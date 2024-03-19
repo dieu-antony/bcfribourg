@@ -1,64 +1,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
-
-const NavLinks = () => {
-  const trainingsubmenu = ["Pizza", "Burger"];
-  return (
-    <>
-      <Link
-        className="text-1xl relative mt-2 text-center text-black after:absolute after:bottom-[0] after:left-[0] after:h-[3px] after:w-full after:origin-bottom-right after:scale-x-0 after:rounded after:bg-picton-blue-500 after:transition-transform after:duration-200 after:ease-in-out after:content-[''] hover:after:origin-bottom-left hover:after:scale-x-100 lg:m-0 lg:self-center"
-        href="/"
-      >
-        Accueil
-      </Link>
-
-      <DropdownNavLink
-        triggerElement={
-          <Link
-            className="text-1xl relative mt-2 text-center text-black after:absolute after:bottom-[0] after:left-[0] after:h-[3px] after:w-full after:origin-bottom-right after:scale-x-0 after:rounded after:bg-picton-blue-500 after:transition-transform after:duration-200 after:ease-in-out after:content-[''] hover:after:origin-bottom-left hover:after:scale-x-100 lg:m-0 lg:self-center"
-            href="/training"
-          >
-            Entraînment
-          </Link>
-        }
-        children={trainingsubmenu}
-      />
-      <Link
-        className="text-1xl relative mt-2 text-center text-black after:absolute after:bottom-[0] after:left-[0] after:h-[3px] after:w-full after:origin-bottom-right after:scale-x-0 after:rounded after:bg-picton-blue-500 after:transition-transform after:duration-200 after:ease-in-out after:content-[''] hover:after:origin-bottom-left hover:after:scale-x-100 lg:m-0 lg:self-center"
-        href="/competition"
-      >
-        Compétition
-      </Link>
-      <Link
-        className="text-1xl relative mt-2 text-center text-black after:absolute after:bottom-[0] after:left-[0] after:h-[3px] after:w-full after:origin-bottom-right after:scale-x-0 after:rounded after:bg-picton-blue-500 after:transition-transform after:duration-200 after:ease-in-out after:content-[''] hover:after:origin-bottom-left hover:after:scale-x-100 lg:m-0 lg:self-center"
-        href="/club"
-      >
-        Club
-      </Link>
-      <Link
-        className="text-1xl relative mt-2 text-center  text-black after:absolute after:bottom-[0] after:left-[0] after:h-[3px] after:w-full after:origin-bottom-right after:scale-x-0 after:rounded after:bg-picton-blue-500 after:transition-transform after:duration-200 after:ease-in-out after:content-[''] hover:after:origin-bottom-left hover:after:scale-x-100 lg:m-0 lg:self-center"
-        href="/contact"
-      >
-        Calendrier
-      </Link>
-      <Link
-        className="text-1xl relative mt-2 text-center text-black after:absolute after:bottom-[0] after:left-[0] after:h-[3px] after:w-full after:origin-bottom-right after:scale-x-0 after:rounded after:bg-picton-blue-500 after:transition-transform after:duration-200 after:ease-in-out after:content-[''] hover:after:origin-bottom-left hover:after:scale-x-100 lg:m-0 lg:self-center"
-        href="/links"
-      >
-        Liens
-      </Link>
-      <Link
-        className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
-        href="/links"
-      >
-        Devenir membre
-      </Link>
-    </>
-  );
-};
+import NavLinks from "./NavLinks";
 
 const Navbar = () => {
+  const subTraining = ["Adultes", "Juniors"];
+  const subCompetition = ["Interclubs", "Circuit Junior", "Coupe l'Avenir", "Tournois SB"];
+  const subClub = ["Comité", "Documents"];
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -69,7 +17,21 @@ const Navbar = () => {
     <>
       <nav className="flex w-1/2 max-w-6xl flex-1 justify-end">
         <div className="ml-16 hidden w-full justify-between pr-12 transition-all duration-500 ease-out lg:flex">
-          <NavLinks />
+          <NavLinks name="Accueil" href="/" />
+          <DropdownNavLink
+            triggerElement={<NavLinks name="Entraînment" href="/training" />}
+            children={subTraining}
+          />
+          <NavLinks name="Compétition" href="/competition" />
+          <NavLinks name="Club" href="/club" />
+          <NavLinks name="Calendrier" href="/calendar" />
+          <NavLinks name="Liens" href="/links" />
+          <Link
+            className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
+            href="/links"
+          >
+            Devenir membre
+          </Link>
         </div>
         <div className="lg:hidden">
           <button onClick={toggleNavbar}>
@@ -96,7 +58,21 @@ const Navbar = () => {
       </nav>
       {isOpen && (
         <div className="flex basis-full flex-col place-items-start lg:hidden">
-          <NavLinks />
+          <NavLinks name="Accueil" href="/" />
+          <DropdownNavLink
+            triggerElement={<NavLinks name="Entraînment" href="/training" />}
+            children={subTraining}
+          />
+          <NavLinks name="Compétition" href="/competition" />
+          <NavLinks name="Club" href="/club" />
+          <NavLinks name="Calendrier" href="/calendar" />
+          <NavLinks name="Liens" href="/links" />
+          <Link
+            className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
+            href="/links"
+          >
+            Devenir membre
+          </Link>
         </div>
       )}
     </>

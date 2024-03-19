@@ -11,13 +11,13 @@ const DropdownNavLink = ({ triggerElement, children }: SubMenu) => {
 
   return (
     <div
-      className="relative flex flex-col justify-start"
+      className="relative flex flex-col justify-start lg:justify-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {triggerElement}
       {isHovered && (
-        <div className="relative left-0 top-full flex flex-col justify-start lg:absolute ">
+        <div className="relative left-0 top-full bg-gray-100 p-2 shadow-md pl-1 w-36 flex flex-col justify-start lg:absolute ">
           {children.map((item) => (
             <Link className="hover:text-picton-blue-500" href={item}>
               {"->"} {item}
