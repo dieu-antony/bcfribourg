@@ -1,5 +1,3 @@
-import React from "react";
-import Header from "~/lib/components/Header";
 import Head from "next/head";
 
 const contact = () => {
