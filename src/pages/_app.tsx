@@ -2,6 +2,7 @@ import { type AppType } from "next/app";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Header from "~/lib/components/Header";
+import Footer from "~/lib/components/Footer";
 
 import "~/styles/globals.css";
 
@@ -21,6 +22,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <main className={`font-sans ${inter.variable}`}>
         <Header />
         <Component {...pageProps} />
+        <Footer />
       </main>
     </>
   );

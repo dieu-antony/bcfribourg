@@ -10,11 +10,43 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model User {
+    id       String @id @default(cuid())
+    username String @unique
+    password String
+    email    String @unique
 
-    @@index([name])
+    @@index([username])
+}
+
+model Team {
+    id          String   @id @default(cuid())
+    name        String   @unique
+    position    Int
+    wins        Int
+    losses      Int
+    draws       Int
+    points      Int
+    matchRecord String
+    setRecord   String
+    gamesRecord String
+    history     String
+    updatedAt   DateTime @updatedAt
+    league      League   @relation(fields: [leagueId], references: [id])
+    leagueId    String
+}
+
+model League {
+    id    String @id @default(cuid())
+    name  String @unique
+    teams Team[]
+}
+
+model CalendarEvent {
+    id       String   @id @default(cuid())
+    summary  String
+    url      String
+    location String
+    start    DateTime
+    end      DateTime
 }
