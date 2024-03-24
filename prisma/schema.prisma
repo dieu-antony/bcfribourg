@@ -46,7 +46,7 @@ model CalendarEvent {
     id       String   @id @default(cuid())
     summary  String
     url      String
-    location String
+    location String?
     start    DateTime
     end      DateTime
 }

@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
@@ -5,16 +6,27 @@ import NavLinks from "./NavLink";
 
 const Navbar = () => {
   const subTraining = [
-    { name: "Adultes", href: "/training/adultes" },
-    { name: "Juniors", href: "/training/juniors" },
+    {
+      name: "Adultes",
+      href: "/training/adultes",
+      icon: "court.svg",
+    },
+    { name: "Juniors", href: "/training/juniors", icon: "court.svg" },
   ];
   const subCompetition = [
-    { name: "Interclubs", href: "/competition/interclubs" },
-    { name: "Circuit Junior", href: "/competition/circuit_junior" },
-    { name: "Coupe l'Avenir", href: "/competition/coupe_avenir" },
-    { name: "Tournois SB", href: "/competition/tournois" },
+    { name: "Interclubs", href: "/competition/interclubs", icon: "switzerland.svg" },
+    {
+      name: "Circuit Junior",
+      href: "/competition/circuit_junior",
+      icon: "shuttleIcon.svg",
+    },
+    { name: "Coupe l'Avenir", href: "/competition/coupe_avenir", icon: "trophy.svg" },
+    { name: "Tournois SB", href: "/competition/tournois", icon: "tournament.svg" },
   ];
-  const subClub = [{name:"Comité", href:"/club/comite"},{name:"Documents", href:"/club/documents"}];
+  const subClub = [
+    { name: "Comité", href: "/club/comite", icon: "comittee.svg" },
+    { name: "Documents", href: "/club/documents", icon: "document.svg" },
+  ];
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -42,7 +54,7 @@ const Navbar = () => {
           <NavLinks name="Liens" href="/links" />
           <Link
             className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
-            href="/links"
+            href="/contact"
           >
             Devenir membre
           </Link>
