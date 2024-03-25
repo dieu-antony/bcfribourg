@@ -1,7 +1,7 @@
 import Head from "next/head";
 import FormItem from "~/lib/components/FormItem";
 
-const contact = () => {
+const contact = (props) => {
   return (
     <>
       <Head>
@@ -11,15 +11,15 @@ const contact = () => {
       <form>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Personal Information
+            <h2 className="text-base font-semibold leading-7 text-picton-blue-500">
+              Contact
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              Use a permanent address where you can receive mail.
+              Contacte nous !
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <FormItem label="name" type="input" labelName="Nom et prénom" />
+              <FormItem label="name" type="text" labelName="Nom et prénom" />
               <FormItem
                 label="subject"
                 type="select"
