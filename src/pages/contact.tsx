@@ -1,14 +1,14 @@
 import Head from "next/head";
 import FormItem from "~/lib/components/FormItem";
 
-const contact = () => {
+const contact = (props) => {
   return (
     <>
       <Head>
         <title>Contact</title>
       </Head>{" "}
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="radius m-5 w-full max-w-[1000px] bg-gray-100 p-5">
+        <div className="rounded-sm m-5 w-full max-w-[1000px] bg-gray-100 p-5">
           <form>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">

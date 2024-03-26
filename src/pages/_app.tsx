@@ -19,7 +19,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="apple-touch-icon" href="/assets/favicon.svg" />
       </Head>
       
-      <main className={`font-sans ${inter.variable}`}>
+      <main className={`font-sans ${inter.variable} flex flex-col min-h-screen`}>
         <Header />
         <Component {...pageProps} />
         <Footer />
