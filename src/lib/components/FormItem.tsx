@@ -1,9 +1,12 @@
+import type { Dispatch, SetStateAction } from "react";
+
 type FormItemProps = {
   type: string;
   label: string;
   labelName: string;
   options?: string[];
   className: string;
+  setValue?: Dispatch<SetStateAction<any>>;
 };
 const FormItem = ({
   type,
@@ -11,6 +14,7 @@ const FormItem = ({
   labelName,
   options,
   className,
+  setValue,
 }: FormItemProps) => {
   if (type == "select") {
     return (
@@ -45,11 +49,11 @@ const FormItem = ({
             rows={3}
             required
             id={label}
-            className="resize-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+            className="block w-full resize-none rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
           />
         </div>
       </div>
-    )
+    );
   } else {
     return (
       <div className={className}>
@@ -61,6 +65,7 @@ const FormItem = ({
         </label>
         <div className="mt-2">
           <input
+            onChange={(e) => setValue && setValue(e.target.value)}
             type={type}
             id={label}
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"

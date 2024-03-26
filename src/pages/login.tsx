@@ -1,7 +1,7 @@
 import Head from "next/head";
 import FormItem from "~/lib/components/FormItem";
 
-const login = (props) => {
+const login = () => {
   return (
     <>
       <Head>

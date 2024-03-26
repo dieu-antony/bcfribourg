@@ -1,4 +1,4 @@
-const admin = (props) => {
+const admin = () => {
   return (
     <div>admin</div>
   )

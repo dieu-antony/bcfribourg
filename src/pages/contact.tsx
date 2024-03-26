@@ -1,15 +1,37 @@
 import Head from "next/head";
 import FormItem from "~/lib/components/FormItem";
+import { useState, type FormEventHandler } from "react";
 
-const contact = (props) => {
+const Contact = () => {
+  const [name, setName] = useState<string>("");
+
+  async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const data = {
+      name,
+      //...
+    };
+    console.log(data)
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    const json = await res.json();
+
+    console.log(json);
+  }
+
   return (
     <>
       <Head>
         <title>Contact</title>
       </Head>{" "}
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="rounded-sm m-5 w-full max-w-[1000px] bg-gray-100 p-5">
-          <form>
+        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-gray-100 p-5">
+          <form onSubmit={onContactSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-picton-blue-500">
@@ -25,6 +47,7 @@ const contact = (props) => {
                     label="name"
                     type="text"
                     labelName="Nom"
+                    setValue={setName}
                   />
                   <FormItem
                     className="sm:col-span-3"
@@ -59,7 +82,7 @@ const contact = (props) => {
                   />
                   <button
                     type="submit"
-                    className="sm:col-span-6 rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
                   >
                     Envoyer
                   </button>
@@ -73,4 +96,4 @@ const contact = (props) => {
   );
 };
 
-export default contact;
+export default Contact;
