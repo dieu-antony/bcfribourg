@@ -3,8 +3,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "~/server/db";
+import { NextAuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   providers: [
     CredentialsProvider({
@@ -13,7 +14,27 @@ export const authOptions = {
         username: { label: "Username", type: "text", placeholder: "username" },
         password: { label: "Password", type: "text", placeholder: "password" },
       },
-      async authorize(credentials) {},
+      async authorize(credentials) {
+        if (!credentials?.username || !credentials?.password) {
+          return null;
+        }
+        const user = await db.user.findUnique({
+          where: {
+            username: credentials?.username,
+          },
+        });
+        if (!user) {
+          return null;
+        }
+        const passwordsMatch = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
+        if (!passwordsMatch) {
+          return null;
+        }
+        return user;
+      },
     }),
   ],
   session: {
@@ -21,8 +42,9 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
+  pages: {
+    signIn: "/login",
+  }
 };
 
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
+export default NextAuth(authOptions);

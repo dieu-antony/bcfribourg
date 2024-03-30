@@ -1,6 +1,6 @@
 import Head from "next/head";
-import FormItem from "~/lib/components/FormItem";
-import { useState, type FormEventHandler } from "react";
+import FormItem from "~/components/FormItem";
+import { useState } from "react";
 
 const Contact = () => {
   const [name, setName] = useState<string>("");
