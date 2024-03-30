@@ -1,8 +1,8 @@
 import { AppProps, type AppType } from "next/app";
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import Header from "~/components/Header";
-import Footer from "~/components/Footer";
+import Header from "~/lib/components/Header";
+import Footer from "~/lib/components/Footer";
 import "~/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 

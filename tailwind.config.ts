@@ -28,6 +28,7 @@ export default {
           "800": "#00618d",
           "900": "#065174",
         },
+        
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {

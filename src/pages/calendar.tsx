@@ -1,4 +1,4 @@
-import { Calendar } from "~/components/ui/calendar";
+import { Calendar } from "~/lib/components/ui/calendar";
 import React from "react";
 
 const calendar = () => {

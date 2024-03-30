@@ -1,5 +1,5 @@
 import Head from "next/head";
-import FormItem from "~/components/FormItem";
+import FormItem from "~/lib/components/FormItem";
 import { useState } from "react";
 
 const Contact = () => {
