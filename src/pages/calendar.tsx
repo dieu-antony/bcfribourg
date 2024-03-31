@@ -3,9 +3,13 @@ import React from "react";
 
 const calendar = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const formattedDate = date
+    ? `${("0" + date.getDate()).slice(-2) + "."}${("0" + (date.getMonth() + 1)).slice(-2) + "."}${date.getFullYear()}`
+    : undefined;
+
   return (
     <>
-      <div>calendar</div>
+      <div>calendar {formattedDate}</div>
       <Calendar
         mode="single"
         selected={date}

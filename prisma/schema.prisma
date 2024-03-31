@@ -44,9 +44,9 @@ model League {
 
 model CalendarEvent {
     id       String   @id @default(cuid())
+    uid      String   @unique
     summary  String
     url      String
     location String?
     start    DateTime
-    end      DateTime
 }

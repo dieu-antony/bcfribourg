@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   await RouteHandler(req, res, {
     POST: function (req, res: NextApiResponse) {
-      res.json({ status: "success", message: "COntact added successfully " });
+      res.json({ status: "success", message: "Contact added successfully " });
     },
   });
 }
