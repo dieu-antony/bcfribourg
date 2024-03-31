@@ -1,6 +1,7 @@
 import { Calendar } from "~/lib/components/ui/calendar";
 import React from "react";
 
+//TODO: add event list
 const calendar = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const formattedDate = date

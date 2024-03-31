@@ -4,7 +4,8 @@ import { useState } from "react";
 
 const Contact = () => {
   const [name, setName] = useState<string>("");
-
+ 
+  //TODO: finish form submit, get logic on who to send to, send email on submit
   async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 

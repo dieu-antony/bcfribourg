@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 
+
+//FIXME: Implement the handler for the POST method
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<void>,

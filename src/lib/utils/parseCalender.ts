@@ -14,6 +14,7 @@ export function parseCalendar(
       const vevent = current as ical.VEvent;
 
       const data: CalendarEventWithoutID = {
+        //TODO: think about event title?
         uid: vevent.uid,
         summary: vevent.summary.val,
         location:
