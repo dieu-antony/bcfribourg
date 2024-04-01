@@ -1,38 +1,86 @@
-import { CalendarEvent } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { CalendarEventWithoutID } from "~/lib/utils/parseCalender";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 
-
-//FIXME: Implement the handler for the POST method
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<void>,
 ) {
   await RouteHandler(req, res, {
     POST: async function (req, res: NextApiResponse) {
-      const calendarEvents : Omit<CalendarEvent, "id">[] = req.body;
+      const calendarEvents: CalendarEventWithoutID[] = JSON.parse(req.body);
 
-    try {
-        // Create entries in the database using Prisma
-        await db.calendarEvent.createMany({
-            data: calendarEvents.map((event: any) => ({
-                // Map the properties of the event to the corresponding database fields
-                // For example:
-                title: event.title,
-                description: event.description,
-                uid: event.uid,
-                summary: event.summary,
-                url: event.url,
-                start: event.start,
-                // Add more properties as needed
-            })),
+      if (calendarEvents.length === 0) {
+        return res
+          .status(400)
+          .json({ status: "error", message: "No events provided" });
+      }
+
+      try {
+        const existingEvents = await db.calendarEvent.findMany({
+          where: {
+            uid: { in: calendarEvents.map((event) => event.uid) },
+          },
         });
 
-        res.status(200).end();
-    } catch (error) {
-        console.error("Error creating events:", error);
-        res.status(500).end();
+        const existingEventIds = existingEvents.map((event) => event.uid);
+
+        const eventsToUpdate = calendarEvents.filter((event) =>
+          existingEventIds.includes(event.uid)
+        );
+
+        const eventsToCreate = calendarEvents.filter(
+          (event) => !existingEventIds.includes(event.uid)
+        );
+
+        if (eventsToUpdate.length > 0) {
+          await Promise.all(
+            eventsToUpdate.map(async (event) => {
+              const existingEvent = existingEvents.find(
+                (e) => e.uid === event.uid
+              );
+
+              if (existingEvent) {
+                await db.calendarEvent.update({
+                  where: { uid: event.uid },
+                  data: {
+                    summary: event.summary,
+                    location: event.location,
+                    start: new Date(event.start),
+                    eventType: event.eventType,
+                  },
+                });
+              }
+            })
+          );
+        }
+        console.log("events to create" + eventsToCreate)
+        if (eventsToCreate.length > 0) {
+          await db.calendarEvent.createMany({
+            data: eventsToCreate.map((event) => ({
+              uid: event.uid,
+              summary: event.summary,
+              url: event.url,
+              location: event.location,
+              start: new Date(event.start),
+              eventType: event.eventType,
+            })),
+          });
+        }
+        
+
+        res.status(200).json({
+          status: "success",
+          message: calendarEvents.length + " events successfully created",
+          data: calendarEvents,
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({
+          status: "error",
+          message: "An error occured creating the events.",
+        });
       }
     },
   });

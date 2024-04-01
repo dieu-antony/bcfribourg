@@ -43,10 +43,11 @@ model League {
 }
 
 model CalendarEvent {
-    id       String   @id @default(cuid())
-    uid      String   @unique
-    summary  String
-    url      String
-    location String?
-    start    DateTime
+    id        String   @id @default(cuid())
+    uid       String   @unique
+    summary   String
+    url       String
+    location  String?
+    start     DateTime
+    eventType String   @default("Événement")
 }

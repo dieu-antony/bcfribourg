@@ -1,7 +1,7 @@
 import * as ical from "node-ical";
 import { CalendarEvent } from "@prisma/client";
 
-type CalendarEventWithoutID = Omit<CalendarEvent, "id">;
+export type CalendarEventWithoutID = Omit<CalendarEvent, "id">;
 
 export function parseCalendar(
   calendar: ical.CalendarResponse,
@@ -14,7 +14,6 @@ export function parseCalendar(
       const vevent = current as ical.VEvent;
 
       const data: CalendarEventWithoutID = {
-        //TODO: think about event title?
         uid: vevent.uid,
         summary: vevent.summary.val,
         location:
@@ -22,10 +21,10 @@ export function parseCalendar(
           vevent.summary.val.startsWith("Union Tafers-Fribourg")
             ? "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
             : "Switzerland",
-        start: vevent.start,
+        start: new Date(vevent.start.getTime()),
         url: vevent.url,
+        eventType: vevent.eventType,
       };
-
       events.push(data);
     }
   }
