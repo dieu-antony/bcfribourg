@@ -31,9 +31,9 @@ model Team {
     setRecord   String
     gamesRecord String
     history     String
-    updatedAt   DateTime @updatedAt
     league      League   @relation(fields: [leagueId], references: [id])
     leagueId    String
+    updatedAt   DateTime @updatedAt
 }
 
 model League {
@@ -49,5 +49,14 @@ model CalendarEvent {
     url       String
     location  String?
     start     DateTime
-    eventType String   @default("Événement")
+    eventType String   @default("Events")
+}
+
+model Player {
+    id        String   @id @default(cuid())
+    firstName String
+    lastName  String
+    team      Int
+    captain   Boolean?
+    gender    String
 }

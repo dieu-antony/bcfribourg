@@ -28,7 +28,7 @@ export default {
           "800": "#00618d",
           "900": "#065174",
         },
-        
+
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
@@ -76,9 +76,11 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/forms")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/forms")({ strategy: "class" }),
+  ],
 } as Config;
-
 
 // import { Config } from "tailwindcss";
 // import { fontFamily } from "tailwindcss/defaultTheme";

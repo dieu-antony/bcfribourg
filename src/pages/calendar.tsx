@@ -1,18 +1,19 @@
 import { Calendar } from "~/lib/components/ui/calendar";
-import React from "react";
+import { useState, useEffect } from "react";
 import { CalendarEvent } from "@prisma/client";
+import Select from "react-select";
 
-//TODO: add event list
+//TODO: make filter pretty
 const calendar = () => {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | undefined>(new Date());
   const formattedDate = date
     ? `${("0" + date.getDate()).slice(-2) + "."}${("0" + (date.getMonth() + 1)).slice(-2) + "."}${date.getFullYear()}`
     : undefined;
-  const [events, setEvents] = React.useState<CalendarEvent[]>([]);
-  const [filteredEvents, setFilteredEvents] = React.useState<CalendarEvent[]>([]);
-  const [selectedFilters, setSelectedFilters] = React.useState<string[]>([]);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("/api/events")
       .then((res) => res.json())
       .then((data) => {
@@ -22,9 +23,11 @@ const calendar = () => {
       });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (selectedFilters.length > 0) {
-      const filtered = events.filter((event) => selectedFilters.includes(event.eventType));
+      const filtered = events.filter((event) =>
+        selectedFilters.includes(event.eventType),
+      );
       setFilteredEvents(filtered);
     } else {
       setFilteredEvents(events);
@@ -33,7 +36,9 @@ const calendar = () => {
 
   const getNextEvents = () => {
     if (date) {
-      const nextEvents = filteredEvents.filter((event) => new Date(event.start) > date);
+      const nextEvents = filteredEvents.filter(
+        (event) => new Date(event.start) > date,
+      );
       return nextEvents.slice(0, 10);
     }
     return [];
@@ -41,33 +46,36 @@ const calendar = () => {
 
   const nextEvents = getNextEvents();
 
-  const handleFilterClick = (filter: string) => {
-    if (filter === "Tous") {
-      setSelectedFilters([]);
-    } else {
-      setSelectedFilters((prevFilters) => {
-        if (prevFilters.includes(filter)) {
-          return prevFilters.filter((f) => f !== filter);
-        } else {
-          return [...prevFilters, filter];
-        }
-      });
-    }
-  };
+  //TODO: make the options a part of the db and fetch them here
+  const filterOptions = [
+    //{ value: "Interclub A", label: "NLA" },
+    { value: "Interclub B", label: "NLB" },
+    { value: "Interclub 1", label: "1ère Ligue" },
+    { value: "Interclub 2", label: "2ème Ligue" },
+    //{ value: "Interclub 3", label: "3ème Ligue" },
+    { value: "Interclub 4", label: "4ème Ligue" },
+    { value: "Events", label: "Événements" },
+  ];
+
+  const filteredOptions = filterOptions.filter((option) =>
+    selectedFilters.includes(option.value),
+  );
 
   return (
     <>
       <div>calendar {formattedDate}</div>
-      <div>
-        <button onClick={() => handleFilterClick("Tous")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.length === 0 ? 'bg-picton-blue-400' : ''}`}>Tous</button>
-        <button onClick={() => handleFilterClick("Interclub A")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Interclub A") ? 'bg-picton-blue-400' : ''}`}>NLA</button>
-        <button onClick={() => handleFilterClick("Interclub B")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Interclub B") ? 'bg-picton-blue-400' : ''}`}>NLB</button>
-        <button onClick={() => handleFilterClick("Interclub 1")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Interclub 1") ? 'bg-picton-blue-400' : ''}`}>1ère Ligue</button>
-        <button onClick={() => handleFilterClick("Interclub 2")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Interclub 2") ? 'bg-picton-blue-400' : ''}`}>2ème Ligue</button>
-        <button onClick={() => handleFilterClick("Interclub 3")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Interclub 3") ? 'bg-picton-blue-400' : ''}`}>3ème Ligue</button>
-        <button onClick={() => handleFilterClick("Interclub 4")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Interclub 4") ? 'bg-picton-blue-400' : ''}`}>4ème Ligue</button>
-        <button onClick={() => handleFilterClick("Événements")} className={`bg-picton-blue-500 hover:bg-picton-blue-400 h-10 w-32 ${selectedFilters.includes("Événements") ? 'bg-picton-blue-400' : ''}`}>Événements</button>
-      </div>
+      <Select
+        isMulti
+        options={filterOptions}
+        closeMenuOnSelect={false}
+        onChange={(selectedOptions) => {
+          const selectedValues = selectedOptions.map((option) => option.value);
+          setSelectedFilters(selectedValues);
+        }}
+        value={filteredOptions}
+        placeholder="Filtrer par type"
+      />
+
       <Calendar
         mode="single"
         selected={date}
@@ -78,7 +86,7 @@ const calendar = () => {
         {nextEvents.map((event) => (
           <div
             key={event.id}
-            className="flex m-5 w-full max-w-[1000px] flex-col rounded border bg-slate-50 p-2"
+            className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-slate-50 p-2"
           >
             <div>{event.summary}</div>
             <div>{event.location}</div>
