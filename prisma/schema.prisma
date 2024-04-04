@@ -22,18 +22,20 @@ model User {
 model Team {
     id          String   @id @default(cuid())
     name        String   @unique
-    position    Int
-    wins        Int
-    losses      Int
-    draws       Int
-    points      Int
-    matchRecord String
-    setRecord   String
-    gamesRecord String
-    history     String
+    position    Int      @default(1)
+    wins        Int      @default(0)
+    losses      Int      @default(0)
+    draws       Int      @default(0)
+    points      Int      @default(0)
+    matchRecord String   @default("0-0")
+    setRecord   String   @default("0-0")
+    gamesRecord String   @default("0-0")
+    history     String   @default("")
     league      League   @relation(fields: [leagueId], references: [id])
     leagueId    String
     updatedAt   DateTime @updatedAt
+    players     Player[]
+    url         String?  @unique
 }
 
 model League {
@@ -56,7 +58,8 @@ model Player {
     id        String   @id @default(cuid())
     firstName String
     lastName  String
-    team      Int
+    team      Team     @relation(fields: [teamId], references: [id])
+    teamId    String
     captain   Boolean?
     gender    String
 }

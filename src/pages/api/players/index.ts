@@ -8,8 +8,26 @@ export default async function handler(
 ) {
   await RouteHandler(req, res, {
     GET: async function (req, res: NextApiResponse) {
-      const players = await db.player.findMany();
-      res.status(200).json({status: "success", players: players});
+      //      const players = await db.player.findMany();
+
+      const playersByTeam = await db.team.findMany({
+        select: {
+          id: true,
+          name: true,
+          url: true,
+          players: true,
+          league: {
+            select: {
+              name: true,
+              
+            },
+            
+          },
+        },
+      });
+
+
+      res.status(200).json({ status: "success", players: playersByTeam });
     },
   });
 }
