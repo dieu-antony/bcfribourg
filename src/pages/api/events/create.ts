@@ -3,6 +3,7 @@ import { CalendarEventWithoutID } from "~/lib/utils/parseCalender";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<void>,
@@ -27,18 +28,18 @@ export default async function handler(
         const existingEventIds = existingEvents.map((event) => event.uid);
 
         const eventsToUpdate = calendarEvents.filter((event) =>
-          existingEventIds.includes(event.uid)
+          existingEventIds.includes(event.uid),
         );
 
         const eventsToCreate = calendarEvents.filter(
-          (event) => !existingEventIds.includes(event.uid)
+          (event) => !existingEventIds.includes(event.uid),
         );
 
         if (eventsToUpdate.length > 0) {
           await Promise.all(
             eventsToUpdate.map(async (event) => {
               const existingEvent = existingEvents.find(
-                (e) => e.uid === event.uid
+                (e) => e.uid === event.uid,
               );
 
               if (existingEvent) {
@@ -49,13 +50,15 @@ export default async function handler(
                     location: event.location,
                     start: new Date(event.start),
                     eventType: event.eventType,
+                    longitude: event.longitude,
+                    latitude: event.latitude,
                   },
                 });
               }
-            })
+            }),
           );
         }
-        console.log("events to create" + eventsToCreate)
+        console.log("events to create" + eventsToCreate);
         if (eventsToCreate.length > 0) {
           await db.calendarEvent.createMany({
             data: eventsToCreate.map((event) => ({
@@ -65,10 +68,11 @@ export default async function handler(
               location: event.location,
               start: new Date(event.start),
               eventType: event.eventType,
+              longitude: event.longitude,
+              latitude: event.latitude,
             })),
           });
         }
-        
 
         res.status(200).json({
           status: "success",

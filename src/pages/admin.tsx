@@ -7,11 +7,14 @@ import {
   parseCalendar,
 } from "~/lib/utils/parseCalender";
 import { FormEvent } from "react";
-import { Toaster } from "~/lib/components/ui/sonner"
+import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
+
 
 const admin = () => {
   const [events, setEvents] = useState<CalendarEventWithoutID[]>([]);
+  const [loading, setLoading] = useState(false);
+
 
   const { status, data } = useSession();
   useEffect(() => {
@@ -19,6 +22,8 @@ const admin = () => {
   }, [status]);
 
   function onFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    setLoading(true);
+    const toastId = toast.loading("Uploading events...");
     setEvents([]);
     const files = e.target.files;
     if (!files) return;
@@ -32,13 +37,17 @@ const admin = () => {
 
       const reader = new FileReader();
 
-      reader.addEventListener("load", function (e) {
+      reader.addEventListener("load", async function (e) {
         const content = e.target?.result;
         if (!content) return;
         if (typeof content !== "string") return;
 
         const data = ical.sync.parseICS(content);
-        setEvents((prev) => [...prev, ...parseCalendar(data)]);
+        const parsedEvents = await parseCalendar(data);
+        setEvents( (prev) => [... prev, ...parsedEvents]);
+        setLoading(false);
+        toast.dismiss(toastId); 
+        toast.success("Events uploaded successfully");
       });
 
       reader.readAsText(file);
@@ -50,9 +59,10 @@ const admin = () => {
 
     if (events.length === 0) return;
 
-    
-    const selectedType = (document.getElementById("league") as HTMLSelectElement)?.value;
-    const eventsWithType = events.map((event) => ({
+    const selectedType = (
+      document.getElementById("league") as HTMLSelectElement
+    )?.value;
+    const eventsWithType = (await events).map((event) => ({
       ...event,
       eventType: selectedType,
     }));
@@ -69,7 +79,8 @@ const admin = () => {
       toast.error(data.message);
     }
   }
-
+  
+  
   if (status === "authenticated") {
     return (
       <div className="mt-6 flex flex-col items-center justify-center gap-2">
@@ -86,13 +97,13 @@ const admin = () => {
               onChange={onFileUpload}
               multiple
               accept=".ics, .ical"
-              className="block w-full m-1 rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
+              className="m-1 block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
               required
             />
-            <select 
+            <select
               name="league"
               id="league"
-              className="block w-full m-1 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
+              className="m-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
               required
             >
               <option>Interclub A</option>
@@ -105,11 +116,13 @@ const admin = () => {
             <input
               type="submit"
               value="Submit"
-              className="bg-blue-500 m-1 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="m-1 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
+              disabled={loading}
             />
           </form>
         </div>
-        <Toaster richColors/>
+        
+        <Toaster richColors />
       </div>
     );
   }
