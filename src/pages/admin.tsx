@@ -9,12 +9,26 @@ import {
 import { FormEvent } from "react";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
+import Head from "next/head";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "~/lib/components/ui/popover";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
 
+import { cn } from "~/lib/utils";
+import { Button } from "~/lib/components/ui/button";
+import { Calendar } from "~/lib/components/ui/calendar";
+import { DatabaseTable } from "~/lib/components/dataTable/DatabaseTable";
+import { DatabaseColumns, DatabaseColumnsProps } from "~/lib/components/dataTable/DatabaseColumns";
 
 const admin = () => {
   const [events, setEvents] = useState<CalendarEventWithoutID[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const [eventDate, setEventDate] = useState<Date>();
+  const [tableData, setTableData] = useState<DatabaseColumnsProps[]>([]);
 
   const { status, data } = useSession();
   useEffect(() => {
@@ -22,8 +36,6 @@ const admin = () => {
   }, [status]);
 
   function onFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    setLoading(true);
-    const toastId = toast.loading("Uploading events...");
     setEvents([]);
     const files = e.target.files;
     if (!files) return;
@@ -34,6 +46,8 @@ const admin = () => {
       if (file.type !== "text/calendar") {
         continue;
       }
+      setLoading(true);
+      const toastId = toast.loading("Uploading events...");
 
       const reader = new FileReader();
 
@@ -44,9 +58,9 @@ const admin = () => {
 
         const data = ical.sync.parseICS(content);
         const parsedEvents = await parseCalendar(data);
-        setEvents( (prev) => [... prev, ...parsedEvents]);
+        setEvents((prev) => [...prev, ...parsedEvents]);
         setLoading(false);
-        toast.dismiss(toastId); 
+        toast.dismiss(toastId);
         toast.success("Events uploaded successfully");
       });
 
@@ -62,7 +76,7 @@ const admin = () => {
     const selectedType = (
       document.getElementById("league") as HTMLSelectElement
     )?.value;
-    const eventsWithType = (await events).map((event) => ({
+    const eventsWithType = events.map((event) => ({
       ...event,
       eventType: selectedType,
     }));
@@ -79,51 +93,127 @@ const admin = () => {
       toast.error(data.message);
     }
   }
-  
-  
+
+  async function getDatabaseEvents() {
+    const response = await fetch("/api/events");
+    const data = await response.json();
+    if (data.status === "success") {
+      setTableData(
+        data.events.map((event: any) => ({
+          id: event.id,
+          eventType: event.eventType,
+          summary: event.summary,
+          location: event.location,
+          url: event.url,
+          start: event.start,
+        })),
+      );
+      console.log(tableData);
+    }
+  }
   if (status === "authenticated") {
     return (
-      <div className="mt-6 flex flex-col items-center justify-center gap-2">
-        <h1 className="text-3xl font-bold">Admin</h1>
-        <h2 className="text-xl">
-          Logged in as <span className="font-bold">{data.user?.email}</span>
-        </h2>
+      <>
+        <Head>
+          <title>Admin</title>
+        </Head>
+        <div className="mt-6 flex flex-col items-center justify-center gap-2">
+          <h1 className="text-3xl font-bold">Admin</h1>
+          <h2 className="text-xl">
+            Logged in as <span className="font-bold">{data.user?.email}</span>
+          </h2>
 
-        <div>
-          <h2 className="text-xl">Upload SwissBadminton Interclub Calendar</h2>
-          <form onSubmit={onCalendarSubmit}>
-            <input
-              type="file"
-              onChange={onFileUpload}
-              multiple
-              accept=".ics, .ical"
-              className="m-1 block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
-              required
-            />
-            <select
-              name="league"
-              id="league"
-              className="m-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
-              required
-            >
-              <option>Interclub A</option>
-              <option>Interclub B</option>
-              <option>Interclub 1</option>
-              <option>Interclub 2</option>
-              <option>Interclub 3</option>
-              <option>Interclub 4</option>
-            </select>
-            <input
-              type="submit"
-              value="Submit"
-              className="m-1 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
-              disabled={loading}
-            />
-          </form>
+          <div className="container">
+            <h2 className="text-xl">
+              Upload SwissBadminton Interclub Calendar
+            </h2>
+            <form onSubmit={onCalendarSubmit}>
+              <input
+                type="file"
+                onChange={onFileUpload}
+                multiple
+                accept=".ics, .ical"
+                className="m-1 block w-full rounded-sm border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
+                required
+              />
+              <select
+                name="league"
+                id="league"
+                className="m-1 block w-full rounded-sm border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
+                required
+              >
+                <option>Interclub A</option>
+                <option>Interclub B</option>
+                <option>Interclub 1</option>
+                <option>Interclub 2</option>
+                <option>Interclub 3</option>
+                <option>Interclub 4</option>
+              </select>
+              <input
+                type="submit"
+                value="Submit"
+                className="m-1 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
+                disabled={loading}
+              />
+            </form>
+          </div>
+          <div className="container">
+            <h2>Create Event</h2>
+            <p>Please fill out all the required fields to create an event.</p>
+            <form /*onSubmit={onEventCreation}*/>
+              <label htmlFor="title">Title/Summary</label>
+              <input id="title" className="form-input" />
+              <label htmlFor="location">Location (optional)</label>
+              <input id="start" className="form-input" />
+              <label htmlFor="location">Location (optional)</label>
+              <input id="location" />
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "w-[280px] justify-start text-left font-normal",
+                      !eventDate && "text-muted-foreground",
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {eventDate ? (
+                      format(eventDate, "PPP")
+                    ) : (
+                      <span>Pick a date</span>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={eventDate}
+                    onSelect={setEventDate}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <label htmlFor="location">Location (optional)</label>
+              <input id="location" />
+              <label htmlFor="location">Location (optional)</label>
+              <input id="location" />
+              <label htmlFor="location">Location (optional)</label>
+              <input id="location" />
+              <input
+                type="submit"
+                value="Submit"
+                className="m-1 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
+                disabled={loading}
+              />
+            </form>
+          </div>
+          <Button onClick={getDatabaseEvents}>Get Events</Button>
+          <div className="container mx-auto py-10">
+            <DatabaseTable columns={DatabaseColumns} data={tableData} />
+          </div>
+          <Toaster richColors />
         </div>
-        
-        <Toaster richColors />
-      </div>
+      </>
     );
   }
 };

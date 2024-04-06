@@ -78,10 +78,12 @@ const calendar = () => {
       />
 
       <Calendar
-        mode="single"
         selected={date}
         onSelect={setDate}
         className="rounded-md border"
+        captionLayout="dropdown-buttons"
+        fromYear={2023}
+        toYear={2025}
       />
       <div className="flex flex-col items-center justify-center">
         {nextEvents.map((event) => (
