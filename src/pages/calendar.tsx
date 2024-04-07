@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { CalendarEvent } from "@prisma/client";
 import Select from "react-select";
 
-
 //TODO: make filter pretty
 const calendar = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -97,6 +96,9 @@ const calendar = () => {
             <a href={event.url}>Lien</a>
           </div>
         ))}
+        <div>
+          
+        </div>
       </div>
     </>
   );
