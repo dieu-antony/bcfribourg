@@ -3,7 +3,6 @@ import { CalendarEventWithoutID } from "~/lib/utils/parseCalender";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<void>,
@@ -52,6 +51,7 @@ export default async function handler(
                     eventType: event.eventType,
                     longitude: event.longitude,
                     latitude: event.latitude,
+                    end: new Date(event.end),
                   },
                 });
               }
@@ -70,6 +70,7 @@ export default async function handler(
               eventType: event.eventType,
               longitude: event.longitude,
               latitude: event.latitude,
+              end: new Date(event.end),
             })),
           });
         }

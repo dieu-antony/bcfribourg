@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const Contact = () => {
   const [name, setName] = useState<string>("");
- 
+
   //TODO: finish form submit, get logic on who to send to, send email on submit
   async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -13,7 +13,7 @@ const Contact = () => {
       name,
       //...
     };
-    console.log(data)
+    console.log(data);
 
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -29,7 +29,7 @@ const Contact = () => {
     <>
       <Head>
         <title>Contact</title>
-      </Head>{" "}
+      </Head>
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
         <div className="m-5 w-full max-w-[1000px] rounded-sm bg-gray-100 p-5">
           <form onSubmit={onContactSubmit}>

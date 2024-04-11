@@ -31,8 +31,14 @@ export async function parseCalendar(
           ? "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
           : "Switzerland");
       const coordinates = await findLonLat(location);
-      const lat= location == "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland" ? 46.811778972062086 : coordinates.lat;
-      const lon = location == "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland" ? 7.147400994098687 : coordinates.lon;
+      const lat =
+        location == "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
+          ? 46.811778972062086
+          : coordinates.lat;
+      const lon =
+        location == "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
+          ? 7.147400994098687
+          : coordinates.lon;
 
       const data: CalendarEventWithoutID = {
         uid: vevent.uid,
@@ -43,6 +49,7 @@ export async function parseCalendar(
         eventType: vevent.eventType,
         longitude: lon,
         latitude: lat,
+        end: new Date(vevent.end.getTime()),
       };
       events.push(data);
     }

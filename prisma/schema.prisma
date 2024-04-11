@@ -51,6 +51,7 @@ model CalendarEvent {
     url         String
     location    String?
     start       DateTime
+    end         DateTime
     eventType   String    @default("Events")
     longitude   Float? 
     latitude    Float?

@@ -6,7 +6,7 @@ import Footer from "~/lib/components/Footer";
 import "~/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 
-const inter = Inter({
+export const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
