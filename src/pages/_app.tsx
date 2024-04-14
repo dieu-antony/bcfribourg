@@ -22,11 +22,9 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
       <main
         className={`font-sans ${inter.variable} flex min-h-screen flex-col`}
       >
-        <SessionProvider>
           <Header />
           <Component {...pageProps} />
           <Footer />
-        </SessionProvider>
       </main>
     </SessionProvider>
   );

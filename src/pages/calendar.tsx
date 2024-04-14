@@ -62,19 +62,28 @@ const calendar = () => {
       <Head>
         <title>Calendar</title>
       </Head>
-      <Select
-        isMulti
-        options={filterOptions}
-        closeMenuOnSelect={false}
-        onChange={(selectedOptions) => {
-          const selectedValues = selectedOptions.map((option) => option.value);
-          setSelectedFilters(selectedValues);
-        }}
-        value={filteredOptions}
-        placeholder="Filtrer par type"
-        className="z-10"
-      />
-      <EventCalendar events={filteredEvents} />
+      <div className="flex flex-col items-center m-2">
+        <div className="">
+          <Select
+            isMulti
+            options={filterOptions}
+            closeMenuOnSelect={false}
+            onChange={(selectedOptions) => {
+              const selectedValues = selectedOptions.map(
+                (option) => option.value,
+              );
+              setSelectedFilters(selectedValues);
+            }}
+            value={filteredOptions}
+            placeholder="Filtrer par type"
+            className="z-10"
+          />
+        </div>
+
+        <div className="md:w-11/12 w-full">
+          <EventCalendar events={filteredEvents} />
+        </div>
+      </div>
     </>
   );
 };

@@ -53,7 +53,7 @@ const Navbar = () => {
           <NavLinks name="Calendrier" href="/calendar" />
           <NavLinks name="Liens" href="/links" />
           <Link
-            className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
+            className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black hover:text-white hover:font-bold transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
             href="/contact"
           >
             Devenir membre

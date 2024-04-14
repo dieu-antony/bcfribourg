@@ -10,7 +10,14 @@ import {
 } from "date-fns";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { CalendarIcon, MapPin } from "lucide-react";
+import {
+  CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  Link,
+  List,
+  MapPin,
+} from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { cn } from "~/lib/utils";
 import { inter } from "~/pages/_app";
@@ -63,58 +70,83 @@ const EventCalendar = ({ events }: { events: CalendarEvent[] }) => {
 
   return (
     <div>
-      <div className="flex justify-between">
-        <div>
-          <Button onClick={() => setChosenMonth(previousMonth(chosenMonth))}>
-            Previous Month
+      <div className="grid grid-cols-3 pb-2 pt-2">
+        <div className="flex gap-1">
+          <Button
+            onClick={() => setChosenMonth(previousMonth(chosenMonth))}
+            className="border bg-white text-black hover:bg-gray-100"
+          >
+            <ChevronLeft />
           </Button>
-          <Button onClick={() => setChosenMonth(nextMonth(chosenMonth))}>
-            Next Month
+          <Button
+            onClick={() => setChosenMonth(new Date())}
+            className="border bg-white text-black hover:bg-gray-100"
+          >
+            Today
+          </Button>
+          <Button
+            onClick={() => setChosenMonth(nextMonth(chosenMonth))}
+            className="border bg-white text-black hover:bg-gray-100"
+          >
+            <ChevronRight />
           </Button>
         </div>
-        <h2 className="text-center">{format(chosenMonth, "MMMM yyyy")} </h2>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[280px] justify-start text-left font-normal",
-                !chosenMonth && "text-muted-foreground",
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {chosenMonth ? (
-                format(chosenMonth, "PPP")
-              ) : (
-                <span>Pick a date</span>
-              )}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0">
-            <Calendar
-              mode="single"
-              selected={chosenMonth}
-              onSelect={(date) => setChosenMonth((prev) => date || prev)}
-              initialFocus
-              captionLayout="dropdown-buttons"
-              fromYear={2022}
-              toYear={2025}
-              className={`font-sans ${inter.variable}`}
-            />
-          </PopoverContent>
-        </Popover>
+        <h2 className="self-center text-center font-bold">
+          {format(chosenMonth, "MMMM yyyy")}{" "}
+        </h2>
+        <div className="ml-auto flex flex-grow gap-1">
+          <Button className="border bg-white text-black hover:bg-gray-100">
+            <CalendarIcon />
+          </Button>
+          <Button className="border bg-white text-black hover:bg-gray-100">
+            <List />
+          </Button>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[180px] justify-start text-left font-normal",
+                  !chosenMonth && "text-muted-foreground",
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {chosenMonth ? (
+                  format(chosenMonth, "PPP")
+                ) : (
+                  <span>Pick a date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={chosenMonth}
+                onSelect={(date) => setChosenMonth((prev) => date || prev)}
+                initialFocus
+                captionLayout="dropdown-buttons"
+                fromYear={2022}
+                toYear={2025}
+                className={`font-sans ${inter.variable}`}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
       <div className="grid grid-cols-7">
         {weekDays.map((day) => {
           return (
-            <div key={day} className="text-center font-bold">
+            <div key={day} className="border text-center font-bold">
               {day}
             </div>
           );
         })}
         {Array.from({ length: startingDayIndex }).map((_, index) => {
           return (
-            <div className="bg-gray-400 text-center border" key={index}>
+            <div
+              className="border bg-gray-100 pt-1 text-center text-gray-500"
+              key={index}
+            >
               {format(
                 daysInPreviousMonth[startingDayIndex - 1 - index]?.toString() ||
                   new Date().toString(),
@@ -127,86 +159,126 @@ const EventCalendar = ({ events }: { events: CalendarEvent[] }) => {
           return (
             <div
               key={day.toString()}
-              className={clsx("text-center border", {
-                "bg-picton-blue-500": isToday(day),
-              })}
+              className={clsx(
+                "h-16 overflow-y-auto overflow-x-hidden border pt-1 text-center md:h-24 lg:h-32",
+                {
+                  "bg-picton-blue-200": isToday(day),
+                },
+              )}
             >
               {format(day.toString(), "d")}
-              {events
-                .filter((event) => isSameDay(event.start, day))
-                .map((event) => {
-                  return (
-                    <div
-                      key={event.summary}
-                      className={`font-sans ${inter.variable} bg-picton-blue-500 text-white p-1 rounded-md text-nowrap`}
-                    >
-                      <AlertDialog>
-                        <AlertDialogTrigger>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <div
-                                  className={`flex font-sans ${inter.variable}`}
-                                >
-                                  {event.summary}
-                                </div>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <div
-                                  className={`flex font-sans ${inter.variable} gap-1`}
-                                >
-                                  <div>{event.summary}</div>
-                                  <div>({format(event.start, "HH:mm")})</div>
-                                </div>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>
-                              <div
-                                className={`flex font-sans ${inter.variable}`}
-                              >
-                                {event.summary}
-                              </div>
-                            </AlertDialogTitle>
-                            <AlertDialogDescription>
-                              <div className="flex flex-col gap-1">
-                                <div
-                                  className={`flex font-sans ${inter.variable} gap-1`}
-                                >
-                                  <Clock8 className="size-5" />{format(event.start, "dd.MM.yyyy")}{": "}
-                                  {format(event.start, "HH:mm")} -{" "}
-                                  {format(event.end, "HH:mm")}
-                                </div>
-                                <div
-                                  className={`flex font-sans ${inter.variable} gap-1`}
-                                >
-                                  <MapPin className="size-5" /> {event.location}
-                                </div>
-                              </div>
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>
-                              <p className={`font-sans ${inter.variable}`}>
-                                Close
-                              </p>
-                            </AlertDialogCancel>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </div>
-                  );
-                })}
+              <div className="hidden md:block">
+                {events
+                  .filter((event) => isSameDay(event.start, day))
+                  .map((event) => {
+                    return (
+                      <>
+                        <div
+                          key={event.summary}
+                          className={`font-sans ${inter.variable} m-1 hidden text-nowrap rounded-md bg-picton-blue-500 p-1 text-white sm:block`}
+                        >
+                          <AlertDialog>
+                            <AlertDialogTrigger className="w-full">
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger>
+                                    <div
+                                      className={`font-sans ${inter.variable}`}
+                                    >
+                                      {event.eventType == "Interclub A"
+                                        ? "Interclub NLA"
+                                        : event.eventType == "Interclub B"
+                                          ? "Interclub NLB"
+                                          : event.eventType == "Interclub 1"
+                                            ? "Interclub 1ère Ligue"
+                                            : event.eventType == "Interclub 2"
+                                              ? "Interclub 2ème Ligue"
+                                              : event.eventType == "Interclub 3"
+                                                ? "Interclub 3ème Ligue"
+                                                : event.eventType ==
+                                                    "Interclub 4"
+                                                  ? "Interclub 4ème Ligue"
+                                                  : event.summary}
+                                    </div>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <div
+                                      className={`flex font-sans ${inter.variable} gap-1`}
+                                    >
+                                      <div>{event.summary}</div>
+                                      <div>
+                                        ({format(event.start, "HH:mm")})
+                                      </div>
+                                    </div>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                  <div
+                                    className={`flex font-sans ${inter.variable}`}
+                                  >
+                                    {event.summary}
+                                  </div>
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  <div className="flex flex-col gap-1">
+                                    <div
+                                      className={`flex font-sans ${inter.variable} gap-1`}
+                                    >
+                                      <Clock8 className="size-5" />
+                                      {format(event.start, "dd.MM.yyyy")}
+                                      {": "}
+                                      {format(event.start, "HH:mm")} -{" "}
+                                      {format(event.end, "HH:mm")}
+                                    </div>
+                                    <div
+                                      className={`flex font-sans ${inter.variable} gap-1`}
+                                    >
+                                      <MapPin className="size-5" />{" "}
+                                      {event.location}
+                                    </div>
+                                    <div
+                                      className={`flex font-sans ${inter.variable} gap-1`}
+                                    >
+                                      <Link className="size-5" />{" "}
+                                      <a
+                                        className="hover:underline"
+                                        href={event.url}
+                                        target="_blank"
+                                      >
+                                        Lien
+                                      </a>
+                                    </div>
+                                  </div>
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>
+                                  <p className={`font-sans ${inter.variable}`}>
+                                    Close
+                                  </p>
+                                </AlertDialogCancel>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </div>
+                      </>
+                    );
+                  })}
+              </div>
             </div>
           );
         })}
         {Array.from({ length: 35 - startingDayIndex - daysInMonth.length }).map(
           (_, index) => {
             return (
-              <div className="bg-gray-400 text-center border" key={index}>
+              <div
+                className="border bg-gray-100 pt-1 text-center text-gray-500"
+                key={index}
+              >
                 {format(
                   daysInNextMonth[index]?.toString() || new Date().toString(),
                   "d",
