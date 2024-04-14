@@ -8,9 +8,5 @@ This website is made using
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
-
-
-## Notable libraries
-This website, on top of having the basics, uses the following libraries:
 - [D3.js](https://d3js.org/)
 - [Shadcn/ui](https://ui.shadcn.com/)
