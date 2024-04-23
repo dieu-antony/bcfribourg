@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { CalendarEvent } from "@prisma/client";
-import Select from "react-select";
+import Select, { StylesConfig } from "react-select";
 import Head from "next/head";
 import EventCalendar from "~/lib/components/calendar/EventCalendar";
+import chroma from "chroma-js";
 
 //TODO: make filter pretty
 const calendar = () => {
@@ -31,6 +32,59 @@ const calendar = () => {
       });
   }, []);
 
+  const colorStyles = {
+    control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
+    option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: isDisabled
+          ? undefined
+          : isSelected
+            ? data.color
+            : isFocused
+              ? color.alpha(0.1).css()
+              : undefined,
+        color: isDisabled
+          ? "#ccc"
+          : isSelected
+            ? chroma.contrast(color, "white") > 2
+              ? "white"
+              : "black"
+            : data.color,
+        cursor: isDisabled ? "not-allowed" : "default",
+
+        ":active": {
+          ...styles[":active"],
+          backgroundColor: !isDisabled
+            ? isSelected
+              ? data.color
+              : color.alpha(0.3).css()
+            : undefined,
+        },
+      };
+    },
+    multiValue: (styles: any, { data }: any) => {
+      const color = chroma(data.color);
+      return {
+        ...styles,
+        backgroundColor: color.alpha(0.1).css(),
+      };
+    },
+    multiValueLabel: (styles: any, { data }: any) => ({
+      ...styles,
+      color: data.color,
+    }),
+    multiValueRemove: (styles: any, { data }: any) => ({
+      ...styles,
+      color: data.color,
+      ":hover": {
+        backgroundColor: data.color,
+        color: "white",
+      },
+    }),
+  };
+
   useEffect(() => {
     if (selectedFilters.length > 0) {
       const filtered = events.filter((event) =>
@@ -44,13 +98,13 @@ const calendar = () => {
 
   //TODO: make the options a part of the db and fetch them here
   const filterOptions = [
-    //{ value: "Interclub A", label: "NLA" },
-    { value: "Interclub B", label: "NLB" },
-    { value: "Interclub 1", label: "1ère Ligue" },
-    { value: "Interclub 2", label: "2ème Ligue" },
-    //{ value: "Interclub 3", label: "3ème Ligue" },
-    { value: "Interclub 4", label: "4ème Ligue" },
-    { value: "Events", label: "Événements" },
+    { value: "Interclub A", label: "NLA", color: "purple" },
+    { value: "Interclub B", label: "NLB", color: "orange" },
+    { value: "Interclub 1", label: "1ère Ligue", color: "blue" },
+    { value: "Interclub 2", label: "2ème Ligue", color: "red" },
+    { value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
+    { value: "Interclub 4", label: "4ème Ligue", color: "green" },
+    { value: "Events", label: "Événements", color: "black" },
   ];
 
   const filteredOptions = filterOptions.filter((option) =>
@@ -62,9 +116,10 @@ const calendar = () => {
       <Head>
         <title>Calendar</title>
       </Head>
-      <div className="flex flex-col items-center m-2">
+      <div className="m-2 flex flex-col items-center">
         <div className="">
           <Select
+            instanceId={"filter"}
             isMulti
             options={filterOptions}
             closeMenuOnSelect={false}
@@ -77,11 +132,16 @@ const calendar = () => {
             value={filteredOptions}
             placeholder="Filtrer par type"
             className="z-10"
+            styles={colorStyles}
           />
         </div>
 
-        <div className="md:w-11/12 w-full">
-          <EventCalendar events={filteredEvents} />
+        <div className="w-full md:w-11/12">
+          <EventCalendar
+            events={filteredEvents.map((ev) => {
+              return { ...ev, color: getColorByEvent(ev.eventType) };
+            })}
+          />
         </div>
       </div>
     </>
@@ -89,3 +149,18 @@ const calendar = () => {
 };
 
 export default calendar;
+function getColorByEvent(eventType: string) {
+  const filterOptions = [
+    { value: "Interclub A", label: "NLA", color: "purple" },
+    { value: "Interclub B", label: "NLB", color: "orange" },
+    { value: "Interclub 1", label: "1ère Ligue", color: "blue" },
+    { value: "Interclub 2", label: "2ème Ligue", color: "red" },
+    { value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
+    { value: "Interclub 4", label: "4ème Ligue", color: "green" },
+    { value: "Events", label: "Événements", color: "black" },
+  ];
+
+  return (
+    filterOptions.find((option) => option.value === eventType)?.color || "black"
+  );
+}

@@ -23,12 +23,7 @@ import { cn } from "~/lib/utils";
 import { inter } from "~/pages/_app";
 import clsx from "clsx";
 import { CalendarEvent } from "@prisma/client";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { ScrollArea } from "../ui/scroll-area";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -41,7 +36,11 @@ import {
 } from "../ui/alert-dialog";
 import { Clock8 } from "lucide-react";
 
-const EventCalendar = ({ events }: { events: CalendarEvent[] }) => {
+const EventCalendar = ({
+  events,
+}: {
+  events: (CalendarEvent & { color: string })[];
+}) => {
   const [chosenMonth, setChosenMonth] = useState<Date>(new Date());
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const firstDayOfMonth = startOfMonth(chosenMonth);
@@ -157,119 +156,98 @@ const EventCalendar = ({ events }: { events: CalendarEvent[] }) => {
         })}
         {daysInMonth.map((day) => {
           return (
-            <div
+            <ScrollArea
               key={day.toString()}
-              className={clsx(
-                "h-16 overflow-y-auto overflow-x-hidden border pt-1 text-center md:h-24 lg:h-32",
-                {
-                  "bg-picton-blue-200": isToday(day),
-                },
-              )}
+              className={clsx("h-16 border pt-1 text-center md:h-24 lg:h-32", {
+                "bg-picton-blue-200": isToday(day),
+              })}
             >
               {format(day.toString(), "d")}
+
               <div className="hidden md:block">
                 {events
                   .filter((event) => isSameDay(event.start, day))
                   .map((event) => {
+                    const bgcolor = ("bg-" + event.color + "-500").toString();
+                    console.log(bgcolor);
                     return (
-                      <>
-                        <div
-                          key={event.summary}
-                          className={`font-sans ${inter.variable} m-1 hidden text-nowrap rounded-md bg-picton-blue-500 p-1 text-white sm:block`}
-                        >
-                          <AlertDialog>
-                            <AlertDialogTrigger className="w-full">
-                              <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger>
-                                    <div
-                                      className={`font-sans ${inter.variable}`}
-                                    >
-                                      {event.eventType == "Interclub A"
-                                        ? "Interclub NLA"
-                                        : event.eventType == "Interclub B"
-                                          ? "Interclub NLB"
-                                          : event.eventType == "Interclub 1"
-                                            ? "Interclub 1ère Ligue"
-                                            : event.eventType == "Interclub 2"
-                                              ? "Interclub 2ème Ligue"
-                                              : event.eventType == "Interclub 3"
-                                                ? "Interclub 3ème Ligue"
-                                                : event.eventType ==
-                                                    "Interclub 4"
-                                                  ? "Interclub 4ème Ligue"
-                                                  : event.summary}
-                                    </div>
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    <div
-                                      className={`flex font-sans ${inter.variable} gap-1`}
-                                    >
-                                      <div>{event.summary}</div>
-                                      <div>
-                                        ({format(event.start, "HH:mm")})
-                                      </div>
-                                    </div>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                  <div
-                                    className={`flex font-sans ${inter.variable}`}
+                      <div
+                        key={event.summary}
+                        className={`font-sans ${inter.variable} m-1 hidden text-nowrap rounded-md ${bgcolor} p-1 text-white sm:block`}
+                      >
+                        <AlertDialog>
+                          <AlertDialogTrigger className="w-full">
+                            <div className={`font-sans ${inter.variable}`}>
+                              {event.eventType == "Interclub A"
+                                ? "Interclub NLA"
+                                : event.eventType == "Interclub B"
+                                  ? "Interclub NLB"
+                                  : event.eventType == "Interclub 1"
+                                    ? "Interclub 1ère Ligue"
+                                    : event.eventType == "Interclub 2"
+                                      ? "Interclub 2ème Ligue"
+                                      : event.eventType == "Interclub 3"
+                                        ? "Interclub 3ème Ligue"
+                                        : event.eventType == "Interclub 4"
+                                          ? "Interclub 4ème Ligue"
+                                          : event.summary}
+                            </div>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                <span
+                                  className={`flex font-sans ${inter.variable}`}
+                                >
+                                  {event.summary}
+                                </span>
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                <span className="flex flex-col gap-1">
+                                  <span
+                                    className={`flex font-sans ${inter.variable} gap-1`}
                                   >
-                                    {event.summary}
-                                  </div>
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  <div className="flex flex-col gap-1">
-                                    <div
-                                      className={`flex font-sans ${inter.variable} gap-1`}
+                                    <Clock8 className="size-5" />
+                                    {format(event.start, "dd.MM.yyyy")}
+                                    {": "}
+                                    {format(event.start, "HH:mm")} -{" "}
+                                    {format(event.end, "HH:mm")}
+                                  </span>
+                                  <span
+                                    className={`flex font-sans ${inter.variable} gap-1`}
+                                  >
+                                    <MapPin className="size-5" />{" "}
+                                    {event.location}
+                                  </span>
+                                  <span
+                                    className={`flex font-sans ${inter.variable} gap-1`}
+                                  >
+                                    <Link className="size-5" />{" "}
+                                    <a
+                                      className="hover:underline"
+                                      href={event.url}
+                                      target="_blank"
                                     >
-                                      <Clock8 className="size-5" />
-                                      {format(event.start, "dd.MM.yyyy")}
-                                      {": "}
-                                      {format(event.start, "HH:mm")} -{" "}
-                                      {format(event.end, "HH:mm")}
-                                    </div>
-                                    <div
-                                      className={`flex font-sans ${inter.variable} gap-1`}
-                                    >
-                                      <MapPin className="size-5" />{" "}
-                                      {event.location}
-                                    </div>
-                                    <div
-                                      className={`flex font-sans ${inter.variable} gap-1`}
-                                    >
-                                      <Link className="size-5" />{" "}
-                                      <a
-                                        className="hover:underline"
-                                        href={event.url}
-                                        target="_blank"
-                                      >
-                                        Lien
-                                      </a>
-                                    </div>
-                                  </div>
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>
-                                  <p className={`font-sans ${inter.variable}`}>
-                                    Close
-                                  </p>
-                                </AlertDialogCancel>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                        </div>
-                      </>
+                                      Lien
+                                    </a>
+                                  </span>
+                                </span>
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>
+                                <span className={`font-sans ${inter.variable}`}>
+                                  Close
+                                </span>
+                              </AlertDialogCancel>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
                     );
                   })}
               </div>
-            </div>
+            </ScrollArea>
           );
         })}
         {Array.from({ length: 35 - startingDayIndex - daysInMonth.length }).map(

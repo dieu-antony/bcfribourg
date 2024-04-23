@@ -6,7 +6,7 @@ const links = () => {
       <Head>
         <title>Liens</title>
       </Head>
-      <Map />
+      <Map longitude={47.15741469347104} latitude={7.819150610677002}/>
 
     </>
   );
