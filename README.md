@@ -8,8 +8,5 @@ This website is made using
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
+- [D3.js](https://d3js.org/)
 - [Shadcn/ui](https://ui.shadcn.com/)
-
-## Demo/Tryout
-
-The test is made on a free website using vercel as to be able to access it outside of local host while still in prod.
