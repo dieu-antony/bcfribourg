@@ -80,5 +80,10 @@ export default {
     require("tailwindcss-animate"),
     require("@tailwindcss/forms")({ strategy: "class" }),
   ],
+  safelist: [
+    {
+      pattern: /bg-.+/,
+    }
+  ],
 } as Config;
 

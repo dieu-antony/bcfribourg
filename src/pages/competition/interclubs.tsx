@@ -81,6 +81,7 @@ const interclubs = () => {
                       <div className="">
                         <div className="flex flex-col gap-1">
                           <a
+                            target="_blank"
                             href={team.url}
                             className="hover:pointer flex gap-1 hover:text-picton-blue-500 hover:fill-picton-blue-500"
                           >
