@@ -6,6 +6,7 @@ import ch_ from "swiss-maps/2024/ch-combined.json";
 const ch: Topology = ch_ as unknown as Topology;
 import { useState } from "react";
 import { MapTooltip } from "./MapTooltip";
+import { on } from "events";
 
 type MapProps = { longitude: number; latitude: number; location: string };
 type InteractionData = {
@@ -28,7 +29,9 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
 
         // Update the SVG element
         svg.attr("width", width).attr("height", height);
-        d3.geoMercator().translate([width / 2, height / 2]).scale(width*height/600)
+        d3.geoMercator()
+          .translate([width / 2, height / 2])
+          .scale((width * height) / 600);
         // Call any other functions that depend on the width and height
         // ...
       }
@@ -104,6 +107,8 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         ),
       );
 
+    
+
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()
       .scaleExtent([1, 8])
@@ -119,9 +124,33 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
       g.attr("stroke-width", 1 / transform.k);
     }
 
+    
+    const onLoadZoom = () => {
+      const x0 = projection([7.147400994098687, 46.81177897206209])?.[0] ?? 0;
+      const y0 = projection([7.147400994098687, 46.81177897206209])?.[1] ?? 0;
+      const x1 = projection([longitude, latitude])?.[0] ?? 0;
+      const y1 = projection([longitude, latitude])?.[1] ?? 0;
+      svg
+        .transition()
+        .duration(2000)
+        .call(
+          zoom.transform as any,
+          d3.zoomIdentity
+            .translate(width / 2, height / 2)
+            .scale(
+              Math.min(
+                8,
+                0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height),
+              ),
+            )
+            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+        );
+      console.log("onLoadZoom");
+    };
     if (svgRef.current) {
       const svg = d3.select(svgRef.current);
       svg.call(zoom);
+      onLoadZoom();
     }
 
     g.append("circle")
@@ -183,7 +212,6 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
   return (
     <>
       <div className="relative">
-        
         <svg ref={svgRef} />
         <div className="absolute left-0 top-0 ml-[60px] mt-[60px]">
           <MapTooltip interactionData={interactionData} />

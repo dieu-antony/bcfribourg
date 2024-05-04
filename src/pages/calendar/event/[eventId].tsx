@@ -39,18 +39,42 @@ export default function eventPage() {
     event?.location != "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
   ) {
     return (
-      <>
-        <p>This event exists</p>
-        <Map
-          location={event?.location?.toString() || ""}
+      
+      <div className="flex flex-col md:flex-row items-center justify-center md:m-8 ">
+        <div className="flex flex-col items-center">
+          <h1 className="bg-picton-blue-400 p-2 rounded-sm font-semibold">{event?.summary || ""}</h1>
+          <Map
+            location={event?.location?.toString() || ""}
+            latitude={event?.latitude || 46.81177897206209}
+            longitude={event?.longitude || 7.147400994098687}
+          />
+        </div>
+        <aside className="flex flex-col bg-gray-200 p-6">
+          <div className="flex flex-col">
+            <h1 className="bg-picton-blue-400 p-2">Détails</h1>
+            <h2 className="ml-1 mt-2 font-bold">Début</h2>
+            <p className="ml-1">{format(event?.start || "", "HH:mm")}</p>
+            <Separator className="my-2 bg-black" />
+            <h2 className="ml-1 font-bold">Fin</h2>
+            <p className="ml-1">{format(event?.end || "", "HH:mm")}</p>
+            <Separator className="my-2 bg-black" />
+            <h2 className="ml-1 mt-2 font-bold">Lien</h2>
+            <a href={event?.url} className="ml-1 flex gap-1 hover:underline items-center" target="_blank">
+              <SquareArrowOutUpRight className="size-5" />
+              Swiss Badminton
+            </a>
+            <Separator className="my-2 bg-black" />
+            <h2 className="ml-1 mt-2 font-bold">Lieu</h2>
+            <p className="ml-1">{event?.location}</p>
+          </div>
+          <EmbedGoogleMap
           latitude={event?.latitude || 46.81177897206209}
           longitude={event?.longitude || 7.147400994098687}
+          className="w-[400px] h-[400px] border-0 mt-2"
         />
-        <EmbedGoogleMap
-          latitude={event?.latitude || 46.81177897206209}
-          longitude={event?.longitude || 7.147400994098687}
-        />
-      </>
+        </aside>
+      </div>
+
     );
   } else if (
     event?.location === "Switzerland" ||

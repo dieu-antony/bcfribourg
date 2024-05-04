@@ -5,10 +5,12 @@ import { env } from "~/env.js";
 type EmbedGoogleMapProps = {
   longitude: number;
   latitude: number;
+  className?: string;
 };
 export const EmbedGoogleMap = ({
   longitude,
   latitude,
+  className,
 }: EmbedGoogleMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
 
@@ -37,5 +39,5 @@ export const EmbedGoogleMap = ({
     };
     initMap();
   }, []);
-  return <div className="h-[600px]" ref={mapRef} />;
+  return <div className={className} ref={mapRef} />;
 };
