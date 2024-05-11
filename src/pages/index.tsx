@@ -35,12 +35,6 @@ export default function Home() {
               <img src="/assets/plan_du_site_grand.png" className="w-full" />
             </div>
           </div>
-          <div className="w-50 m-5 min-h-[50px] bg-gray-100 p-5">
-            <h2>Devenir membre</h2>
-          </div>
-          <div className="w-50 m-5 min-h-[50px] bg-gray-100 p-5">
-            <h2>Contact</h2>
-          </div>
         </div>
       </div>
     </>

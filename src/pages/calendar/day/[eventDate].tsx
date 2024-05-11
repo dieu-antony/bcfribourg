@@ -1,12 +1,20 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CalendarEvent } from "@prisma/client";
-import { db } from "~/server/db";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/lib/components/ui/accordion";
+
 export default function eventDayPage() {
   const router = useRouter();
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const queryDate = router.query["eventDate"];
   useEffect(() => {
-    fetch("/api/events")
+    if (!router.isReady) return;
+    fetch(`/api/events/filter/${queryDate}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
@@ -22,24 +30,35 @@ export default function eventDayPage() {
             longitude: event.longitude,
             latitude: event.latitude,
           }));
+
           setEvents(newEvents);
         }
       });
-  }, []);
-const eventAtDay = db.calendarEvent.findMany({
-    where: {
-        start: new Date(),
-    },
-});
-  if (null == null) {
-    return <><p>{router.query.eventDate}</p></>;
-  } else if (null != null) {
-    return <></>;
-  } else {
+  }, [router.isReady]);
+
+  if (events.length != 0) {
+    return (
+      <div>
+        <p>{router.query.eventDate}</p>
+
+        <Accordion type="single" collapsible>
+          {events.map((event) => (
+            <AccordionItem key={event.id} value={event.id}>
+              <AccordionTrigger>{event.summary}</AccordionTrigger>
+              <AccordionContent>
+                <p>{event.location}</p>
+                <a href={`/calendar/event/${event.id}`} className="hover:underline">Détails</a>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    );
+  } else if (events.length == 0) {
     return (
       <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
         <h1 className="text-9xl font-bold">404</h1>
-        <p>Sorry, the event you are looking for does not exist</p>
+        <p>Sorry, there are no events on this day</p>
       </div>
     );
   }

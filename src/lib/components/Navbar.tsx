@@ -22,9 +22,11 @@ const Navbar = () => {
     },
     { name: "Coupe l'Avenir", href: "/competition/coupe_avenir", icon: "trophy.svg" },
     { name: "Tournois SB", href: "/competition/tournois", icon: "tournament.svg" },
+    { name: "Saisons précédentes", href: "competition/previous_seasons", icon: "switzerland.svg" },
   ];
   const subClub = [
     { name: "Comité", href: "/club/comite", icon: "comittee.svg" },
+    { name: "Historique", href: "/club/history", icon: "comittee.svg" },
     { name: "Documents", href: "/club/documents", icon: "document.svg" },
   ];
   const [isOpen, setIsOpen] = useState(false);

@@ -6,7 +6,6 @@ import ch_ from "swiss-maps/2024/ch-combined.json";
 const ch: Topology = ch_ as unknown as Topology;
 import { useState } from "react";
 import { MapTooltip } from "./MapTooltip";
-import { on } from "events";
 
 type MapProps = { longitude: number; latitude: number; location: string };
 type InteractionData = {

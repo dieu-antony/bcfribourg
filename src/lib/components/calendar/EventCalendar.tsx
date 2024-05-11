@@ -109,12 +109,6 @@ const EventCalendar = ({
           {format(chosenMonth, "MMM yy")}{" "}
         </h2>
         <div className="ml-auto flex flex-grow gap-1">
-          {/* <Button className="border bg-white text-black hover:bg-gray-100">
-            <CalendarIcon />
-          </Button>
-          <Button className="border bg-white text-black hover:bg-gray-100">
-            <List />
-          </Button> */}
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -187,7 +181,7 @@ const EventCalendar = ({
                   if (isSameDay(val, day)) {
                     return (
                       <div key={val} className="flex justify-center mt-1" >
-                        <a href={`/calendar/day/${val}`} ><div className="size-5 rounded-full bg-picton-blue-500"></div></a>
+                        <a href={`/calendar/day/${new Date(val).toDateString()}`} ><div className="size-5 rounded-full bg-picton-blue-500"></div></a>
                       </div>
                     );
                   }

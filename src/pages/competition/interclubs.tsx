@@ -31,7 +31,6 @@ const interclubs = () => {
         }
       });
   }, []);
-  console.log(playersByTeam);
 
   return (
     <>

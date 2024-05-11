@@ -21,21 +21,20 @@ model User {
 
 model Team {
     id          String   @id @default(cuid())
-    name        String   @unique
+    name        String
     position    Int      @default(1)
     wins        Int      @default(0)
     losses      Int      @default(0)
-    draws       Int      @default(0)
+    ties        Int      @default(0)
     points      Int      @default(0)
     matchRecord String   @default("0-0")
     setRecord   String   @default("0-0")
     gamesRecord String   @default("0-0")
-    history     String   @default("")
+    seasonStart Int      @default(0)
     league      League   @relation(fields: [leagueId], references: [id])
     leagueId    String
-    updatedAt   DateTime @updatedAt
     players     Player[]
-    url         String?  @unique
+    url         String?  
 }
 
 model League {
@@ -45,16 +44,16 @@ model League {
 }
 
 model CalendarEvent {
-    id          String    @id @default(cuid())
-    uid         String    @unique
-    summary     String
-    url         String
-    location    String?
-    start       DateTime
-    end         DateTime
-    eventType   String    @default("Events")
-    longitude   Float? 
-    latitude    Float?
+    id        String   @id @default(cuid())
+    uid       String   @unique
+    summary   String
+    url       String
+    location  String?
+    start     DateTime
+    end       DateTime
+    eventType String   @default("Events")
+    longitude Float?
+    latitude  Float?
 }
 
 model Player {

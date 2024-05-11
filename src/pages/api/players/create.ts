@@ -51,7 +51,7 @@ export default async function handler(
                   data: {
                     firstName: player.firstName,
                     lastName: player.lastName,
-                    team: player.team,
+                    teamId: player.teamId,
                     captain: player.captain,
                     gender: player.gender,
                   },
@@ -64,7 +64,7 @@ export default async function handler(
         if (playersToCreate.length > 0) {
           await db.player.createMany({
             data: playersToCreate.map((player) => ({
-              team: player.team,
+              teamId: player.teamId,
               gender: player.gender,
               captain: player.captain,
               firstName: player.firstName,

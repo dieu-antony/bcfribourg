@@ -8,24 +8,24 @@ export default async function handler(
 ) {
   await RouteHandler(req, res, {
     GET: async function (req, res: NextApiResponse) {
-      //      const players = await db.player.findMany();
-
+      const currentYear = new Date().getFullYear();
+      const currentMonth = new Date().getMonth();
       const playersByTeam = await db.team.findMany({
+        where: {
+          seasonStart: currentMonth >= 8 ? currentYear : currentYear - 1,
+        },
         select: {
           id: true,
           name: true,
           url: true,
           players: true,
           league: {
-            select: {
-              name: true,
-              
-            },
-            
+        select: {
+          name: true,
+        },
           },
         },
       });
-
 
       res.status(200).json({ status: "success", players: playersByTeam });
     },
