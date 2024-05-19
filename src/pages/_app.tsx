@@ -20,7 +20,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
       </Head>
 
       <main
-        className={`font-sans ${inter.variable} flex min-h-screen flex-col`}
+        className={`font-sans ${inter.variable} flex min-h-screen flex-col bg-gradient-to-b from-gray-50 to-gray-100`}
       >
           <Header />
           <Component {...pageProps} />

@@ -1,4 +1,4 @@
-import { Team } from "~/pages/api/teams/create";
+import { PastTeam } from "~/pages/api/pastTeams/create";
 import { useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 
@@ -6,11 +6,11 @@ import { getWinLossRecord } from "~/lib/utils/utils";
 
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
-type RatioStackedBarplotProps = {
+type StackedBarplotProps = {
   width: number;
   height: number;
   type: "set" | "games" | "match";
-  data: Team[];
+  data: PastTeam[];
 };
 
 export type TeamWithRatioKey = { seasonStart: number } & { won: number } & {
@@ -19,12 +19,12 @@ export type TeamWithRatioKey = { seasonStart: number } & { won: number } & {
   [key: string]: number;
 };
 
-export const RatioStackedBarplot = ({
+export const StackedBarplot = ({
   data,
   width,
   height,
   type,
-}: RatioStackedBarplotProps) => {
+}: StackedBarplotProps) => {
   const axesRef = useRef(null);
   const boundsWidth = width - margin.right - margin.left;
   const boundsHeight = height - margin.top - margin.bottom;
@@ -91,7 +91,7 @@ export const RatioStackedBarplot = ({
   const colorScale = d3
     .scaleOrdinal<string>()
     .domain(allGroups)
-    .range(["red", "green"]);
+    .range(["#dc2626", "#22c55e"]);
 
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);

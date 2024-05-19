@@ -8,12 +8,7 @@ export default async function handler(
 ) {
   await RouteHandler(req, res, {
     GET: async function (req, res: NextApiResponse) {
-      const currentYear = new Date().getFullYear();
-      const currentMonth = new Date().getMonth();
-      const playersByTeam = await db.team.findMany({
-        where: {
-          seasonStart: currentMonth >= 8 ? currentYear : currentYear - 1,
-        },
+      const playersByTeam = await db.iCTeam.findMany({
         select: {
           id: true,
           name: true,

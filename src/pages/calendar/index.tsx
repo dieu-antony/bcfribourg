@@ -102,7 +102,7 @@ const calendar = () => {
     { value: "Interclub B", label: "NLB", color: "orange" },
     { value: "Interclub 1", label: "1ère Ligue", color: "blue" },
     { value: "Interclub 2", label: "2ème Ligue", color: "red" },
-    { value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
+    //{ value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
     { value: "Interclub 4", label: "4ème Ligue", color: "green" },
     { value: "Events", label: "Événements", color: "black" },
   ];

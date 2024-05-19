@@ -6,12 +6,12 @@ import {
   CardTitle,
   CardDescription,
 } from "../ui/card";
-import { Team } from "~/pages/api/teams/create";
+import { PastTeam } from "~/pages/api/pastTeams/create";
 
 export type InteractionData = {
   xPos: number;
   yPos: number;
-  data: Team;
+  data: PastTeam;
 };
 
 type ScatterPlotTooltipProps = {

@@ -1,12 +1,11 @@
-import { Team } from "~/pages/api/teams/create";
+import { PastTeam } from "~/pages/api/pastTeams/create";
 import { useMemo } from "react";
 import * as d3 from "d3";
-import { getLeagueFromId } from "~/lib/utils/utils";
-import { abbreviateTeamName } from "~/lib/utils/utils";
+import { getLeagueFromId, abbreviateTeamName, turnLeagueToNumber} from "~/lib/utils/utils";
 
 const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
-type HeatmapProps = { data: Team[]; width: number; height: number };
+type HeatmapProps = { data: PastTeam[]; width: number; height: number };
 
 export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
   const boundsWidth = width - margin.right - margin.left;
@@ -37,28 +36,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
       .padding(0.01);
   }, [data, height]);
 
-  function turnLeagueToNumber(league: string) {
-    switch (league) {
-      case "A":
-        return "10";
-      case "B":
-        return "20";
-      case "C":
-        return "30";
-      case "1":
-        return "40";
-      case "2":
-        return "50";
-      case "3":
-        return "60";
-      case "4":
-        return "70";
-      case "5":
-        return "80";
-      default:
-        return "0";
-    }
-  }
+  
   const [min, max] = d3.extent(
     data.map((d) => parseInt(turnLeagueToNumber(getLeagueFromId(d.leagueId)))),
   );

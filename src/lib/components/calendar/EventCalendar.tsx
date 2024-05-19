@@ -21,7 +21,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { Calendar } from "../ui/calendar";
-import { cn } from "~/lib/utils";
+import { cn } from "~/lib/utils/utils";
 import { inter } from "~/pages/_app";
 import clsx from "clsx";
 import { CalendarEvent } from "@prisma/client";
@@ -35,6 +35,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Clock8 } from "lucide-react";
+import { translateWeekday } from "~/lib/utils/utils";
 
 const EventCalendar = ({
   events,
@@ -146,8 +147,8 @@ const EventCalendar = ({
       <div className="grid grid-cols-7">
         {weekDays.map((day) => {
           return (
-            <div key={day} className="border text-center font-bold">
-              {day}
+            <div key={day} className="border text-center bg-white font-bold">
+              {translateWeekday(day)}
             </div>
           );
         })}
@@ -169,7 +170,7 @@ const EventCalendar = ({
           return (
             <ScrollArea
               key={day.toString()}
-              className={clsx("h-16 border pt-1 text-center md:h-24 lg:h-32", {
+              className={clsx("h-16 border pt-1 text-center bg-white md:h-24 lg:h-32", {
                 "bg-picton-blue-200": isToday(day),
               })}
             >

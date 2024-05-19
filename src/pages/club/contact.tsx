@@ -1,28 +1,68 @@
 import Head from "next/head";
 import FormItem from "~/lib/components/FormItem";
 import { useState } from "react";
+import { Toaster } from "~/lib/components/ui/sonner";
+import { toast } from "sonner";
 
 const Contact = () => {
-  const [name, setName] = useState<string>("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [subject, setSubject] = useState("Information");
 
-  //TODO: finish form submit, get logic on who to send to, send email on submit
   async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const data = {
-      name,
-      //...
+    const toEmail = (subject: string) => {
+      switch (subject) {
+        case "Information":
+          return "president@bcfribourg.ch";
+        case "Compétition":
+          return "technique@bcfribourg.ch";
+        case "Entraînement Adultes":
+          return "technique@bcfribourg.ch";
+        case "Entraînement Juniors":
+          return "juniors@bcfribourg.ch";
+        case "Site internet":
+          return "webmaster@bcfribourg.ch";
+        case "Autre":
+          return "secretaire@bcfribourg.ch";
+        default:
+          "secretaire@bcfribourg.ch";
+      }
     };
-    console.log(data);
 
-    const res = await fetch("/api/contact", {
+    const emailTo = toEmail(subject);
+
+    const data = {
+      lastName: lastName,
+      firstName: firstName,
+      email: email,
+      message: message,
+      subject: subject,
+      toEmail: emailTo,
+      gender: "",
+      address: "",
+      npa: "",
+      birthdate: "",
+      avs: "",
+      phone: "",
+      natel: "",
+      license: "",
+    };
+    const res = await fetch("/api/email/send", {
       method: "POST",
       body: JSON.stringify(data),
     });
+    toast.success("Votre demande a bien été envoyée !");
+    setLastName("");
+    setFirstName("");
+    setEmail("");
 
-    const json = await res.json();
-
-    console.log(json);
+    //FIXME: setSubject and setMessage don't work
+    setMessage("");
+    setSubject("Information");
   }
 
   return (
@@ -31,7 +71,7 @@ const Contact = () => {
         <title>Contact</title>
       </Head>
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-gray-100 p-5">
+        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5">
           <form onSubmit={onContactSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
@@ -48,19 +88,27 @@ const Contact = () => {
                     label="name"
                     type="text"
                     labelName="Nom"
-                    setValue={setName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                    value={lastName}
                   />
                   <FormItem
                     className="sm:col-span-3"
                     label="name"
                     type="text"
                     labelName="Prénom"
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    value={firstName}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="name"
                     type="email"
                     labelName="Adresse email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    value={email}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -70,16 +118,22 @@ const Contact = () => {
                     options={[
                       "Information",
                       "Compétition",
-                      "Entraînement",
+                      "Entraînement Adultes",
+                      "Entraînement Juniors",
                       "Site internet",
                       "Autre",
                     ]}
+                    onChange={(e) => setSubject(e.target.value)}
+                    value={subject}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="message"
                     type="textarea"
                     labelName="Message"
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                    value={message}
                   />
                   <button
                     type="submit"
@@ -92,6 +146,7 @@ const Contact = () => {
             </div>
           </form>
         </div>
+        <Toaster richColors />
       </div>
     </>
   );

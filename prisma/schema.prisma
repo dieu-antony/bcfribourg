@@ -19,28 +19,28 @@ model User {
     @@index([username])
 }
 
-model Team {
-    id          String   @id @default(cuid())
+model PastTeam {
+    id          String  @id @default(cuid())
     name        String
-    position    Int      @default(1)
-    wins        Int      @default(0)
-    losses      Int      @default(0)
-    ties        Int      @default(0)
-    points      Int      @default(0)
-    matchRecord String   @default("0-0")
-    setRecord   String   @default("0-0")
-    gamesRecord String   @default("0-0")
-    seasonStart Int      @default(0)
-    league      League   @relation(fields: [leagueId], references: [id])
+    position    Int     @default(1)
+    wins        Int     @default(0)
+    losses      Int     @default(0)
+    ties        Int     @default(0)
+    points      Int     @default(0)
+    matchRecord String  @default("0-0")
+    setRecord   String  @default("0-0")
+    gamesRecord String  @default("0-0")
+    seasonStart Int     @default(0)
+    league      League  @relation(fields: [leagueId], references: [id])
     leagueId    String
-    players     Player[]
-    url         String?  
+    url         String?
 }
 
 model League {
     id    String @id @default(cuid())
     name  String @unique
-    teams Team[]
+    pastTeams PastTeam[]
+    icTeams   ICTeam[]
 }
 
 model CalendarEvent {
@@ -60,8 +60,17 @@ model Player {
     id        String   @id @default(cuid())
     firstName String
     lastName  String
-    team      Team     @relation(fields: [teamId], references: [id])
+    team      ICTeam   @relation(fields: [teamId], references: [id])
     teamId    String
     captain   Boolean?
     gender    String
+}
+
+model ICTeam {
+    id       String   @id @default(cuid())
+    name     String
+    league   League   @relation(fields: [leagueId], references: [id])
+    leagueId String
+    players  Player[]
+    url     String
 }

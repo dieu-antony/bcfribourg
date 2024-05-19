@@ -39,10 +39,11 @@ export default function eventPage() {
     event?.location != "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
   ) {
     return (
-      
-      <div className="flex flex-col md:flex-row items-center justify-center md:m-8 ">
+      <div className="flex flex-col items-center justify-center md:m-8 md:flex-row ">
         <div className="flex flex-col items-center">
-          <h1 className="bg-picton-blue-400 p-2 rounded-sm font-semibold">{event?.summary || ""}</h1>
+          <h1 className="rounded-sm bg-picton-blue-400 p-2 font-semibold">
+            {event?.summary || ""}
+          </h1>
           <Map
             location={event?.location?.toString() || ""}
             latitude={event?.latitude || 46.81177897206209}
@@ -59,7 +60,11 @@ export default function eventPage() {
             <p className="ml-1">{format(event?.end || "", "HH:mm")}</p>
             <Separator className="my-2 bg-black" />
             <h2 className="ml-1 mt-2 font-bold">Lien</h2>
-            <a href={event?.url} className="ml-1 flex gap-1 hover:underline items-center" target="_blank">
+            <a
+              href={event?.url}
+              className="ml-1 flex items-center gap-1 hover:underline"
+              target="_blank"
+            >
               <SquareArrowOutUpRight className="size-5" />
               Swiss Badminton
             </a>
@@ -68,22 +73,23 @@ export default function eventPage() {
             <p className="ml-1">{event?.location}</p>
           </div>
           <EmbedGoogleMap
-          latitude={event?.latitude || 46.81177897206209}
-          longitude={event?.longitude || 7.147400994098687}
-          className="w-[400px] h-[400px] border-0 mt-2"
-        />
+            latitude={event?.latitude || 46.81177897206209}
+            longitude={event?.longitude || 7.147400994098687}
+            className="mt-2 h-[400px] w-[400px] border-0"
+          />
         </aside>
       </div>
-
     );
   } else if (
     event?.location === "Switzerland" ||
     event?.location === "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
   ) {
     return (
-      <div className="flex flex-col md:flex-row items-center justify-center md:m-8 ">
+      <div className="flex flex-col items-center justify-center md:m-8 md:flex-row ">
         <div className="flex flex-col items-center">
-          <h1 className="bg-picton-blue-400 p-2 rounded-sm font-semibold">{event.summary}</h1>
+          <h1 className="rounded-sm bg-picton-blue-400 p-2 font-semibold">
+            {event.summary}
+          </h1>
           <Map
             location={event?.location?.toString() || ""}
             latitude={event?.latitude || 46.81177897206209}
@@ -100,7 +106,11 @@ export default function eventPage() {
             <p className="ml-1">{format(event.end, "HH:mm")}</p>
             <Separator className="my-2 bg-black" />
             <h2 className="ml-1 mt-2 font-bold">Lien</h2>
-            <a href={event.url} className="ml-1 flex gap-1 hover:underline items-center" target="_blank">
+            <a
+              href={event.url}
+              className="ml-1 flex items-center gap-1 hover:underline"
+              target="_blank"
+            >
               <SquareArrowOutUpRight className="size-5" />
               Swiss Badminton
             </a>
@@ -112,7 +122,7 @@ export default function eventPage() {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1694.185361353271!2d7.1470027257841755!3d46.81204182530239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e77f032055555%3A0x4e14f509540705e5!2sBadminton%20Club%20Fribourg!5e1!3m2!1sen!2sch!4v1714296481160!5m2!1sen!2sch"
             width="400"
             height="400"
-            className="border-0 mt-2"
+            className="mt-2 border-0"
             loading="lazy"
           />
         </aside>

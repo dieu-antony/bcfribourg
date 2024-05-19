@@ -18,7 +18,7 @@ import {
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { inter } from "./_app";
-import { cn } from "~/lib/utils";
+import { cn } from "~/lib/utils/utils"
 import { Button } from "~/lib/components/ui/button";
 import { Calendar } from "~/lib/components/ui/calendar";
 import { DatabaseTable } from "~/lib/components/dataTable/DatabaseTable";
@@ -26,11 +26,11 @@ import {
   DatabaseColumns,
   DatabaseColumnsProps,
 } from "~/lib/components/dataTable/DatabaseColumns";
-import { Team } from "./api/teams/create";
+import { PastTeam } from "./api/pastTeams/create";
 
 const admin = () => {
   const [events, setEvents] = useState<CalendarEventWithoutID[]>([]);
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<PastTeam[]>([]);
   const [loading, setLoading] = useState(false);
   const [eventDate, setEventDate] = useState<Date>();
   const [tableData, setTableData] = useState<DatabaseColumnsProps[]>([]);
@@ -127,7 +127,7 @@ const admin = () => {
 
     if (teams.length === 0) return;
 
-    const response = await fetch("/api/teams/create", {
+    const response = await fetch("/api/pastTeams/create", {
       method: "POST",
       body: JSON.stringify(teams),
     });

@@ -27,7 +27,7 @@ export async function parseCalendar(
       const vevent = current as ical.VEvent;
       const location =
         vevent.location ||
-        (vevent.summary.startsWith("Union Tafers-Fribourg")
+        (vevent.summary.val.startsWith("Union Tafers-Fribourg")
           ? "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
           : "Switzerland");
       const coordinates = await findLonLat(location);
@@ -42,7 +42,7 @@ export async function parseCalendar(
 
       const data: CalendarEventWithoutID = {
         uid: vevent.uid,
-        summary: vevent.summary,
+        summary: vevent.summary.val,
         location: location,
         start: new Date(vevent.start.getTime()),
         url: vevent.url,

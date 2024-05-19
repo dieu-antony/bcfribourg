@@ -1,4 +1,4 @@
-import { Team } from "~/pages/api/teams/create";
+import { PastTeam } from "~/pages/api/pastTeams/create";
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import {
@@ -13,10 +13,10 @@ type RatioScatterPlotProps = {
   width: number;
   height: number;
   type: "wins" | "points";
-  data: Team[];
+  data: PastTeam[];
 };
 
-export type TeamWithRatio = Team & { ratio: number };
+export type TeamWithRatio = PastTeam & { ratio: number };
 
 export const RatioScatterPlot = ({
   width,

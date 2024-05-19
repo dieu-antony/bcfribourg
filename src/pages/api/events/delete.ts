@@ -2,11 +2,15 @@ import { CalendarEvent } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<void>,
+  res: NextApiResponse,
 ) {
+  const session = await getServerSession( req, res, authOptions );
+  if (session) {
   await RouteHandler(req, res, {
     POST: async function (req, res: NextApiResponse) {
       const calendarEvents: CalendarEvent[] = JSON.parse(req.body);
@@ -40,4 +44,7 @@ export default async function handler(
       }
     },
   });
+} else {
+  res.status(401).json({ status: "error", message: "Unauthorized" });
+}
 }

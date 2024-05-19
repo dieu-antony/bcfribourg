@@ -3,31 +3,49 @@ import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
 import NavLinks from "./NavLink";
+import { Activity, Play, Handshake, Blocks, Award, Trophy, History, FileClock, Mail, Users, Folder } from "lucide-react";
 
 const Navbar = () => {
   const subTraining = [
     {
       name: "Adultes",
       href: "/training/adultes",
-      icon: "court.svg",
+      icon: <Activity size="20px"/>,
     },
-    { name: "Juniors", href: "/training/juniors", icon: "court.svg" },
+    { name: "Juniors", href: "/training/juniors", icon: <Play size="20px"/> },
   ];
   const subCompetition = [
-    { name: "Interclubs", href: "/competition/interclubs", icon: "switzerland.svg" },
+    {
+      name: "Interclubs",
+      href: "/competition/interclubs",
+      icon: <Handshake size="20px"/>,
+    },
     {
       name: "Circuit Junior",
       href: "/competition/circuit_junior",
-      icon: "shuttleIcon.svg",
+      icon: <Blocks size="20px"/>,
     },
-    { name: "Coupe l'Avenir", href: "/competition/coupe_avenir", icon: "trophy.svg" },
-    { name: "Tournois SB", href: "/competition/tournois", icon: "tournament.svg" },
-    { name: "Saisons précédentes", href: "competition/previous_seasons", icon: "switzerland.svg" },
+    {
+      name: "Coupe l'Avenir",
+      href: "/competition/coupe_avenir",
+      icon: <Award size="20px"/>,
+    },
+    {
+      name: "Tournois SB",
+      href: "/competition/tournois",
+      icon: <Trophy size="20px"/>,
+    },
+    {
+      name: "Saisons précédentes",
+      href: "/competition/previous_seasons",
+      icon: <FileClock size="20px"/>,
+    },
   ];
   const subClub = [
-    { name: "Comité", href: "/club/comite", icon: "comittee.svg" },
-    { name: "Historique", href: "/club/history", icon: "comittee.svg" },
-    { name: "Documents", href: "/club/documents", icon: "document.svg" },
+    { name: "Contact", href: "/club/contact", icon: <Mail size="20px"/> },
+    { name: "Comité", href: "/club/comite", icon: <Users size="20px"/> },
+    { name: "Historique", href: "/club/history", icon: <History size="20px"/> },
+    { name: "Documents", href: "/club/documents", icon: <Folder size="20px"/>},
   ];
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,22 +59,37 @@ const Navbar = () => {
         <div
           className={`${isOpen ? "" : "hidden lg:flex"} flex basis-full flex-col place-items-start lg:ml-16 lg:w-full lg:flex-row lg:justify-between lg:pr-12`}
         >
-          <NavLinks name="Accueil" href="/" />
+          <NavLinks name="Accueil" href="/" onClick={() => setIsOpen(false)} />
           <DropdownNavLink
             triggerElement="Entraînment"
             children={subTraining}
+            onClick={() => setIsOpen(false)}
           />
           <DropdownNavLink
             triggerElement="Compétition"
             children={subCompetition}
+            onClick={() => setIsOpen(false)}
           />
-          <DropdownNavLink triggerElement="Club" children={subClub} />
+          <DropdownNavLink
+            triggerElement="Club"
+            children={subClub}
+            onClick={() => setIsOpen(false)}
+          />
 
-          <NavLinks name="Calendrier" href="/calendar" />
-          <NavLinks name="Liens" href="/links" />
+          <NavLinks
+            name="Calendrier"
+            href="/calendar"
+            onClick={() => setIsOpen(false)}
+          />
+          <NavLinks
+            name="Liens"
+            href="/links"
+            onClick={() => setIsOpen(false)}
+          />
           <Link
-            className="text-1xl mt-2 rounded bg-gray-300 p-2 text-center text-black hover:text-white hover:font-bold transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500  lg:m-0 lg:self-center"
-            href="/contact"
+            className="text-1xl mt-2 rounded bg-gray-200 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500 hover:font-bold hover:text-white  lg:m-0 lg:self-center"
+            href="/member"
+            onClick={() => setIsOpen(false)}
           >
             Devenir membre
           </Link>

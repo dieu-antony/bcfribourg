@@ -1,4 +1,4 @@
-import { Team } from "~/pages/api/teams/create";
+import { PastTeam } from "~/pages/api/pastTeams/create";
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
@@ -7,7 +7,7 @@ const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 type PositionScatterPlotProps = {
   width: number;
   height: number;
-  data: Team[];
+  data: PastTeam[];
 };
 
 export const PositionScatterPlot = ({
@@ -47,7 +47,7 @@ export const PositionScatterPlot = ({
   }, [xScale, yScale, boundsHeight]);
 
   const lineBuilder = d3
-    .line<Team>()
+    .line<PastTeam>()
     .x((d) => xScale(customTimeParser(d.seasonStart.toString()) as Date))
     .y((d) => yScale(d.position));
 

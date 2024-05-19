@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   await RouteHandler(req, res, {
     GET: async function (req, res: NextApiResponse) {
-      const data = await db.team.findMany();
+      const data = await db.pastTeam.findMany();
       res.status(200).json({status: "success", data: data});
     },
   });

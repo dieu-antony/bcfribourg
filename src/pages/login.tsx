@@ -39,13 +39,14 @@ const login = () => {
                     </label>
                     <div className="mt-2">
                       <input
+                        autoComplete="username"
                         onChange={(e) =>
                           setData({ ...data, username: e.target.value })
                         }
                         value={data.username}
                         type="text"
                         id="username"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+                        className="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -64,7 +65,8 @@ const login = () => {
                         value={data.password}
                         type="password"
                         id="password"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+                        autoComplete="current-password"
+                        className="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>

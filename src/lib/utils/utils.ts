@@ -1,3 +1,11 @@
+import { ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+
 export function abbreviateTeamName(inputText: string): string {
     const regex: RegExp = /Union Tafers-Fribourg ([1-9])/;
 
@@ -42,3 +50,51 @@ export function getLeagueFromId(id: string) {
       lost: parseInt(y as string),
     };
   }
+
+  export function translateWeekday(day: string) {
+    switch (day) {
+      case "Mon":
+        return "Lun";
+      case "Tue":
+        return "Mar";
+      case "Wed":
+        return "Mer";
+      case "Thu":
+        return "Jeu";
+      case "Fri":
+        return "Ven";
+      case "Sat":
+        return "Sam";
+      case "Sun":
+        return "Dim";
+      default:
+        return "Unknown";
+    }
+  }
+
+
+  export function turnLeagueToNumber(league: string) {
+    switch (league) {
+      case "A":
+        return "10";
+      case "B":
+        return "20";
+      case "C":
+        return "30";
+      case "1":
+        return "40";
+      case "2":
+        return "50";
+      case "3":
+        return "60";
+      case "4":
+        return "70";
+      case "5":
+        return "80";
+      default:
+        return "0";
+    }
+  }
+
+
+  
