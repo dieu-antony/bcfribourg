@@ -1,5 +1,5 @@
 import type * as ical from "node-ical";
-import type { CalendarEventWithoutID } from "../types";
+import type { CalendarEventWithoutID, VEventFix } from "../types";
 
 async function findLonLat(address: string) {
   const url = new URL("https://nominatim.openstreetmap.org/search");
@@ -22,10 +22,9 @@ export async function parseCalendar(
     const current = calendar[item];
 
     if (current && current.type == "VEVENT") {
-      const vevent = current as ical.VEvent;
+      const vevent = current as VEventFix;
       const location =
         vevent.location ||
-        //@ts-ignore for issue with node-ical library typeing
         (vevent.summary.val.startsWith("Union Tafers-Fribourg")
           ? "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
           : "Switzerland");
@@ -41,7 +40,6 @@ export async function parseCalendar(
 
       const data: CalendarEventWithoutID = {
         uid: vevent.uid, 
-        //@ts-ignore for issue with node-ical library typeing
         summary: vevent.summary.val,
         location: location,
         start: new Date(vevent.start.getTime()),

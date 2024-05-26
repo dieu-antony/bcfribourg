@@ -1,5 +1,5 @@
 import type { League, CalendarEvent, Player } from "@prisma/client";
-
+import { Attendee, BaseComponent, Class, DateType, DateWithTimeZone, Method, Organizer, Transparency, VAlarm, VEvent, VEventStatus } from "node-ical";
 export type TeamWithRatio = PastTeam & { ratio: number };
 
 export type PastTeam = {
@@ -45,3 +45,36 @@ export type TeamWithRatioKey = { seasonStart: number } & { won: number } & {
 };
 
 export type PlayerWithoutID = Omit<Player, "id">;
+
+export interface VEventFix extends BaseComponent {
+  type: 'VEVENT';
+  method: Method;
+  dtstamp: DateWithTimeZone;
+  uid: string;
+  sequence: string;
+  transparency: Transparency;
+  class: Class;
+  summary: {val: string, params: any[]};
+  start: DateWithTimeZone;
+  datetype: DateType;
+  end: DateWithTimeZone;
+  eventType: string,
+  location: string;
+  description: string;
+  url: string;
+  completion: string;
+  created: DateWithTimeZone;
+  lastmodified: DateWithTimeZone;
+  attendee?: Attendee[] | Attendee;
+  /* eslint-disable-next-line @typescript-eslint/ban-types */
+  recurrences?: Record<string, Omit<VEvent, 'recurrences'>>;
+  status?: VEventStatus;
+
+  // I am not entirely sure about these, leave them as any for now..
+  organizer: Organizer;
+  exdate: any;
+  geo: any;
+  recurrenceid: any;
+
+  alarms?: VAlarm[];
+}
