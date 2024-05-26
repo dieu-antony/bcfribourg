@@ -1,5 +1,5 @@
 import type { League, CalendarEvent, Player } from "@prisma/client";
-import { Attendee, BaseComponent, Class, DateType, DateWithTimeZone, Method, Organizer, Transparency, VAlarm, VEvent, VEventStatus } from "node-ical";
+import { Attendee, BaseComponent, Class, DateType, DateWithTimeZone, Method, Organizer, Transparency, VAlarm, VCalendar, VEvent, VEventStatus, VTimeZone } from "node-ical";
 export type TeamWithRatio = PastTeam & { ratio: number };
 
 export type PastTeam = {
@@ -78,3 +78,8 @@ export interface VEventFix extends BaseComponent {
 
   alarms?: VAlarm[];
 }
+
+export type CalendarResponseFix = Record<string, CalendarComponent>;
+
+export type CalendarComponent = VTimeZone | VEventFix | VCalendar;
+
