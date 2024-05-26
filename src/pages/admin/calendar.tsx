@@ -10,7 +10,7 @@ import {
 } from "~/lib/components/dataTable/DatabaseColumns";
 import type { DatabaseColumnsProps } from "~/lib/components/dataTable/DatabaseColumns";
 import { toast } from "sonner";
-import { CalendarEventWithoutID } from "~/lib/types";
+import { CalendarEventWithoutID, sync } from "~/lib/types";
 import { parseCalendar } from "~/lib/utils/parseCalender";
 import * as ical from "node-ical";
 import {
@@ -78,7 +78,7 @@ const Calendar = () => {
         if (!content) return;
         if (typeof content !== "string") return;
 
-        const data = ical.sync.parseICS(content);
+        const data = sync.parseICSFix(content);
         const parsedEvents = await parseCalendar(data);
         setEvents((prev) => [...prev, ...parsedEvents]);
         setLoading(false);

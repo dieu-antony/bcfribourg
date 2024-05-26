@@ -46,6 +46,7 @@ export type TeamWithRatioKey = { seasonStart: number } & { won: number } & {
 
 export type PlayerWithoutID = Omit<Player, "id">;
 
+
 export interface VEventFix extends BaseComponent {
   type: 'VEVENT';
   method: Method;
@@ -82,4 +83,12 @@ export interface VEventFix extends BaseComponent {
 export type CalendarResponseFix = Record<string, CalendarComponent>;
 
 export type CalendarComponent = VTimeZone | VEventFix | VCalendar;
+
+export interface NodeICalSyncFix {
+  parseICSFix: (body: string) => CalendarResponseFix;
+
+  parseFileFix: (file: string) => CalendarResponseFix;
+}
+
+export const sync: NodeICalSyncFix = require("node-ical") as NodeICalSyncFix;
 
