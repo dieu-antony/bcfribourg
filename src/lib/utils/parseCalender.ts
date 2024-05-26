@@ -25,6 +25,7 @@ export async function parseCalendar(
       const vevent = current as ical.VEvent;
       const location =
         vevent.location ||
+        //@ts-ignore for issue with node-ical library typeing
         (vevent.summary.val.startsWith("Union Tafers-Fribourg")
           ? "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
           : "Switzerland");
@@ -39,7 +40,8 @@ export async function parseCalendar(
           : coordinates.lon;
 
       const data: CalendarEventWithoutID = {
-        uid: vevent.uid,
+        uid: vevent.uid, 
+        //@ts-ignore for issue with node-ical library typeing
         summary: vevent.summary.val,
         location: location,
         start: new Date(vevent.start.getTime()),
