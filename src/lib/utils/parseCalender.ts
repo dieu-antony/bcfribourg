@@ -1,5 +1,5 @@
-import * as ical from "node-ical";
-import { CalendarEvent } from "@prisma/client";
+import type * as ical from "node-ical";
+import type { CalendarEventWithoutID } from "../types";
 
 async function findLonLat(address: string) {
   const url = new URL("https://nominatim.openstreetmap.org/search");
@@ -13,8 +13,6 @@ async function findLonLat(address: string) {
     lat: data.features[0].geometry.coordinates[1],
   };
 }
-
-export type CalendarEventWithoutID = Omit<CalendarEvent, "id">;
 
 export async function parseCalendar(
   calendar: ical.CalendarResponse,

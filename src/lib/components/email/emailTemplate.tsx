@@ -1,6 +1,5 @@
 import * as React from "react";
-import { EmailData } from "~/pages/api/email/send";
-
+import type { EmailData } from "~/lib/types";
 export function EmailTemplate({
   firstName,
   lastName,
@@ -15,7 +14,6 @@ export function EmailTemplate({
   avs,
   license,
   subject,
-  toEmail,
 }: EmailData) {
   if (subject == "inscription") {
     return (

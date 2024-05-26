@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { inter } from "~/pages/_app";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Toaster } from "~/lib/components/ui/sonner";
@@ -12,18 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "~/lib/components/ui/alert-dialog"
-
 
 export type DatabaseColumnsProps = {
   id: string;
@@ -84,16 +72,17 @@ export const DatabaseColumns: ColumnDef<DatabaseColumnsProps>[] = [
     id: "actions",
     cell: ({ row }) => {
       const original = row.original;
-      async function deleteEvent(
-        event: React.MouseEventHandler<HTMLDivElement>,
-      ) {
+      async function deleteEvent() {
         const events = [original];
 
         const response = await fetch("/api/events/delete", {
           method: "POST",
           body: JSON.stringify(events),
         });
-        const data = await response.json();
+        const data: {
+          status: "success" | "error" | "loading";
+          message: string;
+        } = await response.json();
         if (data.status === "success") {
           toast.success(data.message);
         }
@@ -115,7 +104,11 @@ export const DatabaseColumns: ColumnDef<DatabaseColumnsProps>[] = [
               className={`font-sans ${inter.variable}`}
             >
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem onClick={deleteEvent as unknown as React.MouseEventHandler<HTMLDivElement>}>
+              <DropdownMenuItem
+                onClick={
+                  deleteEvent as unknown as React.MouseEventHandler<HTMLDivElement>
+                }
+              >
                 Delete Event
               </DropdownMenuItem>
               <DropdownMenuSeparator />

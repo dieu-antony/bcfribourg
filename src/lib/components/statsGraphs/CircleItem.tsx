@@ -1,37 +1,25 @@
-import { useSpring, animated } from "@react-spring/web";
+import { animated } from "@react-spring/web";
 
-export type CircleItemProps = {
-  cx: number;
-  cy: number;
+type CircleItemProps = {
+  springProps: { cx: string; cy: string };
   color: string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  key: string;
 };
 
 export const CircleItem = ({
-  cx,
-  cy,
+  springProps,
   color,
   onMouseEnter,
   onMouseLeave,
 }: CircleItemProps) => {
-  const springProps = useSpring({
-    to: {
-      cx,
-      cy,
-      color,
-    },
-    config: {
-      friction: 100,
-    },
-  });
-
   return (
     <animated.circle
       cx={springProps.cx}
       cy={springProps.cy}
       r={5}
-      fill="#00afef"
+      fill={color}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     />

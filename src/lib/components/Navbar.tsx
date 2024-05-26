@@ -37,7 +37,7 @@ const Navbar = () => {
     },
     {
       name: "Saisons précédentes",
-      href: "/competition/previous_seasons",
+      href: "/competition/PreviousSeasons",
       icon: <FileClock size="20px"/>,
     },
   ];

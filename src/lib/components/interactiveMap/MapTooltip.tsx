@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardDescription,
 } from "../ui/card";
-import { EmbedGoogleMap } from "./EmbedGoogleMap";
+
 export type InteractionData = {
   xPos: number;
   yPos: number;

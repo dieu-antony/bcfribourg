@@ -17,14 +17,13 @@ import {
   ChevronRight,
   CircleEllipsis,
   Link,
-  List,
   MapPin,
 } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { cn } from "~/lib/utils/utils";
 import { inter } from "~/pages/_app";
 import clsx from "clsx";
-import { CalendarEvent } from "@prisma/client";
+import type { CalendarEvent } from "@prisma/client";
 import { ScrollArea } from "../ui/scroll-area";
 import {
   Dialog,
@@ -80,33 +79,33 @@ const EventCalendar = ({
         <div className="flex gap-1">
           <Button
             onClick={() => setChosenMonth(previousMonth(chosenMonth))}
-            className="border w-12 bg-white text-black hover:bg-gray-100 py-3 px-2"
+            className="w-12 border bg-white px-2 py-3 text-black hover:bg-gray-100"
           >
             <ChevronLeft />
           </Button>
           <Button
             onClick={() => setChosenMonth(new Date())}
-            className="border w-16 md:flex hidden bg-white text-black hover:bg-gray-100"
+            className="hidden w-16 border bg-white text-black hover:bg-gray-100 md:flex"
           >
             Today
           </Button>
           <Button
             onClick={() => setChosenMonth(new Date())}
-            className="border w-12 md:hidden flex items-center bg-white text-black justify-items-center hover:bg-gray-100 p-3 "
+            className="flex w-12 items-center justify-items-center border bg-white p-3 text-black hover:bg-gray-100 md:hidden "
           >
             <CalendarCheck />
           </Button>
           <Button
             onClick={() => setChosenMonth(nextMonth(chosenMonth))}
-            className="border w-12 bg-white text-black hover:bg-gray-100 py-3 px-2"
+            className="w-12 border bg-white px-2 py-3 text-black hover:bg-gray-100"
           >
             <ChevronRight />
           </Button>
         </div>
-        <h2 className="self-center text-center font-bold md:block hidden">
+        <h2 className="hidden self-center text-center font-bold md:block">
           {format(chosenMonth, "MMMM yyyy")}{" "}
         </h2>
-        <h2 className="self-center text-center font-bold md:hidden block">
+        <h2 className="block self-center text-center font-bold md:hidden">
           {format(chosenMonth, "MMM yy")}{" "}
         </h2>
         <div className="ml-auto flex flex-grow gap-1">
@@ -115,25 +114,26 @@ const EventCalendar = ({
               <Button
                 variant={"outline"}
                 className={cn(
-                  "md:w-[180px] w-24 justify-start text-left font-normal",
+                  "w-24 justify-start text-left font-normal md:w-[180px]",
                   !chosenMonth && "text-muted-foreground",
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                <p className="md:block hidden">
-                {chosenMonth ? (
-                  format(chosenMonth, "PPP")
-                ) : (
-                  <span>Pick a date</span>
-                )}</p>
-                <p className="md:hidden block">Date</p>
+                <p className="hidden md:block">
+                  {chosenMonth ? (
+                    format(chosenMonth, "PPP")
+                  ) : (
+                    <span>Pick a date</span>
+                  )}
+                </p>
+                <p className="block md:hidden">Date</p>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
               <Calendar
                 mode="single"
                 selected={chosenMonth}
-                onSelect={(date) => setChosenMonth((prev) => date || prev)}
+                onSelect={(date) => setChosenMonth((prev) => date ?? prev)}
                 initialFocus
                 captionLayout="dropdown-buttons"
                 fromYear={new Date().getFullYear() - 2}
@@ -147,7 +147,7 @@ const EventCalendar = ({
       <div className="grid grid-cols-7">
         {weekDays.map((day) => {
           return (
-            <div key={day} className="border text-center bg-white font-bold">
+            <div key={day} className="border bg-white text-center font-bold">
               {translateWeekday(day)}
             </div>
           );
@@ -159,7 +159,7 @@ const EventCalendar = ({
               key={index}
             >
               {format(
-                daysInPreviousMonth[startingDayIndex - 1 - index]?.toString() ||
+                daysInPreviousMonth[startingDayIndex - 1 - index]?.toString() ??
                   new Date().toString(),
                 "d",
               )}
@@ -170,9 +170,12 @@ const EventCalendar = ({
           return (
             <ScrollArea
               key={day.toString()}
-              className={clsx("h-16 border pt-1 text-center bg-white md:h-24 lg:h-32", {
-                "bg-picton-blue-200": isToday(day),
-              })}
+              className={clsx(
+                "h-16 border bg-white pt-1 text-center md:h-24 lg:h-32",
+                {
+                  "bg-picton-blue-200": isToday(day),
+                },
+              )}
             >
               {format(day.toString(), "d")}
 
@@ -181,8 +184,12 @@ const EventCalendar = ({
                 {[...eventDaySet].map((val) => {
                   if (isSameDay(val, day)) {
                     return (
-                      <div key={val} className="flex justify-center mt-1" >
-                        <a href={`/calendar/day/${new Date(val).toDateString()}`} ><div className="size-5 rounded-full bg-picton-blue-500"></div></a>
+                      <div key={val} className="mt-1 flex justify-center">
+                        <a
+                          href={`/calendar/day/${new Date(val).toDateString()}`}
+                        >
+                          <div className="size-5 rounded-full bg-picton-blue-500"></div>
+                        </a>
                       </div>
                     );
                   }
@@ -279,7 +286,7 @@ const EventCalendar = ({
                 key={index}
               >
                 {format(
-                  daysInNextMonth[index]?.toString() || new Date().toString(),
+                  daysInNextMonth[index]?.toString() ?? new Date().toString(),
                   "d",
                 )}
               </div>

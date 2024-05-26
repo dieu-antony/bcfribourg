@@ -1,5 +1,5 @@
-import { CalendarEvent } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
+import type { CalendarEvent } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 import { getServerSession } from "next-auth/next";

@@ -1,4 +1,4 @@
-import { FormEventHandler, FormEvent, useState } from "react";
+import { type FormEventHandler, type FormEvent, useState } from "react";
 import Head from "next/head";
 import { signIn } from "next-auth/react";
 
@@ -16,9 +16,9 @@ const login = () => {
     <>
       <Head>
         <title>Login</title>
-      </Head>{" "}
+      </Head>
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="m-5 w-full max-w-[500px] rounded-sm bg-gray-100 p-5">
+        <div className="m-5 w-full max-w-[500px] rounded-sm bg-white shadow p-5">
           <form onSubmit={loginUser}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
@@ -26,7 +26,7 @@ const login = () => {
                   Login
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Please login using your usename and password.
+                  Please login using your usename and password. If you don't have a login, please ask the admin to create one for you.
                 </p>
 
                 <div className="mt-10 flex flex-col gap-x-6 gap-y-8">

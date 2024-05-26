@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 export const useDimensions = (targetRef: React.RefObject<HTMLDivElement>) => {
 
@@ -18,11 +18,11 @@ export const useDimensions = (targetRef: React.RefObject<HTMLDivElement>) => {
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [handleResize]);
 
   useLayoutEffect(() => {
     handleResize();
-  }, []);
+  }, [handleResize]);
 
   return dimensions;
 }

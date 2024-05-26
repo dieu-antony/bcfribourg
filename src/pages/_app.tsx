@@ -1,4 +1,4 @@
-import { AppProps, type AppType } from "next/app";
+import { type AppProps, type AppType } from "next/app";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Header from "~/lib/components/Header";

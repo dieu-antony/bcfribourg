@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PastTeam } from "../api/pastTeams/create";
 import {
   Tabs,
   TabsContent,
@@ -16,13 +15,13 @@ import { useDimensions } from "~/lib/hooks/useDimensions";
 import { getLeagueFromId } from "~/lib/utils/utils";
 import { LeagueHeatmap } from "~/lib/components/statsGraphs/LeagueHeatmap";
 import { StackedBarplot } from "~/lib/components/statsGraphs/StackedBarplot";
+import type { PastTeam } from "~/lib/types";
 
-const previous_seasons = () => {
+const PreviousSeasons = () => {
   const chartRef = useRef<HTMLDivElement>(null);
   const chartSize = useDimensions(chartRef);
 
   const [data, setData] = useState<PastTeam[]>([]);
-  const [filteredData, setFilteredData] = useState<PastTeam[]>([]);
   const [selectedData, setSelectedData] = useState<string>(
     "Union Tafers-Fribourg 1",
   );
@@ -55,14 +54,9 @@ const previous_seasons = () => {
         }
       });
   }, []);
-  useEffect(() => {
-    if (selectedData.length > 0) {
-      const filtered = data.filter((data) => selectedData.includes(data.name));
-      setFilteredData(filtered);
-    } else {
-      setFilteredData(data);
-    }
-  }, [selectedData, data]);
+  const filteredData = data.filter((data) => {
+    return selectedData.includes(data.name)
+  })
   const filterOptions = [
     {
       value: "Union Tafers-Fribourg 1",
@@ -142,7 +136,7 @@ const previous_seasons = () => {
             <div className="flex flex-col">
               <Tabs defaultValue="positionScatterPlot">
                 <div className="flex h-auto justify-center">
-                  <TabsList className="grid grid-cols-2 justify-center gap-1 md:flex md:gap-0 py-4 bg-gray-200 mb-4">
+                  <TabsList className="grid grid-cols-2 justify-center gap-1 md:flex md:gap-0 h-24 md:h-12 md:py-4 mb-4">
                     <TabsTrigger
                       value="positionScatterPlot"
                       className="text-gray border-2 bg-gray-50 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white md:rounded-l  md:rounded-r-none "
@@ -358,4 +352,4 @@ const previous_seasons = () => {
   );
 };
 
-export default previous_seasons;
+export default PreviousSeasons;

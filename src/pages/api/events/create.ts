@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { CalendarEventWithoutID } from "~/lib/utils/parseCalender";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+import type { CalendarEventWithoutID } from "~/lib/types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -62,7 +62,6 @@ export default async function handler(
               }),
             );
           }
-          console.log("events to create" + eventsToCreate);
           if (eventsToCreate.length > 0) {
             await db.calendarEvent.createMany({
               data: eventsToCreate.map((event) => ({

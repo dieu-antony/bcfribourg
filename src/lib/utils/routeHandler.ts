@@ -21,5 +21,5 @@ export async function RouteHandler(
     return res.status(405).send("Method not allowed");
   }
 
-  return await handler!(req, res);
+  return await handler(req, res);
 }

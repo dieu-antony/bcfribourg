@@ -1,13 +1,15 @@
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  SortingState,
   useReactTable,
-  ColumnFiltersState,
   getFilteredRowModel,
   getSortedRowModel,
+} from "@tanstack/react-table";
+import type {
+  ColumnDef,
+  SortingState,
+  ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Button } from "~/lib/components/ui/button";
 import { useState } from "react";

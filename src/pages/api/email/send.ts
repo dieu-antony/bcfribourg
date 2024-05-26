@@ -2,23 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { EmailTemplate } from "~/lib/components/email/emailTemplate";
 import { Resend } from "resend";
 import { RouteHandler } from "~/lib/utils/routeHandler";
+import type { EmailData } from "~/lib/types";
 
-export type EmailData = {
-  firstName?: string;
-  lastName?: string;
-  email: string;
-  message?: string;
-  phone?: string;
-  natel?: string;
-  address?: string;
-  toEmail: string;
-  npa?: string;
-  gender?: string;
-  birthdate?: string;
-  avs?: string;
-  license?: string;
-  subject?: string;
-};
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -30,9 +15,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<void>) => {
         const { data, error } = await resend.emails.send({
           from: "BC Fribourg <onboarding@resend.dev>",
           to: EmailData.toEmail,
-          subject: EmailData.subject || "Subject unknown",
+          subject: EmailData.subject ?? "Subject unknown",
           react: EmailTemplate({ ...EmailData }),
-          text: EmailData.message || "Message unknown",
+          text: EmailData.message ?? "Message unknown",
         });
 
         if (error) {

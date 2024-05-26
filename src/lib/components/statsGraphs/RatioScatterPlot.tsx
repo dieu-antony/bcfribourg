@@ -1,11 +1,21 @@
-import { PastTeam } from "~/pages/api/pastTeams/create";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
+import type { InteractionData } from "../statsGraphs/ScatterPlotTooltip";
 import {
-  InteractionData,
   ScatterPlotTooltip,
 } from "../statsGraphs/ScatterPlotTooltip";
-
+import { PastTeam, TeamWithRatio } from "~/lib/types";
+import { CircleItem } from "./CircleItem";
+import { interpolatePath } from "d3-interpolate-path";
+import {
+  AnimationResult,
+  Lookup,
+  SpringValue,
+  animated,
+  to,
+  useSpring,
+  useSprings,
+} from "@react-spring/web";
 
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
@@ -15,8 +25,6 @@ type RatioScatterPlotProps = {
   type: "wins" | "points";
   data: PastTeam[];
 };
-
-export type TeamWithRatio = PastTeam & { ratio: number };
 
 export const RatioScatterPlot = ({
   width,
@@ -74,31 +82,76 @@ export const RatioScatterPlot = ({
     .x((d) => xScale(customTimeParser(d.seasonStart.toString()) as Date))
     .y((d) => yScale(d.ratio));
 
-  const linePath = lineBuilder(updatedData);
+  const line = lineBuilder(updatedData);
+
+  const linePath = useRef(line);
+
+  const pathInterpolator = useMemo(
+    () =>
+      interpolatePath(linePath.current || "", lineBuilder(updatedData) || ""),
+    [lineBuilder(updatedData)],
+  );
 
   if (!linePath) {
     return null;
   }
 
-  const allCircles = updatedData.map((d, index) => (
-    <circle
-      key={`${d.id}-${d.ratio}-${type}-${d.seasonStart}-${index}`}
-      cx={xScale(customTimeParser(d.seasonStart.toString()) as Date)}
-      cy={yScale(d.ratio)}
-      r={5}
-      onMouseEnter={() => {
-        setInteractionData({
-          xPos: xScale(customTimeParser(d.seasonStart.toString()) as Date),
-          yPos: yScale(d.ratio),
-          data: d,
-        });
-      }}
-      onMouseLeave={() => {
-        setInteractionData(null);
-      }}
-      fill="#00afef"
-    />
-  ));
+  const lineSpringProps = useSpring({
+    from: {
+      t: 0,
+    },
+    to: {
+      t: 1,
+    },
+    config: {
+      friction: 20,
+      mass: 1,
+    },
+    reset: linePath.current !== line,
+    onChange: ({ value }: AnimationResult<SpringValue<Lookup<any>>>) => {
+      linePath.current = pathInterpolator(value.t);
+    },
+  });
+
+  const springs = useSprings(
+    updatedData.length,
+    updatedData.map((d) => ({
+      to: {
+        cx: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+        cy: yScale(d.ratio),
+        color: "#00afef",
+      },
+      config: {
+        friction: 20,
+        mass: 1,
+      },
+    })),
+  );
+
+  const allCircles = updatedData.map((d, index) => {
+    return (
+      <CircleItem
+        key={`${d.id}-${d.ratio}-${type}-${d.seasonStart}-${index}`}
+        springProps={{ cx: springs[index]?.cx.toString() || "0", cy: springs[index]?.cy.toString() || "0" }}
+        onMouseEnter={() => {
+          setInteractionData({
+            xPos: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+            yPos: yScale(d.ratio),
+            orientation:
+              xScale(customTimeParser(d.seasonStart.toString()) as Date) >
+              boundsWidth / 2
+                ? "left"
+                : "right",
+            data: d,
+          });
+        }}
+        onMouseLeave={() => {
+          setInteractionData(null);
+        }}
+        color="#00afef"
+      />
+    );
+  });
 
   return (
     <>
@@ -108,11 +161,10 @@ export const RatioScatterPlot = ({
           height={boundsHeight}
           transform={`translate(${[margin.left, margin.top].join(",")})`}
         >
-          <path
-            d={linePath}
-            opacity={1}
-            stroke="#00afef"
-            fill="none"
+          <animated.path
+            d={to(lineSpringProps.t, pathInterpolator)}
+            fill={"none"}
+            stroke={"#00afef"}
             strokeWidth={2}
           />
           {allCircles}

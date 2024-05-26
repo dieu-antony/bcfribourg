@@ -1,7 +1,11 @@
-import { PastTeam } from "~/pages/api/pastTeams/create";
 import { useMemo } from "react";
 import * as d3 from "d3";
-import { getLeagueFromId, abbreviateTeamName, turnLeagueToNumber} from "~/lib/utils/utils";
+import {
+  getLeagueFromId,
+  abbreviateTeamName,
+  turnLeagueToNumber,
+} from "~/lib/utils/utils";
+import type { PastTeam } from "~/lib/types";
 
 const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
@@ -26,7 +30,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
       .range([0, boundsWidth])
       .domain(allXGroups)
       .padding(0.01);
-  }, [data, width]);
+  }, [data, allXGroups, boundsWidth, width]);
 
   const yScale = useMemo(() => {
     return d3
@@ -34,9 +38,8 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
       .range([boundsHeight, 0])
       .domain(allYGroups)
       .padding(0.01);
-  }, [data, height]);
+  }, [data, height, allYGroups, boundsHeight]);
 
-  
   const [min, max] = d3.extent(
     data.map((d) => parseInt(turnLeagueToNumber(getLeagueFromId(d.leagueId)))),
   );
@@ -53,7 +56,6 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
     return (
       <g key={i}>
         <rect
-          
           r={4}
           x={xScale(d.name)}
           y={yScale(d.seasonStart.toString())}
@@ -68,7 +70,6 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
         />
         <text
           className="z-50"
-          
           x={(xScale(d.name) ?? 0) + xScale.bandwidth() / 2}
           y={(yScale(d.seasonStart.toString()) ?? 0) + yScale.bandwidth() / 2}
           width={xScale.bandwidth()}

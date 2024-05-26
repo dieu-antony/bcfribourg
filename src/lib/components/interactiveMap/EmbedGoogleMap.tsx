@@ -17,7 +17,8 @@ export const EmbedGoogleMap = ({
   useEffect(() => {
     const initMap = async () => {
       const loader = new Loader({
-        apiKey: /*env.NEXT_PUBLIC_GOOGLE_API_KEY as string*/"Insert your Google API key here",
+        apiKey:
+          /*env.NEXT_PUBLIC_GOOGLE_API_KEY as string*/ "Insert your Google API key here",
         version: "weekly",
       });
       const { Map } = await loader.importLibrary("maps");
@@ -38,6 +39,6 @@ export const EmbedGoogleMap = ({
       });
     };
     initMap();
-  }, []);
+  }, [latitude, longitude]);
   return <div className={className} ref={mapRef} />;
 };

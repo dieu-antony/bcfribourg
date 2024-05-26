@@ -62,7 +62,7 @@ model Player {
     lastName  String
     team      ICTeam   @relation(fields: [teamId], references: [id])
     teamId    String
-    captain   Boolean?
+    captain   Boolean  @default(false)
     gender    String
 }
 

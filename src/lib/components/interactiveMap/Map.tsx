@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import * as topojson from "topojson-client";
-import { Topology, GeometryObject } from "topojson-specification";
+import type { Topology, GeometryObject } from "topojson-specification";
 import ch_ from "swiss-maps/2024/ch-combined.json";
 const ch: Topology = ch_ as unknown as Topology;
 import { useState } from "react";
@@ -31,8 +31,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         d3.geoMercator()
           .translate([width / 2, height / 2])
           .scale((width * height) / 600);
-        // Call any other functions that depend on the width and height
-        // ...
+        
       }
     });
     let width = Math.min(window.innerWidth, 975);
@@ -58,7 +57,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         .transition()
         .duration(750)
         .call(
-          zoom.transform as any, // Add 'as any' to bypass type checking
+          zoom.transform as any,
           d3.zoomIdentity,
           d3.zoomTransform(svg as any).invert([width / 2, height / 2]),
         );
@@ -106,8 +105,6 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         ),
       );
 
-    
-
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()
       .scaleExtent([1, 8])
@@ -123,7 +120,6 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
       g.attr("stroke-width", 1 / transform.k);
     }
 
-    
     const onLoadZoom = () => {
       const x0 = projection([7.147400994098687, 46.81177897206209])?.[0] ?? 0;
       const y0 = projection([7.147400994098687, 46.81177897206209])?.[1] ?? 0;
@@ -206,7 +202,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         g.remove();
       }
     };
-  }, []);
+  }, [latitude, longitude, location]);
 
   return (
     <>

@@ -1,6 +1,12 @@
-import { PastTeam } from "~/pages/api/pastTeams/create";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
+import type { PastTeam } from "~/lib/types";
+import { animated, to, useSpring, useSprings } from "@react-spring/web";
+import type { AnimationResult, Lookup, SpringValue } from "@react-spring/web";
+import { interpolatePath } from "d3-interpolate-path";
+import { CircleItem } from "./CircleItem";
+import { ScatterPlotTooltip } from "./ScatterPlotTooltip";
+import type { InteractionData } from "./ScatterPlotTooltip";
 
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
@@ -15,6 +21,8 @@ export const PositionScatterPlot = ({
   height,
   data,
 }: PositionScatterPlotProps) => {
+  const [interactionData, setInteractionData] =
+    useState<InteractionData | null>(null);
   const axesRef = useRef<SVGSVGElement>(null);
 
   const boundsWidth = width - margin.right - margin.left;
@@ -26,7 +34,7 @@ export const PositionScatterPlot = ({
 
   //x-axis
   const customTimeParser = d3.timeParse("%Y");
-  
+
   const times = data
     .map((d) => customTimeParser(d.seasonStart.toString() || ""))
     .filter((item) => item instanceof Date) as Date[];
@@ -42,52 +50,120 @@ export const PositionScatterPlot = ({
       .attr("transform", "translate(0," + boundsHeight + ")")
       .call(xAxisGenerator);
 
-    const yAxisGenerator = d3.axisLeft(yScale).tickFormat(d3.format("0.0f")).ticks(max);
+    const yAxisGenerator = d3
+      .axisLeft(yScale)
+      .tickFormat(d3.format("0.0f"))
+      .ticks(max);
     svgElement.append("g").call(yAxisGenerator);
-  }, [xScale, yScale, boundsHeight]);
+  }, [xScale, yScale, boundsHeight, max, times.length]);
 
   const lineBuilder = d3
     .line<PastTeam>()
     .x((d) => xScale(customTimeParser(d.seasonStart.toString()) as Date))
     .y((d) => yScale(d.position));
 
-  const linePath = lineBuilder(data);
+  const line = lineBuilder(data);
 
+  const linePath = useRef(line);
+
+  const pathInterpolator = useMemo(
+    () => interpolatePath(linePath.current ?? "", lineBuilder(data) ?? ""),
+    [lineBuilder(data), data, lineBuilder],
+  );
+
+  const lineSpringProps = useSpring({
+    from: {
+      t: 0,
+    },
+    to: {
+      t: 1,
+    },
+    config: {
+      friction: 20,
+      mass: 1,
+    },
+    reset: linePath.current !== line,
+    onChange: ({ value }: AnimationResult<SpringValue<Lookup<any>>>) => {
+      linePath.current = pathInterpolator(value.t);
+    },
+  });
+
+  const springs = useSprings(
+    data.length,
+    data.map((d) => ({
+      to: {
+        cx: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+        cy: yScale(d.position),
+        color: "#00afef",
+      },
+      config: {
+        friction: 20,
+        mass: 1,
+      },
+    })),
+  );
   if (!linePath) {
     return null;
   }
-
-  const allCircles = data.map((d) => (
-    <circle
-      key={d.id}
-      cx={xScale(customTimeParser(d.seasonStart.toString()) as Date)}
-      cy={yScale(d.position)}
-      r={5}
-      fill="#00afef"
+  const allCircles = data.map((d, index) => (
+    <CircleItem
+      key={`${d.id}-${d.position}-${d.seasonStart}-${index}`}
+      springProps={{
+        cx: springs[index]?.cx.toString() || "0",
+        cy: springs[index]?.cy.toString() || "0",
+      }}
+      onMouseEnter={() => {
+        setInteractionData({
+          xPos: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+          yPos: yScale(d.position),
+          orientation:
+            xScale(customTimeParser(d.seasonStart.toString()) as Date) >
+            boundsWidth / 2
+              ? "left"
+              : "right",
+          data: d,
+        });
+      }}
+      onMouseLeave={() => {
+        setInteractionData(null);
+      }}
+      color="#00afef"
     />
   ));
   return (
-    <svg width={width} height={height}>
-      <g
-        width={boundsWidth}
-        height={boundsHeight}
-        transform={`translate(${[margin.left, margin.top].join(",")})`}
-      >
-        <path
-          d={linePath}
-          opacity={1}
-          stroke="#00afef"
-          fill="none"
-          strokeWidth={2}
+    <>
+      <svg width={width} height={height}>
+        <g
+          width={boundsWidth}
+          height={boundsHeight}
+          transform={`translate(${[margin.left, margin.top].join(",")})`}
+        >
+          <animated.path
+            d={to(lineSpringProps.t, pathInterpolator)}
+            fill={"none"}
+            stroke={"#00afef"}
+            strokeWidth={2}
+          />
+          {allCircles}
+        </g>
+        <g
+          width={boundsWidth}
+          height={boundsHeight}
+          ref={axesRef}
+          transform={`translate(${[margin.left, margin.top].join(",")})`}
         />
-        {allCircles}
-      </g>
-      <g
-        width={boundsWidth}
-        height={boundsHeight}
-        ref={axesRef}
-        transform={`translate(${[margin.left, margin.top].join(",")})`}
-      />
-    </svg>
+      </svg>
+      <div
+        className="pointer-events-none relative left-0 top-0 z-40 translate-y-[-125%]"
+        style={{
+          width: boundsWidth,
+          height: boundsHeight,
+          marginLeft: margin.left,
+          marginTop: margin.top,
+        }}
+      >
+        <ScatterPlotTooltip interactionData={interactionData} />
+      </div>
+    </>
   );
 };

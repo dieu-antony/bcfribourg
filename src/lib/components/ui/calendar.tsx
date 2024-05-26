@@ -8,7 +8,7 @@ import { setMonth } from "date-fns";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "./select";
 import { inter } from "~/pages/_app";
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({
   className,
@@ -88,9 +88,9 @@ function Calendar({
             );
           } else if (props.name === "years") {
             const earliestYear =
-              fromYear || fromMonth?.getFullYear() || fromDate?.getFullYear();
+              fromYear ?? fromMonth?.getFullYear() ?? fromDate?.getFullYear();
             const latestYear =
-              toYear || toMonth?.getFullYear() || toDate?.getFullYear();
+              toYear ?? toMonth?.getFullYear() ?? toDate?.getFullYear();
             let selectItems: { label: string; value: string }[] = [];
             if (earliestYear && latestYear) {
               const yearsLength = Number(latestYear) - Number(earliestYear) + 1;

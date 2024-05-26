@@ -1,8 +1,9 @@
-import { PastTeam } from "~/pages/api/pastTeams/create";
 import { useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 
 import { getWinLossRecord } from "~/lib/utils/utils";
+import { PastTeam, TeamWithRatioKey } from "~/lib/types";
+import { animated, useSprings } from "@react-spring/web";
 
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
@@ -11,12 +12,6 @@ type StackedBarplotProps = {
   height: number;
   type: "set" | "games" | "match";
   data: PastTeam[];
-};
-
-export type TeamWithRatioKey = { seasonStart: number } & { won: number } & {
-  lost: number;
-} & {
-  [key: string]: number;
 };
 
 export const StackedBarplot = ({
@@ -65,7 +60,7 @@ export const StackedBarplot = ({
   }
 
   const allGroups = data.map((d) => String(d.seasonStart));
-  const allSubgroups = ["lost","won"];
+  const allSubgroups = ["lost", "won"];
 
   // Data Wrangling: stack the data
   const stackSeries = d3.stack().keys(allSubgroups).order(d3.stackOrderNone);
@@ -91,7 +86,7 @@ export const StackedBarplot = ({
   const colorScale = d3
     .scaleOrdinal<string>()
     .domain(allGroups)
-    .range(["#dc2626", "#22c55e"]);
+    .range(["#22c55e","#dc2626"]);
 
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);
@@ -106,30 +101,47 @@ export const StackedBarplot = ({
     svgElement.append("g").call(yAxisGenerator);
   }, [xScale, yScale, boundsHeight]);
 
+
   const rectangles = series.map((subgroup, i) => {
+    const springs = useSprings(
+      subgroup.length,
+      subgroup.map((group, j) => ({
+        to: {
+          x: xScale(group.data.seasonStart?.toString() ?? ""),
+          y: yScale(group[1]),
+          height: yScale(group[0]) - yScale(group[1]),
+          width: xScale.bandwidth(),
+          dx: xScale.bandwidth()/2,
+        },
+        config: {
+          friction: 20,
+          mass: 1,
+        },
+      })),
+    );
     return (
       <g key={i}>
         {subgroup.map((group, j) => {
           return (
             <g key={j}>
-            <rect
-              key={j}
-              x={xScale(group.data.seasonStart?.toString() ?? "")}
-              y={yScale(group[1])}
-              height={yScale(group[0]) - yScale(group[1])}
-              width={xScale.bandwidth()}
-              fill={colorScale(subgroup.key)}
-              opacity={0.9}
-            ></rect>
-            <text
-              x={xScale(group.data.seasonStart?.toString() ?? "")}
-              y={yScale(group[1])}
-              dy={20}
-              dx={xScale.bandwidth() / 2}
-              textAnchor="middle"
-              fill="black">
-              {group.data[subgroup.key] === 0 ? "" : group.data[subgroup.key]}
-              </text>
+              <animated.rect
+                x={springs[j]?.x}
+                y={springs[j]?.y}
+                height={springs[j]?.height}
+                width={springs[j]?.width}
+                fill={colorScale(subgroup.key)}
+                opacity={0.9}
+              ></animated.rect>
+              <animated.text
+                x={springs[j]?.x}
+                y={springs[j]?.y}
+                dy={20}
+                dx={springs[j]?.dx}
+                textAnchor="middle"
+                fill="black"
+              >
+                {group.data[subgroup.key] === 0 ? "" : group.data[subgroup.key]}
+              </animated.text>
             </g>
           );
         })}

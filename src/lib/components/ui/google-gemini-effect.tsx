@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "~/lib/utils/utils";
-import { motion, MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 import React from "react";
 
 const transition = {
@@ -22,10 +23,10 @@ export const GoogleGeminiEffect = ({
   return (
     <div className={cn("sticky top-40", className)}>
       <p className="pb-4 text-center text-lg text-black font-normal md:text-5xl">
-        {title || `Liens`}
+        {title ?? `Liens`}
       </p>
       <p className="mx-auto mt-4 max-w-lg text-xs font-normal text-neutral-400 md:text-xl">
-        {description ||
+        {description ??
           `Voici quelques liens utiles pour les membres du club de badminton de Fribourg.`}
       </p>
       <div className="bg-red-transparent absolute -top-60 flex  h-[890px] w-full items-center justify-center md:-top-40 ">

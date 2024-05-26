@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { CalendarEvent } from "@prisma/client";
+import type { CalendarEvent } from "@prisma/client";
 import {
   Accordion,
   AccordionContent,
@@ -34,7 +34,7 @@ export default function eventDayPage() {
           setEvents(newEvents);
         }
       });
-  }, [router.isReady]);
+  }, [router.isReady, queryDate]);
 
   if (events.length != 0) {
     return (

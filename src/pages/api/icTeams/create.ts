@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import { PastTeam } from "~/lib/types";
+import type { ICTeam } from "@prisma/client";
 
 
 
@@ -15,7 +15,7 @@ export default async function handler(
   if (session) {
     await RouteHandler(req, res, {
       POST: async function (req, res: NextApiResponse) {
-        const team: PastTeam[] = JSON.parse(req.body);
+        const team: ICTeam[] = JSON.parse(req.body);
         if (team.length === 0) {
           return res
             .status(400)
@@ -23,25 +23,21 @@ export default async function handler(
         }
 
         try {
-          const existingTeams = await db.pastTeam.findMany({
+          const existingTeams = await db.iCTeam.findMany({
             where: {
-              url: { in: team.map((team) => team.url) },
               name: { in: team.map((team) => team.name) },
             },
           });
 
-          const existingTeamUrl = existingTeams.map((team) => team.url);
           const existingTeamName = existingTeams.map((team) => team.name);
 
           const teamsToUpdate = team.filter(
             (team) =>
-              existingTeamUrl.includes(team.url) &&
               existingTeamName.includes(team.name),
           );
 
           const teamsToCreate = team.filter(
             (team) =>
-              !existingTeamUrl.includes(team.url) &&
               !existingTeamName.includes(team.name),
           );
 
@@ -49,25 +45,16 @@ export default async function handler(
             await Promise.all(
               teamsToUpdate.map(async (team) => {
                 const existingTeam = existingTeams.find(
-                  (t) => t.url === team.url && t.name === team.name,
+                  (t) => t.name === team.name,
                 );
 
                 if (existingTeam) {
-                  await db.pastTeam.update({
+                  await db.iCTeam.update({
                     where: { id: existingTeam.id },
                     data: {
                       name: team.name,
-                      position: team.position,
-                      wins: team.wins,
-                      losses: team.losses,
-                      ties: team.ties,
-                      points: team.points,
-                      matchRecord: team.matchRecord,
-                      setRecord: team.setRecord,
-                      gamesRecord: team.gamesRecord,
-                      seasonStart: team.seasonStart,
-                      leagueId: team.leagueId,
                       url: team.url,
+                      leagueId: team.leagueId,
                     },
                   });
                   res.status(200).json({
@@ -79,19 +66,9 @@ export default async function handler(
             );
           }
           if (teamsToCreate.length > 0) {
-            await db.pastTeam.createMany({
+            await db.iCTeam.createMany({
               data: teamsToCreate.map((team) => ({
-                id: team.id,
                 name: team.name,
-                position: team.position,
-                wins: team.wins,
-                losses: team.losses,
-                ties: team.ties,
-                points: team.points,
-                matchRecord: team.matchRecord,
-                setRecord: team.setRecord,
-                gamesRecord: team.gamesRecord,
-                seasonStart: team.seasonStart,
                 leagueId: team.leagueId,
                 url: team.url,
               })),

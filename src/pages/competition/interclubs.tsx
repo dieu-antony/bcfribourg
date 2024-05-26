@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
 import { useEffect, useState } from "react";
-import { Player } from "@prisma/client";
+import type { Player } from "@prisma/client";
 import { SquareArrowOutUpRight } from 'lucide-react';
 
 
@@ -38,7 +38,6 @@ const interclubs = () => {
         <title>Interclubs</title>
       </Head>
       <div className="flex justify-center">
-        <img src="/assets/ic_pic.png" alt="Interclubs" className="w-full"/>
         <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-slate-50 p-2 z-10 absolute md:mt-72 mt-52 px-4">
           <Accordion type="single" collapsible>
             {playersByTeam.map((team) => {
