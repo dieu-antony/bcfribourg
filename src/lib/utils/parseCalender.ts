@@ -1,5 +1,5 @@
 import type * as ical from "node-ical";
-import type { CalendarEventWithoutID, VEventFix } from "../types";
+import type { CalendarEventWithoutID, CalendarResponseFix, VEventFix } from "../types";
 
 async function findLonLat(address: string) {
   const url = new URL("https://nominatim.openstreetmap.org/search");
@@ -15,7 +15,7 @@ async function findLonLat(address: string) {
 }
 
 export async function parseCalendar(
-  calendar: ical.CalendarResponse,
+  calendar: CalendarResponseFix,
 ): Promise<CalendarEventWithoutID[]> {
   let events: CalendarEventWithoutID[] = [];
   for (let item in calendar) {
