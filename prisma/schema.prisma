@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
@@ -37,8 +38,8 @@ model PastTeam {
 }
 
 model League {
-    id    String @id @default(cuid())
-    name  String @unique
+    id        String     @id @default(cuid())
+    name      String     @unique
     pastTeams PastTeam[]
     icTeams   ICTeam[]
 }
@@ -57,12 +58,12 @@ model CalendarEvent {
 }
 
 model Player {
-    id        String   @id @default(cuid())
+    id        String  @id @default(cuid())
     firstName String
     lastName  String
-    team      ICTeam   @relation(fields: [teamId], references: [id])
+    team      ICTeam  @relation(fields: [teamId], references: [id])
     teamId    String
-    captain   Boolean  @default(false)
+    captain   Boolean @default(false)
     gender    String
 }
 
@@ -72,5 +73,5 @@ model ICTeam {
     league   League   @relation(fields: [leagueId], references: [id])
     leagueId String
     players  Player[]
-    url     String
+    url      String
 }
