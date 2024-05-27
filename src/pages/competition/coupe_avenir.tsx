@@ -1,7 +1,7 @@
-const coupe_avenir = () => {
+const CoupeAvenir = () => {
   return (
     <div>coupe_avenir</div>
   )
 }
 
-export default coupe_avenir;
+export default CoupeAvenir;

@@ -51,7 +51,7 @@ const Contact = () => {
       natel: "",
       license: "",
     };
-    const res = await fetch("/api/email/send", {
+    await fetch("/api/email/send", {
       method: "POST",
       body: JSON.stringify(data),
     });

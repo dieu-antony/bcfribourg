@@ -1,3 +1,5 @@
+import type { ChangeEventHandler } from "react";
+
 type FormItemProps = {
   type: string;
   label: string;
@@ -5,7 +7,7 @@ type FormItemProps = {
   options?: string[];
   className: string;
   required?: boolean;
-  onChange?: (e: any) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
   value?: string;
 };
 const FormItem = ({

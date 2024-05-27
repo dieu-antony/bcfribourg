@@ -17,28 +17,27 @@ export const EmbedGoogleMap = ({
   useEffect(() => {
     const initMap = async () => {
       const loader = new Loader({
-        apiKey:
-          /*env.NEXT_PUBLIC_GOOGLE_API_KEY as string*/ "Insert your Google API key here",
+        apiKey: env.NEXT_PUBLIC_GOOGLE_API_KEY,
         version: "weekly",
       });
       const { Map } = await loader.importLibrary("maps");
-      const { Marker } = (await loader.importLibrary(
-        "marker",
-      )) as google.maps.MarkerLibrary;
+      await loader.importLibrary("marker");
       const position = { lat: latitude, lng: longitude };
       const mapOptions: google.maps.MapOptions = {
         center: position,
         zoom: 17,
         mapId: "f1b7b3b3b1b7b3b3",
       };
-      const map = new Map(mapRef.current as HTMLDivElement, mapOptions);
+      const map = new Map(mapRef.current!, mapOptions);
 
-      const marker = new google.maps.marker.AdvancedMarkerElement({
+      new google.maps.marker.AdvancedMarkerElement({
         map: map,
         position: position,
       });
     };
-    initMap();
+    void initMap().catch((error) => {
+      console.error(error);
+    });
   }, [latitude, longitude]);
   return <div className={className} ref={mapRef} />;
 };

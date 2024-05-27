@@ -1,7 +1,7 @@
-const documents = () => {
+const Documents = () => {
   return (
-    <div>documents</div>
+    <div>Documents</div>
   )
 }
 
-export default documents;
+export default Documents;

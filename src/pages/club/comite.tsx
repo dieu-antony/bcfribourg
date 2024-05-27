@@ -1,8 +1,8 @@
 
-const comite = () => {
+const Comite = () => {
   return (
     <div>comite</div>
   )
 }
 
-export default comite
+export default Comite

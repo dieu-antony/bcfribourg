@@ -1,7 +1,7 @@
-const tournois = () => {
+const Tournois = () => {
   return (
     <div>tournois</div>
   )
 }
 
-export default tournois
+export default Tournois

@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardDescription,
 } from "../ui/card";
-import { PastTeam } from "~/lib/types";
+import type { PastTeam } from "~/lib/types";
 
 export type InteractionData = {
   xPos: number;

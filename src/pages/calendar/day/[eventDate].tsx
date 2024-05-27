@@ -8,10 +8,10 @@ import {
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
 
-export default function eventDayPage() {
+export default function EventDayPage() {
   const router = useRouter();
   const [events, setEvents] = useState<CalendarEvent[]>([]);
-  const queryDate = router.query["eventDate"];
+  const queryDate = router.query.eventDate as string;
   useEffect(() => {
     if (!router.isReady) return;
     fetch(`/api/events/filter/${queryDate}`)

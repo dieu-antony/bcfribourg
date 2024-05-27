@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
 
-const member = () => {
+const Member = () => {
   const [lastName, setLastName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [gender, setGender] = useState("Masculin");
@@ -42,7 +42,7 @@ const member = () => {
       subject: subject,
       toEmail: toEmail,
     };
-    const res = await fetch("/api/email/send", {
+    await fetch("/api/email/send", {
       method: "POST",
       body: JSON.stringify(data),
     });
@@ -76,7 +76,7 @@ const member = () => {
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-picton-blue-500">
-                  Demande d'admission
+                  Demande d&apos;admission
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   Contacte nous !
@@ -200,10 +200,10 @@ const member = () => {
             </div>
           </form>
         </div>
-        <Toaster richColors/>
+        <Toaster richColors />
       </div>
     </>
   );
 };
 
-export default member;
+export default Member;

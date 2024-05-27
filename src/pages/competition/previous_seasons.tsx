@@ -170,7 +170,7 @@ const PreviousSeasons = () => {
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">Position Scatter Plot</h3>
                     <p>
-                      Ce graphique montre la position de chaque équipe dans leur ligue respectif pour chaque saison. Une équipe en dernière position pendant une saison va typiquement descendre dans une ligue inférieure pour la saison suivante, tandis qu'une équipe en première place va typiquement étre promu dans une ligue supérieure. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!
+                      Ce graphique montre la position de chaque équipe dans leur ligue respectif pour chaque saison. Une équipe en dernière position pendant une saison va typiquement descendre dans une ligue inférieure pour la saison suivante, tandis qu&apos;une équipe en première place va typiquement étre promu dans une ligue supérieure. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!
                     </p>
 
                     <Select
@@ -178,7 +178,7 @@ const PreviousSeasons = () => {
                       options={filterOptions}
                       closeMenuOnSelect={true}
                       onChange={(selectedOptions) => {
-                        setSelectedData(selectedOptions?.value as string);
+                        setSelectedData(selectedOptions!.value);
                       }}
                       value={filteredOptions}
                       placeholder="Filtrer par équipe"
@@ -227,7 +227,7 @@ const PreviousSeasons = () => {
                         options={filterOptions}
                         closeMenuOnSelect={true}
                         onChange={(selectedOptions) => {
-                          setSelectedData(selectedOptions?.value as string);
+                          setSelectedData(selectedOptions!.value);
                         }}
                         value={filteredOptions}
                         placeholder="Filtrer par équipe"
@@ -290,7 +290,7 @@ const PreviousSeasons = () => {
                       options={filterOptions}
                       closeMenuOnSelect={true}
                       onChange={(selectedOptions) => {
-                        setSelectedData(selectedOptions?.value as string);
+                        setSelectedData(selectedOptions!.value);
                       }}
                       value={filteredOptions}
                       placeholder="Filtrer par équipe"

@@ -1,5 +1,5 @@
 import type { League, CalendarEvent, Player } from "@prisma/client";
-import { Attendee, BaseComponent, Class, DateType, DateWithTimeZone, Method, Organizer, Transparency, VAlarm, VCalendar, VEvent, VEventStatus, VTimeZone } from "node-ical";
+import type { Attendee, BaseComponent, Class, DateType, DateWithTimeZone, Method, Organizer, Transparency, VAlarm, VCalendar, VEvent, VEventStatus, VTimeZone } from "node-ical";
 export type TeamWithRatio = PastTeam & { ratio: number };
 
 export type PastTeam = {
@@ -38,9 +38,10 @@ export type EmailData = {
 
 export type CalendarEventWithoutID = Omit<CalendarEvent, "id">;
 
-export type TeamWithRatioKey = { seasonStart: number } & { won: number } & {
+export type TeamWithRatioKey = {
+  seasonStart: number;
+  won: number;
   lost: number;
-} & {
   [key: string]: number;
 };
 
@@ -55,7 +56,7 @@ export interface VEventFix extends BaseComponent {
   sequence: string;
   transparency: Transparency;
   class: Class;
-  summary: {val: string, params: any[]};
+  summary: {val: string, params: string[]};
   start: DateWithTimeZone;
   datetype: DateType;
   end: DateWithTimeZone;
@@ -73,9 +74,9 @@ export interface VEventFix extends BaseComponent {
 
   // I am not entirely sure about these, leave them as any for now..
   organizer: Organizer;
-  exdate: any;
+  /*exdate: any;
   geo: any;
-  recurrenceid: any;
+  recurrenceid: any;*/
 
   alarms?: VAlarm[];
 }

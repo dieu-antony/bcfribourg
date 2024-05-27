@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 import { GoogleGeminiEffect } from "~/lib/components/ui/google-gemini-effect";
 
-const links = () => {
+const Links = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -35,4 +35,4 @@ const links = () => {
   );
 };
 
-export default links;
+export default Links;

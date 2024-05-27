@@ -30,7 +30,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
       .range([0, boundsWidth])
       .domain(allXGroups)
       .padding(0.01);
-  }, [data, allXGroups, boundsWidth, width]);
+  }, [allXGroups, boundsWidth]);
 
   const yScale = useMemo(() => {
     return d3
@@ -38,7 +38,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
       .range([boundsHeight, 0])
       .domain(allYGroups)
       .padding(0.01);
-  }, [data, height, allYGroups, boundsHeight]);
+  }, [allYGroups, boundsHeight]);
 
   const [min, max] = d3.extent(
     data.map((d) => parseInt(turnLeagueToNumber(getLeagueFromId(d.leagueId)))),

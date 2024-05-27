@@ -6,6 +6,7 @@ import ch_ from "swiss-maps/2024/ch-combined.json";
 const ch: Topology = ch_ as unknown as Topology;
 import { useState } from "react";
 import { MapTooltip } from "./MapTooltip";
+import type { Transition } from "d3";
 
 type MapProps = { longitude: number; latitude: number; location: string };
 type InteractionData = {
@@ -57,7 +58,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         .transition()
         .duration(750)
         .call(
-          zoom.transform as any,
+          zoom.transform as (transition: Transition<SVGSVGElement | null, unknown, null, undefined>, ...args: any[]) => any,
           d3.zoomIdentity,
           d3.zoomTransform(svg as any).invert([width / 2, height / 2]),
         );
@@ -92,7 +93,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
           ),
         ),
       );
-    const lakes = g
+    g
       .append("path")
       .attr("fill", "#b3e6ff")
       .attr(

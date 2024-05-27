@@ -4,7 +4,7 @@ import Router from "next/router";
 import Head from "next/head";
 import { Button } from "~/lib/components/ui/button";
 
-const admin = () => {
+const Admin = () => {
   const { status, data } = useSession();
   useEffect(() => {
     if (status === "unauthenticated") Router.replace("/login");
@@ -30,4 +30,4 @@ const admin = () => {
   }
 };
 
-export default admin;
+export default Admin;

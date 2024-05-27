@@ -20,7 +20,7 @@ type PlayerByTeam = {
   };
 };
 
-const interclubs = () => {
+const Interclubs = () => {
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
   useEffect(() => {
     fetch("/api/players")
@@ -115,4 +115,4 @@ const interclubs = () => {
   );
 };
 
-export default interclubs;
+export default Interclubs;

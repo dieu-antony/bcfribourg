@@ -1,7 +1,7 @@
-const circuit_junior = () => {
+const CircuitJunior = () => {
   return (
     <div>circuit_junior</div>
   )
 }
 
-export default circuit_junior;
+export default CircuitJunior;

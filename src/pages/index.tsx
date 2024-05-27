@@ -54,7 +54,7 @@ export default function Home() {
             </h2>
             <div>
               <p className="mb-4">
-                La salle se situe au Cycle d'Orientation de langue allemande
+                La salle se situe au Cycle d&apos;Orientation de langue allemande
                 (DOSF) de la quartier du Torry
               </p>
               <iframe
@@ -63,9 +63,8 @@ export default function Home() {
               ></iframe>
               <p className="mb-4 mt-4">
                 Ci-dessous, vous trouvez un plan détaillé du site lui-même
-                (cliquez sur l'image pour agrandir).
+                (cliquez sur l&apos;image pour agrandir).
               </p>
-              <img src="/assets/plan_du_site_grand.png" className="w-full" />
             </div>
           </div>
         </div>

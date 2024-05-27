@@ -7,7 +7,7 @@ import { SquareArrowOutUpRight } from "lucide-react";
 import { format } from "date-fns";
 import { Separator } from "~/lib/components/ui/separator";
 
-export default function eventPage() {
+export default function EventPage() {
   const router = useRouter();
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   useEffect(() => {

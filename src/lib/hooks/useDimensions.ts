@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useCallback } from "react";
 
 export const useDimensions = (targetRef: React.RefObject<HTMLDivElement>) => {
 
@@ -11,9 +11,9 @@ export const useDimensions = (targetRef: React.RefObject<HTMLDivElement>) => {
 
   const [dimensions, setDimensions] = useState(getDimensions);
 
-  const handleResize = () => {
+  const handleResize = useCallback(() => {
     setDimensions(getDimensions());
-  };
+  }, [setDimensions, getDimensions]);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);

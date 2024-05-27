@@ -6,7 +6,7 @@ import EventCalendar from "~/lib/components/calendar/EventCalendar";
 import chroma from "chroma-js";
 
 //TODO: make filter pretty
-const calendar = () => {
+const Calendar = () => {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -148,7 +148,7 @@ const calendar = () => {
   );
 };
 
-export default calendar;
+export default Calendar;
 function getColorByEvent(eventType: string) {
   const filterOptions = [
     { value: "Interclub A", label: "NLA", color: "purple" },
@@ -161,6 +161,6 @@ function getColorByEvent(eventType: string) {
   ];
 
   return (
-    filterOptions.find((option) => option.value === eventType)?.color || "black"
+    filterOptions.find((option) => option.value === eventType)?.color ?? "black"
   );
 }

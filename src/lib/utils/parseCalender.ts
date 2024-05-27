@@ -1,5 +1,4 @@
-import type * as ical from "node-ical";
-import type { CalendarEventWithoutID, CalendarResponseFix, VEventFix } from "../types";
+import type { CalendarEventWithoutID, CalendarResponseFix } from "../types";
 
 async function findLonLat(address: string) {
   const url = new URL("https://nominatim.openstreetmap.org/search");
@@ -17,12 +16,12 @@ async function findLonLat(address: string) {
 export async function parseCalendar(
   calendar: CalendarResponseFix,
 ): Promise<CalendarEventWithoutID[]> {
-  let events: CalendarEventWithoutID[] = [];
-  for (let item in calendar) {
+  const events: CalendarEventWithoutID[] = [];
+  for (const item in calendar) {
     const current = calendar[item];
 
     if (current && current.type == "VEVENT") {
-      const vevent = current as VEventFix;
+      const vevent = current;
       const location =
         vevent.location ||
         (vevent.summary.val.startsWith("Union Tafers-Fribourg")

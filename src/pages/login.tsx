@@ -1,14 +1,14 @@
-import { type FormEventHandler, type FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import Head from "next/head";
 import { signIn } from "next-auth/react";
 
-const login = () => {
+const Login = () => {
   const [data, setData] = useState({
     username: "",
     password: "",
   });
 
-  const loginUser: FormEventHandler<HTMLFormElement> = async (e: FormEvent) => {
+  const loginUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await signIn("credentials", { ...data, callbackUrl: "/admin"});
   };
@@ -26,7 +26,7 @@ const login = () => {
                   Login
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Please login using your usename and password. If you don't have a login, please ask the admin to create one for you.
+                  Please login using your usename and password. If you don&apos;t have a login, please ask the admin to create one for you.
                 </p>
 
                 <div className="mt-10 flex flex-col gap-x-6 gap-y-8">
@@ -87,4 +87,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

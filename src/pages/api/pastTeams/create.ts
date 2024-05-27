@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { RouteHandler } from "~/lib/utils/routeHandler";
 import { db } from "~/server/db";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import { PastTeam } from "~/lib/types";
+import type { PastTeam } from "~/lib/types";
 
 
 

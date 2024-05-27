@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,19 +16,19 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { inter } from "../_app";
-import { ICTeam } from "@prisma/client";
+import type { ICTeam } from "@prisma/client";
 import { getLeagueFromId } from "~/lib/utils/utils";
 import { toast } from "sonner";
 import { Toaster } from "~/lib/components/ui/sonner";
 
-const players = () => {
-  const { status, data } = useSession();
+const Players = () => {
+  const { status } = useSession();
   useEffect(() => {
     if (status === "unauthenticated") Router.replace("/login");
   }, [status]);
 
   const [icTeams, setIcTeams] = useState<ICTeam[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [leagueId, setLeagueId] = useState("clvzbbfot00001o6wxykabs64");
   const [teamName, setTeamName] = useState("Union Tafers-Fribourg 1");
   const [playersF, setPlayersF] = useState("");
@@ -83,15 +83,15 @@ const players = () => {
     event.preventDefault();
 
     const playersFList = playersF.split(",").map((player) => ({
-      firstName: player.split(" ")[0] || "",
-      lastName: player.split(" ")[1] || "",
+      firstName: player.split(" ")[0] ?? "",
+      lastName: player.split(" ")[1] ?? "",
       gender: "F",
       captain: captain === player ? true : false,
       teamId: icTeamId,
     }));
     const playersMList = playersM.split(",").map((player) => ({
-      firstName: player.split(" ")[0] || "",
-      lastName: player.split(" ")[1] || "",
+      firstName: player.split(" ")[0] ?? "",
+      lastName: player.split(" ")[1] ?? "",
       gender: "M",
       captain: captain === player ? true : false,
       teamId: icTeamId,
@@ -272,4 +272,4 @@ const players = () => {
     );
   }
 };
-export default players;
+export default Players;

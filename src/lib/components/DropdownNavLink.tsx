@@ -10,14 +10,14 @@ type DropdownNavLinkList = {
 };
 
 type DropdownNavLinkProps = {
-  children: DropdownNavLinkList[];
+  options: DropdownNavLinkList[];
   triggerElement: string;
   onClick?: () => void;
 };
 
 const DropdownNavLink = ({
   triggerElement,
-  children,
+  options,
   onClick,
 }: DropdownNavLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -33,7 +33,7 @@ const DropdownNavLink = ({
       </p>
       {isHovered && (
         <div className="relative left-0 flex w-40 flex-col justify-start bg-white p-2 pl-1 shadow-md lg:absolute lg:top-full ">
-          {children.map((item) => (
+          {options.map((item) => (
             
               <Link
                 key={item.name}

@@ -19,7 +19,6 @@ export type DatabaseColumnsProps = {
   summary: string;
   location: number;
   url: string;
-  email: string;
   start: Date;
 };
 

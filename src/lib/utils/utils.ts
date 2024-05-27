@@ -12,7 +12,7 @@ export function abbreviateTeamName(inputText: string): string {
   const match: RegExpMatchArray | null = inputText.match(regex);
 
   if (match) {
-    const digit: string = match[1] as string;
+    const digit: string = match[1]!;
     const abbreviatedText = `UTF ${digit}`;
     return abbreviatedText;
   } else {
@@ -46,8 +46,8 @@ export function getLeagueFromId(id: string) {
 export function getWinLossRecord(input: string): { won: number; lost: number } {
   const [x, y] = input.split("-");
   return {
-    won: parseInt(x as string),
-    lost: parseInt(y as string),
+    won: parseInt(x!),
+    lost: parseInt(y!),
   };
 }
 

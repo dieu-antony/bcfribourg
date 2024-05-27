@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
   Breadcrumb,
@@ -17,14 +17,14 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { Toaster } from "~/lib/components/ui/sonner";
-import { PastTeam } from "~/lib/types";
+import type { PastTeam } from "~/lib/types";
 import { inter } from "../_app";
 
-const icdata = () => {
+const IcData = () => {
   const [teams, setTeams] = useState<PastTeam[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const { status, data } = useSession();
+  const { status } = useSession();
   useEffect(() => {
     if (status === "unauthenticated") Router.replace("/login");
   }, [status]);
@@ -40,9 +40,9 @@ const icdata = () => {
 
     const reader = new FileReader();
 
-    reader.addEventListener("load", async function (e) {
+    reader.addEventListener("load", async function () {
       console.log("reader");
-      const parsedTeams = await file
+      const parsedTeams: PastTeam[] = await file
         .text()
         .then((text: string) => JSON.parse(text));
       console.log("parsed");
@@ -63,7 +63,7 @@ const icdata = () => {
       method: "POST",
       body: JSON.stringify(teams),
     });
-    const data = await response.json();
+    const data: {status: "success" | "error" | "loading", message: string} = await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -131,4 +131,4 @@ const icdata = () => {
   }
 };
 
-export default icdata;
+export default IcData;

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 
 import { getWinLossRecord } from "~/lib/utils/utils";
-import { PastTeam, TeamWithRatioKey } from "~/lib/types";
+import type { PastTeam, TeamWithRatioKey } from "~/lib/types";
 import { animated, useSprings } from "@react-spring/web";
 
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
@@ -72,7 +72,7 @@ export const StackedBarplot = ({
       .scaleLinear()
       .domain([0, max || 0])
       .range([boundsHeight, 0]);
-  }, [data, type, height]);
+  }, [max, boundsHeight]);
 
   // X axis
   const xScale = useMemo(() => {
@@ -81,7 +81,7 @@ export const StackedBarplot = ({
       .domain(allGroups)
       .range([0, boundsWidth])
       .padding(0.05);
-  }, [data, type, width]);
+  }, [allGroups, boundsWidth]);
 
   const colorScale = d3
     .scaleOrdinal<string>()
@@ -105,7 +105,7 @@ export const StackedBarplot = ({
   const rectangles = series.map((subgroup, i) => {
     const springs = useSprings(
       subgroup.length,
-      subgroup.map((group, j) => ({
+      subgroup.map((group, _) => ({
         to: {
           x: xScale(group.data.seasonStart?.toString() ?? ""),
           y: yScale(group[1]),

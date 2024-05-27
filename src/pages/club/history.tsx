@@ -1,7 +1,7 @@
 import React from "react";
 import EventTimeline from "~/lib/components/timeline/EventTimeline";
 
-const history = () => {
+const History = () => {
   return (
     <>
       <EventTimeline />
@@ -9,4 +9,4 @@ const history = () => {
   );
 };
 
-export default history;
+export default History;

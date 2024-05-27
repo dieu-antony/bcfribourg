@@ -4,13 +4,13 @@ import type { InteractionData } from "../statsGraphs/ScatterPlotTooltip";
 import {
   ScatterPlotTooltip,
 } from "../statsGraphs/ScatterPlotTooltip";
-import { PastTeam, TeamWithRatio } from "~/lib/types";
+import type { PastTeam, TeamWithRatio } from "~/lib/types";
 import { CircleItem } from "./CircleItem";
 import { interpolatePath } from "d3-interpolate-path";
 import {
-  AnimationResult,
-  Lookup,
-  SpringValue,
+  type AnimationResult,
+  type Lookup,
+  type SpringValue,
   animated,
   to,
   useSpring,
@@ -75,11 +75,11 @@ export const RatioScatterPlot = ({
 
     const yAxisGenerator = d3.axisLeft(yScale);
     svgElement.append("g").call(yAxisGenerator);
-  }, [xScale, yScale, boundsHeight]);
+  }, [times.length, xScale, yScale, boundsHeight]);
 
   const lineBuilder = d3
     .line<TeamWithRatio>()
-    .x((d) => xScale(customTimeParser(d.seasonStart.toString()) as Date))
+    .x((d) => xScale(customTimeParser(d.seasonStart.toString())!))
     .y((d) => yScale(d.ratio));
 
   const line = lineBuilder(updatedData);
@@ -88,8 +88,8 @@ export const RatioScatterPlot = ({
 
   const pathInterpolator = useMemo(
     () =>
-      interpolatePath(linePath.current || "", lineBuilder(updatedData) || ""),
-    [lineBuilder(updatedData)],
+      interpolatePath(linePath.current ?? "", lineBuilder(updatedData) ?? ""),
+    [lineBuilder, updatedData],
   );
 
   if (!linePath) {
@@ -117,7 +117,7 @@ export const RatioScatterPlot = ({
     updatedData.length,
     updatedData.map((d) => ({
       to: {
-        cx: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+        cx: xScale(customTimeParser(d.seasonStart.toString())!),
         cy: yScale(d.ratio),
         color: "#00afef",
       },
@@ -132,13 +132,13 @@ export const RatioScatterPlot = ({
     return (
       <CircleItem
         key={`${d.id}-${d.ratio}-${type}-${d.seasonStart}-${index}`}
-        springProps={{ cx: springs[index]?.cx.toString() || "0", cy: springs[index]?.cy.toString() || "0" }}
+        springProps={{ cx: springs[index]?.cx!.toString() ?? "0", cy: springs[index]?.cy!.toString() ?? "0" }}
         onMouseEnter={() => {
           setInteractionData({
-            xPos: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+            xPos: xScale(customTimeParser(d.seasonStart.toString())!),
             yPos: yScale(d.ratio),
             orientation:
-              xScale(customTimeParser(d.seasonStart.toString()) as Date) >
+              xScale(customTimeParser(d.seasonStart.toString())!) >
               boundsWidth / 2
                 ? "left"
                 : "right",

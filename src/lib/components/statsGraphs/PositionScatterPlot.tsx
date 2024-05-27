@@ -59,7 +59,7 @@ export const PositionScatterPlot = ({
 
   const lineBuilder = d3
     .line<PastTeam>()
-    .x((d) => xScale(customTimeParser(d.seasonStart.toString()) as Date))
+    .x((d) => xScale(customTimeParser(d.seasonStart.toString())!))
     .y((d) => yScale(d.position));
 
   const line = lineBuilder(data);
@@ -68,7 +68,7 @@ export const PositionScatterPlot = ({
 
   const pathInterpolator = useMemo(
     () => interpolatePath(linePath.current ?? "", lineBuilder(data) ?? ""),
-    [lineBuilder(data), data, lineBuilder],
+    [data, lineBuilder],
   );
 
   const lineSpringProps = useSpring({
@@ -83,7 +83,7 @@ export const PositionScatterPlot = ({
       mass: 1,
     },
     reset: linePath.current !== line,
-    onChange: ({ value }: AnimationResult<SpringValue<Lookup<any>>>) => {
+    onChange: ({ value }: AnimationResult<SpringValue<Lookup<any>>>): void => {
       linePath.current = pathInterpolator(value.t);
     },
   });
@@ -92,7 +92,7 @@ export const PositionScatterPlot = ({
     data.length,
     data.map((d) => ({
       to: {
-        cx: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+        cx: xScale(customTimeParser(d.seasonStart.toString())!),
         cy: yScale(d.position),
         color: "#00afef",
       },
@@ -109,15 +109,15 @@ export const PositionScatterPlot = ({
     <CircleItem
       key={`${d.id}-${d.position}-${d.seasonStart}-${index}`}
       springProps={{
-        cx: springs[index]?.cx.toString() || "0",
-        cy: springs[index]?.cy.toString() || "0",
+        cx: springs[index]?.cx.toString() ?? "0",
+        cy: springs[index]?.cy.toString() ?? "0",
       }}
       onMouseEnter={() => {
         setInteractionData({
-          xPos: xScale(customTimeParser(d.seasonStart.toString()) as Date),
+          xPos: xScale(customTimeParser(d.seasonStart.toString())!),
           yPos: yScale(d.position),
           orientation:
-            xScale(customTimeParser(d.seasonStart.toString()) as Date) >
+            xScale(customTimeParser(d.seasonStart.toString())!) >
             boundsWidth / 2
               ? "left"
               : "right",

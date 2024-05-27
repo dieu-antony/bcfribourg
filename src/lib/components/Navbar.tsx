@@ -37,7 +37,7 @@ const Navbar = () => {
     },
     {
       name: "Saisons précédentes",
-      href: "/competition/PreviousSeasons",
+      href: "/competition/previous_seasons",
       icon: <FileClock size="20px"/>,
     },
   ];
@@ -62,17 +62,17 @@ const Navbar = () => {
           <NavLinks name="Accueil" href="/" onClick={() => setIsOpen(false)} />
           <DropdownNavLink
             triggerElement="Entraînment"
-            children={subTraining}
+            options={subTraining}
             onClick={() => setIsOpen(false)}
           />
           <DropdownNavLink
             triggerElement="Compétition"
-            children={subCompetition}
+            options={subCompetition}
             onClick={() => setIsOpen(false)}
           />
           <DropdownNavLink
             triggerElement="Club"
-            children={subClub}
+            options={subClub}
             onClick={() => setIsOpen(false)}
           />
 
