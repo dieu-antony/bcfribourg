@@ -127,12 +127,14 @@ export const RatioScatterPlot = ({
       },
     })),
   );
-
   const allCircles = updatedData.map((d, index) => {
     return (
       <CircleItem
         key={`${d.id}-${d.ratio}-${type}-${d.seasonStart}-${index}`}
-        springProps={{ cx: springs[index]?.cx!.toString() ?? "0", cy: springs[index]?.cy!.toString() ?? "0" }}
+        springProps={{
+          cx: springs[index]?.cx!,
+          cy: springs[index]?.cy!,
+        }}
         onMouseEnter={() => {
           setInteractionData({
             xPos: xScale(customTimeParser(d.seasonStart.toString())!),

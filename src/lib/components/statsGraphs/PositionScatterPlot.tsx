@@ -109,8 +109,8 @@ export const PositionScatterPlot = ({
     <CircleItem
       key={`${d.id}-${d.position}-${d.seasonStart}-${index}`}
       springProps={{
-        cx: springs[index]?.cx.toString() ?? "0",
-        cy: springs[index]?.cy.toString() ?? "0",
+        cx: springs[index]?.cx!,
+        cy: springs[index]?.cy!,
       }}
       onMouseEnter={() => {
         setInteractionData({

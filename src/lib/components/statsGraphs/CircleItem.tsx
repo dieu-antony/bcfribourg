@@ -1,7 +1,7 @@
-import { animated } from "@react-spring/web";
+import { type SpringValue, animated } from "@react-spring/web";
 
 type CircleItemProps = {
-  springProps: { cx: string; cy: string };
+  springProps: { cx: SpringValue<number>; cy: SpringValue<number> };
   color: string;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
