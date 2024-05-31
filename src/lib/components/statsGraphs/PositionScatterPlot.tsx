@@ -8,6 +8,7 @@ import { CircleItem } from "./CircleItem";
 import { ScatterPlotTooltip } from "./ScatterPlotTooltip";
 import type { InteractionData } from "./ScatterPlotTooltip";
 
+// Predefined margins
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
 type PositionScatterPlotProps = {
@@ -21,6 +22,7 @@ export const PositionScatterPlot = ({
   height,
   data,
 }: PositionScatterPlotProps) => {
+  // Ref for the axes, interaction data for the tooltips and define the bounds
   const [interactionData, setInteractionData] =
     useState<InteractionData | null>(null);
   const axesRef = useRef<SVGSVGElement>(null);
@@ -41,6 +43,7 @@ export const PositionScatterPlot = ({
   const dateDomain = d3.extent(times) as [Date, Date];
   const xScale = d3.scaleTime().domain(dateDomain).range([0, boundsWidth]);
 
+  // Draw the axes
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);
     svgElement.selectAll("*").remove();
@@ -57,6 +60,7 @@ export const PositionScatterPlot = ({
     svgElement.append("g").call(yAxisGenerator);
   }, [xScale, yScale, boundsHeight, max, times.length]);
 
+  // Define the line generator
   const lineBuilder = d3
     .line<PastTeam>()
     .x((d) => xScale(customTimeParser(d.seasonStart.toString())!))
@@ -71,6 +75,7 @@ export const PositionScatterPlot = ({
     [data, lineBuilder],
   );
 
+  // Define the spring properties for the react-spring library
   const lineSpringProps = useSpring({
     from: {
       t: 0,
@@ -105,6 +110,8 @@ export const PositionScatterPlot = ({
   if (!linePath) {
     return null;
   }
+
+  // Draw the circles
   const allCircles = data.map((d, index) => (
     <CircleItem
       key={`${d.id}-${d.position}-${d.seasonStart}-${index}`}

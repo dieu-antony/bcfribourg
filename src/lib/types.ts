@@ -81,6 +81,16 @@ export interface VEventFix extends BaseComponent {
   alarms?: VAlarm[];
 }
 
+export type PlayerByTeam = {
+  id: string;
+  name: string;
+  players: Player[];
+  url: string;
+  league: {
+    name: string;
+  };
+};
+
 export type CalendarResponseFix = Record<string, CalendarComponent>;
 
 export type CalendarComponent = VTimeZone | VEventFix | VCalendar;

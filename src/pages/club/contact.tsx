@@ -3,66 +3,27 @@ import FormItem from "~/lib/components/FormItem";
 import { useState } from "react";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
+import { EmailData } from "~/lib/types";
+import { toEmail } from "~/lib/utils/utils";
 
 const Contact = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [subject, setSubject] = useState("Information");
+  const [emailData, setEmailData] = useState({subject: "Information"} as EmailData);
 
   async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const toEmail = (subject: string) => {
-      switch (subject) {
-        case "Information":
-          return "president@bcfribourg.ch";
-        case "Compétition":
-          return "technique@bcfribourg.ch";
-        case "Entraînement Adultes":
-          return "technique@bcfribourg.ch";
-        case "Entraînement Juniors":
-          return "juniors@bcfribourg.ch";
-        case "Site internet":
-          return "webmaster@bcfribourg.ch";
-        case "Autre":
-          return "secretaire@bcfribourg.ch";
-        default:
-          "secretaire@bcfribourg.ch";
-      }
-    };
-
-    const emailTo = toEmail(subject);
+    const emailTo = toEmail(emailData.subject!);
 
     const data = {
-      lastName: lastName,
-      firstName: firstName,
-      email: email,
-      message: message,
-      subject: subject,
+      ...emailData,
       toEmail: emailTo,
-      gender: "",
-      address: "",
-      npa: "",
-      birthdate: "",
-      avs: "",
-      phone: "",
-      natel: "",
-      license: "",
     };
     await fetch("/api/email/send", {
       method: "POST",
       body: JSON.stringify(data),
     });
     toast.success("Votre demande a bien été envoyée !");
-    setLastName("");
-    setFirstName("");
-    setEmail("");
-
-    //FIXME: setSubject and setMessage don't work
-    setMessage("");
-    setSubject("Information");
+    setEmailData({subject: "Information"} as EmailData)
   }
 
   return (
@@ -88,27 +49,27 @@ const Contact = () => {
                     label="name"
                     type="text"
                     labelName="Nom"
-                    onChange={(e) => setLastName(e.target.value)}
+                    onChange={(e) => setEmailData({...emailData, lastName: e.target.value})}
                     required
-                    value={lastName}
+                    value={emailData.lastName}
                   />
                   <FormItem
                     className="sm:col-span-3"
                     label="name"
                     type="text"
                     labelName="Prénom"
-                    onChange={(e) => setFirstName(e.target.value)}
+                    onChange={(e) => setEmailData({...emailData, firstName: e.target.value})}
                     required
-                    value={firstName}
+                    value={emailData.firstName}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="name"
                     type="email"
                     labelName="Adresse email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setEmailData({...emailData, email: e.target.value})}
                     required
-                    value={email}
+                    value={emailData.email}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -123,17 +84,17 @@ const Contact = () => {
                       "Site internet",
                       "Autre",
                     ]}
-                    onChange={(e) => setSubject(e.target.value)}
-                    value={subject}
+                    onChange={(e) => setEmailData({...emailData, subject: e.target.value})}
+                    value={emailData.subject}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="message"
                     type="textarea"
                     labelName="Message"
-                    onChange={(e) => setMessage(e.target.value)}
+                    onChange={(e) => setEmailData({...emailData, message: e.target.value})}
                     required
-                    value={message}
+                    value={emailData.message}
                   />
                   <button
                     type="submit"

@@ -12,6 +12,8 @@ export default function EventDayPage() {
   const router = useRouter();
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const queryDate = router.query.eventDate as string;
+
+  // Fetch events from the API
   useEffect(() => {
     if (!router.isReady) return;
     fetch(`/api/events/filter/${queryDate}`)
@@ -36,6 +38,7 @@ export default function EventDayPage() {
       });
   }, [router.isReady, queryDate]);
 
+  // Check for events to display the event or a 404 message
   if (events.length != 0) {
     return (
       <div>
@@ -54,12 +57,13 @@ export default function EventDayPage() {
         </Accordion>
       </div>
     );
-  } else if (events.length == 0) {
-    return (
-      <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
-        <h1 className="text-9xl font-bold">404</h1>
-        <p>Sorry, there are no events on this day</p>
-      </div>
-    );
-  }
+  } 
+  // else if (events.length == 0) {
+  //   return (
+  //     <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
+  //       <h1 className="text-9xl font-bold">404</h1>
+  //       <p>Sorry, there are no events on this day</p>
+  //     </div>
+  //   );
+  // }
 }

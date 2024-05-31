@@ -24,7 +24,7 @@ export const MapTooltip = ({ interactionData }: MapTooltipProps) => {
 
   return (
     <div
-      className=" border border-black bg-white"
+      className="border border-black bg-white"
       style={{
         left: interactionData.xPos,
         top: interactionData.yPos,
@@ -36,7 +36,6 @@ export const MapTooltip = ({ interactionData }: MapTooltipProps) => {
           <CardDescription></CardDescription>
         </CardHeader>
         <CardContent>
-
           {interactionData.location}
         </CardContent>
         <CardFooter></CardFooter>

@@ -7,14 +7,17 @@ import {
 } from "~/lib/utils/utils";
 import type { PastTeam } from "~/lib/types";
 
+// Predefined margins
 const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
 type HeatmapProps = { data: PastTeam[]; width: number; height: number };
 
 export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
+  // Define the bounds
   const boundsWidth = width - margin.right - margin.left;
   const boundsHeight = height - margin.top - margin.bottom;
 
+  // Define the groups for the x and y axis
   const allXGroups = useMemo(
     () => [...new Set(data.map((d) => d.name))],
     [data],
@@ -24,6 +27,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
     [data],
   );
 
+  // Define the scales for the axes
   const xScale = useMemo(() => {
     return d3
       .scaleBand()
@@ -40,6 +44,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
       .padding(0.01);
   }, [allYGroups, boundsHeight]);
 
+  // Define the maximum and minimum values for the color scale
   const [min, max] = d3.extent(
     data.map((d) => parseInt(turnLeagueToNumber(getLeagueFromId(d.leagueId)))),
   );
@@ -52,6 +57,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
     .interpolator(d3.interpolateYlOrRd)
     .domain([90 - min, 90 - max]);
 
+  // Define the rectangles
   const allRects = data.map((d, i) => {
     return (
       <g key={i}>
@@ -86,6 +92,7 @@ export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
     );
   });
 
+  // Define the labels for the axes
   const xLabels = allXGroups.map((name, i) => {
     const xPos = xScale(name) ?? 0;
     return (

@@ -41,6 +41,7 @@ const EventCalendar = ({
 }: {
   events: (CalendarEvent & { color: string })[];
 }) => {
+  // Define needed constants and states
   const [chosenMonth, setChosenMonth] = useState<Date>(new Date());
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const firstDayOfMonth = startOfMonth(chosenMonth);
@@ -55,9 +56,11 @@ const EventCalendar = ({
     eventDaySet.add(format(event.start, "yyyy-MM-dd"));
   });
 
+  // Define the starting day index (0 = Monday, 6 = Sunday)
   const startingDayIndex =
     getDay(firstDayOfMonth) - 1 === -1 ? 6 : getDay(firstDayOfMonth) - 1;
 
+  // Check which days are in the previous and next month
   const previousMonth = (chosenMonth: Date) => {
     return new Date(chosenMonth.getFullYear(), chosenMonth.getMonth() - 1);
   };
@@ -76,6 +79,7 @@ const EventCalendar = ({
   return (
     <div>
       <div className="grid grid-cols-3 py-2">
+        {/* Calendar navigation buttons */}
         <div className="flex gap-1">
           <Button
             onClick={() => setChosenMonth(previousMonth(chosenMonth))}
@@ -108,6 +112,7 @@ const EventCalendar = ({
         <h2 className="block self-center text-center font-bold md:hidden">
           {format(chosenMonth, "MMM yy")}{" "}
         </h2>
+        {/* Calendar date choose button */}
         <div className="ml-auto flex flex-grow gap-1">
           <Popover>
             <PopoverTrigger asChild>
@@ -144,6 +149,7 @@ const EventCalendar = ({
           </Popover>
         </div>
       </div>
+      {/* Calendar grid */}
       <div className="grid grid-cols-7">
         {weekDays.map((day) => {
           return (

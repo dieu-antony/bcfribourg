@@ -22,10 +22,13 @@ type ScatterPlotTooltipProps = {
 export const ScatterPlotTooltip = ({
   interactionData,
 }: ScatterPlotTooltipProps) => {
+
+  // Check if there is data to display
   if (!interactionData) {
     return null;
   }
 
+  // Check the orientation of the tooltip
   if (interactionData.orientation === "right") {
     return (
       <div

@@ -3,20 +3,13 @@ import FormItem from "~/lib/components/FormItem";
 import { useState } from "react";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
+import { EmailData } from "~/lib/types";
 
 const Member = () => {
-  const [lastName, setLastName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [gender, setGender] = useState("Masculin");
-  const [address, setAddress] = useState("");
-  const [npa, setNpa] = useState("");
-  const [birthdate, setBirthdate] = useState("");
-  const [avs, setAvs] = useState("");
-  const [phone, setPhone] = useState("");
-  const [natel, setNatel] = useState("");
-  const [license, setLicense] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [emailData, setEmailData] = useState({
+    gender: "Masculin",
+  } as EmailData);
+
   const [loading, setLoading] = useState(false);
 
   async function onFormSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -27,18 +20,7 @@ const Member = () => {
     const toEmail = "caissier@bcfribourg.ch";
 
     const data = {
-      lastName: lastName,
-      firstName: firstName,
-      gender: gender,
-      address: address,
-      npa: npa,
-      birthdate: birthdate,
-      avs: avs,
-      phone: phone,
-      natel: natel,
-      license: license,
-      email: email,
-      message: message,
+      ...emailData,
       subject: subject,
       toEmail: toEmail,
     };
@@ -47,20 +29,7 @@ const Member = () => {
       body: JSON.stringify(data),
     });
     toast.success("Votre demande a bien été envoyée !");
-    setLastName("");
-    setFirstName("");
-    setGender("Masculin");
-    setAddress("");
-    setNpa("");
-    setBirthdate("");
-    setAvs("");
-    setPhone("");
-    setNatel("");
-    setLicense("");
-    setEmail("");
-
-    //FIXME: setMessage don't work
-    setMessage("");
+    setEmailData({gender: "Masculin"} as EmailData);
 
     setLoading(false);
   }
@@ -89,8 +58,10 @@ const Member = () => {
                     type="text"
                     labelName="Nom"
                     required
-                    onChange={(e) => setLastName(e.target.value)}
-                    value={lastName}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, lastName: e.target.value })
+                    }
+                    value={emailData.lastName}
                   />
                   <FormItem
                     className="sm:col-span-3"
@@ -98,8 +69,10 @@ const Member = () => {
                     type="text"
                     labelName="Prénom"
                     required
-                    onChange={(e) => setFirstName(e.target.value)}
-                    value={firstName}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, firstName: e.target.value })
+                    }
+                    value={emailData.firstName}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -107,7 +80,9 @@ const Member = () => {
                     type="select"
                     labelName="Sexe"
                     options={["Masculin", "Féminin", "Autre"]}
-                    onChange={(e) => setGender(e.target.value)}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, gender: e.target.value })
+                    }
                     value="Masculin"
                   />
                   <FormItem
@@ -116,8 +91,10 @@ const Member = () => {
                     type=""
                     labelName="Adresse"
                     required
-                    onChange={(e) => setAddress(e.target.value)}
-                    value={address}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, address: e.target.value })
+                    }
+                    value={emailData.address}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -125,8 +102,10 @@ const Member = () => {
                     type=""
                     labelName="NPA, Localité"
                     required
-                    onChange={(e) => setNpa(e.target.value)}
-                    value={npa}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, npa: e.target.value })
+                    }
+                    value={emailData.npa}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -134,16 +113,20 @@ const Member = () => {
                     type="date"
                     labelName="Date de naissance"
                     required
-                    onChange={(e) => setBirthdate(e.target.value)}
-                    value={birthdate}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, birthdate: e.target.value })
+                    }
+                    value={emailData.birthdate}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="avs"
                     type="avs"
                     labelName="Numéro AVS (pour juniors)"
-                    onChange={(e) => setAvs(e.target.value)}
-                    value={avs}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, avs: e.target.value })
+                    }
+                    value={emailData.avs}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -151,24 +134,30 @@ const Member = () => {
                     type="tel"
                     labelName="Tel Privé"
                     required
-                    onChange={(e) => setPhone(e.target.value)}
-                    value={phone}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, phone: e.target.value })
+                    }
+                    value={emailData.phone}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="natel"
                     type="tel"
                     labelName="Natel"
-                    onChange={(e) => setNatel(e.target.value)}
-                    value={natel}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, natel: e.target.value })
+                    }
+                    value={emailData.natel}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="license"
                     type=""
                     labelName="Numéro de license (si titulaire d'une license Swiss Badminton)"
-                    onChange={(e) => setLicense(e.target.value)}
-                    value={license}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, license: e.target.value })
+                    }
+                    value={emailData.license}
                   />
                   <FormItem
                     className="sm:col-span-6"
@@ -176,8 +165,10 @@ const Member = () => {
                     type="email"
                     labelName="Email"
                     required
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, email: e.target.value })
+                    }
+                    value={emailData.email}
                   />
 
                   <FormItem
@@ -185,8 +176,10 @@ const Member = () => {
                     label="message"
                     type="textarea"
                     labelName="Message"
-                    onChange={(e) => setMessage(e.target.value)}
-                    value={message}
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, message: e.target.value })
+                    }
+                    value={emailData.message}
                   />
                   <button
                     disabled={loading}

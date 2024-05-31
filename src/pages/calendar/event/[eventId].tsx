@@ -1,15 +1,20 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CalendarEvent } from "@prisma/client";
 import Map from "~/lib/components/interactiveMap/Map";
 import { EmbedGoogleMap } from "~/lib/components/interactiveMap/EmbedGoogleMap";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { format } from "date-fns";
 import { Separator } from "~/lib/components/ui/separator";
+import { useDimensions } from "~/lib/hooks/useDimensions";
 
 export default function EventPage() {
   const router = useRouter();
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const chartRef = useRef<HTMLDivElement>(null);
+  const chartSize = useDimensions(chartRef);
+
+  // Fetch events from the API
   useEffect(() => {
     fetch("/api/events")
       .then((res) => res.json())
@@ -31,8 +36,12 @@ export default function EventPage() {
         }
       });
   }, []);
+
+  // Check if the event exists
   const eventExists = events.find((elem) => elem.id === router.query.eventId);
   const event = events.find((elem) => elem.id === router.query.eventId);
+
+  // Check for events to display the event or a 404 message
   if (
     eventExists != null &&
     event?.location != "Switzerland" &&
@@ -44,11 +53,15 @@ export default function EventPage() {
           <h1 className="rounded-sm bg-picton-blue-400 p-2 font-semibold">
             {event?.summary ?? ""}
           </h1>
-          <Map
-            location={event?.location?.toString() ?? ""}
-            latitude={event?.latitude ?? 46.81177897206209}
-            longitude={event?.longitude ?? 7.147400994098687}
-          />
+          <div ref={chartRef} className="h-[610px] w-full max-w-[975px]">
+            <Map
+              location={event?.location?.toString() ?? ""}
+              latitude={event?.latitude ?? 46.81177897206209}
+              longitude={event?.longitude ?? 7.147400994098687}
+              width={chartSize.width}
+              height={chartSize.width * 0.61803398875}
+            />
+          </div>
         </div>
         <aside className="flex flex-col bg-gray-200 p-6">
           <div className="flex flex-col">
@@ -90,11 +103,15 @@ export default function EventPage() {
           <h1 className="rounded-sm bg-picton-blue-400 p-2 font-semibold">
             {event?.summary}
           </h1>
-          <Map
-            location={event?.location?.toString() ?? ""}
-            latitude={event?.latitude ?? 46.81177897206209}
-            longitude={event?.longitude ?? 7.147400994098687}
-          />
+          <div ref={chartRef} className="h-[610px] w-full max-w-[975px]">
+            <Map
+              location={event?.location?.toString() ?? ""}
+              latitude={event?.latitude ?? 46.81177897206209}
+              longitude={event?.longitude ?? 7.147400994098687}
+              width={chartSize.width}
+              height={chartSize.width * 0.61803398875}
+            />
+          </div>
         </div>
         <aside className="flex flex-col bg-gray-200 p-6">
           <div className="flex flex-col">
@@ -128,12 +145,13 @@ export default function EventPage() {
         </aside>
       </div>
     );
-  } else {
-    return (
-      <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
-        <h1 className="text-9xl font-bold">404</h1>
-        <p>Sorry, the event you are looking for does not exist</p>
-      </div>
-    );
-  }
+   } 
+  //else if (eventExists == null) {
+  //   return (
+  //     <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
+  //       <h1 className="text-9xl font-bold">404</h1>
+  //       <p>Sorry, the event you are looking for does not exist</p>
+  //     </div>
+  //   );
+  // }
 }

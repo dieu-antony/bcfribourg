@@ -17,6 +17,7 @@ import {
   useSprings,
 } from "@react-spring/web";
 
+// Predefined margins
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
 type RatioScatterPlotProps = {
@@ -32,6 +33,8 @@ export const RatioScatterPlot = ({
   type,
   data,
 }: RatioScatterPlotProps) => {
+
+  // Ref for the axes, interaction data for the tooltips and define the bounds
   const [interactionData, setInteractionData] =
     useState<InteractionData | null>(null);
   const axesRef = useRef<SVGSVGElement>(null);
@@ -39,6 +42,7 @@ export const RatioScatterPlot = ({
   const boundsWidth = width - margin.right - margin.left;
   const boundsHeight = height - margin.top - margin.bottom;
 
+  // Use the type to determine the data to display
   let updatedData: TeamWithRatio[] = [];
   let max = 1;
 
@@ -53,9 +57,9 @@ export const RatioScatterPlot = ({
     max = d3.extent(updatedData, (d) => d.ratio)?.[1] ?? 0;
   }
 
+  // Define the scales for the axes
   const yScale = d3.scaleLinear().domain([0, max]).range([boundsHeight, 0]);
 
-  //x-axis
   const customTimeParser = d3.timeParse("%Y");
 
   const times = updatedData
@@ -64,6 +68,7 @@ export const RatioScatterPlot = ({
   const dateDomain = d3.extent(times) as [Date, Date];
   const xScale = d3.scaleTime().domain(dateDomain).range([0, boundsWidth]);
 
+  // draw the axes
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);
     svgElement.selectAll("*").remove();
@@ -77,11 +82,13 @@ export const RatioScatterPlot = ({
     svgElement.append("g").call(yAxisGenerator);
   }, [times.length, xScale, yScale, boundsHeight]);
 
+  // Define the line generator
   const lineBuilder = d3
     .line<TeamWithRatio>()
     .x((d) => xScale(customTimeParser(d.seasonStart.toString())!))
     .y((d) => yScale(d.ratio));
 
+  // Define the path interpolator
   const line = lineBuilder(updatedData);
 
   const linePath = useRef(line);
@@ -96,6 +103,7 @@ export const RatioScatterPlot = ({
     return null;
   }
 
+  // Define the spring properties for the line for react-spring animations
   const lineSpringProps = useSpring({
     from: {
       t: 0,
@@ -127,6 +135,8 @@ export const RatioScatterPlot = ({
       },
     })),
   );
+
+  // Draw the circles for the data points
   const allCircles = updatedData.map((d, index) => {
     return (
       <CircleItem

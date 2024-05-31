@@ -6,22 +6,13 @@ import {
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
 import { useEffect, useState } from "react";
-import type { Player } from "@prisma/client";
 import { SquareArrowOutUpRight } from 'lucide-react';
-
-
-type PlayerByTeam = {
-  id: string;
-  name: string;
-  players: Player[];
-  url: string;
-  league: {
-    name: string;
-  };
-};
+import { PlayerByTeam } from "~/lib/types";
 
 const Interclubs = () => {
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
+
+  // Fetch players by team
   useEffect(() => {
     fetch("/api/players")
       .then((res) => res.json())
@@ -40,6 +31,7 @@ const Interclubs = () => {
       <div className="flex justify-center">
         <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-slate-50 p-2 z-10 absolute md:mt-72 mt-52 px-4">
           <Accordion type="single" collapsible>
+            {/* Set display names for the teams */ }
             {playersByTeam.map((team) => {
               let leagueName = "";
               if (team.league.name === "A" || team.league.name === "B") {

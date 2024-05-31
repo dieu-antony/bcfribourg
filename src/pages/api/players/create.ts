@@ -76,7 +76,6 @@ export default async function handler(
                 captain: player.captain,
                 firstName: player.firstName,
                 lastName: player.lastName,
-                // Set other properties as needed
               })),
             });
           }

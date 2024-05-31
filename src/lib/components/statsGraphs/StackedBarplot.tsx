@@ -5,6 +5,7 @@ import { getWinLossRecord } from "~/lib/utils/utils";
 import type { PastTeam, TeamWithRatioKey } from "~/lib/types";
 import { animated, useSprings } from "@react-spring/web";
 
+// Predefined margins
 const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
 type StackedBarplotProps = {
@@ -20,10 +21,12 @@ export const StackedBarplot = ({
   height,
   type,
 }: StackedBarplotProps) => {
+  // Ref for the axes and define the bounds
   const axesRef = useRef(null);
   const boundsWidth = width - margin.right - margin.left;
   const boundsHeight = height - margin.top - margin.bottom;
 
+  // Use the type to determine the data to display
   let updatedData: TeamWithRatioKey[] = [];
   let max = 1;
 
@@ -59,14 +62,15 @@ export const StackedBarplot = ({
     max = d3.extent(updatedData, (d) => d.won + d.lost)?.[1] ?? 0;
   }
 
+  // Get all the groups and subgroups for the stacks
   const allGroups = data.map((d) => String(d.seasonStart));
   const allSubgroups = ["lost", "won"];
 
   // Data Wrangling: stack the data
   const stackSeries = d3.stack().keys(allSubgroups).order(d3.stackOrderNone);
-  //.offset(d3.stackOffsetNone);
   const series = stackSeries(updatedData);
 
+  // define scales using useMemo to avoid recalculating on every render
   const yScale = useMemo(() => {
     return d3
       .scaleLinear()
@@ -74,7 +78,6 @@ export const StackedBarplot = ({
       .range([boundsHeight, 0]);
   }, [max, boundsHeight]);
 
-  // X axis
   const xScale = useMemo(() => {
     return d3
       .scaleBand<string>()
@@ -83,11 +86,13 @@ export const StackedBarplot = ({
       .padding(0.05);
   }, [allGroups, boundsWidth]);
 
+  // Define the color scale for the stacks
   const colorScale = d3
     .scaleOrdinal<string>()
     .domain(allGroups)
-    .range(["#22c55e","#dc2626"]);
+    .range(["#22c55e", "#dc2626"]);
 
+  // Draw the axes
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);
     svgElement.selectAll("*").remove();
@@ -101,7 +106,7 @@ export const StackedBarplot = ({
     svgElement.append("g").call(yAxisGenerator);
   }, [xScale, yScale, boundsHeight]);
 
-
+  // Draw the bars using react-spring library for animations
   const rectangles = series.map((subgroup, i) => {
     const springs = useSprings(
       subgroup.length,
@@ -111,7 +116,7 @@ export const StackedBarplot = ({
           y: yScale(group[1]),
           height: yScale(group[0]) - yScale(group[1]),
           width: xScale.bandwidth(),
-          dx: xScale.bandwidth()/2,
+          dx: xScale.bandwidth() / 2,
         },
         config: {
           friction: 20,

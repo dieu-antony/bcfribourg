@@ -11,6 +11,7 @@ const Calendar = () => {
   const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
+  // Fetch events from the API
   useEffect(() => {
     fetch("/api/events")
       .then((res) => res.json())
@@ -32,6 +33,7 @@ const Calendar = () => {
       });
   }, []);
 
+  // Styles for the filter
   const colorStyles = {
     control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
     option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
@@ -85,6 +87,7 @@ const Calendar = () => {
     }),
   };
 
+  // Filter events based on the selected filters
   useEffect(() => {
     if (selectedFilters.length > 0) {
       const filtered = events.filter((event) =>
@@ -107,6 +110,14 @@ const Calendar = () => {
     { value: "Events", label: "Événements", color: "black" },
   ];
 
+  // Get the color of the event type
+  function getColorByEvent(eventType: string) {
+    return (
+      filterOptions.find((option) => option.value === eventType)?.color ?? "black"
+    );
+  }
+
+  // Get the selected options
   const filteredOptions = filterOptions.filter((option) =>
     selectedFilters.includes(option.value),
   );
@@ -149,18 +160,5 @@ const Calendar = () => {
 };
 
 export default Calendar;
-function getColorByEvent(eventType: string) {
-  const filterOptions = [
-    { value: "Interclub A", label: "NLA", color: "purple" },
-    { value: "Interclub B", label: "NLB", color: "orange" },
-    { value: "Interclub 1", label: "1ère Ligue", color: "blue" },
-    { value: "Interclub 2", label: "2ème Ligue", color: "red" },
-    { value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
-    { value: "Interclub 4", label: "4ème Ligue", color: "green" },
-    { value: "Events", label: "Événements", color: "black" },
-  ];
 
-  return (
-    filterOptions.find((option) => option.value === eventType)?.color ?? "black"
-  );
-}
+

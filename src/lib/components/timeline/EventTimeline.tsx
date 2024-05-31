@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
+// TODO: Finish the timeline component, most likely without D3
 const EventTimeline = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   useEffect(() => {

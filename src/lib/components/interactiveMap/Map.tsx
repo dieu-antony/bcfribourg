@@ -8,16 +8,19 @@ import { useState } from "react";
 import { MapTooltip } from "./MapTooltip";
 import type { Transition } from "d3";
 
-type MapProps = { longitude: number; latitude: number; location: string };
+type MapProps = { longitude: number; latitude: number; location: string, width: number, height: number };
 type InteractionData = {
   xPos: number;
   yPos: number;
   location: string;
 };
-const Map = ({ longitude, latitude, location }: MapProps) => {
+const Map = ({ longitude, latitude, location, width, height /* two props for future with useDimension hook*/}: MapProps) => {
+  // Ref for the SVG element and the interaction data for the tooltip
   const [interactionData, setInteractionData] =
     useState<InteractionData | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
+
+
   useEffect(() => {
     window.addEventListener("resize", () => {
       const newWidth = Math.min(window.innerWidth, 975);
@@ -38,6 +41,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
     let width = Math.min(window.innerWidth, 975);
     let height = Math.min(window.innerHeight, 610);
 
+    // Define the projection and path
     const projection = d3
       .geoMercator()
       .rotate([0, 0])
@@ -52,6 +56,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
       .attr("height", height)
       .on("click", reset);
 
+    // Reset the map to the original view on click
     function reset() {
       cantons.transition().style("fill", null);
       svg
@@ -64,8 +69,8 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         );
     }
 
+    // Draw the map
     const g = svg.append("g");
-
     g.append("path")
       .attr("fill", "#ddd")
       .attr(
@@ -77,6 +82,8 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
           ),
         ),
       );
+    
+    // Add cantons and lakes
     const cantons = g
       .append("path")
       .attr("fill", "none")
@@ -106,6 +113,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
         ),
       );
 
+    // Zoom behavior
     const zoom = d3
       .zoom<SVGSVGElement, unknown>()
       .scaleExtent([1, 8])
@@ -115,12 +123,14 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
       ])
       .on("zoom", zoomed);
 
+    // Zoom function
     function zoomed(event: { transform: any }) {
       const { transform } = event;
       g.attr("transform", transform);
       g.attr("stroke-width", 1 / transform.k);
     }
 
+    // Zoom to the location on load
     const onLoadZoom = () => {
       const x0 = projection([7.147400994098687, 46.81177897206209])?.[0] ?? 0;
       const y0 = projection([7.147400994098687, 46.81177897206209])?.[1] ?? 0;
@@ -149,6 +159,7 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
       onLoadZoom();
     }
 
+    // Add the location points
     g.append("circle")
       .attr("cx", projection([7.147400994098687, 46.81177897206209])?.[0] ?? 0)
       .attr("cy", projection([7.147400994098687, 46.81177897206209])?.[1] ?? 0)
@@ -161,7 +172,6 @@ const Map = ({ longitude, latitude, location }: MapProps) => {
           location: "Av. du Général-Guisan 61a, 1700 Fribourg",
         });
       })
-
       .on("mouseout", () => {
         setInteractionData(null);
       });
