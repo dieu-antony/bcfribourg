@@ -194,7 +194,7 @@ const EventCalendar = ({
                         <a
                           href={`/calendar/day/${new Date(val).toDateString()}`}
                         >
-                          <div className="size-5 rounded-full bg-picton-blue-500"></div>
+                          <div className="size-5 rounded-full bg-picton-blue-500"/>
                         </a>
                       </div>
                     );
@@ -207,7 +207,7 @@ const EventCalendar = ({
                 {events
                   .filter((event) => isSameDay(event.start, day))
                   .map((event) => {
-                    const bgcolor = ("bg-" + event.color + "-500").toString();
+                    const bgcolor = event.color === "black" ? ("bg-" + event.color).toString() : ("bg-" + event.color + "-500").toString();
                     return (
                       <div
                         key={event.summary}

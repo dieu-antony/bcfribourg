@@ -1,5 +1,19 @@
 import type { League, CalendarEvent, Player } from "@prisma/client";
-import type { Attendee, BaseComponent, Class, DateType, DateWithTimeZone, Method, Organizer, Transparency, VAlarm, VCalendar, VEvent, VEventStatus, VTimeZone } from "node-ical";
+import type {
+  Attendee,
+  BaseComponent,
+  Class,
+  DateType,
+  DateWithTimeZone,
+  Method,
+  Organizer,
+  Transparency,
+  VAlarm,
+  VCalendar,
+  VEvent,
+  VEventStatus,
+  VTimeZone,
+} from "node-ical";
 export type TeamWithRatio = PastTeam & { ratio: number };
 
 export type PastTeam = {
@@ -47,20 +61,19 @@ export type TeamWithRatioKey = {
 
 export type PlayerWithoutID = Omit<Player, "id">;
 
-
 export interface VEventFix extends BaseComponent {
-  type: 'VEVENT';
+  type: "VEVENT";
   method: Method;
   dtstamp: DateWithTimeZone;
   uid: string;
   sequence: string;
   transparency: Transparency;
   class: Class;
-  summary: {val: string, params: string[]};
+  summary: { val: string; params: string[] };
   start: DateWithTimeZone;
   datetype: DateType;
   end: DateWithTimeZone;
-  eventType: string,
+  eventType: string;
   location: string;
   description: string;
   url: string;
@@ -69,7 +82,7 @@ export interface VEventFix extends BaseComponent {
   lastmodified: DateWithTimeZone;
   attendee?: Attendee[] | Attendee;
   /* eslint-disable-next-line @typescript-eslint/ban-types */
-  recurrences?: Record<string, Omit<VEvent, 'recurrences'>>;
+  recurrences?: Record<string, Omit<VEvent, "recurrences">>;
   status?: VEventStatus;
 
   // I am not entirely sure about these, leave them as any for now..
@@ -90,16 +103,23 @@ export type PlayerByTeam = {
     name: string;
   };
 };
-
 export type CalendarResponseFix = Record<string, CalendarComponent>;
 
 export type CalendarComponent = VTimeZone | VEventFix | VCalendar;
 
 export interface NodeICalSyncFix {
   parseICSFix: (body: string) => CalendarResponseFix;
-
   parseFileFix: (file: string) => CalendarResponseFix;
 }
 
-export const sync: NodeICalSyncFix = require("node-ical") as NodeICalSyncFix;
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
+const nodeIcal = require("node-ical");
 
+export const sync: NodeICalSyncFix = {
+  parseICSFix: (body: string): CalendarResponseFix => {
+    return nodeIcal.parseICS(body);
+  },
+  parseFileFix: (file: string): CalendarResponseFix => {
+    return nodeIcal.parseFile(file);
+  },
+};

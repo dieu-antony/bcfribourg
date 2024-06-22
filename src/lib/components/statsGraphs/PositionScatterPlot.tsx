@@ -39,7 +39,7 @@ export const PositionScatterPlot = ({
 
   const times = data
     .map((d) => customTimeParser(d.seasonStart.toString() || ""))
-    .filter((item) => item instanceof Date) as Date[];
+    .filter((item): item is Date => item instanceof Date);
   const dateDomain = d3.extent(times) as [Date, Date];
   const xScale = d3.scaleTime().domain(dateDomain).range([0, boundsWidth]);
 

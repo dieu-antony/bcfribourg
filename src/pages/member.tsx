@@ -3,7 +3,7 @@ import FormItem from "~/lib/components/FormItem";
 import { useState } from "react";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
-import { EmailData } from "~/lib/types";
+import type { EmailData } from "~/lib/types";
 
 const Member = () => {
   const [emailData, setEmailData] = useState({

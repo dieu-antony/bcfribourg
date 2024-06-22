@@ -7,7 +7,7 @@ import {
 } from "~/lib/components/ui/accordion";
 import { useEffect, useState } from "react";
 import { SquareArrowOutUpRight } from 'lucide-react';
-import { PlayerByTeam } from "~/lib/types";
+import type { PlayerByTeam } from "~/lib/types";
 
 const Interclubs = () => {
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);

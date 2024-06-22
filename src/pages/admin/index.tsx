@@ -23,7 +23,7 @@ const Admin = () => {
           </h2>
           <Button onClick={() => Router.push("/admin/icdata")}>IC Data</Button>
           <Button onClick={() => Router.push("/admin/players")}>Players</Button>
-          <Button onClick={() => Router.push("/admin/calendar")}>Teams</Button>
+          <Button onClick={() => Router.push("/admin/calendar")}>Calendar</Button>
         </div>
       </>
     );

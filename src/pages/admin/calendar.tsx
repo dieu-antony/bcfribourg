@@ -9,7 +9,7 @@ import { DatabaseColumns } from "~/lib/components/dataTable/DatabaseColumns";
 import type { DatabaseColumnsProps } from "~/lib/components/dataTable/DatabaseColumns";
 import { toast } from "sonner";
 import { type CalendarEventWithoutID, sync } from "~/lib/types";
-import { parseCalendar } from "~/lib/utils/parseCalender";
+import { findLonLat, parseCalendar } from "~/lib/utils/parseCalender";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -25,6 +25,7 @@ import {
 } from "~/lib/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
 import { inter } from "../_app";
+import crypto from "crypto";
 
 const Calendar = () => {
   const { status } = useSession();
@@ -33,6 +34,9 @@ const Calendar = () => {
   }, [status]);
 
   const [events, setEvents] = useState<CalendarEventWithoutID[]>([]);
+  const [eventsToCreate, setEventsToCreate] = useState(
+    {eventType: "Events"} as CalendarEventWithoutID,
+  );
   const [tableData, setTableData] = useState<DatabaseColumnsProps[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -101,7 +105,6 @@ const Calendar = () => {
       ...event,
       eventType: selectedType,
     }));
-    console.log(eventsWithType);
     const response = await fetch("/api/events/create", {
       method: "POST",
       body: JSON.stringify(eventsWithType),
@@ -113,6 +116,26 @@ const Calendar = () => {
     if (data.status === "error") {
       toast.error(data.message);
     }
+  }
+  async function onEventSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    eventsToCreate.longitude = (await findLonLat(eventsToCreate.location!)).lon;
+    eventsToCreate.latitude = (await findLonLat(eventsToCreate.location!)).lat;
+     eventsToCreate.uid = crypto.randomBytes(20).toString('hex');
+    const eventsAsArray = [];
+    eventsAsArray.push(eventsToCreate);
+    const response = await fetch("/api/events/create", {
+      method: "POST",
+      body: JSON.stringify(eventsAsArray),
+    });
+    const data = await response.json();
+    if (data.status === "success") {
+      toast.success(data.message);
+    }
+    if (data.status === "error") {
+      toast.error(data.message);
+    }
+    setEventsToCreate({} as CalendarEventWithoutID);
   }
 
   if (status === "authenticated") {
@@ -189,33 +212,75 @@ const Calendar = () => {
               />
             </form>
           </div>
+
+          {/* Create single event */}
           <div className="container bg-slate-50 py-5">
             <h2>Create Event</h2>
             <p>Please fill out all the required fields to create an event.</p>
-            <form /*onSubmit={onEventCreation}*/ className="flex flex-col">
+            <form onSubmit={onEventSubmit} className="flex flex-col">
               <label htmlFor="title">Title/Summary</label>
-              <input id="title" className="form-input" />
+              <input
+                id="title"
+                className="form-input"
+                onChange={(e) =>
+                  setEventsToCreate({
+                    ...eventsToCreate,
+                    summary: e.target.value,
+                  })
+                }
+              />
               <label htmlFor="location">Location (optional)</label>
-              <input id="start" className="form-input" />
+              <input
+                id="start"
+                className="form-input"
+                onChange={(e) =>
+                  setEventsToCreate({
+                    ...eventsToCreate,
+                    location: e.target.value,
+                  })
+                }
+              />
               <label htmlFor="startDate">Start Date</label>
               <input
                 id="startDate"
                 type="datetime-local"
                 className="form-input"
+                onChange={(e) =>
+                  setEventsToCreate({
+                    ...eventsToCreate,
+                    start: new Date(e.target.value),
+                  })
+                }
               />
               <label htmlFor="endDate">End Date</label>
               <input
                 id="endDate"
                 type="datetime-local"
                 className="form-input"
+                onChange={(e) =>
+                  setEventsToCreate({
+                    ...eventsToCreate,
+                    end: new Date(e.target.value),
+                  })
+                }
               />
               <label htmlFor="url">Url (optional)</label>
-              <input id="url" type="url" className="form-input" />
+              <input
+                id="url"
+                type="url"
+                className="form-input"
+                onChange={(e) =>
+                  setEventsToCreate({
+                    ...eventsToCreate,
+                    url: e.target.value,
+                  })
+                }
+              />
               <input
                 type="submit"
                 value="Submit"
                 className="m-1 mt-2 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
-                disabled={true}
+                disabled={loading}
               />
             </form>
           </div>

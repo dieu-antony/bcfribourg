@@ -41,11 +41,9 @@ const IcData = () => {
     const reader = new FileReader();
 
     reader.addEventListener("load", async function () {
-      console.log("reader");
       const parsedTeams: PastTeam[] = await file
         .text()
         .then((text: string) => JSON.parse(text));
-      console.log("parsed");
       setTeams((prev) => [...prev, ...parsedTeams]);
       setLoading(false);
       toast.dismiss(toastId);

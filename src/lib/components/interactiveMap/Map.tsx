@@ -14,7 +14,7 @@ type InteractionData = {
   yPos: number;
   location: string;
 };
-const Map = ({ longitude, latitude, location, width, height /* two props for future with useDimension hook*/}: MapProps) => {
+const Map = ({ longitude, latitude, location, /*width, height  two props for future with useDimension hook*/}: MapProps) => {
   // Ref for the SVG element and the interaction data for the tooltip
   const [interactionData, setInteractionData] =
     useState<InteractionData | null>(null);

@@ -1,6 +1,6 @@
 import type { CalendarEventWithoutID, CalendarResponseFix } from "../types";
 
-async function findLonLat(address: string) {
+export async function findLonLat(address: string) {
   const url = new URL("https://nominatim.openstreetmap.org/search");
   url.searchParams.append("q", address);
   url.searchParams.append("format", "geojson");
