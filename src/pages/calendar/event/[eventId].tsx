@@ -79,7 +79,7 @@ export default function EventPage() {
               target="_blank"
             >
               <SquareArrowOutUpRight className="size-5" />
-              {new URL(event?.url!).host}
+              {new URL(event!.url).host}
             </a>
             <Separator className="my-2 bg-black" />
             <h2 className="ml-1 mt-2 font-bold">Lieu</h2>
@@ -129,7 +129,7 @@ export default function EventPage() {
               target="_blank"
             >
               <SquareArrowOutUpRight className="size-5" />
-              {new URL(event?.url!).host}
+              {new URL(event!.url).host}
             </a>
             <Separator className="my-2 bg-black" />
             <h2 className="ml-1 mt-2 font-bold">Lieu</h2>

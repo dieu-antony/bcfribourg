@@ -22,17 +22,17 @@ import { Toaster } from "~/lib/components/ui/sonner";
 import { ICDatabaseTable } from "~/lib/components/dataTables/icTable/ICDatabaseTable";
 import {
   ICDatabaseColumns,
-  ICDatabaseColumnsProps,
+  type ICDatabaseColumnsProps,
 } from "~/lib/components/dataTables/icTable/ICDatabaseColumns";
 import { Tabs, TabsContent, TabsList } from "~/lib/components/ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
 import { PlayerDatabaseTable } from "~/lib/components/dataTables/playerTable/PlayerDatabaseTable";
 import {
   PlayerDatabaseColumns,
-  PlayerDatabaseColumnsProps,
+  type PlayerDatabaseColumnsProps,
 } from "~/lib/components/dataTables/playerTable/PlayerDatabaseColumns";
 import { Button } from "~/lib/components/ui/button";
-import { Player } from "@prisma/client";
+import type { Player } from "@prisma/client";
 
 const Players = () => {
   const { status } = useSession();
