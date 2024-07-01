@@ -151,7 +151,6 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
             )
             .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
         );
-      console.log("onLoadZoom");
     };
     if (svgRef.current) {
       const svg = d3.select(svgRef.current);

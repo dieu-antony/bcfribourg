@@ -16,10 +16,23 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { inter } from "../_app";
-import type { ICTeam } from "@prisma/client";
 import { getLeagueFromId } from "~/lib/utils/utils";
 import { toast } from "sonner";
 import { Toaster } from "~/lib/components/ui/sonner";
+import { ICDatabaseTable } from "~/lib/components/dataTables/icTable/ICDatabaseTable";
+import {
+  ICDatabaseColumns,
+  ICDatabaseColumnsProps,
+} from "~/lib/components/dataTables/icTable/ICDatabaseColumns";
+import { Tabs, TabsContent, TabsList } from "~/lib/components/ui/tabs";
+import { TabsTrigger } from "@radix-ui/react-tabs";
+import { PlayerDatabaseTable } from "~/lib/components/dataTables/playerTable/PlayerDatabaseTable";
+import {
+  PlayerDatabaseColumns,
+  PlayerDatabaseColumnsProps,
+} from "~/lib/components/dataTables/playerTable/PlayerDatabaseColumns";
+import { Button } from "~/lib/components/ui/button";
+import { Player } from "@prisma/client";
 
 const Players = () => {
   const { status } = useSession();
@@ -27,7 +40,9 @@ const Players = () => {
     if (status === "unauthenticated") Router.replace("/login");
   }, [status]);
 
-  const [icTeams, setIcTeams] = useState<ICTeam[]>([]);
+  const [icTeams, setIcTeams] = useState<ICDatabaseColumnsProps[]>([]);
+  const [players, setPlayers] = useState<PlayerDatabaseColumnsProps[]>([]);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [loading] = useState(false);
   const [leagueId, setLeagueId] = useState("clvzbbfot00001o6wxykabs64");
   const [teamName, setTeamName] = useState("Union Tafers-Fribourg 1");
@@ -36,7 +51,7 @@ const Players = () => {
   const [url, setUrl] = useState("");
   const [icTeamId, setIcTeamId] = useState("Union Tafers-Fribourg 1");
   const [captain, setCaptain] = useState("");
-
+  const [singlePlayer, setSinglePlayer] = useState({gender:"M", captain:false, teamId:"clvzbbfot00001o6wxykabs64"} as Player);
   useEffect(() => {
     async function getIcTeams() {
       const response = await fetch("/api/icTeams");
@@ -53,7 +68,46 @@ const Players = () => {
       }
     }
     getIcTeams();
+    async function getPlayers() {
+      try {
+        const response = await fetch("/api/players");
+        const data: { status: any; players: any[] } = await response.json();
+        if (data.status === "success") {
+          setPlayers(
+            data.players.flatMap((team: any) =>
+              team.players.map((player: any) => ({
+                id: player.id,
+                firstName: player.firstName,
+                lastName: player.lastName,
+                team: team.name,
+                captain: player.captain ? "Yes" : "No",
+                gender: player.gender,
+              })),
+            ),
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching players", error);
+      }
+    }
+    getPlayers();
   }, []);
+
+  async function deleteAllPlayers() {
+    confirmDelete ? setConfirmDelete(false) : setConfirmDelete(true);
+    if (!confirmDelete) return;
+    const response = await fetch("/api/players/delete", {
+      method: "POST",
+      body: JSON.stringify(players),
+    });
+    const data = await response.json();
+    if (data.status === "success") {
+      toast.success(data.message);
+    }
+    if (data.status === "error") {
+      toast.error(data.message);
+    }
+  }
 
   async function createIcTeams(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -78,20 +132,35 @@ const Players = () => {
       toast.error(data.message);
     }
   }
-
-  async function createPlayers(event: FormEvent<HTMLFormElement>) {
+  async function createSinglePlayer(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const playersFList = playersF.split(",").map((player) => ({
+    const playerToCreate = [singlePlayer]
+
+    const response = await fetch("/api/players/create", {
+      method: "POST",
+      body: JSON.stringify(playerToCreate),
+    });
+    const data = await response.json();
+    if (data.status === "success") {
+      toast.success(data.message);
+    }
+    if (data.status === "error") {
+      toast.error(data.message);
+    }
+  }
+  async function createPlayers(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const playersFList = playersF.split(", ").map((player) => ({
       firstName: player.split(" ")[0] ?? "",
-      lastName: player.split(" ")[1] ?? "",
+      lastName: player.slice((player.split(" ")[0]?.length ?? 0) + 1) ?? "",
       gender: "F",
       captain: captain === player ? true : false,
       teamId: icTeamId,
     }));
-    const playersMList = playersM.split(",").map((player) => ({
+    const playersMList = playersM.split(", ").map((player) => ({
       firstName: player.split(" ")[0] ?? "",
-      lastName: player.split(" ")[1] ?? "",
+      lastName: player.slice((player.split(" ")[0]?.length ?? 0) + 1) ?? "",
       gender: "M",
       captain: captain === player ? true : false,
       teamId: icTeamId,
@@ -113,7 +182,11 @@ const Players = () => {
   }
 
   const teamOption = icTeams.map((team) => {
-    return <option key={team.id} value={team.id}>{team.name}</option>;
+    return (
+      <option key={team.id} value={team.id}>
+        {team.name}
+      </option>
+    );
   });
   if (status === "authenticated") {
     return (
@@ -264,8 +337,129 @@ const Players = () => {
                   />
                 </form>
               </div>
+              <div>
+                <h3>Add one Players</h3>
+                <form className="flex flex-col" onSubmit={createSinglePlayer}>
+                  <select
+                    className="form-select"
+                    onChange={(e) =>
+                      setSinglePlayer({
+                        ...singlePlayer,
+                        teamId: e.target.value,
+                      })
+                    }
+                  >
+                    {teamOption}
+                  </select>
+                  <label htmlFor="firstName">First Name</label>
+                  <input
+                    name="firstName"
+                    className="form-input"
+                    placeholder="Prénom"
+                    onChange={(e) =>
+                      setSinglePlayer({
+                        ...singlePlayer,
+                        firstName: e.target.value,
+                      })
+                    }
+                  ></input>
+                  <label htmlFor="lastName">Last Name</label>
+                  <input
+                    name="lastName"
+                    className="form-input"
+                    placeholder="Nom"
+                    onChange={(e) =>
+                      setSinglePlayer({
+                        ...singlePlayer,
+                        lastName: e.target.value,
+                      })
+                    }
+                  ></input>
+                  <label htmlFor="gender">Gender</label>
+                  <select
+                    className="form-select"
+                    name="gender"
+                    onChange={(e) =>
+                      setSinglePlayer({
+                        ...singlePlayer,
+                        gender: e.target.value,
+                      })
+                    }
+                  >
+                    <option>M</option>
+                    <option>F</option>
+                  </select>
+                  <label htmlFor="captain">Capitain?</label>
+                  <select
+                    className="form-select"
+                    name="captain"
+                    onChange={(e) =>
+                      setSinglePlayer({
+                        ...singlePlayer,
+                        captain: e.target.value === "1" ? true : false,
+                      })
+                    }
+                  >
+                    <option value={0}>No</option>
+                    <option value={1}>Yes</option>
+                  </select>
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="m-1 mt-2 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
+                    disabled={loading}
+                  />
+                </form>
+              </div>
             </div>
           </div>
+          <Tabs defaultValue="teams" className="w-[1000px] pt-10">
+            <TabsList className="gap-4">
+              <TabsTrigger
+                value="teams"
+                className="text-gray rounded-sm border-2 bg-gray-50 p-2 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white"
+              >
+                IC Teams
+              </TabsTrigger>
+              <TabsTrigger
+                value="players"
+                className="text-gray rounded-sm border-2 bg-gray-50 p-2 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white"
+              >
+                Players
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="teams">
+              <div className="container mx-auto pb-10">
+                <ICDatabaseTable columns={ICDatabaseColumns} data={icTeams} />
+              </div>
+            </TabsContent>
+            <TabsContent value="players">
+              <div className="flex flex-row gap-2">
+                <Button
+                  onClick={deleteAllPlayers}
+                  className="bg-red-500 hover:bg-red-600"
+                >
+                  {confirmDelete
+                    ? "Yes, delete all Players"
+                    : "Delete All Players"}
+                </Button>
+                {confirmDelete && (
+                  <Button
+                    onClick={() => setConfirmDelete(false)}
+                    className="bg-green-500 hover:bg-green-600"
+                  >
+                    Nevermind
+                  </Button>
+                )}
+              </div>
+              <div className="container mx-auto pb-10">
+                <PlayerDatabaseTable
+                  columns={PlayerDatabaseColumns}
+                  data={players}
+                />
+              </div>
+            </TabsContent>
+          </Tabs>
           <Toaster richColors />
         </div>
       </>

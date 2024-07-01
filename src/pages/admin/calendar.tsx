@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import Router from "next/router";
 import { Button } from "~/lib/components/ui/button";
-import { DatabaseTable } from "~/lib/components/dataTable/DatabaseTable";
+import { EventDatabaseTable } from "~/lib/components/dataTables/eventTable/EventDatabaseTable";
 import { Toaster } from "~/lib/components/ui/sonner";
-import { DatabaseColumns } from "~/lib/components/dataTable/DatabaseColumns";
-import type { DatabaseColumnsProps } from "~/lib/components/dataTable/DatabaseColumns";
+import { EventDatabaseColumns } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
+import type { DatabaseColumnsProps } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
 import { toast } from "sonner";
 import { type CalendarEventWithoutID, sync } from "~/lib/types";
 import { findLonLat, parseCalendar } from "~/lib/utils/parseCalender";
@@ -34,32 +34,36 @@ const Calendar = () => {
   }, [status]);
 
   const [events, setEvents] = useState<CalendarEventWithoutID[]>([]);
-  const [eventsToCreate, setEventsToCreate] = useState(
-    {eventType: "Events"} as CalendarEventWithoutID,
-  );
+  const [eventsToCreate, setEventsToCreate] = useState({
+    eventType: "Events",
+  } as CalendarEventWithoutID);
   const [tableData, setTableData] = useState<DatabaseColumnsProps[]>([]);
   const [loading, setLoading] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-  async function getDatabaseEvents() {
-    const response = await fetch("/api/events");
-    const data: {
-      status: "success" | "loading" | "error";
-      events: DatabaseColumnsProps[];
-      message: string;
-    } = await response.json();
-    if (data.status === "success") {
-      setTableData(
-        data.events.map((event: DatabaseColumnsProps) => ({
-          id: event.id,
-          eventType: event.eventType,
-          summary: event.summary,
-          location: event.location,
-          url: event.url,
-          start: event.start,
-        })),
-      );
+  useEffect(() => {
+    async function getDatabaseEvents() {
+      const response = await fetch("/api/events");
+      const data: {
+        status: "success" | "loading" | "error";
+        events: DatabaseColumnsProps[];
+        message: string;
+      } = await response.json();
+      if (data.status === "success") {
+        setTableData(
+          data.events.map((event: DatabaseColumnsProps) => ({
+            id: event.id,
+            eventType: event.eventType,
+            summary: event.summary,
+            location: event.location,
+            url: event.url,
+            start: event.start,
+          })),
+        );
+      }
     }
-  }
+    getDatabaseEvents();
+  }, []);
 
   function onFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     setEvents([]);
@@ -121,7 +125,7 @@ const Calendar = () => {
     event.preventDefault();
     eventsToCreate.longitude = (await findLonLat(eventsToCreate.location!)).lon;
     eventsToCreate.latitude = (await findLonLat(eventsToCreate.location!)).lat;
-     eventsToCreate.uid = crypto.randomBytes(20).toString('hex');
+    eventsToCreate.uid = crypto.randomBytes(20).toString("hex");
     const eventsAsArray = [];
     eventsAsArray.push(eventsToCreate);
     const response = await fetch("/api/events/create", {
@@ -136,6 +140,22 @@ const Calendar = () => {
       toast.error(data.message);
     }
     setEventsToCreate({} as CalendarEventWithoutID);
+  }
+
+  async function deleteAllEvents() {
+    confirmDelete ? setConfirmDelete(false) : setConfirmDelete(true);
+    if (!confirmDelete) return;
+    const response = await fetch("/api/events/delete", {
+      method: "POST",
+      body: JSON.stringify(tableData),
+    });
+    const data = await response.json();
+    if (data.status === "success") {
+      toast.success(data.message);
+    }
+    if (data.status === "error") {
+      toast.error(data.message);
+    }
   }
 
   if (status === "authenticated") {
@@ -228,6 +248,7 @@ const Calendar = () => {
                     summary: e.target.value,
                   })
                 }
+                required
               />
               <label htmlFor="location">Location (optional)</label>
               <input
@@ -251,6 +272,7 @@ const Calendar = () => {
                     start: new Date(e.target.value),
                   })
                 }
+                required
               />
               <label htmlFor="endDate">End Date</label>
               <input
@@ -263,6 +285,7 @@ const Calendar = () => {
                     end: new Date(e.target.value),
                   })
                 }
+                required
               />
               <label htmlFor="url">Url (optional)</label>
               <input
@@ -284,9 +307,27 @@ const Calendar = () => {
               />
             </form>
           </div>
-          <Button onClick={getDatabaseEvents}>Get Events</Button>
-          <div className="container mx-auto py-10">
-            <DatabaseTable columns={DatabaseColumns} data={tableData} />
+          <div className="flex flex-row gap-2 pt-10">
+            <Button
+              onClick={deleteAllEvents}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              {confirmDelete ? "Yes, delete all Events" : "Delete All Events"}
+            </Button>
+            {confirmDelete && (
+              <Button
+                onClick={() => setConfirmDelete(false)}
+                className="bg-green-500 hover:bg-green-600"
+              >
+                Nevermind
+              </Button>
+            )}
+          </div>
+          <div className="container mx-auto pb-10">
+            <EventDatabaseTable
+              columns={EventDatabaseColumns}
+              data={tableData}
+            />
           </div>
           <Toaster richColors />
         </div>

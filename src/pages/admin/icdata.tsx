@@ -32,7 +32,6 @@ const IcData = () => {
   async function onTeamFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     setTeams([]);
     const file = e.target.files?.[0];
-    console.log(file);
     if (!file) return;
 
     setLoading(true);

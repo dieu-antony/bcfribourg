@@ -11,7 +11,6 @@ import type {
   SortingState,
   ColumnFiltersState,
 } from "@tanstack/react-table";
-import { Button } from "~/lib/components/ui/button";
 import { useState } from "react";
 import {
   Table,
@@ -21,17 +20,16 @@ import {
   TableHeader,
   TableRow,
 } from "~/lib/components/ui/table";
-import { Input } from "../ui/input";
 
-interface DatabaseTableProps<TData, TValue> {
+interface ICDatabaseTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DatabaseTable<TData, TValue>({
+export function ICDatabaseTable<TData, TValue>({
   columns,
   data,
-}: DatabaseTableProps<TData, TValue>) {
+}: ICDatabaseTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -50,53 +48,6 @@ export function DatabaseTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex justify-between gap-2">
-        <div className="flex gap-2">
-          <div className="flex items-center py-4">
-            <Input
-              placeholder="Filter Summary/Title..."
-              value={
-                (table.getColumn("summary")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("summary")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm"
-            />
-          </div>
-          <div className="flex items-center py-4">
-            <Input
-              placeholder="Filter Event Type..."
-              value={
-                (table.getColumn("eventType")?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn("eventType")?.setFilterValue(event.target.value)
-              }
-              className="max-w-sm"
-            />
-          </div>
-        </div>
-        <div className="flex items-center justify-end space-x-2 py-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -147,6 +98,5 @@ export function DatabaseTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-    </div>
   );
 }

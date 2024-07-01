@@ -22,7 +22,7 @@ export type DatabaseColumnsProps = {
   start: Date;
 };
 
-export const DatabaseColumns: ColumnDef<DatabaseColumnsProps>[] = [
+export const EventDatabaseColumns: ColumnDef<DatabaseColumnsProps>[] = [
   {
     accessorKey: "id",
     header: "ID",
