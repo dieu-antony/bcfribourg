@@ -1,7 +1,9 @@
 
 const Comite = () => {
   return (
-    <div>comite</div>
+    <div>
+      
+    </div>
   )
 }
 

@@ -46,6 +46,7 @@ export default function Home() {
               </Link>
             </div>
           </motion.h1>
+          
         </div>
         <div className="flex flex-col">
           <div className="m-5 max-w-[1000px] bg-white p-5 shadow">

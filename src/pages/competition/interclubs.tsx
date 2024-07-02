@@ -6,8 +6,9 @@ import {
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
 import { useEffect, useState } from "react";
-import { SquareArrowOutUpRight } from 'lucide-react';
+import { SquareArrowOutUpRight } from "lucide-react";
 import type { PlayerByTeam } from "~/lib/types";
+import Link from "next/link";
 
 const Interclubs = () => {
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
@@ -22,16 +23,16 @@ const Interclubs = () => {
         }
       });
   }, []);
-
+  console.log(playersByTeam);
   return (
     <>
       <Head>
         <title>Interclubs</title>
       </Head>
       <div className="flex justify-center">
-        <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-slate-50 p-2 absolute px-4">
+        <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-white p-2 px-4">
           <Accordion type="single" collapsible>
-            {/* Set display names for the teams */ }
+            {/* Set display names for the teams */}
             {playersByTeam.map((team) => {
               let leagueName = "";
               if (team.league.name === "A" || team.league.name === "B") {
@@ -49,7 +50,69 @@ const Interclubs = () => {
                 <AccordionItem key={team.id} value={team.id}>
                   <AccordionTrigger>{team.name + leagueName}</AccordionTrigger>
                   <AccordionContent>
-                    <div className="grid grid-cols-2">
+                    <div className="mt-2 grid grid-cols-2 place-items-center items-start">
+                      <div className="flex flex-col gap-4">
+                        <h1 className="font-bold text-base">Femmes</h1>
+                        <div className="flex flex-col gap-1">
+                          {team.players
+                            .filter((player) => player.gender === "F")
+                            .map((player) => {
+                              return (
+                                <div
+                                  key={player.id}
+                                  className="flex items-center justify-between"
+                                >
+                                  {player.captain ? (
+                                    <span className="font-semibold">
+                                      {player.firstName} {player.lastName}
+                                    </span>
+                                  ) : (
+                                    <span>
+                                      {player.firstName} {player.lastName}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-4">
+                        <h1 className="font-semibold text-base">Hommes</h1>
+                        <div className="gap-1 flex flex-col">
+                          {team.players
+                            .filter((player) => player.gender === "M")
+                            .map((player) => {
+                              return (
+                                <div
+                                  key={player.id}
+                                  className="flex items-center justify-between"
+                                >
+                                  {player.captain ? (
+                                    <span className="font-semibold">
+                                      {player.firstName} {player.lastName}
+                                    </span>
+                                  ) : (
+                                    <span>
+                                      {player.firstName} {player.lastName}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      <div className="col-span-2">
+                        <Link
+                          target="_blank"
+                          href={team.url}
+                          className="hover:pointer flex gap-1 mt-4 items-center hover:fill-picton-blue-500 hover:text-picton-blue-500"
+                        >
+                          <SquareArrowOutUpRight className="size-4" />
+                          Swiss Badminton
+                        </Link>
+                      </div>
+                    </div>
+                    {/* <div className="grid grid-cols-2">
                       <div className="grid grid-cols-2">
                       <div className="flex flex-col gap-1 items-center">
                         <span className="font-bold">Joueurs:</span>
@@ -95,7 +158,7 @@ const Interclubs = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </AccordionContent>
                 </AccordionItem>
               );
