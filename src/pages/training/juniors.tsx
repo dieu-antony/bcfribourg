@@ -6,7 +6,25 @@ const juniors = () => {
   return (
     <>
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
-        <div className="m-8 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm hover:translate-x-1 transition duration-200 md:place-self-end lg:h-[300] lg:w-[400px]">
+        <TrainingCard
+          className="md:place-self-end mt-8 hover:translate-x-1 transition duration-200"
+          time={{ start: "18h00 - 20h00", day: "Mardi" }}
+          trainer="Sheen Khurdi et Julie Huser"
+          target="Juniors A"
+        />
+        <TrainingCard
+          className="md:place-self-start md:mt-8 hover:translate-x-1 transition duration-200"
+          time={{ start: "18h00 - 20h00", day: "Mardi" }}
+          trainer="Hugo Genoud"
+          target="Juniors B"
+        />
+        <TrainingCard
+          className="md:place-self-end hover:translate-x-1 transition duration-200"
+          time={{ start: "18h00 - 20h00", day: "Jeudi" }}
+          trainer="Colette Jungo et Julie Huser"
+          target="Juniors A et B"
+        />
+        <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm hover:translate-x-1 transition duration-200 md:place-self-start lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
             <h1 className="text-lg font-semibold">Vacances</h1>
             <a
@@ -22,7 +40,7 @@ const juniors = () => {
             <span>28.06.2023 jusqu&apos;au 28.08.2024</span>
           </div>
         </div>
-        <div className="m-8 flex h-[200px] w-[300px] flex-col hover:translate-x-1 transition duration-200 gap-6 bg-white p-8 shadow-sm md:place-self-start lg:h-[300] lg:w-[400px]">
+        <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col hover:translate-x-1 transition duration-200 gap-6 bg-white p-8 shadow-sm md:place-self-end lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
             <h1 className="text-lg font-semibold">Contact</h1>
             <span>Antony Dieu</span>
@@ -36,24 +54,6 @@ const juniors = () => {
             <span>078 692 53 87</span>
           </div>
         </div>
-        <TrainingCard
-          className="md:place-self-end hover:translate-x-1 transition duration-200"
-          time={{ start: "18h00 - 20h00", day: "Mardi" }}
-          trainer="Sheen Khurdi et Julie Huser"
-          target="Juniors A"
-        />
-        <TrainingCard
-          className="md:place-self-start hover:translate-x-1 transition duration-200"
-          time={{ start: "18h00 - 20h00", day: "Mardi" }}
-          trainer="Hugo Genoud"
-          target="Juniors B"
-        />
-        <TrainingCard
-          className="md:place-self-end hover:translate-x-1 transition duration-200"
-          time={{ start: "18h00 - 20h00", day: "Jeudi" }}
-          trainer="Colette Jungo et Julie Huser"
-          target="Juniors A et B"
-        />
       </div>
     </>
   );
