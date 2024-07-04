@@ -26,7 +26,7 @@ export default function Home() {
               duration: 0.5,
               ease: [0.4, 0.0, 0.2, 1],
             }}
-            className="mx-auto max-w-4xl px-4 text-center text-3xl sm:text-4xl font-bold leading-relaxed text-black lg:text-6xl lg:leading-snug"
+            className="mx-auto max-w-4xl px-4 text-center text-2xl sm:text-3xl md:text-4xl font-bold leading-relaxed text-black lg:text-6xl lg:leading-snug"
           >
             Bienvenue sur le site du
             <br />
