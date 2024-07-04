@@ -113,8 +113,8 @@ const PreviousSeasons = () => {
   });
 
   return (
-    <div className="flex max-h-max min-h-max flex-col items-center justify-center pt-16">
-      <div className="w-full max-w-[1000px] shadow">
+    <div className="flex max-h-max min-h-max flex-col items-center justify-center pt-8 lg:pt-16 m-4">
+      <div className="w-full max-w-[1000px] shadow-md">
         <div className="max-h-max max-w-[1000px]  bg-white p-5">
           <h1 className="mb-2 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 bg-clip-text text-2xl font-bold text-transparent">
             Statistiques des saisons précédentes

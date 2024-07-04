@@ -107,6 +107,8 @@ export const toEmail = (subject: string) => {
       return "juniors@bcfribourg.ch";
     case "Site internet":
       return "webmaster@bcfribourg.ch";
+    case "Evènements":
+      return "event@bcfribourg.ch";
     case "Autre":
       return "secretaire@bcfribourg.ch";
     default:

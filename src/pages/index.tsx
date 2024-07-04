@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Highlight } from "~/lib/components/ui/hero-hightlight";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
               duration: 0.5,
               ease: [0.4, 0.0, 0.2, 1],
             }}
-            className="mx-auto max-w-4xl px-4 text-center text-2xl font-bold leading-relaxed text-black md:text-4xl lg:text-6xl lg:leading-snug "
+            className="mx-auto max-w-4xl px-4 text-center text-3xl sm:text-4xl font-bold leading-relaxed text-black lg:text-6xl lg:leading-snug"
           >
             Bienvenue sur le site du
             <br />
@@ -64,8 +65,13 @@ export default function Home() {
               ></iframe>
               <p className="mb-4 mt-4">
                 Ci-dessous, vous trouvez un plan détaillé du site lui-même
-                (cliquez sur l&apos;image pour agrandir).
               </p>
+              <Image
+                src="/assets/plan_du_site_grand.png"
+                alt="Plan de la salle"
+                width={800}
+                height={600}
+              />
             </div>
           </div>
         </div>

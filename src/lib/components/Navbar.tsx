@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
 import NavLinks from "./NavLink";
-import { Activity, Play, Handshake, Blocks, Award, Trophy, History, FileClock, Mail, Users, Folder } from "lucide-react";
+import { Activity, Play, Handshake, Award, Trophy, History, FileClock, Mail, Users, Folder } from "lucide-react";
 
 const Navbar = () => {
   const subTraining = [
@@ -21,13 +21,8 @@ const Navbar = () => {
       icon: <Handshake size="20px"/>,
     },
     {
-      name: "Circuit Junior",
-      href: "/competition/circuit_junior",
-      icon: <Blocks size="20px"/>,
-    },
-    {
-      name: "Coupe l'Avenir",
-      href: "/competition/coupe_avenir",
+      name: "Juniors",
+      href: "/competition/juniors",
       icon: <Award size="20px"/>,
     },
     {
@@ -43,7 +38,7 @@ const Navbar = () => {
   ];
   const subClub = [
     { name: "Contact", href: "/club/contact", icon: <Mail size="20px"/> },
-    { name: "Comité", href: "/club/comite", icon: <Users size="20px"/> },
+    { name: "Comité", href: "/club/committee", icon: <Users size="20px"/> },
     { name: "Historique", href: "/club/history", icon: <History size="20px"/> },
     { name: "Documents", href: "/club/documents", icon: <Folder size="20px"/>},
   ];
@@ -57,7 +52,7 @@ const Navbar = () => {
     <>
       <nav className="flex w-1/2 max-w-6xl flex-1 justify-end">
         <div
-          className={`${isOpen ? "" : "hidden lg:flex"} flex basis-full flex-col place-items-start lg:ml-16 lg:w-full lg:flex-row lg:justify-between lg:pr-12`}
+          className={`${isOpen ? "" : "hidden lg:flex"} flex lg:mt-0 mt-4 basis-full flex-col place-items-start lg:ml-16 lg:w-full lg:flex-row lg:justify-between lg:pr-12`}
         >
           <NavLinks name="Accueil" href="/" onClick={() => setIsOpen(false)} />
           <DropdownNavLink

@@ -1,11 +1,36 @@
-import Head from "next/head";
 import FormItem from "~/lib/components/FormItem";
 import { useState } from "react";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
 import type { EmailData } from "~/lib/types";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/lib/components/ui/accordion";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/lib/components/ui/table";
 
 const Member = () => {
+  const getCurrentYear = (): number => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (currentMonth >= 7) {
+      return currentDate.getFullYear();
+    } else {
+      return currentDate.getFullYear() - 1;
+    }
+  };
+
+  const cotisation = [
+    {catégorie: "Adultes", années: "", cotisation: "270.-", license: "60.-"},
+    {catégorie: "Juniors U19", années: ((getCurrentYear() - 18).toString() + " - " + (getCurrentYear() - 17).toString()), cotisation: "200.-", license: "40.-"},
+    {catégorie: "Juniors U17", années:((getCurrentYear() - 16).toString() + " - " + (getCurrentYear() - 15).toString()), cotisation: "190.-", license: "30.-"},
+    {catégorie: "Juniors U15", années: ((getCurrentYear() - 14).toString() + " - " + (getCurrentYear() - 13).toString()), cotisation: "150.-", license: "30.-"},
+    {catégorie: "Juniors U13", années: ((getCurrentYear() - 12).toString() + " - "), cotisation: "120.-", license: ""},
+  ]
+
   const [emailData, setEmailData] = useState({
     gender: "Masculin",
   } as EmailData);
@@ -29,28 +54,60 @@ const Member = () => {
       body: JSON.stringify(data),
     });
     toast.success("Votre demande a bien été envoyée !");
-    setEmailData({gender: "Masculin"} as EmailData);
+    setEmailData({ gender: "Masculin" } as EmailData);
 
     setLoading(false);
   }
 
   return (
     <>
-      <Head>
-        <title>Devenir membre</title>
-      </Head>
-      <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5">
+      <div className="flex min-h-max w-full flex-col items-center justify-center pt-8 lg:pt-16">
+        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-sm">
           <form onSubmit={onFormSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-picton-blue-500">
+                <h2 className="text-xl font-semibold leading-7 text-picton-blue-500">
                   Demande d&apos;admission
                 </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Contacte nous !
+                <p className="text-sm my-1 leading-6 text-gray-600">
+                  Vous êtes déjà passé et vous souhaitez devenir membre du
+                  Badminton Club Fribourg ? Remplissez le formulaire d&apos;inscription ci-dessous !
                 </p>
-
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger className="font-normal text-picton-blue-500">Cotisation</AccordionTrigger>
+                    <AccordionContent>
+                      <Table className="shadow-md">
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>
+                              Catégorie
+                            </TableHead>
+                            <TableHead>
+                              Années
+                            </TableHead>
+                            <TableHead>
+                              Cotisation annuelle
+                            </TableHead>
+                            <TableHead>
+                              License
+                            </TableHead>
+                          </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {cotisation.map((cotisation) => (
+                              <TableRow key={cotisation.catégorie}>
+                                <TableCell>{cotisation.catégorie}</TableCell>
+                                <TableCell>{cotisation.années}</TableCell>
+                                <TableCell>{cotisation.cotisation}</TableCell>
+                                <TableCell>{cotisation.license}</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                      </Table>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <FormItem
                     className="sm:col-span-3"

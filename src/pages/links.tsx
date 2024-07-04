@@ -55,7 +55,7 @@ const Links = () => {
   ];
   return (
     <>
-      <div className="mx-auto max-w-5xl px-8">
+      <div className="mx-auto max-w-5xl -z-0 px-8">
         <HoverEffect items={links} />
       </div>
     </>

@@ -43,13 +43,13 @@ const adultes = () => {
           </div>
           <div className="flex flex-col gap-1">
             <h1 className="text-lg font-semibold">Durée de la saison</h1>
-            <span>28.06.2023 jusqu&apos;au 28.08.2024</span>
+            <span>26.08.2024 jusqu&apos;au 26.06.2025</span>
           </div>
         </div>
         <div className="m-8 mt-0 flex h-[200px] w-[300px] hover:translate-x-1 transition duration-200 flex-col gap-6 bg-white p-8 shadow-sm md:place-self-start lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
             <h1 className="text-lg font-semibold">Contact</h1>
-            <span>Antony Dieu</span>
+            <span>Philippe Etter</span>
           </div>
           <div className="grid grid-cols-2 place-items-center justify-center ">
             <Link className="mb-2 hover:text-picton-blue-500" href="/club/contact">
@@ -59,7 +59,7 @@ const adultes = () => {
             <Link className="hover:text-picton-blue-500" href="/club/contact">
               Email
             </Link>
-            <span>078 692 53 87</span>
+            <span>079 488 15 38</span>
           </div>
         </div>
       </div>

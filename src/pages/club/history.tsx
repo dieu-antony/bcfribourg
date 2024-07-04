@@ -659,11 +659,11 @@ const content5 = [
     content: (
       <div className="flex h-full  w-full items-center justify-center text-white">
         <Image
-          src="/assets/history/hist_1978.jpg"
+          src="/assets/history/hist_2024.png"
           width={300}
           height={300}
           className="h-full w-full object-contain"
-          alt="1978"
+          alt="2024"
         />
       </div>
     ),
@@ -673,8 +673,8 @@ const History = () => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-white p-2 px-4 gap-4">
-          <h1 className="text-2xl font-bold text-picton-blue-600">Histoire du club</h1>
+        <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-white p-5 gap-4">
+          <h1 className="text-2xl font-bold text-picton-blue-500">Histoire du club</h1>
           <p>Le Badminton Club de Fribourg a été fondé officiellement le 12 novembre 1969. Voici quelques-uns des faits marquants de la vie de notre club depuis ses débuts jusqu&apos;à aujourd&apos;hui:</p>
         </div>
       </div>

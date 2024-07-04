@@ -31,16 +31,16 @@ const Contact = () => {
       <Head>
         <title>Contact</title>
       </Head>
-      <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5">
+      <div className="flex h-full min-h-max w-full flex-col items-center justify-center lg:pt-16 pt-8">
+        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white shadow-sm p-5">
           <form onSubmit={onContactSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-picton-blue-500">
+                <h2 className="text-xl font-semibold leading-7 text-picton-blue-500">
                   Contact
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Contacte nous !
+                  Contactez nous !
                 </p>
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -82,6 +82,7 @@ const Contact = () => {
                       "Entraînement Adultes",
                       "Entraînement Juniors",
                       "Site internet",
+                      "Evènements",
                       "Autre",
                     ]}
                     onChange={(e) => setEmailData({...emailData, subject: e.target.value})}

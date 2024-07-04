@@ -94,16 +94,17 @@ export default function EventPage() {
       </div>
     );
   } else if (
-    event?.location === "Switzerland" ??
-    event?.location === "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
+    event?.location ===
+      "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland" ||
+    event?.location === "Switzerland"
   ) {
     return (
-      <div className="flex flex-col items-center justify-center md:m-8 md:flex-row ">
-        <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center justify-center m-8 xl:flex-row ">
+        <div className="flex flex-col items-center m-2">
           <h1 className="rounded-sm bg-picton-blue-400 p-2 font-semibold">
             {event?.summary}
           </h1>
-          <div ref={chartRef} className="h-[610px] w-full max-w-[975px]">
+          <div ref={chartRef} className="min-w-[1px] hidden xl:block m-2">
             <Map
               location={event?.location?.toString() ?? ""}
               latitude={event?.latitude ?? 46.81177897206209}
@@ -113,7 +114,7 @@ export default function EventPage() {
             />
           </div>
         </div>
-        <aside className="flex flex-col bg-gray-200 p-6">
+        <aside className="flex flex-col bg-white p-6">
           <div className="flex flex-col">
             <h1 className="bg-picton-blue-400 p-2">Détails</h1>
             <h2 className="ml-1 mt-2 font-bold">Début</h2>
@@ -129,7 +130,7 @@ export default function EventPage() {
               target="_blank"
             >
               <SquareArrowOutUpRight className="size-5" />
-              {new URL(event!.url).host}
+              {new URL(event.url).host}
             </a>
             <Separator className="my-2 bg-black" />
             <h2 className="ml-1 mt-2 font-bold">Lieu</h2>
@@ -137,16 +138,14 @@ export default function EventPage() {
           </div>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1694.185361353271!2d7.1470027257841755!3d46.81204182530239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e77f032055555%3A0x4e14f509540705e5!2sBadminton%20Club%20Fribourg!5e1!3m2!1sen!2sch!4v1714296481160!5m2!1sen!2sch"
-            width="400"
-            height="400"
-            className="mt-2 border-0"
+            className="mt-2 border-0 max-h-[400px] min-h-[300px] max-w-[400px]"
             loading="lazy"
           />
         </aside>
       </div>
     );
-   } 
-  //else if (eventExists == null) {
+  }
+  // else if (eventExists == null) {
   //   return (
   //     <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
   //       <h1 className="text-9xl font-bold">404</h1>
