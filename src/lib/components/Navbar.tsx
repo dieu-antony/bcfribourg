@@ -3,44 +3,63 @@ import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
 import NavLinks from "./NavLink";
-import { Activity, Play, Handshake, Award, Trophy, History, FileClock, Mail, Users, Folder } from "lucide-react";
+import {
+  Handshake,
+  Award,
+  Trophy,
+  History,
+  FileClock,
+  Mail,
+  Users,
+  Folder,
+  UserRoundCog,
+  UserRoundPlus,
+} from "lucide-react";
 
 const Navbar = () => {
   const subTraining = [
     {
       name: "Adultes",
       href: "/training/adultes",
-      icon: <Activity size="20px"/>,
+      icon: <UserRoundPlus size="20px"/>,
     },
-    { name: "Juniors", href: "/training/juniors", icon: <Play size="20px"/> },
+    { name: "Juniors", href: "/training/juniors", icon: <UserRoundCog size="20px"/> },
   ];
   const subCompetition = [
     {
       name: "Interclubs",
       href: "/competition/interclubs",
-      icon: <Handshake size="20px"/>,
+      icon: <Handshake size="20px" />,
     },
     {
       name: "Juniors",
       href: "/competition/juniors",
-      icon: <Award size="20px"/>,
+      icon: <Award size="20px" />,
     },
     {
       name: "Tournois SB",
-      href: "/competition/tournois",
-      icon: <Trophy size="20px"/>,
+      href: "/competition/tournament",
+      icon: <Trophy size="20px" />,
     },
     {
       name: "Saisons précédentes",
       href: "/competition/previous_seasons",
-      icon: <FileClock size="20px"/>,
+      icon: <FileClock size="20px" />,
     },
   ];
   const subClub = [
-    { name: "Contact", href: "/club/contact", icon: <Mail size="20px"/> },
-    { name: "Comité", href: "/club/committee", icon: <Users size="20px"/> },
-    { name: "Historique", href: "/club/history", icon: <History size="20px"/> },
-    { name: "Documents", href: "/club/documents", icon: <Folder size="20px"/>},
+    { name: "Contact", href: "/club/contact", icon: <Mail size="20px" /> },
+    { name: "Comité", href: "/club/committee", icon: <Users size="20px" /> },
+    {
+      name: "Historique",
+      href: "/club/history",
+      icon: <History size="20px" />,
+    },
+    {
+      name: "Documents",
+      href: "/club/documents",
+      icon: <Folder size="20px" />,
+    },
   ];
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,11 +71,11 @@ const Navbar = () => {
     <>
       <nav className="flex w-1/2 max-w-6xl flex-1 justify-end">
         <div
-          className={`${isOpen ? "" : "hidden lg:flex"} flex lg:mt-0 mt-4 basis-full flex-col place-items-start lg:ml-16 lg:w-full lg:flex-row lg:justify-between lg:pr-12`}
+          className={`${isOpen ? "" : "hidden lg:flex"} mt-4 flex basis-full flex-col place-items-start lg:ml-16 lg:mt-0 lg:w-full lg:flex-row lg:justify-between lg:pr-12`}
         >
           <NavLinks name="Accueil" href="/" onClick={() => setIsOpen(false)} />
           <DropdownNavLink
-            triggerElement="Entraînment"
+            triggerElement="Entraînement"
             options={subTraining}
             onClick={() => setIsOpen(false)}
           />
@@ -70,7 +89,6 @@ const Navbar = () => {
             options={subClub}
             onClick={() => setIsOpen(false)}
           />
-
           <NavLinks
             name="Calendrier"
             href="/calendar"

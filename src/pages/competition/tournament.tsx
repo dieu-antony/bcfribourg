@@ -1,7 +1,7 @@
 import { Link2, Mail, Smartphone } from "lucide-react";
 import Link from "next/link";
 
-const Tournois = () => {
+const Tournament = () => {
   return (
     <div className="m-8 flex max-w-[1000px] flex-col self-center">
       <div className="flex flex-col gap-2 bg-white p-5 shadow-md">
@@ -18,15 +18,16 @@ const Tournois = () => {
             <Link
               href="https://www.swiss-badminton.ch/"
               className="flex flex-row items-center gap-2 hover:text-picton-blue-500"
+              target="_blank"
             >
               <Link2 className="h-4 w-4" /> <span>Swiss Badminton</span>
             </Link>
           </div>
           <span>
-            Si vous avez une license, il suffit de créer un login avec vos
-            données personnelles. Si vous n&apos;avez pas de license, vous pouvez
+            Si vous avez une licence, il suffit de créer un login avec vos
+            données personnelles. Si vous n&apos;avez pas de licence, vous pouvez
             vous inscrire en tant que non-licencié, mais vos options seront
-            limité. Pour plus d&apos;infos, veuillez contacter le responsable
+            limitées. Pour plus d&apos;infos, veuillez contacter le responsable
             technique:
           </span>
           
@@ -47,4 +48,4 @@ const Tournois = () => {
   );
 };
 
-export default Tournois;
+export default Tournament;

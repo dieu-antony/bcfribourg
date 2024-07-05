@@ -10,19 +10,19 @@ const juniors = () => {
           className="mt-8 transition duration-200 hover:translate-x-1 md:place-self-end"
           time={{ start: "18h00 - 20h00", day: "Mardi" }}
           trainer="Sheen Khurdi et Julie Huser"
-          target="Juniors A"
+          target="14-18ans"
         />
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:mt-8 md:place-self-start"
           time={{ start: "18h00 - 20h00", day: "Mardi" }}
           trainer="Hugo Genoud"
-          target="Juniors B"
+          target="Jusqu'à 14ans"
         />
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:place-self-end"
           time={{ start: "18h00 - 20h00", day: "Jeudi" }}
           trainer="Colette Jungo et Julie Huser"
-          target="Juniors A et B"
+          target="Jusqu'à 18ans"
         />
         <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm transition duration-200 hover:translate-x-1 md:place-self-start lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">

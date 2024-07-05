@@ -163,11 +163,11 @@ const PreviousSeasons = () => {
                     <h3 className="text-lg font-bold">Position Scatter Plot</h3>
                     <p>
                       Ce graphique montre la position de chaque équipe dans leur
-                      ligue respectif pour chaque saison. Une équipe en dernière
+                      ligue respective pour chaque saison. Une équipe en dernière
                       position pendant une saison va typiquement descendre dans
                       une ligue inférieure pour la saison suivante, tandis
                       qu&apos;une équipe en première place va typiquement étre
-                      promu dans une ligue supérieure. Utilisez les filtres pour
+                      promue dans une ligue supérieure. Utilisez les filtres pour
                       choisir entre les équipes du BC Fribourg!
                     </p>
 
@@ -199,7 +199,7 @@ const PreviousSeasons = () => {
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">League Heatmap</h3>
                     <p>
-                      Ce graphique montre dans quel ligue chaque équipe du BC
+                      Ce graphique montre dans quelle ligue chaque équipe du BC
                       Fribourg a joué pour chaque saison. Une couleur plus
                       foncée indique une ligue plus élevée. Pour le moment il
                       existent les ligues nationales (NLA, NLB), les ligues
@@ -221,9 +221,9 @@ const PreviousSeasons = () => {
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">Ratio Scatter Plot</h3>
                     <p>
-                      Ce graphique montre un ratio entre les matches gagné par
-                      match joué et les points gagné par match joué pour chaque
-                      équipe du BC Fribourg pour chaque saison. Clickez sur les
+                      Ce graphique montre un ratio entre les matches gagnés par
+                      matchs joués et les points gagnés par matchs joués pour chaque
+                      équipe du BC Fribourg pour chaque saison. Cliquez sur les
                       points pour en découvrir plus et utilisez les filtres pour
                       choisir entre les équipes du BC Fribourg!
                     </p>

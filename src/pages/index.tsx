@@ -57,7 +57,7 @@ export default function Home() {
             <div>
               <p className="mb-4">
                 La salle se situe au Cycle d&apos;Orientation de langue allemande
-                (DOSF) de la quartier du Torry
+                (DOSF) du quartier du Torry
               </p>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1007.374433125093!2d7.147392573094514!3d46.81173269592182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e692d3e895bc5%3A0xf65c4161fa3558f6!2sSchool%20Cycle%20Guidance%20Language%20German!5e1!3m2!1sen!2sch!4v1710603088742!5m2!1sen!2sch"

@@ -70,7 +70,7 @@ const Member = () => {
                   Demande d&apos;admission
                 </h2>
                 <p className="text-sm my-1 leading-6 text-gray-600">
-                  Vous êtes déjà passé et vous souhaitez devenir membre du
+                  Vous avez déjà testé et vous souhaitez devenir membre du
                   Badminton Club Fribourg ? Remplissez le formulaire d&apos;inscription ci-dessous !
                 </p>
                 <Accordion type="single" collapsible>

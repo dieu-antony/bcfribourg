@@ -26,11 +26,11 @@ const Committee = () => {
     imgRef: "/assets/committee/blank.png",
     title: "Caissière / Vice-Présidente",
     name: "Nathalie Rey",
-    email: "event@bcfribourg.ch",
+    email: "caissier@bcfribourg.ch",
     phone: "079 296 12 44",
   };
   const ls = {
-    imgRef: "/assets/committee/blank.png",
+    imgRef: "/assets/committee/ligueSup.jpg",
     title: "Resp. Ligues Superieures",
     name: "Gilbert Fischer",
     email: "",

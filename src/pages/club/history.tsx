@@ -640,7 +640,7 @@ const content5 = [
   {
     title: "2024",
     description:
-      "L'Union Tafers-Fribourg est forçé à retirer sa première équipe de la NLA. L'Union continuera avec 5 équipes en interclub, dont une en NLB, une en 1ère ligue, une en 2ème ligue et deux en 4ème ligue.",
+      "L'Union Tafers-Fribourg doit retirer son équipe de la NLA. L'Union continuera avec 5 équipes en interclub, dont une en NLB, une en 1ère ligue, une en 2ème ligue et deux en 4ème ligue.",
     content: (
       <div className="flex h-full  w-full items-center justify-center text-white">
         <Image

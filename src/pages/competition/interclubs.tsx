@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { SquareArrowOutUpRight } from "lucide-react";
 import type { PlayerByTeam } from "~/lib/types";
 import Link from "next/link";
+import Image from "next/image";
 
 const Interclubs = () => {
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
@@ -29,8 +30,16 @@ const Interclubs = () => {
       <Head>
         <title>Interclubs</title>
       </Head>
+      <Image
+        src="/assets/ic_image.jpg"
+        alt="Interclubs"
+        width={3840}
+        height={2160}
+        className="w-full z-0 left-0 top-0"
+      />
+      <h1 className="absolute z-10 md:mt-[220px] mt-[150px] text-center w-full text-white font-bold md:text-6xl text-2xl bg-gradient-to-r from-transparent py-1 via-slate-700/50">Interclub</h1>
       <div className="flex justify-center">
-        <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-white p-2 px-4">
+        <div className="m-5 flex w-full max-w-[1000px] z-10 flex-col rounded border bg-white px-4">
           <Accordion type="single" collapsible>
             {/* Set display names for the teams */}
             {playersByTeam.map((team) => {
@@ -52,7 +61,7 @@ const Interclubs = () => {
                   <AccordionContent>
                     <div className="mt-2 grid grid-cols-2 place-items-center items-start">
                       <div className="flex flex-col gap-4">
-                        <h1 className="font-bold text-base">Femmes</h1>
+                        <h1 className="text-base font-bold">Femmes</h1>
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "F")
@@ -77,8 +86,8 @@ const Interclubs = () => {
                         </div>
                       </div>
                       <div className="flex flex-col gap-4">
-                        <h1 className="font-semibold text-base">Hommes</h1>
-                        <div className="gap-1 flex flex-col">
+                        <h1 className="text-base font-semibold">Hommes</h1>
+                        <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "M")
                             .map((player) => {
@@ -105,60 +114,13 @@ const Interclubs = () => {
                         <Link
                           target="_blank"
                           href={team.url}
-                          className="hover:pointer flex gap-1 mt-4 items-center hover:fill-picton-blue-500 hover:text-picton-blue-500"
+                          className="hover:pointer mt-4 flex items-center gap-1 hover:fill-picton-blue-500 hover:text-picton-blue-500"
                         >
                           <SquareArrowOutUpRight className="size-4" />
                           Swiss Badminton
                         </Link>
                       </div>
                     </div>
-                    {/* <div className="grid grid-cols-2">
-                      <div className="grid grid-cols-2">
-                      <div className="flex flex-col gap-1 items-center">
-                        <span className="font-bold">Joueurs:</span>
-                      </div>
-                      <div className="col-span-1 flex flex-col gap-1 items-start">
-                        {team.players.map((player) => {
-                          return (
-                            <div
-                              key={player.id}
-                              className="flex items-center justify-between"
-                            >
-                              <span>
-                                {player.firstName} {player.lastName}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                      </div>
-                      <div className="">
-                        <div className="flex flex-col gap-1">
-                          <a
-                            target="_blank"
-                            href={team.url}
-                            className="hover:pointer flex gap-1 hover:text-picton-blue-500 hover:fill-picton-blue-500"
-                          >
-                            <SquareArrowOutUpRight className="size-4"/>Swiss Badminton
-                            
-                          </a>
-
-                          <div>
-                            <span className="font-bold">Capitaine: </span>
-                            <span>
-                              {
-                                team.players.find((player) => player.captain)
-                                  ?.firstName
-                              }{" "}
-                              {
-                                team.players.find((player) => player.captain)
-                                  ?.lastName
-                              }
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
                   </AccordionContent>
                 </AccordionItem>
               );
