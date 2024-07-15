@@ -18,8 +18,9 @@ import {
 } from "~/lib/components/ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { inter } from "../_app";
-import { SearchResult } from "~/lib/types";
+import type { SearchResult } from "~/lib/types";
 import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function FolderPage() {
   const router = useRouter();
@@ -74,7 +75,7 @@ export default function FolderPage() {
       <>
         <div className="my-8 flex flex-col items-center px-5">
           <div className="grid grid-cols-3 w-full max-w-[1200px]">
-            <a href="/gallery" className="self-center text-center w-24 rounded-md shadow-sm flex items-center p-1 bg-picton-blue-500 hover:bg-picton-blue-500/80 hover:cursor-pointer gap-1 text-white "><ChevronLeft size="20px"/> Galerie</a>
+            <Link href="/gallery" className="self-center text-center w-24 rounded-md shadow-sm flex items-center p-1 bg-picton-blue-500 hover:bg-picton-blue-500/80 hover:cursor-pointer gap-1 text-white "><ChevronLeft size="20px"/> Galerie</Link>
             <h1 className="my-8 text-xl font-semibold self-center text-center">{folderName}</h1>
           </div>
           <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">

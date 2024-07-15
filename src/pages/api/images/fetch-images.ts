@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import cloudinary from 'cloudinary';
-import { SearchResult } from '~/lib/types';
+import type { SearchResult } from '~/lib/types';
 
 
 // Configure Cloudinary

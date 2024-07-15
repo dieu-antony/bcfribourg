@@ -1,6 +1,6 @@
 import { CldImage } from "next-cloudinary";
 import { useEffect, useState } from "react";
-import { SearchResult } from "~/lib/types";
+import type { SearchResult } from "~/lib/types";
 
 export default function Gallery() {
   const [resources, setResources] = useState<SearchResult[]>([]);
