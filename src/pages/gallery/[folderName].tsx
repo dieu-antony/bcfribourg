@@ -37,7 +37,6 @@ export default function FolderPage() {
       const cachedResources = localStorage.getItem("resources");
       if (cachedResources) {
         setResources(JSON.parse(cachedResources));
-        console.log(cachedResources);
         setLoading(false);
       } else {
         const response = await fetch("/api/images/fetch-images");
