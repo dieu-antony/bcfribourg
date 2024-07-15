@@ -1,9 +1,8 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import { cn } from "~/lib/utils/utils";
-import { TracingBeam } from "./tracing-beam";
 
 export const StickyScroll = ({
   content,
@@ -16,7 +15,7 @@ export const StickyScroll = ({
   }[];
   contentClassName?: string;
 }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
+  const [activeCard, setActiveCard] = useState(0);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
@@ -36,15 +35,15 @@ export const StickyScroll = ({
         }
         return acc;
       },
-      0
+      0,
     );
     setActiveCard(closestBreakpointIndex);
   });
 
   const backgroundColors = [
-    "var(--gray-100)",
+    // "var(--gray-100)",
     "var(--white)",
-    "var(--neutral-100)",
+    // "var(--neutral-100)",
   ];
   const linearGradients = [
     "linear-gradient(to bottom right, var(--picton-blue-500), var(--indigo-500))",
@@ -53,7 +52,7 @@ export const StickyScroll = ({
   ];
 
   const [backgroundGradient, setBackgroundGradient] = useState(
-    linearGradients[0]
+    linearGradients[0],
   );
 
   useEffect(() => {
@@ -61,12 +60,11 @@ export const StickyScroll = ({
   }, [activeCard]);
 
   return (
-    <TracingBeam>
     <motion.div
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="flex justify-center relative space-x-10 p-10 pb-0"
+      className="relative flex justify-center space-x-10 p-10 pb-0"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
@@ -91,25 +89,24 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-kg text-slate-700 min-h-40 max-w-sm mt-10"
+                className="text-kg mt-10 min-h-40 max-w-sm text-slate-700"
               >
                 {item.description}
               </motion.p>
             </div>
           ))}
-          <div className="2xl:h-20 sm:h-40 h-0 "/>
+          <div className="h-0 sm:h-40 2xl:h-20" />
         </div>
       </div>
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "hidden lg:block h-60 w-80 mt-20 rounded-md bg-white sticky top-40 overflow-hidden",
-          contentClassName
+          "sticky top-40 mt-20 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          contentClassName,
         )}
       >
         {content[activeCard]!.content ?? null}
       </div>
     </motion.div>
-    </TracingBeam>
   );
 };

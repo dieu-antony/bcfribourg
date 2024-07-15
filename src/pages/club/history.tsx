@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
-import Footer from "~/lib/components/Footer";
 import ScrollToTop from "~/lib/components/ScrollToTop";
 
 const content1 = [
@@ -15,7 +14,7 @@ const content1 = [
     description:
       "Quelques adolescents du quartier du Jura jouent au jeu de volant. Objectif principal: Trouver des endroits à l'abri du vent! Parmi eux: Jean-Claude Doutaz, Pierre Guerra et Claude Page. A la fin des années soixante, les compères découvrent que le jeu de volant est un sport qui se pratique dans des clubs, il s'agit du badminton! Ils s'inscrivent au BC Wünnewil, seul club du canton.",
     content: (
-      <div className="flex h-full  w-full items-center justify-center text-white">
+      <div className="sticky flex h-full w-full items-center justify-center text-white">
         <Image
           src="/assets/history/hist_1978.jpg"
           width={300}
@@ -121,21 +120,21 @@ const content1 = [
       </div>
     ),
   },
-  {
-    title: "",
-    description: "",
-    content: (
-      <div className="flex h-full  w-full items-center justify-center text-white">
-        <Image
-          src="/assets/history/hist_1978.jpg"
-          width={300}
-          height={300}
-          className="h-full w-full object-contain"
-          alt="1978"
-        />
-      </div>
-    ),
-  },
+  // {
+  //   title: "",
+  //   description: "",
+  //   content: (
+  //     <div className="flex h-full  w-full items-center justify-center text-white">
+  //       <Image
+  //         src="/assets/history/hist_1978.jpg"
+  //         width={300}
+  //         height={300}
+  //         className="h-full w-full object-contain"
+  //         alt="1978"
+  //       />
+  //     </div>
+  //   ),
+  // },
 ];
 
 const content2 = [
@@ -267,22 +266,21 @@ const content2 = [
       </div>
     ),
   },
-  {
-    title: "",
-    description:
-      "",
-    content: (
-      <div className="flex h-full  w-full items-center justify-center text-white">
-        <Image
-          src="/assets/history/hist_1984.jpg"
-          width={300}
-          height={300}
-          className="h-full w-full object-contain"
-          alt="1984"
-        />
-      </div>
-    ),
-  },
+  // {
+  //   title: "",
+  //   description: "",
+  //   content: (
+  //     <div className="flex h-full  w-full items-center justify-center text-white">
+  //       <Image
+  //         src="/assets/history/hist_1984.jpg"
+  //         width={300}
+  //         height={300}
+  //         className="h-full w-full object-contain"
+  //         alt="1984"
+  //       />
+  //     </div>
+  //   ),
+  // },
 ];
 
 const content3 = [
@@ -414,21 +412,21 @@ const content3 = [
       </div>
     ),
   },
-  {
-    title: "",
-    description: "",
-    content: (
-      <div className="flex h-full  w-full items-center justify-center text-white">
-        <Image
-          src="/assets/history/hist_1993.jpg"
-          width={300}
-          height={300}
-          className="h-full w-full object-contain"
-          alt="1993"
-        />
-      </div>
-    ),
-  },
+  // {
+  //   title: "",
+  //   description: "",
+  //   content: (
+  //     <div className="flex h-full  w-full items-center justify-center text-white">
+  //       <Image
+  //         src="/assets/history/hist_1993.jpg"
+  //         width={300}
+  //         height={300}
+  //         className="h-full w-full object-contain"
+  //         alt="1993"
+  //       />
+  //     </div>
+  //   ),
+  // },
 ];
 
 const content4 = [
@@ -450,8 +448,7 @@ const content4 = [
   },
   {
     title: "2002",
-    description:
-      "L'équipe de 2e ligue fête sa promotion en 1e ligue.",
+    description: "L'équipe de 2e ligue fête sa promotion en 1e ligue.",
     content: (
       <div className="flex h-full  w-full items-center justify-center text-white">
         <Image
@@ -482,7 +479,8 @@ const content4 = [
   },
   {
     title: "2005",
-    description: "Le BC Fribourg, en étroite collaboration avec le BC Tafers, organise les championnats fribourgeois. Le premier camp d'été, se déroulant sur un week-end, est organisé à Yverdon.",
+    description:
+      "Le BC Fribourg, en étroite collaboration avec le BC Tafers, organise les championnats fribourgeois. Le premier camp d'été, se déroulant sur un week-end, est organisé à Yverdon.",
     content: (
       <div className="flex h-full  w-full items-center justify-center text-white">
         <Image
@@ -529,7 +527,8 @@ const content4 = [
   },
   {
     title: "2008",
-    description: "La 4e ligue termine brillamment première et rejoint ainsi la 3e ligue.",
+    description:
+      "La 4e ligue termine brillamment première et rejoint ainsi la 3e ligue.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <Image
@@ -544,7 +543,8 @@ const content4 = [
   },
   {
     title: "2009",
-    description: "Pour marquer son 40e anniversaire, le club organise les championnats fribourgeois en collaboration avec le BC Tafers. La 3e ligue, après plusieurs tentatives, assure sa promotion et joue désormais en 2e ligue. Le club compte désormais des équipes dans toutes les ligues interclub, de la ligue A à la 4e ligue. Cadeau d'anniversaire, le BCF a désormais son site internet.",
+    description:
+      "Pour marquer son 40e anniversaire, le club organise les championnats fribourgeois en collaboration avec le BC Tafers. La 3e ligue, après plusieurs tentatives, assure sa promotion et joue désormais en 2e ligue. Le club compte désormais des équipes dans toutes les ligues interclub, de la ligue A à la 4e ligue. Cadeau d'anniversaire, le BCF a désormais son site internet.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <Image
@@ -559,7 +559,8 @@ const content4 = [
   },
   {
     title: "2010",
-    description: "Une 3e équipe de 4e ligue est crée. Le club compte désormais 8 équipes en interclub.",
+    description:
+      "Une 3e équipe de 4e ligue est crée. Le club compte désormais 8 équipes en interclub.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <Image
@@ -574,7 +575,8 @@ const content4 = [
   },
   {
     title: "2012",
-    description: "A partir de la saison 2012-2013, toutes nos équipes sont intégrées à l'Union Fribourg-Tavel ! Nous comptons une 9ème équipe et sommes à nouveaux présents dans toutes les ligues.",
+    description:
+      "A partir de la saison 2012-2013, toutes nos équipes sont intégrées à l'Union Fribourg-Tavel ! Nous comptons une 9ème équipe et sommes à nouveaux présents dans toutes les ligues.",
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <Image
@@ -587,21 +589,21 @@ const content4 = [
       </div>
     ),
   },
-  {
-    title: "",
-    description: "",
-    content: (
-      <div className="flex h-full w-full items-center justify-center text-white">
-        <Image
-          src="/assets/history/hist_1978.jpg"
-          width={300}
-          height={300}
-          className="h-full w-full object-contain"
-          alt="1978"
-        />
-      </div>
-    ),
-  },
+  // {
+  //   title: "",
+  //   description: "",
+  //   content: (
+  //     <div className="flex h-full w-full items-center justify-center text-white">
+  //       <Image
+  //         src="/assets/history/hist_1978.jpg"
+  //         width={300}
+  //         height={300}
+  //         className="h-full w-full object-contain"
+  //         alt="1978"
+  //       />
+  //     </div>
+  //   ),
+  // },
 ];
 
 const content5 = [
@@ -653,97 +655,104 @@ const content5 = [
       </div>
     ),
   },
-  {
-    title: "",
-    description: "",
-    content: (
-      <div className="flex h-full  w-full items-center justify-center text-white">
-        <Image
-          src="/assets/history/hist_2024.png"
-          width={300}
-          height={300}
-          className="h-full w-full object-contain"
-          alt="2024"
-        />
-      </div>
-    ),
-  },
+  // {
+  //   title: "",
+  //   description: "",
+  //   content: (
+  //     <div className="flex h-full  w-full items-center justify-center text-white">
+  //       <Image
+  //         src="/assets/history/hist_2024.png"
+  //         width={300}
+  //         height={300}
+  //         className="h-full w-full object-contain"
+  //         alt="2024"
+  //       />
+  //     </div>
+  //   ),
+  // },
 ];
+
+const scrollTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 const History = () => {
   return (
     <>
       <div className="flex justify-center">
-        <div className="m-5 flex w-full max-w-[1000px] flex-col rounded border bg-white p-5 gap-4">
-          <h1 className="text-2xl font-bold text-picton-blue-500">Histoire du club</h1>
-          <p>Le Badminton Club de Fribourg a été fondé officiellement le 12 novembre 1969. Voici quelques-uns des faits marquants de la vie de notre club depuis ses débuts jusqu&apos;à aujourd&apos;hui:</p>
+        <div className="m-5 flex w-full max-w-[1000px] flex-col gap-4 rounded bg-white p-5 shadow-sm">
+          <h1 className="text-2xl font-bold text-picton-blue-500">
+            Histoire du club
+          </h1>
+          <p>
+            Le Badminton Club de Fribourg a été fondé officiellement le 12
+            novembre 1969. Voici quelques-uns des faits marquants de la vie de
+            notre club depuis ses débuts jusqu&apos;à aujourd&apos;hui:
+          </p>
         </div>
       </div>
-      <Accordion
-        type="single"
-        collapsible
-        className=" border-solid bg-white"
-      >
-        <AccordionItem value="item-1">
-          <AccordionTrigger className="justify-around">
-            1969 - 1979
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="absolute w-full">
-              <StickyScroll content={content1} />
-              <Footer />
-              <ScrollToTop />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
-          <AccordionTrigger className="justify-around">
-            1980 - 1989
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="absolute w-full">
-              <StickyScroll content={content2} />
-              <Footer />
-              <ScrollToTop />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-3">
-          <AccordionTrigger className="justify-around">
-            1990 - 1999
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="absolute w-full">
-              <StickyScroll content={content3} />
-              <Footer />
-              <ScrollToTop />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-4">
-          <AccordionTrigger className="justify-around">
-            2000 - 2014
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="absolute w-full">
-              <StickyScroll content={content4} />
-              <Footer />
-              <ScrollToTop />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-5">
-          <AccordionTrigger className="justify-around">
-            2015 - {new Date().getFullYear()}
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="absolute w-full">
-              <StickyScroll content={content5} />
-              <Footer />
-              <ScrollToTop />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      <div className="mx-5 mb-8 w-full max-w-[1000px] self-center">
+        <Accordion
+          type="single"
+          collapsible
+          className="w-full rounded bg-white shadow-sm"
+        >
+          <AccordionItem value="item-1">
+            <AccordionTrigger className="justify-around" onClick={scrollTop}>
+              1969 - 1979
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="relative w-full">
+                <StickyScroll content={content1} />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger className="justify-around" onClick={scrollTop}>
+              1980 - 1989
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="relative w-full">
+                <StickyScroll content={content2} />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger className="justify-around" onClick={scrollTop}>
+              1990 - 1999
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="relative w-full">
+                <StickyScroll content={content3} />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-4">
+            <AccordionTrigger className="justify-around" onClick={scrollTop}>
+              2000 - 2014
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="relative w-full">
+                <StickyScroll content={content4} />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-5">
+            <AccordionTrigger className="justify-around" onClick={scrollTop}>
+              2015 - {new Date().getFullYear()}
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="relative w-full">
+                <StickyScroll content={content5} />
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+      <ScrollToTop />
     </>
   );
 };

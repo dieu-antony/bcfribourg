@@ -1,9 +1,19 @@
 import { Link2, Mail, Smartphone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+
 
 const Tournament = () => {
   return (
-    <div className="m-8 flex max-w-[1000px] flex-col self-center">
+    <>
+    <Image
+        src="/assets/tournament.jpg"
+        alt="Tournois Swiss Badminton"
+        width={3840}
+        height={2160}
+        className="w-full z-0 left-0 top-0 max-h-[400px] object-cover"
+      />
+    <div className="m-8 flex max-w-[1000px] flex-col self-center top-40">
       <div className="flex flex-col gap-2 bg-white p-5 shadow-md">
         <h1 className="text-xl font-semibold text-picton-blue-500">
           Tournois Swiss Badminton
@@ -44,7 +54,7 @@ const Tournament = () => {
             <span>078 692 53 87</span>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 

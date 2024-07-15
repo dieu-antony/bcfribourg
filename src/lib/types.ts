@@ -123,3 +123,10 @@ export const sync: NodeICalSyncFix = {
     return nodeIcal.parseFile(file);
   },
 };
+
+export type SearchResult = {
+  public_id: string;
+  asset_folder: string;
+  tags: string[];
+  
+};

@@ -7,6 +7,7 @@ import { SquareArrowOutUpRight } from "lucide-react";
 import { format } from "date-fns";
 import { Separator } from "~/lib/components/ui/separator";
 import { useDimensions } from "~/lib/hooks/useDimensions";
+import { Button } from "~/lib/components/ui/button";
 
 export default function EventPage() {
   const router = useRouter();
@@ -145,12 +146,18 @@ export default function EventPage() {
       </div>
     );
   }
-  // else if (eventExists == null) {
-  //   return (
-  //     <div className="mt-40 flex h-full w-full flex-col items-center justify-center">
-  //       <h1 className="text-9xl font-bold">404</h1>
-  //       <p>Sorry, the event you are looking for does not exist</p>
-  //     </div>
-  //   );
-  // }
+
+    return (
+      <div className="mt-40 flex h-full w-full flex-col gap-2 items-center justify-center">
+        <h1 className="text-9xl font-bold">404</h1>
+        <p>Sorry, the event you are looking for does not exist</p>
+        <Button
+        onClick={() => router.push("/calendar")}
+        className="hover:opacity-80"
+      >
+        Return
+      </Button>
+      </div>
+    );
+
 }

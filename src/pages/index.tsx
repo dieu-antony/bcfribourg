@@ -4,8 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Highlight } from "~/lib/components/ui/hero-hightlight";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -49,7 +51,7 @@ export default function Home() {
           </motion.h1>
           
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col" id="salle">
           <div className="m-5 max-w-[1000px] bg-white p-5 shadow">
             <h2 className="mb-2 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 bg-clip-text font-bold text-transparent">
               Accès à la salle
@@ -66,12 +68,13 @@ export default function Home() {
               <p className="mb-4 mt-4">
                 Ci-dessous, vous trouvez un plan détaillé du site lui-même
               </p>
+              <a href={router.basePath + "assets/plan_du_site_grand.png"} target="_blank">
               <Image
                 src="/assets/plan_du_site_grand.png"
                 alt="Plan de la salle"
                 width={800}
                 height={600}
-              />
+              /></a>
             </div>
           </div>
         </div>

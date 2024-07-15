@@ -49,9 +49,9 @@ const Players = () => {
   const [playersF, setPlayersF] = useState("");
   const [playersM, setPlayersM] = useState("");
   const [url, setUrl] = useState("");
-  const [icTeamId, setIcTeamId] = useState("Union Tafers-Fribourg 1");
+  const [icTeamId, setIcTeamId] = useState("");
   const [captain, setCaptain] = useState("");
-  const [singlePlayer, setSinglePlayer] = useState({gender:"M", captain:false, teamId:"clvzbbfot00001o6wxykabs64"} as Player);
+  const [singlePlayer, setSinglePlayer] = useState({gender:"M", captain:false, teamId:""} as Player);
   useEffect(() => {
     async function getIcTeams() {
       const response = await fetch("/api/icTeams");
@@ -304,6 +304,7 @@ const Players = () => {
                     className="form-select"
                     onChange={(e) => setIcTeamId(e.target.value)}
                   >
+                    <option>Choose a Team</option>
                     {teamOption}
                   </select>
                   <label htmlFor="women">Women</label>
@@ -348,7 +349,7 @@ const Players = () => {
                         teamId: e.target.value,
                       })
                     }
-                  >
+                  ><option>Choose a Team</option>
                     {teamOption}
                   </select>
                   <label htmlFor="firstName">First Name</label>

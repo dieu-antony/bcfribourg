@@ -14,6 +14,7 @@ import {
   Folder,
   UserRoundCog,
   UserRoundPlus,
+  Link2,
 } from "lucide-react";
 
 const Navbar = () => {
@@ -60,6 +61,11 @@ const Navbar = () => {
       href: "/club/documents",
       icon: <Folder size="20px" />,
     },
+    {
+      name: "Liens",
+      href: "/club/links",
+      icon: <Link2 size="20px" />,
+    },
   ];
   const [isOpen, setIsOpen] = useState(false);
 
@@ -95,8 +101,8 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           />
           <NavLinks
-            name="Liens"
-            href="/links"
+            name="Galerie"
+            href="/gallery"
             onClick={() => setIsOpen(false)}
           />
           <Link

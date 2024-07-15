@@ -27,7 +27,7 @@ const ScrollToTop: React.FC = () => {
   }, []);
 
   return (
-    <div className={`fixed bottom-8 right-8 transition-opacity duration-300 ${isVisible ? 'opacity-70' : 'opacity-0'}`}>
+    <div className={`fixed bottom-8 right-8 transition-opacity z-50 duration-300 ${isVisible ? 'opacity-70' : 'opacity-0'}`}>
       <button
         onClick={scrollToTop}
         className="flex items-center justify-center w-12 h-12 text-white bg-picton-blue-600 rounded-full shadow-lg hover:bg-picton-blue-700 focus:outline-none"

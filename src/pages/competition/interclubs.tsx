@@ -1,4 +1,3 @@
-import Head from "next/head";
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +9,7 @@ import { SquareArrowOutUpRight } from "lucide-react";
 import type { PlayerByTeam } from "~/lib/types";
 import Link from "next/link";
 import Image from "next/image";
+import { Separator } from "~/lib/components/ui/separator";
 
 const Interclubs = () => {
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
@@ -27,9 +27,6 @@ const Interclubs = () => {
   console.log(playersByTeam);
   return (
     <>
-      <Head>
-        <title>Interclubs</title>
-      </Head>
       <Image
         src="/assets/ic_image.jpg"
         alt="Interclubs"
@@ -57,11 +54,11 @@ const Interclubs = () => {
               }
               return (
                 <AccordionItem key={team.id} value={team.id}>
-                  <AccordionTrigger>{team.name + leagueName}</AccordionTrigger>
+                  <AccordionTrigger className="font-semibold text-xl hover:text-picton-blue-500 no-underline">{team.name + leagueName}</AccordionTrigger>
                   <AccordionContent>
                     <div className="mt-2 grid grid-cols-2 place-items-center items-start">
                       <div className="flex flex-col gap-4">
-                        <h1 className="text-base font-bold">Femmes</h1>
+                        <h1 className="text-lg font-bold">Femmes</h1>
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "F")
@@ -69,7 +66,7 @@ const Interclubs = () => {
                               return (
                                 <div
                                   key={player.id}
-                                  className="flex items-center justify-between"
+                                  className="flex items-center justify-between text-base"
                                 >
                                   {player.captain ? (
                                     <span className="font-semibold">
@@ -86,7 +83,7 @@ const Interclubs = () => {
                         </div>
                       </div>
                       <div className="flex flex-col gap-4">
-                        <h1 className="text-base font-semibold">Hommes</h1>
+                        <h1 className="text-lg font-semibold">Hommes</h1>
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "M")
@@ -94,7 +91,7 @@ const Interclubs = () => {
                               return (
                                 <div
                                   key={player.id}
-                                  className="flex items-center justify-between"
+                                  className="flex items-center justify-between text-base"
                                 >
                                   {player.captain ? (
                                     <span className="font-semibold">
@@ -110,11 +107,12 @@ const Interclubs = () => {
                             })}
                         </div>
                       </div>
+                      <Separator className="self-center w-full bg-picton-blue-500 mt-4 col-span-2"/>
                       <div className="col-span-2">
                         <Link
                           target="_blank"
                           href={team.url}
-                          className="hover:pointer mt-4 flex items-center gap-1 hover:fill-picton-blue-500 hover:text-picton-blue-500"
+                          className="hover:pointer mt-4 text-lg flex items-center gap-1 hover:fill-picton-blue-500 hover:text-picton-blue-500"
                         >
                           <SquareArrowOutUpRight className="size-4" />
                           Swiss Badminton
