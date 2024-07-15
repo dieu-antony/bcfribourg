@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .expression("resource_type:image")
         .sort_by("created_at", "desc")
         .with_field("tags")
+        .max_results(500)
         .execute() as { resources: SearchResult[] };
     res.status(200).json({ resources });
 }
