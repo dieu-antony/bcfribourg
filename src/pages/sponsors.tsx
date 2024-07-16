@@ -45,7 +45,7 @@ export default function sponsors() {
             </h3>
             <p className="text-lg">
               Nous offerons 3 possibilités de sponsoring, le sponsor principal,
-              les sponsors importants et les sponsors de soutien. Pour plus d'infos veuillez nous contacter sous <span className="font-semibold">president(at)bcfribourg.ch</span>
+              les sponsors importants et les sponsors de soutien. Pour plus d&apos;infos veuillez nous contacter sous <span className="font-semibold">president(at)bcfribourg.ch</span>
             </p>
             <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               <div>

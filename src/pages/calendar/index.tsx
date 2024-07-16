@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import type { CalendarEvent } from "@prisma/client";
 import Select from "react-select";
-import Head from "next/head";
 import EventCalendar from "~/lib/components/calendar/EventCalendar";
 import chroma from "chroma-js";
 
