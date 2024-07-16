@@ -113,7 +113,8 @@ const Calendar = () => {
   // Get the color of the event type
   function getColorByEvent(eventType: string) {
     return (
-      filterOptions.find((option) => option.value === eventType)?.color ?? "black"
+      filterOptions.find((option) => option.value === eventType)?.color ??
+      "black"
     );
   }
 
@@ -124,10 +125,7 @@ const Calendar = () => {
 
   return (
     <>
-      <Head>
-        <title>Calendar</title>
-      </Head>
-      <div className="m-2 flex flex-col items-center">
+      <div className="mx-2 my-8 flex flex-col items-center">
         <div className="">
           <Select
             instanceId={"filter"}
@@ -160,5 +158,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-

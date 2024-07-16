@@ -5,28 +5,28 @@ const Committee = () => {
     imgRef: "/assets/committee/president.jpg",
     title: "Président",
     name: "Philippe Etter",
-    email: "president@bcfribourg.ch",
+    email: "president(at)bcfribourg.ch",
     phone: "079 488 15 38",
   };
   const secretary = {
     imgRef: "/assets/committee/secretary.jpg",
     title: "Secrétaire / Resp. Interclubs",
     name: "Antony Dieu",
-    email: "secretaire@bcfribourg.ch",
+    email: "secretaire(at)bcfribourg.ch",
     phone: "078 692 53 87",
   };
   const event = {
     imgRef: "/assets/committee/event.jpg",
     title: "Evènements",
     name: "Colette Jungo",
-    email: "event@bcfribourg.ch",
+    email: "event(at)bcfribourg.ch",
     phone: "079 452 45 15",
   };
   const treasurer = {
     imgRef: "/assets/committee/blank.png",
     title: "Caissière / Vice-Présidente",
     name: "Nathalie Rey",
-    email: "caissier@bcfribourg.ch",
+    email: "caissier(at)bcfribourg.ch",
     phone: "079 296 12 44",
   };
   const ls = {

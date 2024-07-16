@@ -75,7 +75,7 @@ const Member = () => {
                 </p>
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1">
-                    <AccordionTrigger className="font-normal text-picton-blue-500">Cotisation</AccordionTrigger>
+                    <AccordionTrigger className="font-semibold text-picton-blue-500">Cotisation</AccordionTrigger>
                     <AccordionContent>
                       <Table className="shadow-md">
                         <TableHeader>

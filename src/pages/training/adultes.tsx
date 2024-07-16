@@ -21,13 +21,13 @@ const adultes = () => {
         <TrainingCard
           className="md:place-self-end hover:translate-x-1 transition duration-200"
           time={{ start: "20h00 - 22h00", day: "Mercredi" }}
-          trainer="Nicole Perroud"
+          trainer="Anna Lartchenko-Fischer"
           target="LNB, 1ère et 2ème ligues"
         />
         <TrainingCard
           className="md:place-self-start hover:translate-x-1 transition duration-200"
           time={{ start: "19h00 - 21h00", day: "Jeudi" }}
-          trainer="Anna Larchenko-Fischer"
+          trainer="Anna Lartchenko-Fischer"
           target="Licenciés et non licenciés"
         />
         <div className="m-8  mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm md:place-self-end lg:h-[300] hover:translate-x-1 transition duration-200 lg:w-[400px]">

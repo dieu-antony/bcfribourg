@@ -17,10 +17,11 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="icon" href="/assets/favicon.svg" />
         <link rel="apple-touch-icon" href="/assets/favicon.svg" />
+        <title>BC Fribourg</title>
       </Head>
 
       <main
-        className={`font-sans ${inter.variable} flex min-h-screen flex-col bg-gradient-to-b from-gray-50 to-gray-100`}
+        className={`font-sans ${inter.variable} flex min-h-screen flex-col bg-gradient-to-b from-gray-50/80 to-gray-50`}
       >
           <Header />
           <Component {...pageProps} />

@@ -59,7 +59,6 @@ export default function FolderPage() {
     }
 
     setCount(api.scrollSnapList().length);
-    api.scrollTo(current);
 
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap());
@@ -73,9 +72,16 @@ export default function FolderPage() {
     return (
       <>
         <div className="my-8 flex flex-col items-center px-5">
-          <div className="grid grid-cols-3 w-full max-w-[1200px]">
-            <Link href="/gallery" className="self-center text-center w-24 rounded-md shadow-sm flex items-center p-1 bg-picton-blue-500 hover:bg-picton-blue-500/80 hover:cursor-pointer gap-1 text-white "><ChevronLeft size="20px"/> Galerie</Link>
-            <h1 className="my-8 text-xl font-semibold self-center text-center">{folderName}</h1>
+          <div className="grid w-full max-w-[1200px] grid-cols-3">
+            <Link
+              href="/gallery"
+              className="flex w-24 items-center gap-1 self-center rounded-md bg-picton-blue-500 p-1 text-center text-white shadow-sm hover:cursor-pointer hover:bg-picton-blue-500/80 "
+            >
+              <ChevronLeft size="20px" /> Galerie
+            </Link>
+            <h1 className="my-8 self-center text-center text-xl font-semibold">
+              {folderName}
+            </h1>
           </div>
           <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {filteredResources.map((result, index) => (
@@ -90,12 +96,11 @@ export default function FolderPage() {
                   />
                 </DialogTrigger>
                 <DialogContent
-                  className="border-none bg-transparent shadow-none max-h-[600px] max-w-[800px]"
+                  className="max-h-[600px] max-w-[800px] border-none bg-transparent shadow-none"
                   closeClassName="hidden"
                 >
                   <DialogTitle></DialogTitle>
-
-                  <Carousel setApi={setApi} >
+                  <Carousel setApi={setApi} opts={{ startIndex: index }}>
                     <CarouselContent className="flex items-center">
                       {filteredResources.map((result) => (
                         <CarouselItem
@@ -120,8 +125,8 @@ export default function FolderPage() {
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious className="md:translate-x-0 translate-x-8 bg-gray-400 border-none hover:bg-gray-400/80" />
-                    <CarouselNext className="md:translate-x-0 -translate-x-8 bg-gray-400 border-none hover:bg-gray-400/80"/>
+                    <CarouselPrevious className="translate-x-8 border-none bg-gray-400 hover:bg-gray-400/80 md:translate-x-0" />
+                    <CarouselNext className="-translate-x-8 border-none bg-gray-400 hover:bg-gray-400/80 md:translate-x-0" />
                   </Carousel>
                   <DialogDescription
                     className={`bg-gray-400 py-2 text-center ${inter.variable} font-sans text-black`}

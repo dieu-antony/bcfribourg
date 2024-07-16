@@ -38,7 +38,7 @@ export const ScatterPlotTooltip = ({
           top: interactionData.yPos + "px",
         }}
       >
-        <Card>
+        <Card className="absolute z-50">
           <CardHeader>
             <CardTitle className="text-lg md:text-2xl">
               {interactionData.data.seasonStart} -{" "}
@@ -68,7 +68,7 @@ export const ScatterPlotTooltip = ({
           top: interactionData.yPos + "px",
         }}
       >
-        <Card>
+        <Card className="absolute z-50">
           <CardHeader>
             <CardTitle className="text-lg md:text-2xl">
               {interactionData.data.seasonStart} -{" "}

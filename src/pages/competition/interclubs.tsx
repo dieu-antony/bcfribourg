@@ -37,7 +37,7 @@ const Interclubs = () => {
       <h1 className="absolute z-10 md:mt-[220px] mt-[150px] text-center w-full text-white font-bold md:text-6xl text-2xl bg-gradient-to-r from-transparent py-1 via-slate-700/50">Interclub</h1>
       <div className="flex justify-center">
         <div className="m-5 flex w-full max-w-[1000px] z-10 flex-col rounded border bg-white px-4">
-          <Accordion type="single" collapsible>
+          <Accordion type="single" collapsible >
             {/* Set display names for the teams */}
             {playersByTeam.map((team) => {
               let leagueName = "";

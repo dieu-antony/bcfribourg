@@ -33,20 +33,20 @@ export default function Gallery() {
 
   return (
     <div className="my-8 flex flex-col items-center px-5">
-      <h1 className="my-8 text-xl font-semibold">Galerie</h1>
+      <h1 className="my-8 mt-6 text-4xl font-semibold">Galerie</h1>
       <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3">
         {filteredResources.map((result) => (
           <a
           key={result.public_id}
           href={"/gallery/" + encodeURI(result.tags[0]!)}
-          className="relative block"
+          className="relative block hover:opacity-80 transform duration-100 hover:-translate-y-1"
         >
           <CldImage
             src={result.public_id}
             alt="Cover Image"
             width="400"
             height="300"
-            className="object-cover max-h-[250px] hover:opacity-80"
+            className="object-cover max-h-[250px]"
           />
           <span className="absolute z-10 text-white bottom-0 left-0 p-2 bg-black bg-opacity-75">
             {result.tags[0]}
