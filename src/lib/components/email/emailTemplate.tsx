@@ -6,7 +6,6 @@ export function EmailTemplate({
   email,
   message,
   phone,
-  natel,
   address,
   npa,
   gender,
@@ -71,14 +70,6 @@ export function EmailTemplate({
               </td>
               <td className="border px-4 py-2">{phone}</td>
             </tr>
-            {natel && (
-              <tr>
-                <td className="border px-4 py-2">
-                  <strong>Natel:</strong>
-                </td>
-                <td className="border px-4 py-2">{natel}</td>
-              </tr>
-            )}
             {avs && (
               <tr>
                 <td className="border px-4 py-2">

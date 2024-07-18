@@ -150,7 +150,7 @@ const Calendar: React.FC<CalendarPageProps> = ({messages}) => {
 
         <div className="w-full md:w-11/12">
           <EventCalendar
-            messages={messages}
+            _messages={messages}
             events={filteredEvents.map((ev) => {
               return { ...ev, color: getColorByEvent(ev.eventType) };
             })}
