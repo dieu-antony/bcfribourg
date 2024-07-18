@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
@@ -21,12 +20,8 @@ import {
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 
-type NavbarProps = {
-  _messages: Record<string, any>;
-};
-
-const Navbar: React.FC<NavbarProps> = ({ _messages }) => {
-  const t = useTranslations("Header");
+const Navbar = () => {
+  const t = useTranslations("Navbar");
   const subTraining = [
     {
       name: t("adults"),
@@ -91,8 +86,8 @@ const Navbar: React.FC<NavbarProps> = ({ _messages }) => {
     setIsOpen(!isOpen);
   };
 
-  const { locale } = useRouter();
-  const { asPath } = useRouter();
+  const { locale, locales, route } = useRouter();
+  const otherLocale = locales?.find((cur) => cur !== locale);
 
   return (
     <>
@@ -140,8 +135,8 @@ const Navbar: React.FC<NavbarProps> = ({ _messages }) => {
           </Link>
           <Link
             className="ml-2 mt-4 flex hover:text-picton-blue-500 lg:m-0 lg:self-center"
-            href={asPath}
-            locale={locale == "fr-CH" ? "de-CH" : "fr-CH"}
+            href={route}
+            locale={otherLocale}
             onClick={() => setIsOpen(false)}
           >
             <Globe size="20px" />

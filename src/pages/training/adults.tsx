@@ -1,14 +1,15 @@
 import { Mail, Smartphone, File } from "lucide-react";
+import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import Layout from "~/lib/components/Layout";
 import TrainingCard from "~/lib/components/TrainingCard";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const adults = () => {
   const t = useTranslations("Training.Adults");
 
   return (
-    <>
+    <Layout>
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
         <TrainingCard
           className="mt-8 transition duration-200 hover:translate-x-1 md:place-self-end"
@@ -70,15 +71,14 @@ const adults = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
 

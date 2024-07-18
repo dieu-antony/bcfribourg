@@ -1,22 +1,16 @@
-/**
- * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
- * for Docker builds.
- */
-await import("./src/env.js");
+// Ensure the env.js file exists and handles its content correctly
+await import('./src/env.js');
 
-/** @type {import("next").NextConfig} */
+/** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
 
-  /**
-   * If you are using `appDir` then you must comment the below `i18n` config out.
-   *
-   * @see https://github.com/vercel/next.js/issues/41980
-   */
+  // Comment out the i18n configuration if using `appDir`
   i18n: {
-    locales: ["fr-CH", "de-CH"],
-    defaultLocale: "fr-CH",
+    locales: ['fr-CH', 'de-CH'],
+    defaultLocale: 'fr-CH',
   },
 };
 
 export default config;
+

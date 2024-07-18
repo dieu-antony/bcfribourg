@@ -1,4 +1,6 @@
+import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
+import Layout from "~/lib/components/Layout";
 import {
   Table,
   TableBody,
@@ -7,10 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "~/lib/components/ui/table";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const juniors = () => {
-  const t = useTranslations("compJuniors");
+  const t = useTranslations("CompJuniors");
   const circuitJunior = [
     { lieu: "Payerne", date: "30.11.2024" },
     { lieu: "Kerzers", date: "18.01.2025" },
@@ -27,7 +28,7 @@ const juniors = () => {
     { lieu: "CO de Pérolles, Fribourg", date: "29.03.2025" },
   ];
   return (
-    <>
+    <Layout>
       <div className="m-4 mt-8 flex max-w-[1000px] flex-col self-center">
         <div className="flex flex-col gap-2 bg-white p-4 shadow-md">
           <h1 className="text-xl font-semibold text-picton-blue-500">
@@ -78,16 +79,14 @@ const juniors = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
-
 export default juniors;

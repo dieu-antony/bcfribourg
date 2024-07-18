@@ -35,22 +35,27 @@ import {
 } from "../ui/dialog";
 import { Clock8 } from "lucide-react";
 import Link from "next/link";
+import { frCH, de } from "date-fns/locale";
 import { useTranslations } from "next-intl";
 
 type EventProps = {
   events: (CalendarEvent & { color: string })[];
 };
 
-type EventCalendarProps = EventProps & {
-  _messages: Record<string, any>;
-};
-
-const EventCalendar: React.FC<EventCalendarProps> = ({ events, _messages }) => {
-  const t = useTranslations("calendar");
+const EventCalendar = ({ events }: EventProps) => {
+  const t = useTranslations("Calendar");
 
   // Define needed constants and states
   const [chosenMonth, setChosenMonth] = useState<Date>(new Date());
-  const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const weekDays = [
+    t("mon"),
+    t("tue"),
+    t("wed"),
+    t("thu"),
+    t("fri"),
+    t("sat"),
+    t("sun"),
+  ];
   const firstDayOfMonth = startOfMonth(chosenMonth);
   const lastDayOfMonth = endOfMonth(chosenMonth);
   const daysInMonth = eachDayOfInterval({
@@ -114,7 +119,7 @@ const EventCalendar: React.FC<EventCalendarProps> = ({ events, _messages }) => {
           </Button>
         </div>
         <h2 className="hidden self-center text-center font-bold md:block">
-          {t(format(chosenMonth, "MMMM")) + " " + format(chosenMonth, "yyyy")}
+          {format(chosenMonth, "MMMM yyyy", { locale: (t("locale") === "frCH" ? frCH : de) })}
         </h2>
         <h2 className="block self-center text-center font-bold md:hidden">
           {format(chosenMonth, "MMM yy")}
@@ -126,14 +131,14 @@ const EventCalendar: React.FC<EventCalendarProps> = ({ events, _messages }) => {
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-24 text-left font-normal items-center md:w-[140px]",
+                  "w-24 items-center text-left font-normal md:w-[140px]",
                   !chosenMonth && "text-muted-foreground",
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 <p className="hidden md:block">
                   {chosenMonth ? (
-                    t(format(chosenMonth, "MMMM"))
+                    format(chosenMonth, "MMMM", { locale: (t("locale") === "frCH" ? frCH : de) })
                   ) : (
                     <span>Pick a date</span>
                   )}
@@ -161,7 +166,7 @@ const EventCalendar: React.FC<EventCalendarProps> = ({ events, _messages }) => {
         {weekDays.map((day) => {
           return (
             <div key={day} className="border bg-white text-center font-bold">
-              {t(day)}
+              {day}
             </div>
           );
         })}

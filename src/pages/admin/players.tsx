@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { inter } from "../_app";
-import { getLeagueFromId, loadTranslationMessages } from "~/lib/utils/utils";
+import { getLeagueFromId } from "~/lib/utils/utils";
 import { toast } from "sonner";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { ICDatabaseTable } from "~/lib/components/dataTables/icTable/ICDatabaseTable";
@@ -33,6 +33,8 @@ import {
 } from "~/lib/components/dataTables/playerTable/PlayerDatabaseColumns";
 import { Button } from "~/lib/components/ui/button";
 import type { Player } from "@prisma/client";
+import Layout from "~/lib/components/Layout";
+import type { GetStaticPropsContext } from "next";
 
 const Players = () => {
   const { status } = useSession();
@@ -51,7 +53,11 @@ const Players = () => {
   const [url, setUrl] = useState("");
   const [icTeamId, setIcTeamId] = useState("");
   const [captain, setCaptain] = useState("");
-  const [singlePlayer, setSinglePlayer] = useState({gender:"M", captain:false, teamId:""} as Player);
+  const [singlePlayer, setSinglePlayer] = useState({
+    gender: "M",
+    captain: false,
+    teamId: "",
+  } as Player);
   useEffect(() => {
     async function getIcTeams() {
       const response = await fetch("/api/icTeams");
@@ -135,7 +141,7 @@ const Players = () => {
   async function createSinglePlayer(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const playerToCreate = [singlePlayer]
+    const playerToCreate = [singlePlayer];
 
     const response = await fetch("/api/players/create", {
       method: "POST",
@@ -190,7 +196,7 @@ const Players = () => {
   });
   if (status === "authenticated") {
     return (
-      <>
+      <Layout>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -349,7 +355,8 @@ const Players = () => {
                         teamId: e.target.value,
                       })
                     }
-                  ><option>Choose a Team</option>
+                  >
+                    <option>Choose a Team</option>
                     {teamOption}
                   </select>
                   <label htmlFor="firstName">First Name</label>
@@ -463,15 +470,14 @@ const Players = () => {
           </Tabs>
           <Toaster richColors />
         </div>
-      </>
+      </Layout>
     );
   }
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   };
 }

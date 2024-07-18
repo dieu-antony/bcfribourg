@@ -17,11 +17,12 @@ import {
   TableHeader,
   TableRow,
 } from "~/lib/components/ui/table";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 import { useTranslations } from "next-intl";
+import type { GetStaticPropsContext } from "next";
+import Layout from "~/lib/components/Layout";
 
 const Member = () => {
-  const t = useTranslations("member");
+  const t = useTranslations("Member");
 
   const getCurrentYear = (): number => {
     const currentDate = new Date();
@@ -100,7 +101,7 @@ const Member = () => {
   }
 
   return (
-    <>
+    <Layout>
       <div className="flex min-h-max w-full flex-col items-center justify-center pt-8 lg:pt-16">
         <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-sm">
           <form onSubmit={onFormSubmit}>
@@ -164,18 +165,26 @@ const Member = () => {
                     }
                     value={emailData.firstName}
                   />
-                  <label htmlFor="gender">{t("gender")}</label>
-                  <select
-                    name="gender"
-                    onChange={(e) =>
-                      setEmailData({ ...emailData, gender: e.target.value })
-                    }
-                    className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:col-span-6 sm:max-w-xs sm:text-sm sm:leading-6"
-                  >
-                    <option value="Masculin">{t("m")}</option>
-                    <option value="Féminin">{t("f")}</option>
-                    <option value="Autre">{t("other")}</option>
-                  </select>
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="gender"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      {t("gender")}
+                    </label>
+                    <select
+                      name="gender"
+                      id="gender"
+                      onChange={(e) =>
+                        setEmailData({ ...emailData, gender: e.target.value })
+                      }
+                      className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500  sm:max-w-xs sm:text-sm sm:leading-6"
+                    >
+                      <option value="Masculin">{t("m")}</option>
+                      <option value="Féminin">{t("f")}</option>
+                      <option value="Autre">{t("other")}</option>
+                    </select>
+                  </div>
                   <FormItem
                     className="sm:col-span-6"
                     label="address"
@@ -276,15 +285,14 @@ const Member = () => {
         </div>
         <Toaster richColors />
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../messages/${locale}.json`)).default
+    }
   };
 }
 

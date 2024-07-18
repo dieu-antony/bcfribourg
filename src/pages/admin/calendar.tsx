@@ -5,8 +5,6 @@ import Router from "next/router";
 import { Button } from "~/lib/components/ui/button";
 import { EventDatabaseTable } from "~/lib/components/dataTables/eventTable/EventDatabaseTable";
 import { Toaster } from "~/lib/components/ui/sonner";
-import { EventDatabaseColumns } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
-import type { DatabaseColumnsProps } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
 import { toast } from "sonner";
 import { type CalendarEventWithoutID, sync } from "~/lib/types";
 import { findLonLat, parseCalendar } from "~/lib/utils/parseCalender";
@@ -26,7 +24,9 @@ import {
 import { ChevronDownIcon } from "lucide-react";
 import { inter } from "../_app";
 import crypto from "crypto";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import Layout from "~/lib/components/Layout";
+import type { GetStaticPropsContext } from "next";
+import { EventDatabaseColumns, type DatabaseColumnsProps } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
 
 const Calendar = () => {
   const { status } = useSession();
@@ -161,7 +161,7 @@ const Calendar = () => {
 
   if (status === "authenticated") {
     return (
-      <>
+      <Layout>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -333,16 +333,15 @@ const Calendar = () => {
           </div>
           <Toaster richColors />
         </div>
-      </>
+      </Layout>
     );
   }
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
 

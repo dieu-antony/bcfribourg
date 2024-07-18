@@ -110,11 +110,5 @@ export const getEventDescription = (
 
   const description = eventTypeMap[eventType];
 
-  return description ? t(description) : "";
+  return description ? ("Interclub " + t(description)) : "";
 };
-
-
-export async function loadTranslationMessages(locale: string) {
-  const messages = await import(`../../../messages/${locale}.json`);
-  return messages.default;
-}

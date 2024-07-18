@@ -1,13 +1,14 @@
 import { Link2, Mail, Smartphone } from "lucide-react";
+import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import Layout from "~/lib/components/Layout";
 
 const Tournament = () => {
-  const t = useTranslations("tournament");
+  const t = useTranslations("Tournament");
   return (
-    <>
+    <Layout>
       <Image
         src="/assets/tournament.jpg"
         alt="Tournois Swiss Badminton"
@@ -50,16 +51,16 @@ const Tournament = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
+
 
 export default Tournament;

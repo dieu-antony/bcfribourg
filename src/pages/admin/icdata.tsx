@@ -19,7 +19,8 @@ import {
 import { Toaster } from "~/lib/components/ui/sonner";
 import type { PastTeam } from "~/lib/types";
 import { inter } from "../_app";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import type { GetStaticPropsContext } from "next";
+import Layout from "~/lib/components/Layout";
 
 const IcData = () => {
   const [teams, setTeams] = useState<PastTeam[]>([]);
@@ -73,7 +74,7 @@ const IcData = () => {
 
   if (status === "authenticated") {
     return (
-      <>
+      <Layout>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -131,16 +132,15 @@ const IcData = () => {
           </div>
           <Toaster richColors />
         </div>
-      </>
+      </Layout>
     );
   }
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
 

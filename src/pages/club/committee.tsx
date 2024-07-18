@@ -1,9 +1,10 @@
+import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import CommitteeCard from "~/lib/components/CommitteeCard";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import Layout from "~/lib/components/Layout";
 
 const Committee = () => {
-  const t = useTranslations("committee");
+  const t = useTranslations("Committee");
 
   const president = {
     imgRef: "/assets/committee/president.jpg",
@@ -41,7 +42,7 @@ const Committee = () => {
     phone: "",
   };
   return (
-    <>
+    <Layout>
       <div>
         <h1 className="my-8 text-center text-4xl font-semibold lg:my-16">
           {t("title")}
@@ -54,16 +55,16 @@ const Committee = () => {
         <CommitteeCard info={secretary} />
         <CommitteeCard info={ls} />
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
+
 
 export default Committee;

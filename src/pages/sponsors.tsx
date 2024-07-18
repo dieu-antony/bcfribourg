@@ -1,12 +1,13 @@
+import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
+import Layout from "~/lib/components/Layout";
 import Sponsor from "~/lib/components/Sponsor";
 import { Separator } from "~/lib/components/ui/separator";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 
 export default function sponsors() {
-  const t = useTranslations("sponsors");
+  const t = useTranslations("Sponsors");
   return (
-    <>
+    <Layout>
       <div className="flex w-full flex-col items-center">
         <h1 className="mx-5 my-12 text-3xl font-bold text-black underline underline-offset-8">
           {t("title")}
@@ -82,14 +83,13 @@ export default function sponsors() {
           </section>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../messages/${locale}.json`)).default
+    }
   };
 }

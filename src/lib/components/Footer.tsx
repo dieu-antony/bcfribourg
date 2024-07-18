@@ -1,16 +1,13 @@
 import { Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { inter } from "./Layout";
 
-type FooterProps = {
-  _messages: Record<string, any>;
-};
-
-const Footer: React.FC<FooterProps> = ({ _messages }) => {
+const Footer = () => {
   const t = useTranslations("Footer");
   return (
-    <footer className="z-30 mt-auto w-full bg-gray-800 p-4">
+    <footer className={`font-sans ${inter.variable} z-30 mt-auto w-full bg-gray-800 p-4`}>
       <div className="ml-4 mr-4 flex h-full flex-col items-center gap-8 sm:grid sm:grid-cols-3">
         <div className="rounded-lg p-2">
           <div className="h-auto w-16 transition-all duration-300 ease-linear lg:w-20">

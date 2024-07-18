@@ -1,4 +1,3 @@
-// pages/folder/[folderName].tsx
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { CldImage } from "next-cloudinary";
@@ -23,14 +22,13 @@ import type { SearchResult } from "~/lib/types";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import Layout from "~/lib/components/Layout";
 
 type FolderPageProps = {
-  _messages: Record<string, any>;
   initialResources: SearchResult[];
 };
 
-const FolderPage: React.FC<FolderPageProps> = ({ _messages, initialResources }) => {
+const FolderPage = ({ initialResources }: FolderPageProps) => {
   const router = useRouter();
   const [resources, setResources] = useState<SearchResult[]>(initialResources);
   const [api, setApi] = useState<CarouselApi>();
@@ -80,7 +78,7 @@ const FolderPage: React.FC<FolderPageProps> = ({ _messages, initialResources }) 
 
   if (filteredResources.length > 0) {
     return (
-      <>
+      <Layout>
         <div className="my-8 flex flex-col items-center px-5">
           <div className="grid w-full max-w-[1200px] grid-cols-3">
             <Link
@@ -147,7 +145,7 @@ const FolderPage: React.FC<FolderPageProps> = ({ _messages, initialResources }) 
             ))}
           </div>
         </div>
-      </>
+      </Layout>
     );
   }
   return (
@@ -180,7 +178,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = await loadTranslationMessages(locale ?? 'fr-CH');
+  const messages = (await import(`../../../messages/${locale}.json`)).default
+  
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
   const data = await response.json();

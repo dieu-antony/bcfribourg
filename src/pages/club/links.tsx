@@ -1,10 +1,11 @@
+import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Layout from "~/lib/components/Layout";
 import { HoverEffect } from "~/lib/components/ui/card-hover-effect";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const Links = () => {
-  const t = useTranslations("links");
+  const t = useTranslations("Links");
   const links = [
     {
       title: "Swiss Badminton",
@@ -58,20 +59,20 @@ const Links = () => {
     },
   ];
   return (
-    <>
+    <Layout>
       <div className="-z-0 mx-auto max-w-5xl px-8">
         <HoverEffect items={links} />
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   };
 }
+
 
 export default Links;

@@ -1,5 +1,5 @@
 {
-  "Header": {
+  "Navbar": {
     "home": "Start",
     "training": "Training",
     "adults": "Erwachsene",
@@ -82,13 +82,13 @@
       }
     }
   },
-  "interclubs": {
+  "Interclubs": {
     "m": "Männer",
     "f": "Damen",
     "1st": "1. Liga",
     "ligue": ". Liga"
   },
-  "compJuniors": {
+  "CompJuniors": {
     "location": "Ort",
     "date": "Datum",
     "cj": {
@@ -99,7 +99,7 @@
       "description": "Der Coupe l'Avenir ist ein Turnier in der Form eines Interclubs (in Teams) für Junioren unter 2 Kategorien: U12 et U16. Weitere Informationen finden Sie auf der Website des FBV. Für die Anmeldung kontaktieren Sie bitte Ihren Trainer!"
     }
   },
-  "prevSeasons": {
+  "PrevSeasons": {
     "title": "Statistiken der vorherigen Saisons",
     "description": "Hier finden Sie die Statistiken der vorherigen Saisons des BC Fribourgs seit 2015. Nutzen Sie die Filter, um die Mannschaften und ihre Leistungen in jeder Saison zu sehen!",
     "psp": "Diese Grafik zeigt die Position der einzelnen Mannschaften in ihrer jeweiligen Liga für jede Saison. Ein Team, das in einer Saison auf dem letzten Platz steht, wird in der nächsten Saison typischerweise in eine niedrigere Liga absteigen, während ein Team auf dem ersten Platz typischerweise in eine höhere Liga aufsteigen wird. Benutzen Sie die Filter, um zwischen den Teams des BC Fribourg zu wählen!",
@@ -114,12 +114,12 @@
       "matches": "Begegnungen"
     }
   },
-  "tournament": {
+  "Tournament": {
     "title": "Swiss Badminton Turniere",
     "desc1": "Die Swiss Badminton Turniere sind offizielle Turniere, die vom Schweizer Badmintonverband organisiert werden. Um sich anzumelden, müssen Sie über die Website von Swiss Badminton gehen.",
     "desc2": "Wenn Sie eine Lizenz haben, erstellen Sie einfach einen Login mit Ihren persönlichen Daten. Wenn Sie keine Lizenz haben, können Sie sich auch als Nicht-Lizenzierter anmelden, aber Ihre Möglichkeiten sind dann eingeschränkt. Für weitere Informationen wenden Sie sich bitte an den technischen Leiter:"
   },
-  "contact": {
+  "Contact": {
     "success": "Ihre Nachricht wurde erfolgreich gesendet!",
     "title": "Kontakt",
     "description": "Kontaktieren Sie uns!",
@@ -136,7 +136,7 @@
     "message": "Nachricht",
     "send": "Senden"
   },
-  "committee": {
+  "Committee": {
     "title": "Vorstand",
     "president": "Präsident",
     "vicePresident": "Kassiererin / Vizepräsidentin",
@@ -144,7 +144,7 @@
     "secretary": "Sekretärin / Verantw. Interclubs",
     "sup": "Verantw. Oberligen"
   },
-  "history": {
+  "History": {
     "title": "Geschichte des Clubs",
     "description": "Der Badminton Club Fribourg wurde offiziel am 12 November 1969 gegründet. Hier sind einige der wichtigsten Ereignisse aus dem Leben unseres Clubs von den Anfängen bis heute:",
     "events": {
@@ -187,7 +187,7 @@
       "2024": "Die Union Tafers-Fribourg muss ihre Mannschaft aus der NLA zurückziehen. Die Union wird mit fünf Mannschaften im Interclub weiterspielen, davon eine in der NLB, eine in der 1. Liga, eine in der 2. Zum 25. Geburtstag der Webseite wird diese komplett überarbeitet und modernisiert."
     }
   },
-  "documents": {
+  "Documents": {
     "title": "Dokumente",
     "file1": "Statuten",
     "desc1": "Statuten des Badmintons Club Fribourg",
@@ -198,47 +198,37 @@
     "file4": "QR Code",
     "desc4": "QR Code für Banküberweisungen"
   },
-  "links": {
+  "Links": {
     "afb": "Freiburger Badminton Verband",
     "afs": "Freiburger Verband für Sport"
   },
-  "calendar": {
+  "Calendar": {
     "today": "Heute",
     "link": "Link",
     "details": "Details",
     "date": "Datum",
-    "NLA": "Interclub NLA",
-    "NLB": "Interclub NLB",
-    "1": "Interclub 1. Liga",
-    "2": "Interclub 2. Liga",
-    "3": "Interclub 3. Liga",
-    "4": "Interclub 4. Liga",
-    "Mon": "Mon",
-    "Tue": "Die",
-    "Wed": "Mit",
-    "Thu": "Don",
-    "Fri": "Fre",
-    "Sat": "Sam",
-    "Sun": "Son",
+    "NLA": "NLA",
+    "NLB": "NLB",
+    "1": "1. Liga",
+    "2": "2. Liga",
+    "3": "3. Liga",
+    "4": "4. Liga",
+    "mon": "Mon",
+    "tue": "Die",
+    "wed": "Mit",
+    "thu": "Don",
+    "fri": "Fre",
+    "sat": "Sam",
+    "sun": "Son",
     "filter": "Nach Typ filtern",
-    "January": "Januar",
-    "February": "Februar",
-    "March": "März",
-    "April": "April",
-    "May": "Mai",
-    "June": "Juni",
-    "July": "Juli",
-    "August": "August",
-    "September": "September",
-    "October": "Oktober",
-    "November": "November",
-    "December": "Dezember",
     "location": "Ort",
     "start": "Start",
-    "end": "Ende"
+    "end": "Ende",
+    "locale": "de",
+    "events": "Veranstaltungen"
 
   },
-  "sponsors": {
+  "Sponsors": {
     "title": "Sponsoren des BC Fribourg",
     "main": "Hauptsponsor",
     "important": "Wichtiger Sponsor",
@@ -257,7 +247,7 @@
     "supportli1": "Verweis auf den Namen des Sponsors auf der Website",
     "supportli2": "Teilnahme an Heimspielen (Freiburg)"
   },
-  "member": {
+  "Member": {
     "success": "Ihre Nachricht wurde erfolgreich gesendet!",
     "title": "Mitglied werden",
     "description": "Sie haben bereits ein Test training gemacht und möchten Mitglied des Badminton Club Fribourg werden? Füllen Sie das untenstehende Anmeldeformular aus!",

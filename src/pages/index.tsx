@@ -11,14 +11,15 @@ import {
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { useTranslations } from "next-intl";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import Layout from "~/lib/components/Layout";
+import type { GetStaticPropsContext } from "next";
 
 export default function Home() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const t = useTranslations("Index");
 
   return (
-    <>
+    <Layout>
       <div className="mt-8 flex h-full min-h-max w-full flex-col items-center justify-center md:mt-16">
         <div className="mb-16">
           <motion.h1
@@ -88,7 +89,11 @@ export default function Home() {
                 className="mt-2 aspect-video w-full justify-self-center border-0"
               ></iframe>
               <p className="mb-4 mt-4">{t("court.details")}</p>
-              <Link href={"/assets/plan_du_site_grand.png"} target="_blank" locale="">
+              <Link
+                href={"/assets/plan_du_site_grand.png"}
+                target="_blank"
+                locale=""
+              >
                 <Image
                   src="/assets/plan_du_site_grand.png"
                   alt="Plan de la salle"
@@ -100,14 +105,13 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({locale}: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../messages/${locale}.json`)).default
+    }
   };
 }

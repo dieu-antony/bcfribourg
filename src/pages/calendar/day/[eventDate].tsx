@@ -10,17 +10,16 @@ import {
 import { ArrowUpRightFromSquareIcon } from "lucide-react";
 import { Button } from "~/lib/components/ui/button";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import { useTranslations } from "next-intl";
+import Layout from "~/lib/components/Layout";
 
 type EventDayPageProps = {
-  _messages: Record<string, any>;
   initialResources: CalendarEvent[];
 };
 
-const EventDayPage = ({ _messages, initialResources }: EventDayPageProps) => {
-  const t = useTranslations("calendar");
+const EventDayPage = ({ initialResources }: EventDayPageProps) => {
+  const t = useTranslations("Calendar");
   const router = useRouter();
   const [events, setEvents] = useState<CalendarEvent[]>(initialResources);
   const queryDate = router.query.eventDate as string;
@@ -54,48 +53,56 @@ const EventDayPage = ({ _messages, initialResources }: EventDayPageProps) => {
   }, [router.isReady, queryDate]);
 
   if (loading) {
-    return <></>;
+    return (
+      <Layout>
+        <span />
+      </Layout>
+    );
   }
 
   // Check for events to display the event or a 404 message
   if (events.length !== 0) {
     return (
-      <div className="mx-4 mt-8 max-w-[1000px] self-center w-full bg-white p-4 lg:mt-16 shadow-md">
-        <p className="text-xl font-semibold text-picton-blue-500">
-          {router.query.eventDate}
-        </p>
-        <Accordion type="single" collapsible>
-          {events.map((event) => (
-            <AccordionItem key={event.id} value={event.id}>
-              <AccordionTrigger>{event.summary}</AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-2">
-                <p>
-                  <span className="font-semibold">{t("location")}:</span>{" "}
-                  {event.location}
-                </p>
-                <Link
-                  href={`/calendar/event/${event.id}`}
-                  className="flex flex-row items-center gap-1 hover:underline"
-                >
-                  <ArrowUpRightFromSquareIcon className="h-4 w-4" />
-                  {t("details")}
-                </Link>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
+      <Layout>
+        <div className="mx-4 mt-8 w-full max-w-[1000px] self-center bg-white p-4 shadow-md lg:mt-16">
+          <p className="text-xl font-semibold text-picton-blue-500">
+            {router.query.eventDate}
+          </p>
+          <Accordion type="single" collapsible>
+            {events.map((event) => (
+              <AccordionItem key={event.id} value={event.id}>
+                <AccordionTrigger>{event.summary}</AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2">
+                  <p>
+                    <span className="font-semibold">{t("location")}:</span>{" "}
+                    {event.location}
+                  </p>
+                  <Link
+                    href={`/calendar/event/${event.id}`}
+                    className="flex flex-row items-center gap-1 hover:underline"
+                  >
+                    <ArrowUpRightFromSquareIcon className="h-4 w-4" />
+                    {t("details")}
+                  </Link>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </Layout>
     );
   }
 
   return (
-    <div className="mt-40 flex h-full w-full flex-col items-center justify-center gap-2">
-      <h1 className="text-9xl font-bold">404</h1>
-      <p>Sorry, there are no events on this day</p>
-      <Button onClick={() => router.back()} className="hover:opacity-80">
-        Return
-      </Button>
-    </div>
+    <Layout>
+      <div className="mt-40 flex h-full w-full flex-col items-center justify-center gap-2">
+        <h1 className="text-9xl font-bold">404</h1>
+        <p>Sorry, there are no events on this day</p>
+        <Button onClick={() => router.back()} className="hover:opacity-80">
+          Return
+        </Button>
+      </div>
+    </Layout>
   );
 };
 
@@ -121,7 +128,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = await loadTranslationMessages(locale ?? "fr-CH");
+  const messages = (await import(`../../../../messages/${locale}.json`)).default;
+
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`,
   );

@@ -1,7 +1,7 @@
 import { type FormEvent, useState } from "react";
-import Head from "next/head";
 import { signIn } from "next-auth/react";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import Layout from "~/lib/components/Layout";
+import type { GetStaticPropsContext } from "next";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -14,10 +14,7 @@ const Login = () => {
     await signIn("credentials", { ...data, callbackUrl: "/admin"});
   };
   return (
-    <>
-      <Head>
-        <title>Login</title>
-      </Head>
+    <Layout>
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
         <div className="m-5 w-full max-w-[500px] rounded-sm bg-white shadow p-5">
           <form onSubmit={loginUser}>
@@ -84,15 +81,14 @@ const Login = () => {
           </form>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../messages/${locale}.json`)).default
+    }
   };
 }
 

@@ -3,14 +3,12 @@ import type { CalendarEvent } from "@prisma/client";
 import Select from "react-select";
 import EventCalendar from "~/lib/components/calendar/EventCalendar";
 import chroma from "chroma-js";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import type { GetStaticPropsContext } from "next";
+import Layout from "~/lib/components/Layout";
 import { useTranslations } from "next-intl";
 
-type CalendarPageProps = {
-  messages: Record<string, any>;
-};
-const Calendar: React.FC<CalendarPageProps> = ({messages}) => {
-  const t = useTranslations("calendar");
+const Calendar = () => {
+  const t = useTranslations("Calendar");
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -104,13 +102,13 @@ const Calendar: React.FC<CalendarPageProps> = ({messages}) => {
   }, [selectedFilters, events]);
 
   const filterOptions = [
-    //{ value: "Interclub A", label: "NLA", color: "orange" },
-    { value: "Interclub B", label: "NLB", color: "purple" },
-    { value: "Interclub 1", label: "1ère Ligue", color: "blue" },
-    { value: "Interclub 2", label: "2ème Ligue", color: "red" },
-    //{ value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
-    { value: "Interclub 4", label: "4ème Ligue", color: "green" },
-    { value: "Events", label: "Événements", color: "black" },
+    //{ value: "Interclub A", label: t("NLA"), color: "orange" },
+    { value: "Interclub B", label: t("NLB"), color: "purple" },
+    { value: "Interclub 1", label: t("1"), color: "blue" },
+    { value: "Interclub 2", label: t("2"), color: "red" },
+    //{ value: "Interclub 3", label: t("3"), color: "yellow" },
+    { value: "Interclub 4", label: t("4"), color: "green" },
+    { value: "Events", label: t("events"), color: "black" },
   ];
 
   // Get the color of the event type
@@ -127,7 +125,7 @@ const Calendar: React.FC<CalendarPageProps> = ({messages}) => {
   );
 
   return (
-    <>
+    <Layout>
       <div className="mx-2 my-8 flex flex-col items-center">
         <div className="">
           <Select
@@ -150,23 +148,22 @@ const Calendar: React.FC<CalendarPageProps> = ({messages}) => {
 
         <div className="w-full md:w-11/12">
           <EventCalendar
-            _messages={messages}
             events={filteredEvents.map((ev) => {
               return { ...ev, color: getColorByEvent(ev.eventType) };
             })}
           />
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
+
 
 export default Calendar;

@@ -10,11 +10,12 @@ import type { PlayerByTeam } from "~/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "~/lib/components/ui/separator";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 import { useTranslations } from "next-intl";
+import type { GetStaticPropsContext } from "next";
+import Layout from "~/lib/components/Layout";
 
 const Interclubs = () => {
-  const t = useTranslations("interclubs");
+  const t = useTranslations("Interclubs");
   const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
 
   // Fetch players by team
@@ -28,7 +29,7 @@ const Interclubs = () => {
       });
   }, []);
   return (
-    <>
+    <Layout>
       <Image
         src="/assets/ic_image.jpg"
         alt="Interclubs"
@@ -132,15 +133,14 @@ const Interclubs = () => {
           </Accordion>
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
 

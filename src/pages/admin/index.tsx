@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import Router from "next/router";
 import Head from "next/head";
 import { Button } from "~/lib/components/ui/button";
-import { loadTranslationMessages } from "~/lib/utils/utils";
+import type { GetStaticPropsContext } from "next";
+import Layout from "~/lib/components/Layout";
 
 const Admin = () => {
   const { status, data } = useSession();
@@ -13,7 +14,7 @@ const Admin = () => {
   
   if (status === "authenticated") {
     return (
-      <>
+      <Layout>
         <Head>
           <title>Admin</title>
         </Head>
@@ -26,16 +27,15 @@ const Admin = () => {
           <Button onClick={() => Router.push("/admin/players")}>Players</Button>
           <Button onClick={() => Router.push("/admin/calendar")}>Calendar</Button>
         </div>
-      </>
+      </Layout>
     );
   }
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
-    },
+      messages: (await import(`../../../messages/${locale}.json`)).default
+    }
   };
 }
 

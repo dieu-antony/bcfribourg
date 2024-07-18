@@ -6,11 +6,13 @@ import {
 } from "~/lib/components/ui/accordion";
 import ScrollToTop from "~/lib/components/ScrollToTop";
 import HistoryCard from "~/lib/components/HistoryCard";
-import { loadTranslationMessages } from "~/lib/utils/utils";
 import { useTranslations } from "next-intl";
+import Layout from "~/lib/components/Layout";
+import type { GetStaticPropsContext } from "next";
 
 const History = () => {
-  const t = useTranslations("history");
+  const t = useTranslations("History");
+  
   const content1 = [
     {
       title: t("events.start"),
@@ -186,7 +188,7 @@ const History = () => {
     });
   };
   return (
-    <>
+    <Layout>
       <div className="flex justify-center">
         <div className="m-5 flex w-full max-w-[1000px] flex-col gap-4 rounded bg-white p-5 shadow-sm">
           <h1 className="text-2xl font-bold text-picton-blue-500">
@@ -289,16 +291,16 @@ const History = () => {
         </Accordion>
       </div>
       <ScrollToTop />
-    </>
+    </Layout>
   );
 };
-export async function getStaticProps({ locale }: { locale: string }) {
-  const messages = await loadTranslationMessages(locale);
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   };
 }
+
 
 export default History;
