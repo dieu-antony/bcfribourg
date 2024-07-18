@@ -16,11 +16,11 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleEllipsis,
-  Link,
+  Link2,
   MapPin,
 } from "lucide-react";
 import { Calendar } from "../ui/calendar";
-import { cn } from "~/lib/utils/utils";
+import { cn, getEventDescription } from "~/lib/utils/utils";
 import { inter } from "~/pages/_app";
 import clsx from "clsx";
 import type { CalendarEvent } from "@prisma/client";
@@ -34,13 +34,20 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Clock8 } from "lucide-react";
-import { translateWeekday } from "~/lib/utils/utils";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-const EventCalendar = ({
-  events,
-}: {
+type EventProps = {
   events: (CalendarEvent & { color: string })[];
-}) => {
+};
+
+type EventCalendarProps = EventProps & {
+  _messages: Record<string, any>;
+};
+
+const EventCalendar: React.FC<EventCalendarProps> = ({ events, _messages }) => {
+  const t = useTranslations("calendar");
+
   // Define needed constants and states
   const [chosenMonth, setChosenMonth] = useState<Date>(new Date());
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -89,9 +96,9 @@ const EventCalendar = ({
           </Button>
           <Button
             onClick={() => setChosenMonth(new Date())}
-            className="hidden w-16 border bg-white text-black hover:bg-gray-100 md:flex"
+            className="hidden w-24 border bg-white text-black hover:bg-gray-100 md:flex"
           >
-            Today
+            {t("today")}
           </Button>
           <Button
             onClick={() => setChosenMonth(new Date())}
@@ -107,10 +114,10 @@ const EventCalendar = ({
           </Button>
         </div>
         <h2 className="hidden self-center text-center font-bold md:block">
-          {format(chosenMonth, "MMMM yyyy")}{" "}
+          {t(format(chosenMonth, "MMMM")) + " " + format(chosenMonth, "yyyy")}
         </h2>
         <h2 className="block self-center text-center font-bold md:hidden">
-          {format(chosenMonth, "MMM yy")}{" "}
+          {format(chosenMonth, "MMM yy")}
         </h2>
         {/* Calendar date choose button */}
         <div className="ml-auto flex flex-grow gap-1">
@@ -119,19 +126,19 @@ const EventCalendar = ({
               <Button
                 variant={"outline"}
                 className={cn(
-                  "w-24 justify-start text-left font-normal md:w-[180px]",
+                  "w-24 text-left font-normal items-center md:w-[140px]",
                   !chosenMonth && "text-muted-foreground",
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 <p className="hidden md:block">
                   {chosenMonth ? (
-                    format(chosenMonth, "PPP")
+                    t(format(chosenMonth, "MMMM"))
                   ) : (
                     <span>Pick a date</span>
                   )}
                 </p>
-                <p className="block md:hidden">Date</p>
+                <p className="block md:hidden">{t("date")}</p>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
@@ -154,7 +161,7 @@ const EventCalendar = ({
         {weekDays.map((day) => {
           return (
             <div key={day} className="border bg-white text-center font-bold">
-              {translateWeekday(day)}
+              {t(day)}
             </div>
           );
         })}
@@ -191,11 +198,11 @@ const EventCalendar = ({
                   if (isSameDay(val, day)) {
                     return (
                       <div key={val} className="mt-1 flex justify-center">
-                        <a
+                        <Link
                           href={`/calendar/day/${new Date(val).toDateString()}`}
                         >
-                          <div className="size-5 rounded-full bg-picton-blue-500"/>
-                        </a>
+                          <div className="size-5 rounded-full bg-picton-blue-500" />
+                        </Link>
                       </div>
                     );
                   }
@@ -207,7 +214,10 @@ const EventCalendar = ({
                 {events
                   .filter((event) => isSameDay(event.start, day))
                   .map((event) => {
-                    const bgcolor = event.color === "black" ? ("bg-" + event.color).toString() : ("bg-" + event.color + "-500").toString();
+                    const bgcolor =
+                      event.color === "black"
+                        ? ("bg-" + event.color).toString()
+                        : ("bg-" + event.color + "-500").toString();
                     return (
                       <div
                         key={event.summary}
@@ -216,19 +226,8 @@ const EventCalendar = ({
                         <Dialog>
                           <DialogTrigger className="w-full">
                             <div className={`font-sans ${inter.variable}`}>
-                              {event.eventType == "Interclub A"
-                                ? "Interclub NLA"
-                                : event.eventType == "Interclub B"
-                                  ? "Interclub NLB"
-                                  : event.eventType == "Interclub 1"
-                                    ? "Interclub 1ère Ligue"
-                                    : event.eventType == "Interclub 2"
-                                      ? "Interclub 2ème Ligue"
-                                      : event.eventType == "Interclub 3"
-                                        ? "Interclub 3ème Ligue"
-                                        : event.eventType == "Interclub 4"
-                                          ? "Interclub 4ème Ligue"
-                                          : event.summary}
+                              {getEventDescription(event.eventType, t) ||
+                                event.summary}
                             </div>
                           </DialogTrigger>
                           <DialogContent>
@@ -262,16 +261,16 @@ const EventCalendar = ({
                                     href={event.url}
                                     target="_blank"
                                   >
-                                    <Link className="size-5" />
-                                    Lien
+                                    <Link2 className="size-5" />
+                                    {t("link")}
                                   </a>
-                                  <a
+                                  <Link
                                     className={`flex font-sans ${inter.variable} gap-1 hover:underline`}
                                     href={`/calendar/event/${event.id}`}
                                   >
                                     <CircleEllipsis className="size-5" />
-                                    Détails
-                                  </a>
+                                    {t("details")}
+                                  </Link>
                                 </span>
                               </DialogDescription>
                             </DialogHeader>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Logo = () => {
   return (
-    <div className="xl:h-auto xl:w-40 2xl:w-72 w-16">
+    <div className="w-16 xl:h-auto xl:w-40 2xl:w-72">
       <Link href="/">
         <Image
           className="xl:hidden"
@@ -24,7 +24,7 @@ const Logo = () => {
           style={{ width: "100%", height: "auto" }}
         />
         <Image
-          className="2xl:hidden hidden xl:block"
+          className="hidden xl:block 2xl:hidden"
           src="/assets/bcf-short-right.svg"
           alt="BC Fribourg"
           width={0}

@@ -51,27 +51,6 @@ export function getWinLossRecord(input: string): { won: number; lost: number } {
   };
 }
 
-export function translateWeekday(day: string) {
-  switch (day) {
-    case "Mon":
-      return "Lun";
-    case "Tue":
-      return "Mar";
-    case "Wed":
-      return "Mer";
-    case "Thu":
-      return "Jeu";
-    case "Fri":
-      return "Ven";
-    case "Sat":
-      return "Sam";
-    case "Sun":
-      return "Dim";
-    default:
-      return "Unknown";
-  }
-}
-
 export function turnLeagueToNumber(league: string) {
   switch (league) {
     case "A":
@@ -115,3 +94,27 @@ export const toEmail = (subject: string) => {
       "secretaire@bcfribourg.ch";
   }
 };
+
+export const getEventDescription = (
+  eventType: string,
+  t: (key: string) => string,
+): string => {
+  const eventTypeMap: Record<string, string> = {
+    "Interclub A": "NLA",
+    "Interclub B": "NLB",
+    "Interclub 1": "1",
+    "Interclub 2": "2",
+    "Interclub 3": "3",
+    "Interclub 4": "4",
+  };
+
+  const description = eventTypeMap[eventType];
+
+  return description ? t(description) : "";
+};
+
+
+export async function loadTranslationMessages(locale: string) {
+  const messages = await import(`../../../messages/${locale}.json`);
+  return messages.default;
+}

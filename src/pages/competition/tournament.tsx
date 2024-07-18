@@ -1,50 +1,45 @@
 import { Link2, Mail, Smartphone } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const Tournament = () => {
+  const t = useTranslations("tournament");
   return (
     <>
-    <Image
+      <Image
         src="/assets/tournament.jpg"
         alt="Tournois Swiss Badminton"
         width={3840}
         height={2160}
-        className="w-full z-0 left-0 top-0 max-h-[400px] object-cover"
+        className="left-0 top-0 z-0 max-h-[400px] w-full object-cover"
       />
-    <div className="m-8 flex max-w-[1000px] flex-col self-center top-40">
-      <div className="flex flex-col gap-2 bg-white p-5 shadow-md">
-        <h1 className="text-xl font-semibold text-picton-blue-500">
-          Tournois Swiss Badminton
-        </h1>
-        <div className="flex flex-col gap-4">
-          <span>
-            Les tournois Swiss Badminton sont des tournois officiels organisés
-            par l&apos;association suisse de badminton. Pour vous inscrire, vous
-            devez passer par le site de Swiss Badminton.
-          </span>
-          <div className="flex">
+      <div className="top-40 m-8 flex max-w-[1000px] flex-col self-center">
+        <div className="flex flex-col gap-2 bg-white p-5 shadow-md">
+          <h1 className="text-xl font-semibold text-picton-blue-500">
+            {t("title")}
+          </h1>
+          <div className="flex flex-col gap-4">
+            <span>{t("desc1")}</span>
+            <div className="flex">
+              <Link
+                href="https://www.swiss-badminton.ch/"
+                className="flex flex-row items-center gap-2 hover:text-picton-blue-500"
+                target="_blank"
+              >
+                <Link2 className="h-4 w-4" /> <span>Swiss Badminton</span>
+              </Link>
+            </div>
+            <span>{t("desc2")}</span>
+
+            <span className="self-center font-semibold">Antony Dieu</span>
+          </div>
+          <div className="mt-2 grid max-w-[300px] grid-cols-2 place-items-center justify-center self-center">
             <Link
-              href="https://www.swiss-badminton.ch/"
-              className="flex flex-row items-center gap-2 hover:text-picton-blue-500"
-              target="_blank"
+              className="mb-2 hover:text-picton-blue-500"
+              href="/club/contact"
             >
-              <Link2 className="h-4 w-4" /> <span>Swiss Badminton</span>
-            </Link>
-          </div>
-          <span>
-            Si vous avez une licence, il suffit de créer un login avec vos
-            données personnelles. Si vous n&apos;avez pas de licence, vous pouvez
-            vous inscrire en tant que non-licencié, mais vos options seront
-            limitées. Pour plus d&apos;infos, veuillez contacter le responsable
-            technique:
-          </span>
-          
-          <span className="self-center font-semibold">Antony Dieu</span>
-          </div>
-          <div className="grid grid-cols-2 place-items-center justify-center max-w-[300px] self-center mt-2">
-            <Link className="mb-2 hover:text-picton-blue-500" href="/club/contact">
               <Mail />
             </Link>
             <Smartphone className="mb-2" />
@@ -52,10 +47,19 @@ const Tournament = () => {
               Email
             </Link>
             <span>078 692 53 87</span>
+          </div>
         </div>
       </div>
-    </div></>
+    </>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Tournament;

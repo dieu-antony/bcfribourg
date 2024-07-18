@@ -1,11 +1,17 @@
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-const Footer = () => {
+type FooterProps = {
+  _messages: Record<string, any>;
+};
+
+const Footer: React.FC<FooterProps> = ({ _messages }) => {
+  const t = useTranslations("Footer");
   return (
-    <footer className="mt-auto z-30 w-full p-4 bg-gray-800">
-      <div className="ml-4 mr-4 flex h-full flex-col gap-8 sm:grid sm:grid-cols-3 items-center">
+    <footer className="z-30 mt-auto w-full bg-gray-800 p-4">
+      <div className="ml-4 mr-4 flex h-full flex-col items-center gap-8 sm:grid sm:grid-cols-3">
         <div className="rounded-lg p-2">
           <div className="h-auto w-16 transition-all duration-300 ease-linear lg:w-20">
             <Image
@@ -19,7 +25,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <div className="text-gray-500">Retrouvez nous sur</div>
+          <div className="text-gray-500">{t("find")}</div>
           <div className="flex flex-row gap-8">
             <Link href="https://www.instagram.com/bcfribourg">
               <svg
@@ -44,11 +50,13 @@ const Footer = () => {
               </svg>
             </Link>
             <Link href="/club/contact">
-            <Mail className="h-6 w-6 text-white"/>
+              <Mail className="h-6 w-6 text-white" />
             </Link>
           </div>
         </div>
-        <div className="p-2 text-gray-500 sm:place-self-end sm:self-center">&copy; 2024 BC Fribourg</div>
+        <div className="p-2 text-gray-500 sm:place-self-end sm:self-center">
+          &copy; 2024 BC Fribourg
+        </div>
       </div>
     </footer>
   );

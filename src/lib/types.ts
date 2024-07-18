@@ -39,7 +39,6 @@ export type EmailData = {
   email: string;
   message?: string;
   phone?: string;
-  natel?: string;
   address?: string;
   toEmail: string;
   npa?: string;

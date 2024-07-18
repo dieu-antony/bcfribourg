@@ -1,0 +1,283 @@
+{
+  "Header": {
+    "home": "Start",
+    "training": "Training",
+    "adults": "Erwachsene",
+    "juniors": "Junioren",
+    "competition": "Wettkampf",
+    "tournament": "SB Turniere",
+    "prevSeasons": "Vorherige Saisons",
+    "contact": "Kontakt",
+    "committee": "Vorstand",
+    "history": "Geschichte",
+    "documents": "Dokumente",
+    "links": "Links",
+    "court": "Halle",
+    "calendar": "Kalender",
+    "sponsors": "Sponsoren",
+    "member": "Mitglied werden"
+  },
+  "Footer": {
+    "find": "Finde uns auf"
+  },
+  "Index": {
+    "welcome": "Willkommen auf der Website des",
+    "next events": "Nächste Veranstaltungen",
+    "member": "Mitglied werden",
+    "court": {
+      "title": "Zugang zur Halle",
+      "description": "Die Halle befindet sich in der DOSF (Deutsche Orientierungsschule Freiburg) im Torry-Quartier",
+      "details": "Unten finden Sie einen detaillierten Plan des Standorts"
+    }
+  },
+  "Training": {
+    "Adults": {
+      "monday18": {
+        "title": "Montag",
+        "description": "4. Liga und nicht Lizenzierte"
+      },
+      "monday20": {
+        "title": "Montag",
+        "description": "LNB, 1., 2. und 4. Ligen"
+      },
+      "wednesday20": {
+        "title": "Mittwoch",
+        "description": "LNB, 1. und 2. Ligen"
+      },
+      "thursday19": {
+        "title": "Donnerstag",
+        "description": "Lizenzierte und nicht Lizenzierte"
+      },
+      "holidays": {
+        "title": "Ferien",
+        "file": "Schulferien",
+        "seasonDuration": "Saisondauer",
+        "until": "bis"
+      },
+      "contact": {
+        "title": "Kontakt"
+      }
+    },
+    "Juniors": {
+      "tuesday1": {
+        "title": "Dienstag",
+        "description": "14-18 Jährig"
+      },
+      "tuesday2": {
+        "title": "Dienstag",
+        "description": "Bis 14 Jährig"
+      },
+      "thursday18": {
+        "title": "Donnerstag",
+        "description": "Bis 18 Jährig"
+      },
+      "holidays": {
+        "title": "Ferien",
+        "file": "Schulferien",
+        "seasonDuration": "Saisondauer",
+        "until": "bis"
+      },
+      "contact": {
+        "title": "Kontakt"
+      }
+    }
+  },
+  "interclubs": {
+    "m": "Männer",
+    "f": "Damen",
+    "1st": "1. Liga",
+    "ligue": ". Liga"
+  },
+  "compJuniors": {
+    "location": "Ort",
+    "date": "Datum",
+    "cj": {
+      "title": "Junioren Circuit",
+      "description": "Die Junioren Circuit sind eine Serie von Einzel Turnieren für Junioren. Die verfügbaren Kategorien sind U11, U13, U15, U17 und U19. Weitere Informationen finden Sie auf der Website des FBV. Für die Anmeldung kontaktieren Sie bitte Ihren Trainer!"
+    },
+    "ca": {
+      "description": "Der Coupe l'Avenir ist ein Turnier in der Form eines Interclubs (in Teams) für Junioren unter 2 Kategorien: U12 et U16. Weitere Informationen finden Sie auf der Website des FBV. Für die Anmeldung kontaktieren Sie bitte Ihren Trainer!"
+    }
+  },
+  "prevSeasons": {
+    "title": "Statistiken der vorherigen Saisons",
+    "description": "Hier finden Sie die Statistiken der vorherigen Saisons des BC Fribourgs seit 2015. Nutzen Sie die Filter, um die Mannschaften und ihre Leistungen in jeder Saison zu sehen!",
+    "psp": "Diese Grafik zeigt die Position der einzelnen Mannschaften in ihrer jeweiligen Liga für jede Saison. Ein Team, das in einer Saison auf dem letzten Platz steht, wird in der nächsten Saison typischerweise in eine niedrigere Liga absteigen, während ein Team auf dem ersten Platz typischerweise in eine höhere Liga aufsteigen wird. Benutzen Sie die Filter, um zwischen den Teams des BC Fribourg zu wählen!",
+    "lhm": "Diese Grafik zeigt, in welcher Liga jede Mannschaft des BC Freiburg in jeder Saison gespielt hat. Eine dunklere Farbe zeigt eine höhere Liga an. Zurzeit gibt es die nationalen Ligen (NLA, NLB), die Oberligen (1, 2) und die Unterligen (3, 4).",
+    "rsp": "Diese Grafik zeigt das Verhältnis von gewonnenen Spielen pro gespieltem Spiel und gewonnenen Punkten pro gespieltem Spiel für jede Mannschaft des BC Fribourg für jede Saison. Klicke auf die Punkte, um mehr zu erfahren und verwende die Filter, um zwischen den Teams des BC Fribourg zu wählen!",
+    "sbp": "Diese Grafik zeigt die Leistung jeder Mannschaft des BC Freiburg in jeder Saison. Sie können zwischen den gewonnenen Sätzen, Spielen und Begegnungen für jede Saison wählen. Mit Hilfe der Filter können Sie zwischen den einzelnen Teams des BC Fribourg wählen!",
+    "filter": {
+      "points": "Punkte",
+      "wins": "Siege",
+      "sets": "Sätze",
+      "games": "Spiele",
+      "matches": "Begegnungen"
+    }
+  },
+  "tournament": {
+    "title": "Swiss Badminton Turniere",
+    "desc1": "Die Swiss Badminton Turniere sind offizielle Turniere, die vom Schweizer Badmintonverband organisiert werden. Um sich anzumelden, müssen Sie über die Website von Swiss Badminton gehen.",
+    "desc2": "Wenn Sie eine Lizenz haben, erstellen Sie einfach einen Login mit Ihren persönlichen Daten. Wenn Sie keine Lizenz haben, können Sie sich auch als Nicht-Lizenzierter anmelden, aber Ihre Möglichkeiten sind dann eingeschränkt. Für weitere Informationen wenden Sie sich bitte an den technischen Leiter:"
+  },
+  "contact": {
+    "success": "Ihre Nachricht wurde erfolgreich gesendet!",
+    "title": "Kontakt",
+    "description": "Kontaktieren Sie uns!",
+    "lastname": "Nachname",
+    "firstname": "Vorname",
+    "subject": "Betreff",
+    "information": "Informationen",
+    "comp": "Wettkampf",
+    "adultTraining": "Erwachsenentraining",
+    "juniorTraining": "Juniorentraining",
+    "website": "Internetseite",
+    "events": "Veranstaltungen",
+    "other": "Andere",
+    "message": "Nachricht",
+    "send": "Senden"
+  },
+  "committee": {
+    "title": "Vorstand",
+    "president": "Präsident",
+    "vicePresident": "Kassiererin / Vizepräsidentin",
+    "events": "Veranstaltungen",
+    "secretary": "Sekretärin / Verantw. Interclubs",
+    "sup": "Verantw. Oberligen"
+  },
+  "history": {
+    "title": "Geschichte des Clubs",
+    "description": "Der Badminton Club Fribourg wurde offiziel am 12 November 1969 gegründet. Hier sind einige der wichtigsten Ereignisse aus dem Leben unseres Clubs von den Anfängen bis heute:",
+    "events": {
+      "start": "Am Anfang...",
+      "startDesc": "Einige Jugendliche aus dem Jura-Viertel spielen das Spiel „Fliegen“. Hauptziel: Windgeschützte Orte finden! Zu ihnen gehörten Jean-Claude Doutaz, Pierre Guerra und Claude Page. Ende der 60er Jahre entdeckten sie, dass das Federballspiel ein Sport ist, der in Vereinen ausgeübt wird: Badminton! Sie traten dem BC Wünnewil bei, dem einzigen Verein im Kanton.",
+      "1969": "Am 12. November findet die Gründungsversammlung des Clubs statt, der Badminton Club Freiburg ist geboren! Der Verein hat 5 Mitglieder: Jean-Claude Doutaz (Präsident), Pierre Guerra (Kassierer), Pierre Lorson (Sekretär), Rico Casutt und Juliette Guerra. Dank einiger guter Beziehungen bekam die kleine Truppe montags und donnerstags abends die Sporthalle Schönberg zur Verfügung gestellt. In der Saison 1969/1970 nehmen die Spieler des BC Fribourg jedoch in ihrer ersten Saison am Interclub unter den Farben des BC Wünnewil teil. Jean-Claude Doutaz muss jedoch das Amt des Präsidenten des BC Fribourg abgeben. Pierre Guerra übernimmt die Führung des Clubs. Die Farben des BC Fribourg werden von nun an im Interclub verteidigt. Eine Mannschaft, bestehend aus vier Herren, spielt in der 2. Liga",
+      "1973": "Der Club setzt seinen kleinen Weg fort. Er zählt mittlerweile 10 Mitglieder. Die Saison ist geprägt vom Aufstieg der Mannschaft in die 1. Liga. Ein Aufstieg, der vom Schweizer Verband mit Hilfe einiger Tricks im Reglement beschlossen wurde. Frauen haben nun das Recht, auf dem Feld zu spielen. Sie treten dem Team bei. Eine von ihnen ist die Engländerin Jane Skinner, die 1972 nach Freiburg wechselt. Sie war die erste ausländische Spielerin in den Reihen des BC Fribourg.",
+      "1975": "Die Mannschaft steigt in die zweite Liga ab.",
+      "1976": "Ein offizielles Spiel zwischen der Schweiz und China findet im Belluard-Saal vor nicht weniger als 800 Zuschauern statt. Ein Spiel unter Hochspannung, da die sehr protokollarischen Chinesen, die sich mitten in der Kulturrevolution befinden, den Organisatoren einiges Kopfzerbrechen bereiteten. Aber auch eine Sichtbarkeit für das Badminton, das zum ersten Mal in den Freiburger Medien erscheint.",
+      "1977": "Wechsel im Vorstand: Marcel Petignat übernimmt das Amt des Präsidenten und Pierre Guerra wird Vizepräsident. Der Club organisiert die ersten Ausflüge außerhalb der Halle: Wanderungen, Skifahren usw.",
+      "1979": "Bei der Einführung des J+S machen die beiden Trainer des Vereins, Pierre Guerra und Marcel Petignat, die beim Schweizerischen Badmintonverband diplomiert sind, den Übergang und werden J+S-Leiter. Die Vereinsmitglieder können nun dienstagabends im Collège Saint-Michel trainieren.",
+      "1982": "Die Spieler des Clubs wechseln montags und freitags abends von der Schönberghalle in die Jurahalle. Zum ersten Mal seit seiner Gründung hat der Badminton Club Freiburg zwei Mannschaften in der Meisterschaft: Die erste Mannschaft spielt in der zweiten Liga, die zweite Mannschaft in der dritten Liga. Unter den Spielern sind zwei Namen, die auf den Courts nicht mehr wegzudenken sind: Jean-Charles Bossens und Felice Marchesi.",
+      "1983": "Die ersten Juniorentrainings werden von Pierre Guerra geleitet. Die Ergebnisse lassen nicht lange auf sich warten: Francine Guerra wird für das Juniorennationalkader (J14) ausgewählt. Aufstieg der zweiten Mannschaft in die zweite Liga. Felice Marchesi erreicht zweimal den zweiten Platz bei den Genfersee-Meisterschaften im Herreneinzel D.",
+      "1984": "Der Club organisiert die Schweizer Juniorenmeisterschaften in der Halle von Sainte-Croix.",
+      "1985": "Aufstieg in die 1. Liga für die erste Mannschaft des Vereins. Der BC Fribourg hat zwei offizielle Schiedsrichter: Daniel Dupraz und Marcel Petignat.",
+      "1986": "Francine Guerra gewinnt die Schweizer Meisterschaft der Junioren in La Chaux-de-Fonds. Sie gewinnt die Goldmedaille im Einzel J14 und die Bronzemedaille im Doppel mit Santi Wibowo (Genf). Im Interclub hat der BC Freiburg nun vier Mannschaften.",
+      "1987": "Francine Guerra hat bei der Junioren-Schweizermeisterschaft in Stein wieder einmal für Aufsehen gesorgt: Sie hat das Triple geschafft. Sie gewann die Goldmedaille im Dameneinzel J14, im Damendoppel mit Cathia Etzensberger (Basel) und im Mixed an der Seite von Martin Tschumi. Valentine Ayer und Véronique Petignat gewannen den zweiten Platz im Damendoppel. Erstmalige Durchführung der Freiburger Meisterschaften in Zusammenarbeit mit Villars-sur-Glâne.",
+      "1988": "Junioren-Schweizermeisterschaft in Winthertour: Bei den J14 gewinnen Francine Guerra und Valentine Ayer den Junioren-Schweizermeistertitel im Damen-Doppel. Valentine Ayer und Yvan Haymoz (Tafers) gewinnen die Goldmedaille im Mixed. Francine Guerra erreicht im Dameneinzel J16 den zweiten Platz auf dem Podest. Daniel Dupraz übernimmt die Präsidentschaft des Clubs.",
+      "1989": "Der BC Fribourg organisiert die Freiburger Meisterschaften in Sainte-Croix und feiert damit sein 20-jähriges Bestehen. Bei den Schweizer Juniorenmeisterschaften regnet es wieder Medaillen: In der Kategorie J16 gewinnen Francine Guerra und Valentine Ayer das Damendoppel. Letztere gewinnt auch das Mixed mit ihrem Partner aus Singapur, Yvan Haymoz. Bei den Herren gewann Didier Page drei Goldmedaillen: im Einzel, im Doppel mit Damiano Slongo (Tafers) und im Mixed mit Caroline Kull (Tafers).",
+      "1990": "Die Schweizer Juniorenmeisterschaft findet in Freiburg statt: Francine Guerra gewinnt das Dameneinzel und das Damendoppel mit Valentine Ayer in der Kategorie J18. In der Kategorie J16 belegt Didier Page den ersten Platz im Herrendoppel an der Seite von Patrick Bovard (Lausanne). Im Einzel und im Mixed steigt er mit Caroline Kull (Tafers) auf den zweiten Platz. Die ersten A-Spieler des Clubs sind Claudine Francey, Francine Guerra, Jean-Charles Bossens, Felice Marchesi und Didier Page.",
+      "1991": "Die Saison ist geprägt vom Aufstieg der ersten Mannschaft in die Liga B.",
+      "1993": "Der BC Fribourg organisiert erneut die Freiburger Meisterschaften und feiert in der gleichen Saison den Aufstieg seiner Mannschaft in die Liga A.",
+      "1994": "Wieder ein Aufstieg, diesmal schließt sich die vierte Liga am Ende der Saison der dritten Liga an. Die Trainings des Vereins finden nun in der Halle des OS Pérolles statt.",
+      "1995": "Schwarze Saison für den BC Fribourg: Die erste Mannschaft gibt ihren Platz in der NLA ab und fällt in die B-Liga zurück. Das gleiche Schicksal ereilt die 3. Liga, die in die 4.",
+      "1996": "Der BC Freiburg und der BC Tafers schließen sich zusammen. Die Zusammenarbeit zwischen den beiden Clubs beginnt im Training und bei der ersten Mannschaft. Die Junioren sind zum ersten Mal Finalisten des Coupe de l'avenir.",
+      "1997": "Die erste Mannschaft nennt sich nun offiziell Union Fribourg Tafers.",
+      "1999": "Das 30-jährige Bestehen des Clubs wird gebührend gefeiert. Zu diesem Anlass wird ein Ausflug in die Zentralschweiz nach Morschach organisiert. Das jährliche Abendessen des Clubs wird von über 100 Personen besucht. Auf sportlicher Ebene fällt die Mannschaft des BC Fribourg von der 2. Liga zurück in die 3.",
+      "2001": "Der BC Freiburg organisiert die Freiburger Meisterschaften in Zusammenarbeit mit dem BC Granges-Paccot.",
+      "2002": "Die Mannschaft der 2. Liga feiert ihren Aufstieg in die 1.",
+      "2004": "Der Club freut sich erneut über die guten Ergebnisse im Interclub, die 4. Liga sichert sich den Aufstieg in die 3. Juniorenausflug organisiert.",
+      "2005": "Der BC Freiburg organisiert in enger Zusammenarbeit mit dem BC Tafers die Freiburger Meisterschaften. Das erste Sommercamp, das an einem Wochenende stattfindet, wird in Yverdon organisiert.",
+      "2006": "Die dritte Liga wird am Ende der Saison in die vierte Liga zurückgestuft.",
+      "2007": "Die Union ist nicht mehr nur der Elite vorbehalten. Beim Cup der Zukunft verteidigen sowohl die Freiburger als auch die Senseer Junioren die Farben der Union Fribourg-Tafers.",
+      "2008": "Die 4. Liga beendete das Spiel glänzend als Erster und schloss damit zur 3. Liga auf.",
+      "2009": "Anlässlich seines 40-jährigen Bestehens organisiert der Club die Freiburger Meisterschaften in Zusammenarbeit mit dem BC Tafers. Die 3. Liga sichert sich nach mehreren Anläufen den Aufstieg und spielt fortan in der 2. Der Verein hat nun Mannschaften in allen Interclub-Ligen, von der A-Liga bis zur 4. Als Geburtstagsgeschenk hat der BCF nun eine eigene Website.",
+      "2010": "Eine dritte Mannschaft in der 4. Liga wird gegründet. Der Verein hat nun 8 Mannschaften in der Interclub.",
+      "2012": "Ab der Saison 2012-2013 sind alle unsere Mannschaften in die Union Fribourg-Tavel integriert! Wir zählen eine 9. Mannschaft und sind wieder in allen Ligen vertreten.",
+      "2019": "Der BC Fribourg feiert sein 50-jähriges Bestehen. Aus diesem Anlass organisiert der Club unter anderem einen Sommerausflug auf die Höhen von Leukerbad.",
+      "2022": "Der Club organisiert die Freiburger Meisterschaften in Zusammenarbeit mit dem BC Villars-sur-Glâne.",
+      "2024": "Die Union Tafers-Fribourg muss ihre Mannschaft aus der NLA zurückziehen. Die Union wird mit fünf Mannschaften im Interclub weiterspielen, davon eine in der NLB, eine in der 1. Liga, eine in der 2. Zum 25. Geburtstag der Webseite wird diese komplett überarbeitet und modernisiert."
+    }
+  },
+  "documents": {
+    "title": "Dokumente",
+    "file1": "Statuten",
+    "desc1": "Statuten des Badmintons Club Fribourg",
+    "file2": "Charta",
+    "desc2": "Ethik-Charta",
+    "file3": "Einschreibeforumlar (fr)",
+    "desc3": "Einschreibeformular für die Saison 2024-2025",
+    "file4": "QR Code",
+    "desc4": "QR Code für Banküberweisungen"
+  },
+  "links": {
+    "afb": "Freiburger Badminton Verband",
+    "afs": "Freiburger Verband für Sport"
+  },
+  "calendar": {
+    "today": "Heute",
+    "link": "Link",
+    "details": "Details",
+    "date": "Datum",
+    "NLA": "Interclub NLA",
+    "NLB": "Interclub NLB",
+    "1": "Interclub 1. Liga",
+    "2": "Interclub 2. Liga",
+    "3": "Interclub 3. Liga",
+    "4": "Interclub 4. Liga",
+    "Mon": "Mon",
+    "Tue": "Die",
+    "Wed": "Mit",
+    "Thu": "Don",
+    "Fri": "Fre",
+    "Sat": "Sam",
+    "Sun": "Son",
+    "filter": "Nach Typ filtern",
+    "January": "Januar",
+    "February": "Februar",
+    "March": "März",
+    "April": "April",
+    "May": "Mai",
+    "June": "Juni",
+    "July": "Juli",
+    "August": "August",
+    "September": "September",
+    "October": "Oktober",
+    "November": "November",
+    "December": "Dezember",
+    "location": "Ort",
+    "start": "Start",
+    "end": "Ende"
+
+  },
+  "sponsors": {
+    "title": "Sponsoren des BC Fribourg",
+    "main": "Hauptsponsor",
+    "important": "Wichtiger Sponsor",
+    "support": "Unterstützende Sponsoren",
+    "subtitle": "Sie möchten den Badminton Club Freiburg unterstützen?",
+    "desc": "Wir bieten 3 Sponsoringmöglichkeiten an, Hauptsponsor, wichtige Sponsoren und unterstützende Sponsoren. Für weitere Informationen kontaktieren Sie uns bitte unter president(at)bcfribourg.ch",
+    "mainli1": "Werbung auf der Bekleidung gemäss Richtlinien von Swiss Badminton",
+    "mainli2": "Möglichkeit, bei Heimspielen 2 Anzeigetafeln zu haben (max. Tafelgröße 1x3m)",
+    "mainli3": "Verweis und Logo des Hauptsponsors auf der Website",
+    "mainli4": "Verweis und Logo des Hauptsponsors in den Mitteilungen an die Mitglieder",
+    "mainli5": "Teilnahme an Heimspielen (Freiburg)",
+    "mainli6": "Engagement und Sponsoringvertrag über 3 Jahre",
+    "importantli1": "Möglichkeit, bei Heimspielen eine Anzeigetafel zu haben (Größe der Anzeigetafel max. 1x3m)",
+    "importantli2": "Verweis auf den Namen des Sponsors auf der Website",
+    "importantli3": "Teilnahme an Heimspielen (Freiburg)",
+    "supportli1": "Verweis auf den Namen des Sponsors auf der Website",
+    "supportli2": "Teilnahme an Heimspielen (Freiburg)"
+  },
+  "member": {
+    "success": "Ihre Nachricht wurde erfolgreich gesendet!",
+    "title": "Mitglied werden",
+    "description": "Sie haben bereits ein Test training gemacht und möchten Mitglied des Badminton Club Fribourg werden? Füllen Sie das untenstehende Anmeldeformular aus!",
+    "fee": "Mitgliederbeiträge",
+    "category": "Kategorie",
+    "years": "Jahre",
+    "licence": "Lizenz",
+    "m": "Männlich",
+    "f": "Weiblich",
+    "other": "Andere",
+    "lastname": "Nachname",
+    "firstname": "Vorname",
+    "gender": "Geschlecht",
+    "address": "Adresse",
+    "npa": "PLZ, Ort",
+    "dob": "Geburtsdatum",
+    "avs": "AHV Nummer (für Junioren)",
+    "phone": "Telefonnummer",
+    "sblicence": "Lizenznummer (falls Inhaber einer Swiss Badminton-Lizenz)",
+    "message": "Nachricht",
+    "send": "Senden"
+  }
+}

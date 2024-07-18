@@ -18,16 +18,23 @@ import {
   MapPinned,
   Globe,
 } from "lucide-react";
+import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 
-const Navbar = () => {
+type NavbarProps = {
+  _messages: Record<string, any>;
+};
+
+const Navbar: React.FC<NavbarProps> = ({ _messages }) => {
+  const t = useTranslations("Header");
   const subTraining = [
     {
-      name: "Adultes",
-      href: "/training/adultes",
+      name: t("adults"),
+      href: "/training/adults",
       icon: <UserRoundPlus size="20px" />,
     },
     {
-      name: "Juniors",
+      name: t("juniors"),
       href: "/training/juniors",
       icon: <UserRoundCog size="20px" />,
     },
@@ -39,41 +46,41 @@ const Navbar = () => {
       icon: <Handshake size="20px" />,
     },
     {
-      name: "Juniors",
+      name: t("juniors"),
       href: "/competition/juniors",
       icon: <Award size="20px" />,
     },
     {
-      name: "Tournois SB",
+      name: t("tournament"),
       href: "/competition/tournament",
       icon: <Trophy size="20px" />,
     },
     {
-      name: "Saisons précédentes",
+      name: t("prevSeasons"),
       href: "/competition/previous_seasons",
       icon: <FileClock size="20px" />,
     },
   ];
   const subClub = [
-    { name: "Contact", href: "/club/contact", icon: <Mail size="20px" /> },
-    { name: "Comité", href: "/club/committee", icon: <Users size="20px" /> },
+    { name: t("contact"), href: "/club/contact", icon: <Mail size="20px" /> },
+    { name: t("committee"), href: "/club/committee", icon: <Users size="20px" /> },
     {
-      name: "Historique",
+      name: t("history"),
       href: "/club/history",
       icon: <History size="20px" />,
     },
     {
-      name: "Documents",
+      name: t("documents"),
       href: "/club/documents",
       icon: <Folder size="20px" />,
     },
     {
-      name: "Liens",
+      name: t("links"),
       href: "/club/links",
       icon: <Link2 size="20px" />,
     },
     {
-      name: "Salle",
+      name: t("court"),
       href: "/#salle",
       icon: <MapPinned size="20px" />,
     },
@@ -84,20 +91,23 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const { locale } = useRouter();
+  const { asPath } = useRouter();
+
   return (
     <>
-      <nav className="flex lg:max-w-7xl w-full flex-1 justify-end">
+      <nav className="flex w-full flex-1 justify-end lg:max-w-7xl">
         <div
           className={`${isOpen ? "" : "hidden lg:flex"} mt-4 flex basis-full flex-col place-items-start lg:ml-16 lg:mt-0 lg:w-full lg:flex-row lg:justify-between`}
         >
-          <NavLinks name="Accueil" href="/" onClick={() => setIsOpen(false)} />
+          <NavLinks name={t("home")} href="/" onClick={() => setIsOpen(false)} />
           <DropdownNavLink
-            triggerElement="Entraînement"
+            triggerElement={t("training")}
             options={subTraining}
             onClick={() => setIsOpen(false)}
           />
           <DropdownNavLink
-            triggerElement="Compétition"
+            triggerElement={t("competition")}
             options={subCompetition}
             onClick={() => setIsOpen(false)}
           />
@@ -107,7 +117,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           />
           <NavLinks
-            name="Calendrier"
+            name={t("calendar")}
             href="/calendar"
             onClick={() => setIsOpen(false)}
           />
@@ -117,7 +127,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           />
           <NavLinks
-            name="Sponsors"
+            name={t("sponsors")}
             href="/sponsors"
             onClick={() => setIsOpen(false)}
           />
@@ -126,11 +136,16 @@ const Navbar = () => {
             href="/member"
             onClick={() => setIsOpen(false)}
           >
-            Devenir membre
+            {t("member")}
           </Link>
-          <button className="lg:self-center flex mt-4 ml-2 lg:m-0 hover:text-picton-blue-500">
+          <Link
+            className="ml-2 mt-4 flex hover:text-picton-blue-500 lg:m-0 lg:self-center"
+            href={asPath}
+            locale={locale == "fr-CH" ? "de-CH" : "fr-CH"}
+            onClick={() => setIsOpen(false)}
+          >
             <Globe size="20px" />
-          </button>
+          </Link>
         </div>
         <div className="absolute right-8 top-11 lg:hidden">
           <button onClick={toggleNavbar}>

@@ -26,6 +26,7 @@ import {
 import { ChevronDownIcon } from "lucide-react";
 import { inter } from "../_app";
 import crypto from "crypto";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const Calendar = () => {
   const { status } = useSession();
@@ -287,7 +288,7 @@ const Calendar = () => {
                 }
                 required
               />
-              <label htmlFor="url">Url (optional)</label>
+              <label htmlFor="url">Url</label>
               <input
                 id="url"
                 type="url"
@@ -298,6 +299,7 @@ const Calendar = () => {
                     url: e.target.value,
                   })
                 }
+                required
               />
               <input
                 type="submit"
@@ -335,5 +337,13 @@ const Calendar = () => {
     );
   }
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Calendar;

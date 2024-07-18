@@ -19,6 +19,7 @@ import {
 import { Toaster } from "~/lib/components/ui/sonner";
 import type { PastTeam } from "~/lib/types";
 import { inter } from "../_app";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const IcData = () => {
   const [teams, setTeams] = useState<PastTeam[]>([]);
@@ -60,7 +61,8 @@ const IcData = () => {
       method: "POST",
       body: JSON.stringify(teams),
     });
-    const data: {status: "success" | "error" | "loading", message: string} = await response.json();
+    const data: { status: "success" | "error" | "loading"; message: string } =
+      await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -81,7 +83,7 @@ const IcData = () => {
             <BreadcrumbItem>
               <DropdownMenu>
                 <DropdownMenuTrigger className="flex items-center gap-1">
-                    IC Data
+                  IC Data
                   <ChevronDownIcon />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -89,13 +91,19 @@ const IcData = () => {
                   className={`font-sans ${inter.variable}`}
                 >
                   <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/icdata">IC Data</BreadcrumbLink>
+                    <BreadcrumbLink href="/admin/icdata">
+                      IC Data
+                    </BreadcrumbLink>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/players">Players</BreadcrumbLink>
+                    <BreadcrumbLink href="/admin/players">
+                      Players
+                    </BreadcrumbLink>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/calendar">Calendar</BreadcrumbLink>
+                    <BreadcrumbLink href="/admin/calendar">
+                      Calendar
+                    </BreadcrumbLink>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -127,5 +135,13 @@ const IcData = () => {
     );
   }
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default IcData;

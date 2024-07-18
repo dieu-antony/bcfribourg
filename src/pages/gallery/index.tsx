@@ -1,6 +1,8 @@
 import { CldImage } from "next-cloudinary";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { SearchResult } from "~/lib/types";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 export default function Gallery() {
   const [resources, setResources] = useState<SearchResult[]>([]);
@@ -36,7 +38,7 @@ export default function Gallery() {
       <h1 className="my-8 mt-6 text-4xl font-semibold">Galerie</h1>
       <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3">
         {filteredResources.map((result) => (
-          <a
+          <Link
           key={result.public_id}
           href={"/gallery/" + encodeURI(result.tags[0]!)}
           className="relative block hover:opacity-80 transform duration-100 hover:-translate-y-1"
@@ -51,9 +53,17 @@ export default function Gallery() {
           <span className="absolute z-10 text-white bottom-0 left-0 p-2 bg-black bg-opacity-75">
             {result.tags[0]}
           </span>
-        </a>
+        </Link>
         ))}
       </div>
     </div>
   );
+}
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
 }

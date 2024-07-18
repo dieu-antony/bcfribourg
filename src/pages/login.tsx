@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from "react";
 import Head from "next/head";
 import { signIn } from "next-auth/react";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -86,5 +87,13 @@ const Login = () => {
     </>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Login;

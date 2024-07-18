@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Router from "next/router";
 import Head from "next/head";
 import { Button } from "~/lib/components/ui/button";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const Admin = () => {
   const { status, data } = useSession();
@@ -29,5 +30,13 @@ const Admin = () => {
     );
   }
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Admin;

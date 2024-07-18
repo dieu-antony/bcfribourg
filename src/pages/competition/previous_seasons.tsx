@@ -10,12 +10,15 @@ import { RatioScatterPlot } from "~/lib/components/statsGraphs/RatioScatterPlot"
 import Select from "react-select";
 import { useRef } from "react";
 import { useDimensions } from "~/lib/hooks/useDimensions";
-import { getLeagueFromId } from "~/lib/utils/utils";
+import { getLeagueFromId, loadTranslationMessages } from "~/lib/utils/utils";
 import { LeagueHeatmap } from "~/lib/components/statsGraphs/LeagueHeatmap";
 import { StackedBarplot } from "~/lib/components/statsGraphs/StackedBarplot";
 import type { PastTeam } from "~/lib/types";
+import { useTranslations } from "next-intl";
 
 const PreviousSeasons = () => {
+  const t = useTranslations("prevSeasons");
+
   const chartRef = useRef<HTMLDivElement>(null);
   const chartSize = useDimensions(chartRef);
   const [data, setData] = useState<PastTeam[]>([]);
@@ -113,18 +116,14 @@ const PreviousSeasons = () => {
   });
 
   return (
-    <div className="flex max-h-max min-h-max flex-col items-center justify-center pt-8 lg:pt-16 m-4">
+    <div className="m-4 flex max-h-max min-h-max flex-col items-center justify-center pt-8 lg:pt-16">
       <div className="w-full max-w-[1000px] shadow-md">
         <div className="max-h-max max-w-[1000px]  bg-white p-5">
           <h1 className="mb-2 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 bg-clip-text text-2xl font-bold text-transparent">
-            Statistiques des saisons précédentes
+            {t("title")}
           </h1>
           <div className="flex flex-col bg-white">
-            <p className="mb-4">
-              Vous trouverez ici les statistiques des saisons précédentes du BC
-              Fribourg dépuis 2015. Utilisez les filtres pour voir les equipes
-              et leurs performance de chaque saison!
-            </p>
+            <p className="mb-4">{t("description")}</p>
             <div className="flex flex-col">
               <Tabs defaultValue="positionScatterPlot">
                 <div className="flex h-auto justify-center">
@@ -161,15 +160,7 @@ const PreviousSeasons = () => {
                 >
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">Position Scatter Plot</h3>
-                    <p>
-                      Ce graphique montre la position de chaque équipe dans leur
-                      ligue respective pour chaque saison. Une équipe en dernière
-                      position pendant une saison va typiquement descendre dans
-                      une ligue inférieure pour la saison suivante, tandis
-                      qu&apos;une équipe en première place va typiquement étre
-                      promue dans une ligue supérieure. Utilisez les filtres pour
-                      choisir entre les équipes du BC Fribourg!
-                    </p>
+                    <p>{t("psp")}</p>
 
                     <Select
                       instanceId={"filter1"}
@@ -198,13 +189,7 @@ const PreviousSeasons = () => {
                 <TabsContent value="leagueHeatmap" className="mt-12 md:mt-0">
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">League Heatmap</h3>
-                    <p>
-                      Ce graphique montre dans quelle ligue chaque équipe du BC
-                      Fribourg a joué pour chaque saison. Une couleur plus
-                      foncée indique une ligue plus élevée. Pour le moment il
-                      existent les ligues nationales (NLA, NLB), les ligues
-                      supérieurs (1, 2) et les ligues inférieures (3, 4).
-                    </p>
+                    <p>{t("lhm")}</p>
                   </div>
                   <div
                     ref={chartRef}
@@ -220,13 +205,7 @@ const PreviousSeasons = () => {
                 <TabsContent value="ratioScatterPlot" className="mt-12 md:mt-0">
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">Ratio Scatter Plot</h3>
-                    <p>
-                      Ce graphique montre un ratio entre les matches gagnés par
-                      matchs joués et les points gagnés par matchs joués pour chaque
-                      équipe du BC Fribourg pour chaque saison. Cliquez sur les
-                      points pour en découvrir plus et utilisez les filtres pour
-                      choisir entre les équipes du BC Fribourg!
-                    </p>
+                    <p>{t("rsp")}</p>
                     <div className="flex flex-row gap-2">
                       <Select
                         instanceId={"filter2"}
@@ -243,8 +222,8 @@ const PreviousSeasons = () => {
                       <Select
                         instanceId={"filter3"}
                         options={[
-                          { value: "wins", label: "Victoires", color: "black" },
-                          { value: "points", label: "Points", color: "black" },
+                          { value: "wins", label: t("filter.wins"), color: "black" },
+                          { value: "points", label: t("filter.points"), color: "black" },
                         ]}
                         closeMenuOnSelect={true}
                         onChange={(selectedOptions) => {
@@ -258,12 +237,12 @@ const PreviousSeasons = () => {
                           graphType === "wins"
                             ? {
                                 value: "wins",
-                                label: "Victoires",
+                                label: t("filter.wins"),
                                 color: "black",
                               }
                             : {
                                 value: "points",
-                                label: "Points",
+                                label: t("filter.points"),
                                 color: "black",
                               }
                         }
@@ -291,13 +270,7 @@ const PreviousSeasons = () => {
                 >
                   <div className="flex flex-col items-center justify-center gap-2">
                     <h3 className="text-lg font-bold">Stacked Barplot</h3>
-                    <p>
-                      Ce graphique montre les performances de chaque équipe du
-                      BC Fribourg pour chaque saison. Vous pouvez choisir entre
-                      les sets, les matches et les rencontres gagnés pour chaque
-                      saison. Utilisez les filtres pour choisir entre les
-                      équipes du BC Fribourg!
-                    </p>
+                    <p>{t("sbp")}</p>
                     <div className="flex flex-row gap-2">
                       <Select
                         instanceId={"filter4"}
@@ -314,11 +287,11 @@ const PreviousSeasons = () => {
                       <Select
                         instanceId={"filter5"}
                         options={[
-                          { value: "set", label: "Set", color: "black" },
-                          { value: "games", label: "Match", color: "black" },
+                          { value: "set", label: t("filter.sets"), color: "black" },
+                          { value: "games", label: t("filter.games"), color: "black" },
                           {
                             value: "match",
-                            label: "Rencontre",
+                            label: t("filter.matches"),
                             color: "black",
                           },
                         ]}
@@ -334,16 +307,16 @@ const PreviousSeasons = () => {
                         }}
                         value={
                           barplotType === "set"
-                            ? { value: "set", label: "Set", color: "black" }
+                            ? { value: "set", label: t("filter.sets"), color: "black" }
                             : barplotType === "games"
                               ? {
                                   value: "games",
-                                  label: "Match",
+                                  label: t("filter.games"),
                                   color: "black",
                                 }
                               : {
                                   value: "match",
-                                  label: "Rencontre",
+                                  label: t("filter.matches"),
                                   color: "black",
                                 }
                         }
@@ -373,5 +346,13 @@ const PreviousSeasons = () => {
     </div>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default PreviousSeasons;

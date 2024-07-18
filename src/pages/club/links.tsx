@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { HoverEffect } from "~/lib/components/ui/card-hover-effect";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const Links = () => {
+  const t = useTranslations("links");
   const links = [
     {
       title: "Swiss Badminton",
@@ -16,7 +19,7 @@ const Links = () => {
       link: "https://www.swiss-badminton.ch/",
     },
     {
-      title: "Association Fribourgeoise de Badminton",
+      title: t("afb"),
       description: (
         <div className="rounded-lg bg-black p-2">
           <Image
@@ -42,24 +45,33 @@ const Links = () => {
       link: "https://bctafers.ch/",
     },
     {
-      title: "Association Fribourgeoise du Sport",
-      description:
-      <Image
-      src="/assets/logos/afs.webp"
-      width={200}
-      height={200}
-      alt="AFS"
-    />,
+      title: t("afs"),
+      description: (
+        <Image
+          src="/assets/logos/afs.webp"
+          width={200}
+          height={200}
+          alt="AFS"
+        />
+      ),
       link: "https://www.afs-fvs.ch/fr/",
     },
   ];
   return (
     <>
-      <div className="mx-auto max-w-5xl -z-0 px-8">
+      <div className="-z-0 mx-auto max-w-5xl px-8">
         <HoverEffect items={links} />
       </div>
     </>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Links;

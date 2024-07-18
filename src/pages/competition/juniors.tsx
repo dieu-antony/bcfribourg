@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import {
   Table,
   TableBody,
@@ -6,8 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "~/lib/components/ui/table";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
 const juniors = () => {
+  const t = useTranslations("compJuniors");
   const circuitJunior = [
     { lieu: "Payerne", date: "30.11.2024" },
     { lieu: "Kerzers", date: "18.01.2025" },
@@ -28,20 +31,15 @@ const juniors = () => {
       <div className="m-4 mt-8 flex max-w-[1000px] flex-col self-center">
         <div className="flex flex-col gap-2 bg-white p-4 shadow-md">
           <h1 className="text-xl font-semibold text-picton-blue-500">
-            Circuit Junior
+            {t("cj.title")}
           </h1>
           <div className="flex flex-col gap-4">
-            <span>
-              Le Circuit Junior est une série de tournois pour les juniors en
-              simple. Les catégories sont U11, U13, U15, U17 et U19. Pour plus
-              d&apos;informations, veuillez consulter le site de l&apos;AFB. Pour
-              l&apos;Inscription, veuillez contacter votre entraineur!
-            </span>
+            <span>{t("cj.description")}</span>
             <Table className="max-w-[700px] shadow-md">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Lieu</TableHead>
-                  <TableHead>Date</TableHead>
+                  <TableHead>{t("location")}</TableHead>
+                  <TableHead>{t("date")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -57,20 +55,15 @@ const juniors = () => {
         </div>
         <div className="mt-8 flex flex-col gap-2 bg-white p-4 shadow-md">
           <h1 className="text-xl font-semibold text-picton-blue-500">
-            Coupe Avenir
+            Coupe l&apos;Avenir
           </h1>
           <div className="flex flex-col gap-4">
-            <span>
-              La Coupe Avenir est un tournois sous forme &quot;interclub&quot; (en equipe)
-              pour juniors avec 2 catégories: U12 et U16. Pour plus
-              d&apos;informations, veuillez consulter le site de l&apos;AFB. Pour
-              l&apos;Inscription, veuillez contacter votre entraineur!
-            </span>
+            <span>{t("ca.description")}</span>
             <Table className="max-w-[700px] shadow-md">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Lieu</TableHead>
-                  <TableHead>Date</TableHead>
+                  <TableHead>{t("location")}</TableHead>
+                  <TableHead>{t("date")}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -88,5 +81,13 @@ const juniors = () => {
     </>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default juniors;

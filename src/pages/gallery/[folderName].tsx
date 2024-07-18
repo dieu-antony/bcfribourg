@@ -1,3 +1,4 @@
+// pages/folder/[folderName].tsx
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { CldImage } from "next-cloudinary";
@@ -21,14 +22,21 @@ import { inter } from "../_app";
 import type { SearchResult } from "~/lib/types";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import { loadTranslationMessages } from "~/lib/utils/utils";
 
-export default function FolderPage() {
+type FolderPageProps = {
+  _messages: Record<string, any>;
+  initialResources: SearchResult[];
+};
+
+const FolderPage: React.FC<FolderPageProps> = ({ _messages, initialResources }) => {
   const router = useRouter();
-  const [resources, setResources] = useState<SearchResult[]>([]);
+  const [resources, setResources] = useState<SearchResult[]>(initialResources);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const routerQuery = router.query.folderName as string;
 
@@ -37,9 +45,9 @@ export default function FolderPage() {
       const cachedResources = localStorage.getItem("resources");
       if (cachedResources) {
         setResources(JSON.parse(cachedResources));
-        setLoading(false);
       } else {
-        const response = await fetch("/api/images/fetch-images");
+        setLoading(true);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
         const data = await response.json();
         localStorage.setItem("resources", JSON.stringify(data.resources));
         setResources(data.resources);
@@ -53,6 +61,7 @@ export default function FolderPage() {
     (result) => result.asset_folder === routerQuery,
   );
   const folderName = filteredResources[0]?.asset_folder;
+
   useEffect(() => {
     if (!api) {
       return;
@@ -68,7 +77,8 @@ export default function FolderPage() {
   if (loading) {
     return <></>;
   }
-  if (filteredResources != null && filteredResources.length !== 0) {
+
+  if (filteredResources.length > 0) {
     return (
       <>
         <div className="my-8 flex flex-col items-center px-5">
@@ -96,7 +106,7 @@ export default function FolderPage() {
                   />
                 </DialogTrigger>
                 <DialogContent
-                  className="max-h-[600px] max-w-[800px] border-none bg-transparent shadow-none"
+                  className=" max-w-[800px] border-none bg-transparent shadow-none"
                   closeClassName="hidden"
                 >
                   <DialogTitle></DialogTitle>
@@ -109,17 +119,16 @@ export default function FolderPage() {
                         >
                           <a
                             href={
-                              "https://res.cloudinary.com/dpgefyzn1/image/upload/v1721078955/" +
-                              result.public_id
+                              `https://res.cloudinary.com/dpgefyzn1/image/upload/v1721078955/${result.public_id}`
                             }
                             target="_blank"
                           >
                             <CldImage
                               src={result.public_id}
                               width="1500"
-                              height="700"
+                              height="600"
                               alt="Gallery image"
-                              className="max-h-[600px] object-cover"
+                              className="max-h-[800px] object-cover"
                             />
                           </a>
                         </CarouselItem>
@@ -144,10 +153,48 @@ export default function FolderPage() {
   return (
     <div className="mt-40 flex h-full w-full flex-col items-center justify-center gap-2">
       <h1 className="text-9xl font-bold">404</h1>
-      <p>Sorry, there are no images in this folder</p>
+      <p>There are no images in this folder</p>
       <Button onClick={() => router.back()} className="hover:opacity-80">
-        Return
+        Back
       </Button>
     </div>
   );
-}
+};
+
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
+  const data = await response.json();
+  const folders = data.resources.map((folder: SearchResult) => folder.asset_folder);
+
+  const paths = folders.flatMap((folder: string) =>
+    locales?.map((locale) => ({
+      params: { folderName: folder },
+      locale,
+    })) ?? []
+  );
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  const messages = await loadTranslationMessages(locale ?? 'fr-CH');
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
+  const data = await response.json();
+
+  const initialResources = data.resources.filter(
+    (resource: SearchResult) => resource.asset_folder === params?.folderName
+  );
+
+  return {
+    props: {
+      messages,
+      initialResources,
+    },
+  };
+};
+
+export default FolderPage;

@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { inter } from "../_app";
-import { getLeagueFromId } from "~/lib/utils/utils";
+import { getLeagueFromId, loadTranslationMessages } from "~/lib/utils/utils";
 import { toast } from "sonner";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { ICDatabaseTable } from "~/lib/components/dataTables/icTable/ICDatabaseTable";
@@ -467,4 +467,13 @@ const Players = () => {
     );
   }
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
+
 export default Players;

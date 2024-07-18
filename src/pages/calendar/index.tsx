@@ -3,9 +3,14 @@ import type { CalendarEvent } from "@prisma/client";
 import Select from "react-select";
 import EventCalendar from "~/lib/components/calendar/EventCalendar";
 import chroma from "chroma-js";
+import { loadTranslationMessages } from "~/lib/utils/utils";
+import { useTranslations } from "next-intl";
 
-//TODO: make filter pretty
-const Calendar = () => {
+type CalendarPageProps = {
+  messages: Record<string, any>;
+};
+const Calendar: React.FC<CalendarPageProps> = ({messages}) => {
+  const t = useTranslations("calendar");
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -98,10 +103,9 @@ const Calendar = () => {
     }
   }, [selectedFilters, events]);
 
-  //TODO: make the options a part of the db and fetch them here
   const filterOptions = [
-    { value: "Interclub A", label: "NLA", color: "purple" },
-    { value: "Interclub B", label: "NLB", color: "orange" },
+    //{ value: "Interclub A", label: "NLA", color: "orange" },
+    { value: "Interclub B", label: "NLB", color: "purple" },
     { value: "Interclub 1", label: "1ère Ligue", color: "blue" },
     { value: "Interclub 2", label: "2ème Ligue", color: "red" },
     //{ value: "Interclub 3", label: "3ème Ligue", color: "yellow" },
@@ -138,7 +142,7 @@ const Calendar = () => {
               setSelectedFilters(selectedValues);
             }}
             value={filteredOptions}
-            placeholder="Filtrer par type"
+            placeholder={t("filter")}
             className="z-10"
             styles={colorStyles}
           />
@@ -146,6 +150,7 @@ const Calendar = () => {
 
         <div className="w-full md:w-11/12">
           <EventCalendar
+            messages={messages}
             events={filteredEvents.map((ev) => {
               return { ...ev, color: getColorByEvent(ev.eventType) };
             })}
@@ -155,5 +160,13 @@ const Calendar = () => {
     </>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Calendar;

@@ -9,9 +9,20 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/lib/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/lib/components/ui/table";
+import { loadTranslationMessages } from "~/lib/utils/utils";
+import { useTranslations } from "next-intl";
 
 const Member = () => {
+  const t = useTranslations("member");
+
   const getCurrentYear = (): number => {
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth() + 1;
@@ -24,12 +35,41 @@ const Member = () => {
   };
 
   const cotisation = [
-    {catégorie: "Adultes", années: "", cotisation: "270.-", license: "60.-"},
-    {catégorie: "Juniors U19", années: ((getCurrentYear() - 18).toString() + " - " + (getCurrentYear() - 17).toString()), cotisation: "200.-", license: "40.-"},
-    {catégorie: "Juniors U17", années:((getCurrentYear() - 16).toString() + " - " + (getCurrentYear() - 15).toString()), cotisation: "190.-", license: "30.-"},
-    {catégorie: "Juniors U15", années: ((getCurrentYear() - 14).toString() + " - " + (getCurrentYear() - 13).toString()), cotisation: "150.-", license: "30.-"},
-    {catégorie: "Juniors U13", années: ((getCurrentYear() - 12).toString() + " - "), cotisation: "120.-", license: ""},
-  ]
+    { catégorie: "Adultes", années: "", cotisation: "270.-", license: "60.-" },
+    {
+      catégorie: "Juniors U19",
+      années:
+        (getCurrentYear() - 18).toString() +
+        " - " +
+        (getCurrentYear() - 17).toString(),
+      cotisation: "200.-",
+      license: "40.-",
+    },
+    {
+      catégorie: "Juniors U17",
+      années:
+        (getCurrentYear() - 16).toString() +
+        " - " +
+        (getCurrentYear() - 15).toString(),
+      cotisation: "190.-",
+      license: "30.-",
+    },
+    {
+      catégorie: "Juniors U15",
+      années:
+        (getCurrentYear() - 14).toString() +
+        " - " +
+        (getCurrentYear() - 13).toString(),
+      cotisation: "150.-",
+      license: "30.-",
+    },
+    {
+      catégorie: "Juniors U13",
+      années: (getCurrentYear() - 12).toString() + " - ",
+      cotisation: "120.-",
+      license: "",
+    },
+  ];
 
   const [emailData, setEmailData] = useState({
     gender: "Masculin",
@@ -53,7 +93,7 @@ const Member = () => {
       method: "POST",
       body: JSON.stringify(data),
     });
-    toast.success("Votre demande a bien été envoyée !");
+    toast.success(t("success"));
     setEmailData({ gender: "Masculin" } as EmailData);
 
     setLoading(false);
@@ -67,43 +107,36 @@ const Member = () => {
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-xl font-semibold leading-7 text-picton-blue-500">
-                  Demande d&apos;admission
+                  {t("title")}
                 </h2>
-                <p className="text-sm my-1 leading-6 text-gray-600">
-                  Vous avez déjà testé et vous souhaitez devenir membre du
-                  Badminton Club Fribourg ? Remplissez le formulaire d&apos;inscription ci-dessous !
+                <p className="my-1 text-sm leading-6 text-gray-600">
+                  {t("description")}
                 </p>
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1">
-                    <AccordionTrigger className="font-semibold text-picton-blue-500">Cotisation</AccordionTrigger>
+                    <AccordionTrigger className="font-semibold text-picton-blue-500">
+                      {t("fee")}
+                    </AccordionTrigger>
                     <AccordionContent>
                       <Table className="shadow-md">
                         <TableHeader>
                           <TableRow>
-                            <TableHead>
-                              Catégorie
-                            </TableHead>
-                            <TableHead>
-                              Années
-                            </TableHead>
-                            <TableHead>
-                              Cotisation annuelle
-                            </TableHead>
-                            <TableHead>
-                              License
-                            </TableHead>
+                            <TableHead>{t("category")}</TableHead>
+                            <TableHead>{t("years")}</TableHead>
+                            <TableHead>{t("fee")}</TableHead>
+                            <TableHead>{t("licence")}</TableHead>
                           </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {cotisation.map((cotisation) => (
-                              <TableRow key={cotisation.catégorie}>
-                                <TableCell>{cotisation.catégorie}</TableCell>
-                                <TableCell>{cotisation.années}</TableCell>
-                                <TableCell>{cotisation.cotisation}</TableCell>
-                                <TableCell>{cotisation.license}</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
+                        </TableHeader>
+                        <TableBody>
+                          {cotisation.map((cotisation) => (
+                            <TableRow key={cotisation.catégorie}>
+                              <TableCell>{cotisation.catégorie}</TableCell>
+                              <TableCell>{cotisation.années}</TableCell>
+                              <TableCell>{cotisation.cotisation}</TableCell>
+                              <TableCell>{cotisation.license}</TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
                       </Table>
                     </AccordionContent>
                   </AccordionItem>
@@ -113,7 +146,7 @@ const Member = () => {
                     className="sm:col-span-3"
                     label="name"
                     type="text"
-                    labelName="Nom"
+                    labelName={t("lastname")}
                     required
                     onChange={(e) =>
                       setEmailData({ ...emailData, lastName: e.target.value })
@@ -124,29 +157,30 @@ const Member = () => {
                     className="sm:col-span-3"
                     label="firstName"
                     type="text"
-                    labelName="Prénom"
+                    labelName={t("firstname")}
                     required
                     onChange={(e) =>
                       setEmailData({ ...emailData, firstName: e.target.value })
                     }
                     value={emailData.firstName}
                   />
-                  <FormItem
-                    className="sm:col-span-6"
-                    label="gender"
-                    type="select"
-                    labelName="Sexe"
-                    options={["Masculin", "Féminin", "Autre"]}
+                  <label htmlFor="gender">{t("gender")}</label>
+                  <select
+                    name="gender"
                     onChange={(e) =>
                       setEmailData({ ...emailData, gender: e.target.value })
                     }
-                    value="Masculin"
-                  />
+                    className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:col-span-6 sm:max-w-xs sm:text-sm sm:leading-6"
+                  >
+                    <option value="Masculin">{t("m")}</option>
+                    <option value="Féminin">{t("f")}</option>
+                    <option value="Autre">{t("other")}</option>
+                  </select>
                   <FormItem
                     className="sm:col-span-6"
                     label="address"
                     type=""
-                    labelName="Adresse"
+                    labelName={t("address")}
                     required
                     onChange={(e) =>
                       setEmailData({ ...emailData, address: e.target.value })
@@ -157,7 +191,7 @@ const Member = () => {
                     className="sm:col-span-6"
                     label="npa"
                     type=""
-                    labelName="NPA, Localité"
+                    labelName={t("npa")}
                     required
                     onChange={(e) =>
                       setEmailData({ ...emailData, npa: e.target.value })
@@ -168,7 +202,7 @@ const Member = () => {
                     className="sm:col-span-6"
                     label="year"
                     type="date"
-                    labelName="Date de naissance"
+                    labelName={t("dob")}
                     required
                     onChange={(e) =>
                       setEmailData({ ...emailData, birthdate: e.target.value })
@@ -179,7 +213,7 @@ const Member = () => {
                     className="sm:col-span-6"
                     label="avs"
                     type="avs"
-                    labelName="Numéro AVS (pour juniors)"
+                    labelName={t("avs")}
                     onChange={(e) =>
                       setEmailData({ ...emailData, avs: e.target.value })
                     }
@@ -189,7 +223,7 @@ const Member = () => {
                     className="sm:col-span-6"
                     label="phone"
                     type="tel"
-                    labelName="Tel Privé"
+                    labelName={t("phone")}
                     required
                     onChange={(e) =>
                       setEmailData({ ...emailData, phone: e.target.value })
@@ -198,19 +232,9 @@ const Member = () => {
                   />
                   <FormItem
                     className="sm:col-span-6"
-                    label="natel"
-                    type="tel"
-                    labelName="Natel"
-                    onChange={(e) =>
-                      setEmailData({ ...emailData, natel: e.target.value })
-                    }
-                    value={emailData.natel}
-                  />
-                  <FormItem
-                    className="sm:col-span-6"
                     label="license"
                     type=""
-                    labelName="Numéro de license (si titulaire d'une license Swiss Badminton)"
+                    labelName={t("sblicence")}
                     onChange={(e) =>
                       setEmailData({ ...emailData, license: e.target.value })
                     }
@@ -232,7 +256,7 @@ const Member = () => {
                     className="sm:col-span-6"
                     label="message"
                     type="textarea"
-                    labelName="Message"
+                    labelName={t("message")}
                     onChange={(e) =>
                       setEmailData({ ...emailData, message: e.target.value })
                     }
@@ -243,7 +267,7 @@ const Member = () => {
                     type="submit"
                     className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
                   >
-                    Envoyer
+                    {t("send")}
                   </button>
                 </div>
               </div>
@@ -255,5 +279,13 @@ const Member = () => {
     </>
   );
 };
+export async function getStaticProps({ locale }: { locale: string }) {
+  const messages = await loadTranslationMessages(locale);
+  return {
+    props: {
+      messages,
+    },
+  };
+}
 
 export default Member;
