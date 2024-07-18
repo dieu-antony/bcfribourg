@@ -42,7 +42,7 @@ export default function Gallery() {
           {filteredResources.map((result) => (
             <Link
               key={result.public_id}
-              href={"/gallery/" + encodeURI(result.tags[0]!)}
+              href={"/gallery/folder/" + encodeURI(result.tags[0]!)}
               className="relative block transform duration-100 hover:-translate-y-1 hover:opacity-80"
             >
               <CldImage

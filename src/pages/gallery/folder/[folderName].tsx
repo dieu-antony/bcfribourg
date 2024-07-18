@@ -17,12 +17,11 @@ import {
   DialogTrigger,
 } from "~/lib/components/ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
-import { inter } from "../_app";
 import type { SearchResult } from "~/lib/types";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import Layout from "~/lib/components/Layout";
+import Layout, { inter } from "~/lib/components/Layout";
 
 type FolderPageProps = {
   initialResources: SearchResult[];
@@ -166,7 +165,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
   const paths = folders.flatMap((folder: string) =>
     locales?.map((locale) => ({
-      params: { folderName: folder },
+      params: { folderName: "folder/"+ folder },
       locale,
     })) ?? []
   );
@@ -178,7 +177,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(`../../../messages/${locale}.json`)).default
+  const messages = (await import(`../../../../messages/${locale}.json`)).default
   
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
