@@ -61,15 +61,15 @@
     "Juniors": {
       "tuesday1": {
         "title": "Dienstag",
-        "description": "14-18 Jährig"
+        "description": "14-18 Jahre"
       },
       "tuesday2": {
         "title": "Dienstag",
-        "description": "Bis 14 Jährig"
+        "description": "Bis 14 Jahre"
       },
       "thursday18": {
         "title": "Donnerstag",
-        "description": "Bis 18 Jährig"
+        "description": "Bis 18 Jahre"
       },
       "holidays": {
         "title": "Ferien",
@@ -117,7 +117,7 @@
   "Tournament": {
     "title": "Swiss Badminton Turniere",
     "desc1": "Die Swiss Badminton Turniere sind offizielle Turniere, die vom Schweizer Badmintonverband organisiert werden. Um sich anzumelden, müssen Sie über die Website von Swiss Badminton gehen.",
-    "desc2": "Wenn Sie eine Lizenz haben, erstellen Sie einfach einen Login mit Ihren persönlichen Daten. Wenn Sie keine Lizenz haben, können Sie sich auch als Nicht-Lizenzierter anmelden, aber Ihre Möglichkeiten sind dann eingeschränkt. Für weitere Informationen wenden Sie sich bitte an den technischen Leiter:"
+    "desc2": "Wenn Sie eine Lizenz haben, erstellen Sie einfach ein Login mit Ihren persönlichen Daten. Wenn Sie keine Lizenz haben, können Sie sich auch als Nicht-Lizenzierter anmelden, aber Ihre Möglichkeiten sind dann eingeschränkt. Für weitere Informationen wenden Sie sich bitte an den technischen Leiter:"
   },
   "Contact": {
     "success": "Ihre Nachricht wurde erfolgreich gesendet!",
@@ -141,12 +141,12 @@
     "president": "Präsident",
     "vicePresident": "Kassiererin / Vizepräsidentin",
     "events": "Veranstaltungen",
-    "secretary": "Sekretärin / Verantw. Interclubs",
+    "secretary": "Sekretariat / Verantw. Interclubs",
     "sup": "Verantw. Oberligen"
   },
   "History": {
     "title": "Geschichte des Clubs",
-    "description": "Der Badminton Club Fribourg wurde offiziel am 12 November 1969 gegründet. Hier sind einige der wichtigsten Ereignisse aus dem Leben unseres Clubs von den Anfängen bis heute:",
+    "description": "Der Badminton Club Fribourg wurde offiziel am 12. November 1969 gegründet. Hier sind einige der wichtigsten Ereignisse aus der Geschichte unseres Clubs von den Anfängen bis heute:",
     "events": {
       "start": "Am Anfang...",
       "startDesc": "Einige Jugendliche aus dem Jura-Viertel spielen das Spiel „Fliegen“. Hauptziel: Windgeschützte Orte finden! Zu ihnen gehörten Jean-Claude Doutaz, Pierre Guerra und Claude Page. Ende der 60er Jahre entdeckten sie, dass das Federballspiel ein Sport ist, der in Vereinen ausgeübt wird: Badminton! Sie traten dem BC Wünnewil bei, dem einzigen Verein im Kanton.",
