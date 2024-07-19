@@ -164,40 +164,14 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  // const response = await fetch(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-covers`,
-  // );
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-covers`,
+  );
   
-  // const data = await response.json();
-  //const folders = data.resources.map((folder: SearchResult) => folder.tags[0]);
+  const data = await response.json();
+  const folders = data.resources.map((folder: SearchResult) => folder.tags[0]);
 
-  const data2 = [
-    { params: { folderName: "Open Glâne 2024" }, locale: "fr-CH" },
-    { params: { folderName: "Open Glâne 2024" }, locale: "de-CH" },
-    {
-      params: { folderName: "Championnats Fribourgeois 2024" },
-      locale: "fr-CH",
-    },
-    {
-      params: { folderName: "Championnats Fribourgeois 2024" },
-      locale: "de-CH",
-    },
-    { params: { folderName: "Interclubs 2023-2024" }, locale: "fr-CH" },
-    { params: { folderName: "Interclubs 2023-2024" }, locale: "de-CH" },
-    {
-      params: { folderName: "Mi-nuit du Badminton 2024" },
-      locale: "fr-CH",
-    },
-    {
-      params: { folderName: "Mi-nuit du Badminton 2024" },
-      locale: "de-CH",
-    },
-    { params: { folderName: "Tournoi de Noël 2023" }, locale: "fr-CH" },
-    { params: { folderName: "Tournoi de Noël 2023" }, locale: "de-CH" },
-  ];
-  const folders2 = data2.map((folder) => folder.params.folderName);
-
-  const paths = folders2.flatMap(
+  const paths = folders.flatMap(
     (folder: string) =>
       locales?.map((locale) => ({
         params: { folderName: folder },
