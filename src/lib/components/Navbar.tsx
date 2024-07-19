@@ -86,7 +86,7 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const { locale, locales, route } = useRouter();
+  const { locale, locales, asPath } = useRouter();
   const otherLocale = locales?.find((cur) => cur !== locale);
 
   return (
@@ -135,7 +135,7 @@ const Navbar = () => {
           </Link>
           <Link
             className="ml-2 mt-4 flex hover:text-picton-blue-500 lg:m-0 lg:self-center"
-            href={route}
+            href={asPath}
             locale={otherLocale}
             onClick={() => setIsOpen(false)}
           >

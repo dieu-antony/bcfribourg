@@ -38,13 +38,16 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
   const routerQuery = router.query.folderName as string;
 
   useEffect(() => {
+    if (!router.isReady) return;
     const fetchResources = async () => {
       const cachedResources = localStorage.getItem("resources");
       if (cachedResources) {
         setResources(JSON.parse(cachedResources));
       } else {
         setLoading(true);
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
+        );
         const data = await response.json();
         localStorage.setItem("resources", JSON.stringify(data.resources));
         setResources(data.resources);
@@ -72,7 +75,11 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
   }, [api, current]);
 
   if (loading) {
-    return <></>;
+    return (
+      <Layout>
+        <span />
+      </Layout>
+    );
   }
 
   if (filteredResources.length > 0) {
@@ -115,9 +122,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
                           className="items-center"
                         >
                           <a
-                            href={
-                              `https://res.cloudinary.com/dpgefyzn1/image/upload/v1721078955/${result.public_id}`
-                            }
+                            href={`https://res.cloudinary.com/dpgefyzn1/image/upload/v1721078955/${result.public_id}`}
                             target="_blank"
                           >
                             <CldImage
@@ -159,17 +164,46 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
-  const data = await response.json();
-  const folders = data.resources.map((folder: SearchResult) => folder.asset_folder);
+  // const response = await fetch(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-covers`,
+  // );
+  
+  // const data = await response.json();
+  //const folders = data.resources.map((folder: SearchResult) => folder.tags[0]);
 
-  const paths = folders.flatMap((folder: string) =>
-    locales?.map((locale) => ({
-      params: { folderName: "folder/"+ folder },
-      locale,
-    })) ?? []
+  const data2 = [
+    { params: { folderName: "Open Glâne 2024" }, locale: "fr-CH" },
+    { params: { folderName: "Open Glâne 2024" }, locale: "de-CH" },
+    {
+      params: { folderName: "Championnats Fribourgeois 2024" },
+      locale: "fr-CH",
+    },
+    {
+      params: { folderName: "Championnats Fribourgeois 2024" },
+      locale: "de-CH",
+    },
+    { params: { folderName: "Interclubs 2023-2024" }, locale: "fr-CH" },
+    { params: { folderName: "Interclubs 2023-2024" }, locale: "de-CH" },
+    {
+      params: { folderName: "Mi-nuit du Badminton 2024" },
+      locale: "fr-CH",
+    },
+    {
+      params: { folderName: "Mi-nuit du Badminton 2024" },
+      locale: "de-CH",
+    },
+    { params: { folderName: "Tournoi de Noël 2023" }, locale: "fr-CH" },
+    { params: { folderName: "Tournoi de Noël 2023" }, locale: "de-CH" },
+  ];
+  const folders2 = data2.map((folder) => folder.params.folderName);
+
+  const paths = folders2.flatMap(
+    (folder: string) =>
+      locales?.map((locale) => ({
+        params: { folderName: folder },
+        locale,
+      })) ?? [],
   );
-
   return {
     paths,
     fallback: false,
@@ -177,14 +211,16 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`)).default
-  
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
+  );
   const data = await response.json();
 
   const initialResources = data.resources.filter(
-    (resource: SearchResult) => resource.asset_folder === params?.folderName
+    (resource: SearchResult) => resource.asset_folder === params?.folderName,
   );
 
   return {
