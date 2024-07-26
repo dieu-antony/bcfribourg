@@ -88,6 +88,9 @@ const EventCalendar = ({ events }: EventProps) => {
     end: endOfMonth(nextMonth(chosenMonth)),
   });
 
+  // sat + 30 days = 35, sat & sun + 31 days = 42
+  const daysToDisplay = (daysInMonth.length == 30 && startingDayIndex == 6 || daysInMonth.length == 31 && startingDayIndex >= 5) ? 42 : 35;
+
   return (
     <div>
       <div className="grid grid-cols-3 py-2">
@@ -288,7 +291,7 @@ const EventCalendar = ({ events }: EventProps) => {
             </ScrollArea>
           );
         })}
-        {Array.from({ length: 35 - startingDayIndex - daysInMonth.length }).map(
+        {Array.from({ length: daysToDisplay - startingDayIndex - daysInMonth.length }).map(
           (_, index) => {
             return (
               <div

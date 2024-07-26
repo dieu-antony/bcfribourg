@@ -54,8 +54,8 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
         setLoading(false);
       }
     };
-    fetchResources();
-  }, []);
+    void fetchResources();
+  }, [router.isReady]);
 
   const filteredResources = resources.filter(
     (result) => result.asset_folder === routerQuery,

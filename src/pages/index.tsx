@@ -71,6 +71,7 @@ export default function Home() {
                     width={4080}
                     height={2160}
                     className="object-cover"
+                    priority={index < 2}
                   />
                 </CarouselItem>
               ))}

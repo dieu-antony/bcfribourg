@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import type { InteractionData } from "../statsGraphs/ScatterPlotTooltip";
-import {
-  ScatterPlotTooltip,
-} from "../statsGraphs/ScatterPlotTooltip";
+import { ScatterPlotTooltip } from "../statsGraphs/ScatterPlotTooltip";
 import type { PastTeam, TeamWithRatio } from "~/lib/types";
 import { CircleItem } from "./CircleItem";
 import { interpolatePath } from "d3-interpolate-path";
@@ -33,7 +31,6 @@ export const RatioScatterPlot = ({
   type,
   data,
 }: RatioScatterPlotProps) => {
-
   // Ref for the axes, interaction data for the tooltips and define the bounds
   const [interactionData, setInteractionData] =
     useState<InteractionData | null>(null);

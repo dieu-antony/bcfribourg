@@ -31,7 +31,7 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
     setLoading(true);
     fetch(`/api/events/filter/${queryDate}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: {status: "success" | "error", events: CalendarEvent[]}) => {
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
             ...event,

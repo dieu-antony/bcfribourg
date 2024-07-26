@@ -63,7 +63,7 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
         .transition()
         .duration(750)
         .call(
-          zoom.transform as (transition: Transition<SVGSVGElement | null, unknown, null, undefined>, ...args: any[]) => any,
+          (zoom.transform as (transition: Transition<SVGSVGElement | null, unknown, null, undefined>, ...args: any[]) => any).bind(zoom),
           d3.zoomIdentity,
           d3.zoomTransform(svg as any).invert([width / 2, height / 2]),
         );
@@ -124,10 +124,10 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
       .on("zoom", zoomed);
 
     // Zoom function
-    function zoomed(event: { transform: any }) {
+    function zoomed(event: { transform: any}) {
       const { transform } = event;
       g.attr("transform", transform);
-      g.attr("stroke-width", 1 / transform.k);
+      g.attr("stroke-width", 1 / transform?.k);
     }
 
     // Zoom to the location on load
@@ -140,16 +140,16 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
         .transition()
         .duration(2000)
         .call(
-          zoom.transform as any,
+          (zoom.transform as (transition: Transition<SVGSVGElement | null, unknown, null, undefined>, ...args: any[]) => any).bind(zoom),
           d3.zoomIdentity
-            .translate(width / 2, height / 2)
-            .scale(
-              Math.min(
-                8,
-                0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height),
-              ),
-            )
-            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+        .translate(width / 2, height / 2)
+        .scale(
+          Math.min(
+            8,
+            0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height),
+          ),
+        )
+        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
         );
     };
     if (svgRef.current) {

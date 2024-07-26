@@ -49,7 +49,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
           setLoading(false);
         }
       });
-  }, []);
+  }, [router.isReady]);
 
   // Check if the event exists
   const eventExists = events.find((elem) => elem.id === router.query.eventId);

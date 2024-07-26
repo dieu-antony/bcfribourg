@@ -32,6 +32,7 @@
   },
   "Training": {
     "Adults": {
+      "title": "Erwachsenentraining",
       "monday18": {
         "title": "Montag",
         "description": "4. Liga und nicht Lizenzierte"
@@ -59,6 +60,7 @@
       }
     },
     "Juniors": {
+      "title": "Juniorentraining",
       "tuesday1": {
         "title": "Dienstag",
         "description": "14-18 Jahre"
@@ -226,7 +228,6 @@
     "end": "Ende",
     "locale": "de",
     "events": "Veranstaltungen"
-
   },
   "Sponsors": {
     "title": "Sponsoren des BC Fribourg",

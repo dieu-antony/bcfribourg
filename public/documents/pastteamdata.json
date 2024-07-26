@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Union Tafers-Fribourg X",
+    "position": 1,
+    "wins": 14,
+    "losses": 14,
+    "ties": 0,
+    "points": 24,
+    "matchRecord": "40-35",
+    "setRecord": "200-300",
+    "gamesRecord": "4000-3000",
+    "seasonStart": 2024,
+    "leagueId": "check on the website",
+    "url": "url with the table"
+  },
+  {
+    "name": "Union Tafers-Fribourg X",
+    "position": 1,
+    "wins": 14,
+    "losses": 14,
+    "ties": 0,
+    "points": 24,
+    "matchRecord": "40-35",
+    "setRecord": "200-300",
+    "gamesRecord": "4000-3000",
+    "seasonStart": 2024,
+    "leagueId": "check on the website",
+    "url": "url with the table"
+  }
+]

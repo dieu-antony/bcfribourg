@@ -32,6 +32,7 @@
   },
   "Training": {
     "Adults": {
+      "title": "Entraînements adultes",
       "monday18": {
         "title": "Lundi",
         "description": "4ème ligue et non licenciés"
@@ -59,6 +60,7 @@
       }
     },
     "Juniors": {
+      "title": "Entraînements juniors",
       "tuesday1": {
         "title": "Mardi",
         "description": "14-18 ans"

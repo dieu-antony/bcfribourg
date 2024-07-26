@@ -15,6 +15,7 @@ const Tournament = () => {
         width={3840}
         height={2160}
         className="left-0 top-0 z-0 max-h-[400px] w-full object-cover"
+        priority
       />
       <div className="top-40 m-8 flex max-w-[1000px] flex-col self-center">
         <div className="flex flex-col gap-2 bg-white p-5 shadow-md">

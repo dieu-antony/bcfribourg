@@ -23,7 +23,7 @@ export default function Gallery() {
         setLoading(false);
       }
     };
-    fetchResources();
+    void fetchResources();
   }, []);
 
   const filteredResources = resources.filter(

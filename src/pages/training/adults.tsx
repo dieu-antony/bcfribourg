@@ -10,11 +10,16 @@ const adults = () => {
 
   return (
     <Layout>
+      <div className="h-12 w-full bg-picton-blue-500 mt-8">
+        <h1 className="pt-2 text-center text-3xl font-bold text-white">
+          {t("title")}
+        </h1>
+      </div>
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
         <TrainingCard
           className="mt-8 transition duration-200 hover:translate-x-1 md:place-self-end"
           time={{ start: "18h00 - 20h00", day: t("monday18.title") }}
-          trainer="Manuel Helfer"
+          trainer="Antony Dieu"
           target={t("monday18.description")}
         />
         <TrainingCard
@@ -25,7 +30,7 @@ const adults = () => {
         />
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:place-self-end"
-          time={{ start: "20h00 - 22h00", day: t("wednesday20.title")}}
+          time={{ start: "20h00 - 22h00", day: t("wednesday20.title") }}
           trainer="Anna Lartchenko-Fischer"
           target={t("wednesday20.description")}
         />
@@ -47,7 +52,9 @@ const adults = () => {
             </a>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="text-lg font-semibold">{t("holidays.seasonDuration")}</h1>
+            <h1 className="text-lg font-semibold">
+              {t("holidays.seasonDuration")}
+            </h1>
             <span>26.08.2024 {t("holidays.until")} 26.06.2025</span>
           </div>
         </div>
@@ -77,8 +84,8 @@ const adults = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default
-    }
+      messages: (await import(`../../../messages/${locale}.json`)).default,
+    },
   };
 }
 

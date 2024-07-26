@@ -26,7 +26,10 @@ import { inter } from "../_app";
 import crypto from "crypto";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
-import { EventDatabaseColumns, type DatabaseColumnsProps } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
+import {
+  EventDatabaseColumns,
+  type DatabaseColumnsProps,
+} from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
 
 const Calendar = () => {
   const { status } = useSession();
@@ -82,17 +85,18 @@ const Calendar = () => {
 
       const reader = new FileReader();
 
-      reader.addEventListener("load", async function (e) {
+      reader.addEventListener("load", function (e) {
         const content = e.target?.result;
         if (!content) return;
         if (typeof content !== "string") return;
 
         const data = sync.parseICSFix(content);
-        const parsedEvents = await parseCalendar(data);
-        setEvents((prev) => [...prev, ...parsedEvents]);
-        setLoading(false);
-        toast.dismiss(toastId);
-        toast.success("Events uploaded successfully");
+        parseCalendar(data).then((parsedEvents) => {
+          setEvents((prev) => [...prev, ...parsedEvents]);
+          setLoading(false);
+          toast.dismiss(toastId);
+          toast.success("Events uploaded successfully");
+        });
       });
 
       reader.readAsText(file);
@@ -114,7 +118,8 @@ const Calendar = () => {
       method: "POST",
       body: JSON.stringify(eventsWithType),
     });
-    const data = await response.json();
+    const data: { status: "success" | "error"; message: string } =
+      await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -133,7 +138,8 @@ const Calendar = () => {
       method: "POST",
       body: JSON.stringify(eventsAsArray),
     });
-    const data = await response.json();
+    const data: { status: "success" | "error"; message: string } =
+      await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -150,7 +156,8 @@ const Calendar = () => {
       method: "POST",
       body: JSON.stringify(tableData),
     });
-    const data = await response.json();
+    const data: { status: "success" | "error"; message: string } =
+      await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -340,8 +347,8 @@ const Calendar = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default
-    }
+      messages: (await import(`../../../messages/${locale}.json`)).default,
+    },
   };
 }
 
