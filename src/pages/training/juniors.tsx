@@ -30,7 +30,7 @@ const juniors = () => {
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:place-self-end"
           time={{ start: "18h00 - 20h00", day: t("thursday18.title") }}
-          trainer="Colette Jungo & Julie Huser"
+          trainer="Julie Huser"
           target={t("thursday18.description")}
         />
         <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm transition duration-200 hover:translate-x-1 md:place-self-start lg:h-[300] lg:w-[400px]">
