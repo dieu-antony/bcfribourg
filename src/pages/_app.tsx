@@ -51,6 +51,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
             content="/assets/favicon/browserconfig.xml"
           />
           <meta name="theme-color" content="#ffffff" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="description" content="Le Badminton Club Fribourg accueille des joueurs et joueuses de tous âges et de tous niveaux. Que vous soyez débutant ou compétiteur confirmé, vous trouverez des opportunités adaptées à votre niveau." key="desc"/>
           <title>BC Fribourg</title>
         </Head>
