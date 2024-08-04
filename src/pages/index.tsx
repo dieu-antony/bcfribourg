@@ -72,6 +72,7 @@ export default function Home() {
                     height={2160}
                     className="object-cover"
                     priority={index < 2}
+                    loading={index < 2 ? "eager" : "lazy"}
                   />
                 </CarouselItem>
               ))}

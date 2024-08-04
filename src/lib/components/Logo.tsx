@@ -13,6 +13,7 @@ const Logo = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          loading="eager"
         />
         <Image
           className="hidden 2xl:block"
@@ -22,6 +23,7 @@ const Logo = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          loading="eager"
         />
         <Image
           className="hidden xl:block 2xl:hidden"
@@ -31,6 +33,7 @@ const Logo = () => {
           height={0}
           sizes="100vw"
           style={{ width: "100%", height: "auto" }}
+          loading="eager"
         />
       </Link>
     </div>

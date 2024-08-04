@@ -15,7 +15,6 @@ import {
   UserRoundPlus,
   Link2,
   MapPinned,
-  Globe,
 } from "lucide-react";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
@@ -139,7 +138,7 @@ const Navbar = () => {
             locale={otherLocale}
             onClick={() => setIsOpen(false)}
           >
-            <Globe size="20px" />
+            {locale === "de-CH" ? "FR" : "DE"}
           </Link>
         </div>
         <div className="absolute right-8 top-11 lg:hidden">

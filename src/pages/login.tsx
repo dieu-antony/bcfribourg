@@ -2,32 +2,51 @@ import { type FormEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
+import Router from "next/router";
 
 const Login = () => {
   const [data, setData] = useState({
     username: "",
     password: "",
   });
+  const [failedLogin, setFailedLogin] = useState(false);
 
   const loginUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await signIn("credentials", { ...data, callbackUrl: "/admin"});
+    await signIn("credentials", {
+      ...data,
+      callbackUrl: "/admin",
+      redirect: false,
+    }).then((res) => {
+      if (res!.error) {
+        setFailedLogin(true);
+        setData({ ...data, password: "" });
+      }
+      if (res!.ok) {
+        setFailedLogin(false);
+        void Router.replace("/admin");
+      }
+    });
   };
   return (
     <Layout>
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
-        <div className="m-5 w-full max-w-[500px] rounded-sm bg-white shadow p-5">
+        <div className="m-5 w-full max-w-[500px] rounded-sm bg-white p-5 shadow">
           <form onSubmit={loginUser}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-picton-blue-500">
                   Login
                 </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Please login using your usename and password. If you don&apos;t have a login, please ask the admin to create one for you.
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  Please login using your usename and password. If you
+                  don&apos;t have a login, please ask the admin to create one
+                  for you.
                 </p>
-
-                <div className="mt-10 flex flex-col gap-x-6 gap-y-8">
+                <p
+                  className={`mt-2 text-sm leading-6 text-red-500 ${failedLogin ? "block" : "hidden"}`}
+                >The username or password you entered is incorrect. Please try again.</p>
+                <div className="mt-6 flex flex-col gap-x-6 gap-y-8">
                   <div>
                     <label
                       htmlFor="username"
@@ -45,6 +64,7 @@ const Login = () => {
                         type="text"
                         id="username"
                         className="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+                        required
                       />
                     </div>
                   </div>
@@ -65,6 +85,7 @@ const Login = () => {
                         id="password"
                         autoComplete="current-password"
                         className="form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+                        required
                       />
                     </div>
                   </div>
@@ -87,8 +108,8 @@ const Login = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../messages/${locale}.json`)).default
-    }
+      messages: (await import(`../../messages/${locale}.json`)).default,
+    },
   };
 }
 

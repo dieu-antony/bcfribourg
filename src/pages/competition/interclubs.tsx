@@ -37,6 +37,7 @@ const Interclubs = () => {
         height={2160}
         className="left-0 top-0 z-0 max-h-96 w-full object-cover"
         priority
+        loading="eager"
       />
       <h1 className="absolute z-10 mt-[150px] w-full bg-gradient-to-r from-transparent via-slate-700/50 py-1 text-center text-2xl font-bold text-white md:mt-[220px] md:text-6xl">
         Interclub

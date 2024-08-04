@@ -7,7 +7,9 @@ import { inter } from "./Layout";
 const Footer = () => {
   const t = useTranslations("Footer");
   return (
-    <footer className={`font-sans ${inter.variable} z-30 mt-auto w-full bg-gray-800 p-4`}>
+    <footer
+      className={`font-sans ${inter.variable} z-30 mt-auto w-full bg-gray-800 p-4`}
+    >
       <div className="ml-4 mr-4 flex h-full flex-col items-center gap-8 sm:grid sm:grid-cols-3">
         <div className="rounded-lg p-2">
           <div className="h-auto w-16 transition-all duration-300 ease-linear lg:w-20">
@@ -27,7 +29,7 @@ const Footer = () => {
             <Link href="https://www.instagram.com/bcfribourg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-6 w-6 hover:fill-picton-blue-500"
                 fill="#FFFFFF"
                 viewBox="0 0 24 24"
                 target="_blank"
@@ -38,7 +40,7 @@ const Footer = () => {
             <Link href="https://github.com/dieu-antony/bcfribourg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-6 w-6 hover:fill-picton-blue-500"
                 fill="#FFFFFF"
                 viewBox="0 0 24 24"
                 target="_blank"
@@ -47,7 +49,7 @@ const Footer = () => {
               </svg>
             </Link>
             <Link href="/club/contact">
-              <Mail className="h-6 w-6 text-white" />
+              <Mail className="h-6 w-6 text-white hover:text-picton-blue-500" />
             </Link>
           </div>
         </div>
