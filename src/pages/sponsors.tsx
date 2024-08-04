@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 import Sponsor from "~/lib/components/Sponsor";
 
-export default function sponsors() {
+export default function Sponsors() {
   const t = useTranslations("Sponsors");
   return (
     <Layout>

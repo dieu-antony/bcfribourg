@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as d3 from "d3";
 
 import { getWinLossRecord } from "~/lib/utils/utils";
-import type { PastTeam, TeamWithRatioKey } from "~/lib/types";
+import type { PastTeamProps, TeamWithRatioKey } from "~/lib/types";
 import { animated, useSprings } from "@react-spring/web";
 
 // Predefined margins
@@ -12,7 +12,7 @@ type StackedBarplotProps = {
   width: number;
   height: number;
   type: "set" | "games" | "match";
-  data: PastTeam[];
+  data: PastTeamProps[];
 };
 
 export const StackedBarplot = ({
@@ -106,53 +106,56 @@ export const StackedBarplot = ({
     svgElement.append("g").call(yAxisGenerator);
   }, [xScale, yScale, boundsHeight]);
 
+  // Compute the springs for the rectangles outside the mapping function
+  const springs = useSprings(
+    series.flat().length,
+    series.flat().map((group) => ({
+      to: {
+        x: xScale(group.data.seasonStart?.toString() ?? ""),
+        y: yScale(group[1]),
+        height: yScale(group[0]) - yScale(group[1]),
+        width: xScale.bandwidth(),
+        dx: xScale.bandwidth() / 2,
+      },
+      config: {
+        friction: 20,
+        mass: 1,
+      },
+    })),
+  );
+
   // Draw the bars using react-spring library for animations
-  const rectangles = series.map((subgroup, i) => {
-    const springs = useSprings(
-      subgroup.length,
-      subgroup.map((group, _) => ({
-        to: {
-          x: xScale(group.data.seasonStart?.toString() ?? ""),
-          y: yScale(group[1]),
-          height: yScale(group[0]) - yScale(group[1]),
-          width: xScale.bandwidth(),
-          dx: xScale.bandwidth() / 2,
-        },
-        config: {
-          friction: 20,
-          mass: 1,
-        },
-      })),
-    );
-    return (
-      <g key={i}>
-        {subgroup.map((group, j) => {
-          return (
-            <g key={j}>
-              <animated.rect
-                x={springs[j]?.x}
-                y={springs[j]?.y}
-                height={springs[j]?.height}
-                width={springs[j]?.width}
-                fill={colorScale(subgroup.key)}
-                opacity={0.9}
-              ></animated.rect>
-              <animated.text
-                x={springs[j]?.x}
-                y={springs[j]?.y}
-                dy={20}
-                dx={springs[j]?.dx}
-                textAnchor="middle"
-                fill="black"
-              >
-                {group.data[subgroup.key] === 0 ? "" : group.data[subgroup.key]}
-              </animated.text>
-            </g>
-          );
-        })}
-      </g>
-    );
-  });
+  let springIndex = 0; // Track the index manually
+  const rectangles = series.map((subgroup, i) => (
+    <g key={i}>
+      {subgroup.map((group, j) => {
+        const spring = springs[springIndex++];
+        return (
+          <g key={j}>
+            <animated.rect
+              x={spring?.x}
+              y={spring?.y}
+              height={spring?.height}
+              width={spring?.width}
+              fill={colorScale(subgroup.key)}
+              opacity={0.9}
+            ></animated.rect>
+            <animated.text
+              x={spring?.x}
+              y={spring?.y}
+              dy={20}
+              dx={spring?.dx}
+              textAnchor="middle"
+              fill="black"
+            >
+              {group.data[subgroup.key] === 0 ? "" : group.data[subgroup.key]}
+            </animated.text>
+          </g>
+        );
+      })}
+    </g>
+  ));
+
   return (
     <div>
       <svg width={width} height={height}>

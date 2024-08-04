@@ -5,7 +5,7 @@ import Link from "next/link";
 import Layout from "~/lib/components/Layout";
 import TrainingCard from "~/lib/components/TrainingCard";
 
-const juniors = () => {
+const Juniors = () => {
   const t = useTranslations("Training.Juniors");
   return (
     <Layout>
@@ -83,4 +83,4 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 }
 
 
-export default juniors;
+export default Juniors;

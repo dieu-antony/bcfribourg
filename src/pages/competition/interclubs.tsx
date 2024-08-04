@@ -22,7 +22,7 @@ const Interclubs = () => {
   useEffect(() => {
     void fetch("/api/players")
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: { players: PlayerByTeam[]; status: string }) => {
         if (data.status === "success") {
           setPlayersByTeam(data.players);
         }

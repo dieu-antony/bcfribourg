@@ -19,13 +19,6 @@ const config = {
     //disabled a bunch of rules for different reasons, to be fixed later (typing error with D3 etc)
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-unsafe-argument": "off",
-    "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-return": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-floating-promises": "off",
-    "react-hooks/rules-of-hooks": "off",
-    "react-hooks/exhaustive-deps": "off",
 
     "@typescript-eslint/consistent-type-imports": [
       "warn",

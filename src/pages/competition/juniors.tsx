@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "~/lib/components/ui/table";
 
-const juniors = () => {
+const Juniors = () => {
   const t = useTranslations("CompJuniors");
   const circuitJunior = [
     { lieu: "Payerne", date: "30.11.2024" },
@@ -89,4 +89,4 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     }
   };
 }
-export default juniors;
+export default Juniors;

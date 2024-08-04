@@ -12,8 +12,8 @@ export default async function handler(
   const session = await getServerSession( req, res, authOptions );
   if (session) {
     await RouteHandler(req, res, {
-      POST: async function (req, res: NextApiResponse) {
-        const calendarEvents: CalendarEventWithoutID[] = JSON.parse(req.body);
+      POST: async function (req: NextApiRequest, res: NextApiResponse) {
+        const calendarEvents: CalendarEventWithoutID[] = JSON.parse(req.body as string);
 
         if (calendarEvents.length === 0) {
           return res

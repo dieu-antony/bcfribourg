@@ -2,13 +2,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
 import type { InteractionData } from "../statsGraphs/ScatterPlotTooltip";
 import { ScatterPlotTooltip } from "../statsGraphs/ScatterPlotTooltip";
-import type { PastTeam, TeamWithRatio } from "~/lib/types";
+import type { PastTeamProps, TeamWithRatio } from "~/lib/types";
 import { CircleItem } from "./CircleItem";
 import { interpolatePath } from "d3-interpolate-path";
 import {
-  type AnimationResult,
-  type Lookup,
-  type SpringValue,
   animated,
   to,
   useSpring,
@@ -22,7 +19,7 @@ type RatioScatterPlotProps = {
   width: number;
   height: number;
   type: "wins" | "points";
-  data: PastTeam[];
+  data: PastTeamProps[];
 };
 
 export const RatioScatterPlot = ({
@@ -40,19 +37,23 @@ export const RatioScatterPlot = ({
   const boundsHeight = height - margin.top - margin.bottom;
 
   // Use the type to determine the data to display
-  let updatedData: TeamWithRatio[] = [];
-  let max = 1;
+  const { updatedData, max } = useMemo(() => {
+    let computedData: TeamWithRatio[] = [];
+    let maxRatio = 1;
 
-  if (type === "wins") {
-    updatedData = data.map((d) => {
-      return { ...d, ratio: d.wins / (d.wins + d.losses + d.ties) };
-    });
-  } else if (type === "points") {
-    updatedData = data.map((d) => {
-      return { ...d, ratio: d.points / (d.wins + d.losses + d.ties) };
-    });
-    max = d3.extent(updatedData, (d) => d.ratio)?.[1] ?? 0;
-  }
+    if (type === "wins") {
+      computedData = data.map((d) => {
+        return { ...d, ratio: d.wins / (d.wins + d.losses + d.ties) };
+      });
+    } else if (type === "points") {
+      computedData = data.map((d) => {
+        return { ...d, ratio: d.points / (d.wins + d.losses + d.ties) };
+      });
+      maxRatio = d3.extent(computedData, (d) => d.ratio)?.[1] ?? 0;
+    }
+
+    return { updatedData: computedData, max: maxRatio };
+  }, [data, type]);
 
   // Define the scales for the axes
   const yScale = d3.scaleLinear().domain([0, max]).range([boundsHeight, 0]);
@@ -85,7 +86,7 @@ export const RatioScatterPlot = ({
     .x((d) => xScale(customTimeParser(d.seasonStart.toString())!))
     .y((d) => yScale(d.ratio));
 
-  // Define the path interpolator
+  // Generate the line path
   const line = lineBuilder(updatedData);
 
   const linePath = useRef(line);
@@ -96,28 +97,22 @@ export const RatioScatterPlot = ({
     [lineBuilder, updatedData],
   );
 
-  if (!linePath) {
-    return null;
-  }
-
   // Define the spring properties for the line for react-spring animations
   const lineSpringProps = useSpring({
-    from: {
-      t: 0,
-    },
-    to: {
-      t: 1,
-    },
+    from: { t: 0 },
+    to: { t: 1 },
     config: {
       friction: 20,
       mass: 1,
     },
     reset: linePath.current !== line,
-    onChange: ({ value }: AnimationResult<SpringValue<Lookup<any>>>) => {
+    onChange: ({ value }) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       linePath.current = pathInterpolator(value.t);
     },
   });
 
+  // Define the springs for the circles
   const springs = useSprings(
     updatedData.length,
     updatedData.map((d) => ({
@@ -132,6 +127,11 @@ export const RatioScatterPlot = ({
       },
     })),
   );
+
+  // Check if linePath is not null
+  if (!linePath.current) {
+    return null;
+  }
 
   // Draw the circles for the data points
   const allCircles = updatedData.map((d, index) => {

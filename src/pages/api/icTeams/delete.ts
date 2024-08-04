@@ -13,7 +13,7 @@ export default async function handler(
   if (session) {
   await RouteHandler(req, res, {
     POST: async function (req, res: NextApiResponse) {
-      const ICTeam: ICTeam[] = JSON.parse(req.body);
+      const ICTeam: ICTeam[] = JSON.parse(req.body as string);
 
       try {
         const teamToDelete = await db.iCTeam.findMany({

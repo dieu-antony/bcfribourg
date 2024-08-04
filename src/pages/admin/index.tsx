@@ -9,9 +9,11 @@ import Layout from "~/lib/components/Layout";
 const Admin = () => {
   const { status, data } = useSession();
   useEffect(() => {
-    if (status === "unauthenticated") Router.replace("/login");
+    if (status === "unauthenticated") {
+      void Router.replace("/login");
+    }
   }, [status]);
-  
+
   if (status === "authenticated") {
     return (
       <Layout>
@@ -25,7 +27,9 @@ const Admin = () => {
           </h2>
           <Button onClick={() => Router.push("/admin/icdata")}>IC Data</Button>
           <Button onClick={() => Router.push("/admin/players")}>Players</Button>
-          <Button onClick={() => Router.push("/admin/calendar")}>Calendar</Button>
+          <Button onClick={() => Router.push("/admin/calendar")}>
+            Calendar
+          </Button>
         </div>
       </Layout>
     );
@@ -34,8 +38,8 @@ const Admin = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default
-    }
+      messages: (await import(`../../../messages/${locale}.json`)).default,
+    },
   };
 }
 

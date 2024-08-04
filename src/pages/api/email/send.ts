@@ -9,8 +9,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function send (req: NextApiRequest, res: NextApiResponse<void>) {
   await RouteHandler(req, res, {
-    POST: async function (req, res: NextApiResponse) {
-      const EmailData: EmailData = JSON.parse(req.body);
+    POST: async function (req: NextApiRequest, res: NextApiResponse) {
+      const EmailData: EmailData = JSON.parse(req.body as string);
       try {
         const { data, error } = await resend.emails.send({
           from: "BC Fribourg <onboarding@resend.dev>",

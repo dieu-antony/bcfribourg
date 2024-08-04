@@ -1,4 +1,4 @@
-import type { League, CalendarEvent, Player } from "@prisma/client";
+import type { CalendarEvent, Player } from "@prisma/client";
 import type {
   Attendee,
   BaseComponent,
@@ -14,24 +14,7 @@ import type {
   VEventStatus,
   VTimeZone,
 } from "node-ical";
-export type TeamWithRatio = PastTeam & { ratio: number };
-
-export type PastTeam = {
-  id: string;
-  name: string;
-  position: number;
-  wins: number;
-  losses: number;
-  ties: number;
-  points: number;
-  matchRecord: string;
-  setRecord: string;
-  gamesRecord: string;
-  seasonStart: number;
-  league: League;
-  leagueId: string;
-  url: string;
-};
+export type TeamWithRatio = PastTeamProps & { ratio: number };
 
 export type EmailData = {
   firstName?: string;
@@ -111,14 +94,16 @@ export interface NodeICalSyncFix {
   parseFileFix: (file: string) => CalendarResponseFix;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line
 const nodeIcal = require("node-ical");
 
 export const sync: NodeICalSyncFix = {
   parseICSFix: (body: string): CalendarResponseFix => {
+    // eslint-disable-next-line
     return nodeIcal.parseICS(body);
   },
   parseFileFix: (file: string): CalendarResponseFix => {
+    // eslint-disable-next-line
     return nodeIcal.parseFile(file);
   },
 };
@@ -127,5 +112,21 @@ export type SearchResult = {
   public_id: string;
   asset_folder: string;
   tags: string[];
-  
+};
+
+export type PastTeamProps = {
+  id: string;
+  name: string;
+  position: number;
+  wins: number;
+  losses: number;
+  ties: number;
+  points: number;
+  matchRecord: string;
+  setRecord: string;
+  gamesRecord: string;
+  seasonStart: number;
+  league: string;
+  leagueId: string;
+  url: string;
 };

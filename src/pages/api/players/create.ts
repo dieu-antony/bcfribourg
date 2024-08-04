@@ -5,7 +5,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import type { PlayerWithoutID } from "~/lib/types";
 
-//TODO: adapt to players
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -14,7 +13,7 @@ export default async function handler(
   if (session) {
     await RouteHandler(req, res, {
       POST: async function (req, res: NextApiResponse) {
-        const players: PlayerWithoutID[] = JSON.parse(req.body);
+        const players: PlayerWithoutID[] = JSON.parse(req.body as string);
 
         if (players.length === 0) {
           return res

@@ -8,18 +8,27 @@ import { useState } from "react";
 import { MapTooltip } from "./MapTooltip";
 import type { Transition } from "d3";
 
-type MapProps = { longitude: number; latitude: number; location: string, width: number, height: number };
+type MapProps = {
+  longitude: number;
+  latitude: number;
+  location: string;
+  width: number;
+  height: number;
+};
 type InteractionData = {
   xPos: number;
   yPos: number;
   location: string;
 };
-const Map = ({ longitude, latitude, location, /*width, height  two props for future with useDimension hook*/}: MapProps) => {
+const Map = ({
+  longitude,
+  latitude,
+  location /*width, height  two props for future with useDimension hook*/,
+}: MapProps) => {
   // Ref for the SVG element and the interaction data for the tooltip
   const [interactionData, setInteractionData] =
     useState<InteractionData | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
-
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -35,7 +44,6 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
         d3.geoMercator()
           .translate([width / 2, height / 2])
           .scale((width * height) / 600);
-        
       }
     });
     let width = Math.min(window.innerWidth, 975);
@@ -63,8 +71,21 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
         .transition()
         .duration(750)
         .call(
-          (zoom.transform as (transition: Transition<SVGSVGElement | null, unknown, null, undefined>, ...args: any[]) => any).bind(zoom),
+          (
+            zoom.transform as (
+              transition: Transition<
+                SVGSVGElement | null,
+                unknown,
+                null,
+                undefined
+              >,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ...args: any[]
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ) => any
+          ).bind(zoom),
           d3.zoomIdentity,
+          // eslint-disable-next-line
           d3.zoomTransform(svg as any).invert([width / 2, height / 2]),
         );
     }
@@ -82,7 +103,7 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
           ),
         ),
       );
-    
+
     // Add cantons and lakes
     const cantons = g
       .append("path")
@@ -100,8 +121,7 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
           ),
         ),
       );
-    g
-      .append("path")
+    g.append("path")
       .attr("fill", "#b3e6ff")
       .attr(
         "d",
@@ -124,8 +144,11 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
       .on("zoom", zoomed);
 
     // Zoom function
-    function zoomed(event: { transform: any}) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function zoomed(event: { transform: any }) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const { transform } = event;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       g.attr("transform", transform);
       g.attr("stroke-width", 1 / transform?.k);
     }
@@ -140,16 +163,28 @@ const Map = ({ longitude, latitude, location, /*width, height  two props for fut
         .transition()
         .duration(2000)
         .call(
-          (zoom.transform as (transition: Transition<SVGSVGElement | null, unknown, null, undefined>, ...args: any[]) => any).bind(zoom),
+          (
+            zoom.transform as (
+              transition: Transition<
+                SVGSVGElement | null,
+                unknown,
+                null,
+                undefined
+              >,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ...args: any[]
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ) => any
+          ).bind(zoom),
           d3.zoomIdentity
-        .translate(width / 2, height / 2)
-        .scale(
-          Math.min(
-            8,
-            0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height),
-          ),
-        )
-        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+            .translate(width / 2, height / 2)
+            .scale(
+              Math.min(
+                8,
+                0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height),
+              ),
+            )
+            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
         );
     };
     if (svgRef.current) {

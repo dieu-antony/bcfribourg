@@ -28,10 +28,14 @@ const EventPage = ({ initialResources }: EventPageProps) => {
   // Fetch events from the API
   useEffect(() => {
     if (!router.isReady) return;
-    setLoading(true);
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data) => {
+
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/events");
+        const data: { status: string; events: CalendarEvent[] } =
+          await response.json();
+
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
             ...event,
@@ -46,9 +50,15 @@ const EventPage = ({ initialResources }: EventPageProps) => {
             latitude: event.latitude,
           }));
           setEvents(newEvents);
-          setLoading(false);
         }
-      });
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchEvents();
   }, [router.isReady]);
 
   // Check if the event exists
@@ -191,7 +201,8 @@ const EventPage = ({ initialResources }: EventPageProps) => {
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data = await response.json();
+  const data: { status: string; events: CalendarEvent[] } =
+    await response.json();
   const eventDates = data.events.map((event: CalendarEvent) => event.id);
 
   const paths = eventDates.flatMap(
@@ -209,7 +220,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`)).default;
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
   const data = await response.json();

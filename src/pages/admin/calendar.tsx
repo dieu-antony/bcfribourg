@@ -34,7 +34,9 @@ import {
 const Calendar = () => {
   const { status } = useSession();
   useEffect(() => {
-    if (status === "unauthenticated") Router.replace("/login");
+    if (status === "unauthenticated") {
+      void Router.replace("/login");
+    }
   }, [status]);
 
   const [events, setEvents] = useState<CalendarEventWithoutID[]>([]);
@@ -66,10 +68,10 @@ const Calendar = () => {
         );
       }
     }
-    getDatabaseEvents();
+    void getDatabaseEvents();
   }, []);
 
-  function onFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+  async function onFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     setEvents([]);
     const files = e.target.files;
     if (!files) return;
@@ -91,17 +93,24 @@ const Calendar = () => {
         if (typeof content !== "string") return;
 
         const data = sync.parseICSFix(content);
-        parseCalendar(data).then((parsedEvents) => {
-          setEvents((prev) => [...prev, ...parsedEvents]);
-          setLoading(false);
-          toast.dismiss(toastId);
-          toast.success("Events uploaded successfully");
-        });
+        parseCalendar(data)
+          .then((parsedEvents) => {
+            setEvents((prev) => [...prev, ...parsedEvents]);
+            setLoading(false);
+            toast.dismiss(toastId);
+            toast.success("Events uploaded successfully");
+          })
+          .catch(() => {
+            setLoading(false);
+            toast.dismiss(toastId);
+            toast.error("Failed to upload events");
+          });
       });
 
       reader.readAsText(file);
     }
   }
+
   async function onCalendarSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -114,55 +123,66 @@ const Calendar = () => {
       ...event,
       eventType: selectedType,
     }));
-    const response = await fetch("/api/events/create", {
-      method: "POST",
-      body: JSON.stringify(eventsWithType),
-    });
-    const data: { status: "success" | "error"; message: string } =
-      await response.json();
-    if (data.status === "success") {
-      toast.success(data.message);
-    }
-    if (data.status === "error") {
-      toast.error(data.message);
+    try {
+      const response = await fetch("/api/events/create", {
+        method: "POST",
+        body: JSON.stringify(eventsWithType),
+      });
+      const data: { status: "success" | "error"; message: string } =
+        await response.json();
+      if (data.status === "success") {
+        toast.success(data.message);
+      } else if (data.status === "error") {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to submit events");
     }
   }
+
   async function onEventSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    eventsToCreate.longitude = (await findLonLat(eventsToCreate.location!)).lon;
-    eventsToCreate.latitude = (await findLonLat(eventsToCreate.location!)).lat;
-    eventsToCreate.uid = crypto.randomBytes(20).toString("hex");
-    const eventsAsArray = [];
-    eventsAsArray.push(eventsToCreate);
-    const response = await fetch("/api/events/create", {
-      method: "POST",
-      body: JSON.stringify(eventsAsArray),
-    });
-    const data: { status: "success" | "error"; message: string } =
-      await response.json();
-    if (data.status === "success") {
-      toast.success(data.message);
+    try {
+      const lonLat = await findLonLat(eventsToCreate.location!);
+      eventsToCreate.longitude = lonLat.lon;
+      eventsToCreate.latitude = lonLat.lat;
+      eventsToCreate.uid = crypto.randomBytes(20).toString("hex");
+      const eventsAsArray = [eventsToCreate];
+      const response = await fetch("/api/events/create", {
+        method: "POST",
+        body: JSON.stringify(eventsAsArray),
+      });
+      const data: { status: "success" | "error"; message: string } =
+        await response.json();
+      if (data.status === "success") {
+        toast.success(data.message);
+      } else if (data.status === "error") {
+        toast.error(data.message);
+      }
+      setEventsToCreate({} as CalendarEventWithoutID);
+    } catch (error) {
+      toast.error("Failed to create event");
     }
-    if (data.status === "error") {
-      toast.error(data.message);
-    }
-    setEventsToCreate({} as CalendarEventWithoutID);
   }
 
   async function deleteAllEvents() {
-    confirmDelete ? setConfirmDelete(false) : setConfirmDelete(true);
+    setConfirmDelete(!confirmDelete);
     if (!confirmDelete) return;
-    const response = await fetch("/api/events/delete", {
-      method: "POST",
-      body: JSON.stringify(tableData),
-    });
-    const data: { status: "success" | "error"; message: string } =
-      await response.json();
-    if (data.status === "success") {
-      toast.success(data.message);
-    }
-    if (data.status === "error") {
-      toast.error(data.message);
+
+    try {
+      const response = await fetch("/api/events/delete", {
+        method: "POST",
+        body: JSON.stringify(tableData),
+      });
+      const data: { status: "success" | "error"; message: string } =
+        await response.json();
+      if (data.status === "success") {
+        toast.success(data.message);
+      } else if (data.status === "error") {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to delete events");
     }
   }
 

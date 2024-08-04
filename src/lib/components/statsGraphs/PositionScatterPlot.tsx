@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as d3 from "d3";
-import type { PastTeam } from "~/lib/types";
+import type { PastTeamProps } from "~/lib/types";
 import { animated, to, useSpring, useSprings } from "@react-spring/web";
-import type { AnimationResult, Lookup, SpringValue } from "@react-spring/web";
 import { interpolatePath } from "d3-interpolate-path";
 import { CircleItem } from "./CircleItem";
 import { ScatterPlotTooltip } from "./ScatterPlotTooltip";
@@ -14,7 +13,7 @@ const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 type PositionScatterPlotProps = {
   width: number;
   height: number;
-  data: PastTeam[];
+  data: PastTeamProps[];
 };
 
 export const PositionScatterPlot = ({
@@ -62,7 +61,7 @@ export const PositionScatterPlot = ({
 
   // Define the line generator
   const lineBuilder = d3
-    .line<PastTeam>()
+    .line<PastTeamProps>()
     .x((d) => xScale(customTimeParser(d.seasonStart.toString())!))
     .y((d) => yScale(d.position));
 
@@ -88,7 +87,8 @@ export const PositionScatterPlot = ({
       mass: 1,
     },
     reset: linePath.current !== line,
-    onChange: ({ value }: AnimationResult<SpringValue<Lookup<any>>>): void => {
+    onChange: ({ value }): void => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       linePath.current = pathInterpolator(value.t);
     },
   });

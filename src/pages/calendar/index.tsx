@@ -15,14 +15,19 @@ const Calendar = () => {
 
   // Fetch events from the API
   useEffect(() => {
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("/api/events");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data: { status: string; events: CalendarEvent[] } =
+          await response.json();
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
             ...event,
-            start: event.start || new Date(event.start),
-            end: event.end || new Date(event.end),
+            start: event.start ?? new Date(event.start),
+            end: event.end ?? new Date(event.end),
             title: event.summary,
             location: event.location,
             url: event.url,
@@ -31,15 +36,26 @@ const Calendar = () => {
             latitude: event.latitude,
           }));
           setEvents(newEvents);
+        } else {
+          console.error("Error fetching events");
         }
-      });
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    void fetchEvents();
   }, []);
 
-  // Styles for the filter
+  // Styles for the filter (unknown react-select types)
   const colorStyles = {
+    // eslint-disable-next-line
     control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
+    // eslint-disable-next-line
     option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const color = chroma(data.color);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...styles,
         backgroundColor: isDisabled
@@ -68,17 +84,22 @@ const Calendar = () => {
         },
       };
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     multiValue: (styles: any, { data }: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const color = chroma(data.color);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...styles,
         backgroundColor: color.alpha(0.1).css(),
       };
     },
+    // eslint-disable-next-line
     multiValueLabel: (styles: any, { data }: any) => ({
       ...styles,
       color: data.color,
     }),
+    // eslint-disable-next-line
     multiValueRemove: (styles: any, { data }: any) => ({
       ...styles,
       color: data.color,
@@ -160,10 +181,9 @@ const Calendar = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default
-    }
+      messages: (await import(`../../../messages/${locale}.json`)).default,
+    },
   };
 }
-
 
 export default Calendar;

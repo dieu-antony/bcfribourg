@@ -6,12 +6,12 @@ import {
   CardTitle,
   CardDescription,
 } from "../ui/card";
-import type { PastTeam } from "~/lib/types";
+import type { PastTeamProps } from "~/lib/types";
 
 export type InteractionData = {
   xPos: number;
   yPos: number;
-  data: PastTeam;
+  data: PastTeamProps;
   orientation: "left" | "right";
 };
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Layout from "~/lib/components/Layout";
 import TrainingCard from "~/lib/components/TrainingCard";
 
-const adults = () => {
+const Adults = () => {
   const t = useTranslations("Training.Adults");
 
   return (
@@ -89,4 +89,4 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   };
 }
 
-export default adults;
+export default Adults;

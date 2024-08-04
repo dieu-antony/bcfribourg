@@ -35,11 +35,14 @@ import { Button } from "~/lib/components/ui/button";
 import type { Player } from "@prisma/client";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
+import type { PlayerByTeam } from "~/lib/types";
 
 const Players = () => {
   const { status } = useSession();
   useEffect(() => {
-    if (status === "unauthenticated") Router.replace("/login");
+    if (status === "unauthenticated") {
+      void Router.replace("/login");
+    }
   }, [status]);
 
   const [icTeams, setIcTeams] = useState<ICDatabaseColumnsProps[]>([]);
@@ -61,34 +64,61 @@ const Players = () => {
   useEffect(() => {
     async function getIcTeams() {
       const response = await fetch("/api/icTeams");
-      const data = await response.json();
+      const data: {
+        data: {
+          id: string;
+          name: string;
+          leagueId: string;
+          url: string;
+        }[];
+        status: string;
+      } = await response.json();
       if (data.status === "success") {
         setIcTeams(
-          data.data.map((team: any) => ({
-            id: team.id,
-            name: team.name,
-            url: team.url,
-            league: getLeagueFromId(team.leagueId),
-          })),
+          data.data.map(
+            (team: {
+              id: string;
+              name: string;
+              leagueId: string;
+              url: string;
+            }) => ({
+              id: team.id,
+              name: team.name,
+              url: team.url,
+              league: getLeagueFromId(team.leagueId),
+            }),
+          ),
         );
       }
     }
-    getIcTeams();
+    void getIcTeams();
     async function getPlayers() {
       try {
         const response = await fetch("/api/players");
-        const data: { status: any; players: any[] } = await response.json();
+        const data: { status: string; players: PlayerByTeam[] } =
+          await response.json();
         if (data.status === "success") {
           setPlayers(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             data.players.flatMap((team: any) =>
-              team.players.map((player: any) => ({
-                id: player.id,
-                firstName: player.firstName,
-                lastName: player.lastName,
-                team: team.name,
-                captain: player.captain ? "Yes" : "No",
-                gender: player.gender,
-              })),
+              // eslint-disable-next-line
+              team.players.map(
+                (player: {
+                  id: string;
+                  firstName: string;
+                  lastName: string;
+                  teamId: string;
+                  captain: boolean;
+                  gender: string;
+                }) => ({
+                  id: player.id,
+                  firstName: player.firstName,
+                  lastName: player.lastName,
+                  team: team.name,
+                  captain: player.captain ? "Yes" : "No",
+                  gender: player.gender,
+                }),
+              ),
             ),
           );
         }
@@ -96,7 +126,7 @@ const Players = () => {
         console.error("Error fetching players", error);
       }
     }
-    getPlayers();
+    void getPlayers();
   }, []);
 
   async function deleteAllPlayers() {
@@ -106,7 +136,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(players),
     });
-    const data = await response.json();
+    const data: { status: string; message: string } = await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -130,7 +160,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(team),
     });
-    const data = await response.json();
+    const data: { status: string; message: string } = await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -147,7 +177,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(playerToCreate),
     });
-    const data = await response.json();
+    const data: { status: string; message: string } = await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -178,7 +208,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(playersList),
     });
-    const data = await response.json();
+    const data: { status: string; message: string } = await response.json();
     if (data.status === "success") {
       toast.success(data.message);
     }

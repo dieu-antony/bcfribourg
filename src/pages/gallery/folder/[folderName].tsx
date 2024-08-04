@@ -42,13 +42,13 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
     const fetchResources = async () => {
       const cachedResources = localStorage.getItem("resources");
       if (cachedResources) {
-        setResources(JSON.parse(cachedResources));
+        setResources(JSON.parse(cachedResources) as SearchResult[]);
       } else {
         setLoading(true);
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
         );
-        const data = await response.json();
+        const data: {status: string, resources: SearchResult[]} = await response.json();
         localStorage.setItem("resources", JSON.stringify(data.resources));
         setResources(data.resources);
         setLoading(false);
@@ -167,12 +167,13 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-covers`,
   );
-  
-  const data = await response.json();
+
+  const data: { status: string; resources: SearchResult[] } =
+    await response.json();
   const folders = data.resources.map((folder: SearchResult) => folder.tags[0]);
 
   const paths = folders.flatMap(
-    (folder: string) =>
+    (folder) =>
       locales?.map((locale) => ({
         params: { folderName: folder },
         locale,
@@ -191,7 +192,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
   );
-  const data = await response.json();
+  const data: { status: string; resources: SearchResult[] } =
+    await response.json();
 
   const initialResources = data.resources.filter(
     (resource: SearchResult) => resource.asset_folder === params?.folderName,

@@ -13,7 +13,7 @@ import { useDimensions } from "~/lib/hooks/useDimensions";
 import { getLeagueFromId } from "~/lib/utils/utils";
 import { LeagueHeatmap } from "~/lib/components/statsGraphs/LeagueHeatmap";
 import { StackedBarplot } from "~/lib/components/statsGraphs/StackedBarplot";
-import type { PastTeam } from "~/lib/types";
+import type { PastTeamProps } from "~/lib/types";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
@@ -23,7 +23,7 @@ const PreviousSeasons = () => {
 
   const chartRef = useRef<HTMLDivElement>(null);
   const chartSize = useDimensions(chartRef);
-  const [data, setData] = useState<PastTeam[]>([]);
+  const [data, setData] = useState<PastTeamProps[]>([]);
   const [selectedData, setSelectedData] = useState<string>(
     "Union Tafers-Fribourg 1",
   );
@@ -34,11 +34,14 @@ const PreviousSeasons = () => {
 
   // fetch for the graph data
   useEffect(() => {
-    fetch("/api/pastTeams")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchData = async () => {
+
+      try {
+        const res = await fetch("/api/pastTeams");
+        const data: { status: "success" | "error"; data: PastTeamProps[] } = await res.json()
+    
         if (data.status === "success") {
-          const statsData = data.data.map((data: PastTeam) => ({
+          const statsData = data.data.map((data: PastTeamProps) => ({
             ...data,
             name: data.name,
             position: data.position,
@@ -51,11 +54,15 @@ const PreviousSeasons = () => {
             gamesRecord: data.gamesRecord,
             seasonStart: data.seasonStart,
             league: getLeagueFromId(data.leagueId),
+            leagueId: data.leagueId,
             url: data.url,
           }));
           setData(statsData);
-        }
-      });
+        }}
+       catch (error) {
+        console.error("Error fetching data:", error);
+      }}
+    void fetchData();
   }, []);
 
   // filter settings

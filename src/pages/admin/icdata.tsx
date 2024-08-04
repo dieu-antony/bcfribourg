@@ -17,18 +17,20 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { Toaster } from "~/lib/components/ui/sonner";
-import type { PastTeam } from "~/lib/types";
+import type { PastTeamProps } from "~/lib/types";
 import { inter } from "../_app";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
 
 const IcData = () => {
-  const [teams, setTeams] = useState<PastTeam[]>([]);
+  const [teams, setTeams] = useState<PastTeamProps[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { status } = useSession();
   useEffect(() => {
-    if (status === "unauthenticated") Router.replace("/login");
+    if (status === "unauthenticated") {
+      void Router.replace("/login");
+    }
   }, [status]);
 
   async function onTeamFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -42,7 +44,7 @@ const IcData = () => {
     const reader = new FileReader();
 
     reader.addEventListener("load", function () {
-      const parsedTeams: PastTeam[] = JSON.parse(reader.result as string);
+      const parsedTeams: PastTeamProps[] = JSON.parse(reader.result as string);
       setTeams((prev) => [...prev, ...parsedTeams]);
       setLoading(false);
       toast.dismiss(toastId);
@@ -137,8 +139,8 @@ const IcData = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default
-    }
+      messages: (await import(`../../../messages/${locale}.json`)).default,
+    },
   };
 }
 

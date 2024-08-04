@@ -5,12 +5,12 @@ import {
   abbreviateTeamName,
   turnLeagueToNumber,
 } from "~/lib/utils/utils";
-import type { PastTeam } from "~/lib/types";
+import type { PastTeamProps } from "~/lib/types";
 
 // Predefined margins
 const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
-type HeatmapProps = { data: PastTeam[]; width: number; height: number };
+type HeatmapProps = { data: PastTeamProps[]; width: number; height: number };
 
 export const LeagueHeatmap = ({ data, width, height }: HeatmapProps) => {
   // Define the bounds

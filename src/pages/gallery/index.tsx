@@ -13,11 +13,12 @@ export default function Gallery() {
     const fetchResources = async () => {
       const cachedResources = localStorage.getItem("resources");
       if (cachedResources) {
-        setResources(JSON.parse(cachedResources));
+        setResources(JSON.parse(cachedResources) as SearchResult[]);
         setLoading(false);
       } else {
         const response = await fetch("/api/images/fetch-images");
-        const data = await response.json();
+        const data: { status: string; resources: SearchResult[] } =
+          await response.json();
         localStorage.setItem("resources", JSON.stringify(data.resources));
         setResources(data.resources);
         setLoading(false);
@@ -31,7 +32,11 @@ export default function Gallery() {
   );
 
   if (loading) {
-    return <Layout><span/></Layout>;
+    return (
+      <Layout>
+        <span />
+      </Layout>
+    );
   }
 
   return (
@@ -42,7 +47,12 @@ export default function Gallery() {
           {filteredResources.map((result) => (
             <Link
               key={result.public_id}
-              href={"/gallery/folder/" + encodeURI(result.tags[0] ?? "Championnats%20Fribourgeois%202024")}
+              href={
+                "/gallery/folder/" +
+                encodeURI(
+                  result.tags[0] ?? "Championnats%20Fribourgeois%202024",
+                )
+              }
               className="relative block transform duration-100 hover:-translate-y-1 hover:opacity-80"
             >
               <CldImage

@@ -27,11 +27,15 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
 
   // Fetch events from the API
   useEffect(() => {
-    if (!router.isReady) return;
-    setLoading(true);
-    fetch(`/api/events/filter/${queryDate}`)
-      .then((res) => res.json())
-      .then((data: {status: "success" | "error", events: CalendarEvent[]}) => {
+    const fetchData = async () => {
+      if (!router.isReady) return;
+      setLoading(true);
+
+      try {
+        const res = await fetch(`/api/events/filter/${queryDate}`);
+        const data: { status: "success" | "error"; events: CalendarEvent[] } =
+          await res.json();
+
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
             ...event,
@@ -45,11 +49,16 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
             longitude: event.longitude,
             latitude: event.latitude,
           }));
-
           setEvents(newEvents);
-          setLoading(false);
         }
-      });
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    void fetchData();
   }, [router.isReady, queryDate]);
 
   if (loading) {
@@ -108,13 +117,13 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data = await response.json();
+  const data: {status: string, events: CalendarEvent[]} = await response.json();
   const eventDates = data.events.map((event: CalendarEvent) =>
     new Date(event.start).toDateString(),
   );
 
   const paths = eventDates.flatMap(
-    (date: any) =>
+    (date) =>
       locales?.map((locale) => ({
         params: { eventDate: date },
         locale,
@@ -128,7 +137,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`)).default;
+  const messages = (await import(`../../../../messages/${locale}.json`))
+    .default;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`,
