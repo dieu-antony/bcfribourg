@@ -32,7 +32,7 @@
   },
   "Training": {
     "Adults": {
-      "title": "Erwachsenentraining",
+      "title": "Erwachsenentrainings",
       "monday18": {
         "title": "Montag",
         "description": "4. Liga und nicht Lizenzierte"
@@ -94,8 +94,8 @@
     "location": "Ort",
     "date": "Datum",
     "cj": {
-      "title": "Junioren Circuit",
-      "description": "Die Junioren Circuit sind eine Serie von Einzel Turnieren für Junioren. Die verfügbaren Kategorien sind U11, U13, U15, U17 und U19. Weitere Informationen finden Sie auf der Website des FBV. Für die Anmeldung kontaktieren Sie bitte Ihren Trainer!"
+      "title": "Circuit juniors",
+      "description": "Les circuit juniors sont une série de tournois pour les juniors en simple. Les catégories sont U11, U13, U15, U17 et U19. Pour plus d'informations, veuillez consulter le site de l'AFB. Pour l'Inscription, veuillez contacter votre entraineur!"
     },
     "ca": {
       "description": "Der Coupe l'Avenir ist ein Turnier in der Form eines Interclubs (in Teams) für Junioren unter 2 Kategorien: U12 et U16. Weitere Informationen finden Sie auf der Website des FBV. Für die Anmeldung kontaktieren Sie bitte Ihren Trainer!"
@@ -152,7 +152,7 @@
     "events": {
       "start": "Am Anfang...",
       "startDesc": "Einige Jugendliche aus dem Jura-Viertel spielen das Spiel „Fliegen“. Hauptziel: Windgeschützte Orte finden! Zu ihnen gehörten Jean-Claude Doutaz, Pierre Guerra und Claude Page. Ende der 60er Jahre entdeckten sie, dass das Federballspiel ein Sport ist, der in Vereinen ausgeübt wird: Badminton! Sie traten dem BC Wünnewil bei, dem einzigen Verein im Kanton.",
-      "1969": "Am 12. November findet die Gründungsversammlung des Clubs statt, der Badminton Club Freiburg ist geboren! Der Verein hat 5 Mitglieder: Jean-Claude Doutaz (Präsident), Pierre Guerra (Kassierer), Pierre Lorson (Sekretär), Rico Casutt und Juliette Guerra. Dank einiger guter Beziehungen bekam die kleine Truppe montags und donnerstags abends die Sporthalle Schönberg zur Verfügung gestellt. In der Saison 1969/1970 nehmen die Spieler des BC Fribourg jedoch in ihrer ersten Saison am Interclub unter den Farben des BC Wünnewil teil. Jean-Claude Doutaz muss jedoch das Amt des Präsidenten des BC Fribourg abgeben. Pierre Guerra übernimmt die Führung des Clubs. Die Farben des BC Fribourg werden von nun an im Interclub verteidigt. Eine Mannschaft, bestehend aus vier Herren, spielt in der 2. Liga",
+      "1969": "Am 12. November findet die Gründungsversammlung des Clubs statt, der Badminton Club Freiburg ist geboren! Der Verein hat 5 Mitglieder: Jean-Claude Doutaz (Präsident), Pierre Guerra (Kassierer), Pierre Lorson (Sekretär), Rico Casutt und Juliette Guerra. Dank einiger guter Beziehungen bekam die kleine Truppe montags und donnerstags abends die Sporthalle Schönberg zur Verfügung gestellt. In der Saison 1969/1970 nehmen die Spieler des BC Fribourg jedoch in ihrer ersten Saison am Interclub unter den Farben des BC Wünnewil teil. Jean-Claude Doutaz muss jedoch das Amt des Präsidenten des BC Fribourg abgeben. Pierre Guerra übernimmt die Führung des Clubs. Die Farben des BC Fribourg werden von nun an im Interclub verteidigt. Eine Mannschaft, bestehend aus vier Herren, spielt in der 2. Liga.",
       "1973": "Der Club setzt seinen kleinen Weg fort. Er zählt mittlerweile 10 Mitglieder. Die Saison ist geprägt vom Aufstieg der Mannschaft in die 1. Liga. Ein Aufstieg, der vom Schweizer Verband mit Hilfe einiger Tricks im Reglement beschlossen wurde. Frauen haben nun das Recht, auf dem Feld zu spielen. Sie treten dem Team bei. Eine von ihnen ist die Engländerin Jane Skinner, die 1972 nach Freiburg wechselt. Sie war die erste ausländische Spielerin in den Reihen des BC Fribourg.",
       "1975": "Die Mannschaft steigt in die zweite Liga ab.",
       "1976": "Ein offizielles Spiel zwischen der Schweiz und China findet im Belluard-Saal vor nicht weniger als 800 Zuschauern statt. Ein Spiel unter Hochspannung, da die sehr protokollarischen Chinesen, die sich mitten in der Kulturrevolution befinden, den Organisatoren einiges Kopfzerbrechen bereiteten. Aber auch eine Sichtbarkeit für das Badminton, das zum ersten Mal in den Freiburger Medien erscheint.",
