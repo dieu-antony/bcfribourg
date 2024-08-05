@@ -19,25 +19,25 @@ const Adults = () => {
         <TrainingCard
           className="mt-8 transition duration-200 hover:translate-x-1 md:place-self-end"
           time={{ start: "18h00 - 20h00", day: t("monday18.title") }}
-          trainer="Antony Dieu"
+          trainer={t("monday18.trainer")}
           target={t("monday18.description")}
         />
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:mt-8 md:place-self-start"
           time={{ start: "20h00 - 22h00", day: t("monday20.title") }}
-          trainer="Manuel Helfer"
+          trainer={t("monday20.trainer")}
           target={t("monday20.description")}
         />
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:place-self-end"
           time={{ start: "20h00 - 22h00", day: t("wednesday20.title") }}
-          trainer="Anna Lartchenko-Fischer"
+          trainer={t("wednesday20.trainer")}
           target={t("wednesday20.description")}
         />
         <TrainingCard
           className="transition duration-200 hover:translate-x-1 md:place-self-start"
           time={{ start: "19h00 - 21h00", day: t("thursday19.title") }}
-          trainer="Anna Lartchenko-Fischer"
+          trainer={t("thursday19.trainer")}
           target={t("thursday19.description")}
         />
         <div className="m-8  mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm transition duration-200 hover:translate-x-1 md:place-self-end lg:h-[300] lg:w-[400px]">
