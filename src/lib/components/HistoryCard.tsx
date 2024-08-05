@@ -12,7 +12,7 @@ const HistoryCard = ({ title, description, imgFile }: HistoryCardProps) => {
     <div className="my-8 flex w-full flex-col justify-center p-10 px-10 pb-0 sm:flex-row sm:px-12 md:px-24 lg:px-32 xl:px-40">
       <div className="flex w-full flex-col items-center text-justify sm:items-start">
         <h1 className="text-2xl font-bold text-slate-900">{title}</h1>
-        <p className="text-kg mt-10 min-h-40 max-w-sm text-slate-700">
+        <p className="text-kg mt-4 max-w-sm text-slate-700">
           {description}
         </p>
       </div>
