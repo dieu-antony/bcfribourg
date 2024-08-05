@@ -102,16 +102,16 @@
     "date": "Date",
     "cj": {
       "title": "Circuit juniors",
-      "description": "Les circuit juniors sont une série de tournois pour les juniors en simple. Les catégories sont U11, U13, U15, U17 et U19. Pour plus d'informations, veuillez consulter le site de l'AFB. Pour l'Inscription, veuillez contacter votre entraineur!"
+      "description": "Les circuit juniors sont une série de tournois pour les juniors en simple. Les catégories sont U11, U13, U15, U17 et U19. Pour plus d'informations, veuillez consulter le site de l'Association Fribourgeoise du Badminton. Pour l'Inscription, veuillez contacter votre entraineur!"
     },
     "ca": {
-      "description": "La Coupe l'Avenir est un tournois sous forme interclub (en equipe) pour juniors avec 2 catégories: U12 et U16. Pour plus d'informations, veuillez consulter le site de l'AFB. Pour l'Inscription, veuillez contacter votre entraineur!"
+      "description": "La Coupe l'Avenir est un tournois sous forme d'interclubs (en équipe) pour juniors avec 2 catégories: U12 et U16. Pour plus d'informations, veuillez consulter le site de l'Association Fribourgeoise du Badminton. Pour l'Inscription, veuillez contacter votre entraineur!"
     }
   },
   "PrevSeasons": {
     "title": "Statistiques des saisons précédentes",
-    "description": "Vous trouverez ici les statistiques des saisons précédentes du BC Fribourg dépuis 2015. Utilisez les filtres pour voir les equipes et leurs performance de chaque saison!",
-    "psp": "Ce graphique montre la position de chaque équipe dans leur ligue respective pour chaque saison. Une équipe en dernière position pendant une saison va typiquement descendre dans une ligue inférieure pour la saison suivante, tandis qu'une équipe en première place va typiquement étre promue dans une ligue supérieur. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!",
+    "description": "Vous trouverez ici les statistiques des saisons précédentes du BC Fribourg depuis 2015. Utilisez les filtres pour voir les équipes et leurs performances de chaque saison!",
+    "psp": "Ce graphique montre la position de chaque équipe dans leur ligue respective pour chaque saison. Une équipe en dernière position pendant une saison va descendre dans une ligue inférieure pour la saison suivante, tandis qu'une équipe en première place va être promue dans une ligue supérieure. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!",
     "lhm": "Ce graphique montre dans quelle ligue chaque équipe du BC Fribourg a joué pour chaque saison. Une couleur plus foncée indique une ligue plus élevée. Pour le moment il existent les ligues nationales (NLA, NLB), les ligues supérieurs (1, 2) et les ligues inférieures (3, 4).",
     "rsp": "Ce graphique montre un ratio entre les matches gagnés par matchs joués et les points gagnés par matchs joués pour chaque équipe du BC Fribourg pour chaque saison. Cliquez sur les points pour en découvrir plus et utilisez les filtres pour choisir entre les équipes du BC Fribourg!",
     "sbp": "Ce graphique montre les performances de chaque équipe du BC Fribourg pour chaque saison. Vous pouvez choisir entre les sets, les matches et les rencontres gagnés pour chaque saison. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!",
@@ -126,7 +126,7 @@
   "Tournament": {
     "title": "Tournois Swiss Badminton",
     "desc1": "Les tournois Swiss Badminton sont des tournois officiels organisés par l'association suisse de badminton. Pour vous inscrire, vous devez passer par le site de Swiss Badminton.",
-    "desc2": "Si vous avez une licence, il suffit de créer un login avec vos données personnelles. Si vous n'avez pas de licence, vous pouvez vous inscrire en tant que non-licencié, mais vos options seront limitées. Pour plus d'infos, veuillez contacter le responsable technique:"
+    "desc2": "Si vous avez une licence, il suffit de créer un login avec vos données personnelles. Si vous n'avez pas de licence, vous pouvez vous inscrire en tant que non licencié, mais vos options seront limitées. Pour plus d'infos, veuillez contacter le responsable technique:"
   },
   "Contact": {
     "success": "Votre message a bien été envoyé!",
@@ -151,7 +151,7 @@
     "vicePresident": "Caissière / Vice-présidente",
     "events": "Evènements",
     "secretary": "Secrétaire / Resp. interclubs",
-    "sup": "Resp. ligues supérieurs"
+    "sup": "Resp. ligues supérieures"
   },
   "History": {
     "title": "Histoire du club",
