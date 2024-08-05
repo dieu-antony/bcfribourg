@@ -35,19 +35,23 @@
       "title": "Entraînements adultes",
       "monday18": {
         "title": "Lundi",
-        "description": "4ème ligue et non licenciés"
+        "description": "4ème ligue et non licenciés",
+        "trainer": "Antony Dieu"
       },
       "monday20": {
         "title": "Lundi",
-        "description": "LNB, 1ère, 2ème et 4ème ligues"
+        "description": "LNB, 1ère, 2ème et 4ème ligues",
+        "trainer": "Manuel Helfer"
       },
       "wednesday20": {
         "title": "Mercredi",
-        "description": "LNB, 1ère et 2ème ligues"
+        "description": "LNB, 1ère et 2ème ligues",
+        "trainer": "Anna Larchenko Fischer"
       },
       "thursday19": {
         "title": "Jeudi",
-        "description": "Licenciés et non licenciés"
+        "description": "Licenciés et non licenciés",
+        "trainer": "Anna Larchenko Fischer"
       },
       "holidays": {
         "title": "Vacances",
@@ -63,15 +67,18 @@
       "title": "Entraînements juniors",
       "tuesday1": {
         "title": "Mardi",
-        "description": "14-18 ans"
+        "description": "14-18 ans",
+        "trainer": "Sheen Khurdi"
       },
       "tuesday2": {
         "title": "Mardi",
-        "description": "Jusqu'à 14 ans"
+        "description": "Jusqu'à 14 ans",
+        "trainer": "Hugo Genoud & Colette Jungo"
       },
       "thursday18": {
         "title": "Jeudi",
-        "description": "Jusqu'à 18 ans"
+        "description": "Jusqu'à 18 ans",
+        "trainer": "Julie Huser"
       },
       "holidays": {
         "title": "Vacances",

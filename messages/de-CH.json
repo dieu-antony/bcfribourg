@@ -35,19 +35,23 @@
       "title": "Erwachsenentrainings",
       "monday18": {
         "title": "Montag",
-        "description": "4. Liga und nicht Lizenzierte"
+        "description": "4. Liga und nicht Lizenzierte",
+        "trainer": "Antony Dieu"
       },
       "monday20": {
         "title": "Montag",
-        "description": "LNB, 1., 2. und 4. Ligen"
+        "description": "LNB, 1., 2. und 4. Ligen",
+        "trainer": "Manuel Helfer"
       },
       "wednesday20": {
         "title": "Mittwoch",
-        "description": "LNB, 1. und 2. Ligen"
+        "description": "LNB, 1. und 2. Ligen",
+        "trainer": "Anna Larchenko Fischer"
       },
       "thursday19": {
         "title": "Donnerstag",
-        "description": "Lizenzierte und nicht Lizenzierte"
+        "description": "Lizenzierte und nicht Lizenzierte",
+        "trainer": "Anna Larchenko Fischer"
       },
       "holidays": {
         "title": "Ferien",
@@ -63,15 +67,18 @@
       "title": "Juniorentraining",
       "tuesday1": {
         "title": "Dienstag",
-        "description": "14-18 Jahre"
+        "description": "14-18 Jahre",
+        "trainer": "Sheen Khurdi & Julie Huser"
       },
       "tuesday2": {
         "title": "Dienstag",
-        "description": "Bis 14 Jahre"
+        "description": "Bis 14 Jahre",
+        "trainer": "Hugo Genoud & Colette Jungo"
       },
       "thursday18": {
         "title": "Donnerstag",
-        "description": "Bis 18 Jahre"
+        "description": "Bis 18 Jahre",
+        "trainer": "Julie Huser"
       },
       "holidays": {
         "title": "Ferien",
