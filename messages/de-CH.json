@@ -114,7 +114,7 @@
     "psp": "Diese Grafik zeigt die Position der einzelnen Mannschaften in ihrer jeweiligen Liga für jede Saison. Ein Team, das in einer Saison auf dem letzten Platz steht, wird in der nächsten Saison typischerweise in eine niedrigere Liga absteigen, während ein Team auf dem ersten Platz typischerweise in eine höhere Liga aufsteigen wird. Benutzen Sie die Filter, um zwischen den Teams des BC Fribourg zu wählen!",
     "lhm": "Diese Grafik zeigt, in welcher Liga jede Mannschaft des BC Freiburg in jeder Saison gespielt hat. Eine dunklere Farbe zeigt eine höhere Liga an. Zurzeit gibt es die nationalen Ligen (NLA, NLB), die Oberligen (1, 2) und die Unterligen (3, 4).",
     "rsp": "Diese Grafik zeigt das Verhältnis von gewonnenen Spielen pro gespieltem Spiel und gewonnenen Punkten pro gespieltem Spiel für jede Mannschaft des BC Fribourg für jede Saison. Klicke auf die Punkte, um mehr zu erfahren und verwende die Filter, um zwischen den Teams des BC Fribourg zu wählen!",
-    "sbp": "Diese Grafik zeigt die Leistung jeder Mannschaft des BC Freiburg in jeder Saison. Sie können zwischen den gewonnenen Sätzen, Spielen und Begegnungen für jede Saison wählen. Mit Hilfe der Filter können Sie zwischen den einzelnen Teams des BC Fribourg wählen!",
+    "sbp": "Diese Grafik zeigt die Leistung jeder Mannschaft des BC Freiburg in jeder Saison. Sie können zwischen den gewonnenen Sätzen, Spielen und Begegnungen für jede Saison wählen. Mithilfe der Filter können Sie zwischen den einzelnen Teams des BC Fribourg wählen!",
     "filter": {
       "points": "Punkte",
       "wins": "Siege",
