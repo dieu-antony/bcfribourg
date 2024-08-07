@@ -276,29 +276,29 @@ const Players = () => {
                     <option value="Union Tafers-Fribourg 1">
                       Union Tafers-Fribourg 1
                     </option>
-                    <option value="Union Tafers-Fribourg 2">
-                      Union Tafers-Fribourg 2
+                    <option value="Union Fribourg-Tafers 2">
+                      Union Fribourg-Tafers 2
                     </option>
-                    <option value="Union Tafers-Fribourg 3">
-                      Union Tafers-Fribourg 3
+                    <option value="Union Fribourg-Tafers 3">
+                    Union Fribourg-Tafers 3
                     </option>
-                    <option value="Union Tafers-Fribourg 4">
-                      Union Tafers-Fribourg 4
+                    <option value="Union Fribourg-Tafers 4">
+                    Union Fribourg-Tafers 4
                     </option>
-                    <option value="Union Tafers-Fribourg 5">
-                      Union Tafers-Fribourg 5
+                    <option value="Union Fribourg-Tafers 5">
+                    Union Fribourg-Tafers 5
                     </option>
-                    <option value="Union Tafers-Fribourg 6">
-                      Union Tafers-Fribourg 6
+                    <option value="Union Fribourg-Tafers 6">
+                    Union Fribourg-Tafers 6
                     </option>
-                    <option value="Union Tafers-Fribourg 7">
-                      Union Tafers-Fribourg 7
+                    <option value="Union Fribourg-Tafers 7">
+                    Union Fribourg-Tafers 7
                     </option>
-                    <option value="Union Tafers-Fribourg 8">
-                      Union Tafers-Fribourg 8
+                    <option value="Union Fribourg-Tafers 8">
+                    Union Fribourg-Tafers 8
                     </option>
-                    <option value="Union Tafers-Fribourg 9">
-                      Union Tafers-Fribourg 9
+                    <option value="Union Fribourg-Tafers 9">
+                    Union Fribourg-Tafers 9
                     </option>
                   </select>
                   <label htmlFor="league">League</label>

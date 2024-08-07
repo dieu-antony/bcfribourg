@@ -26,7 +26,8 @@ export async function parseCalendar(
       const vevent = current;
       const location =
         vevent.location ||
-        (vevent.summary.val.startsWith("Union Tafers-Fribourg")
+        (vevent.summary.val.startsWith("Union Tafers-Fribourg") ||
+        vevent.summary.val.startsWith("Union Fribourg-Tafers")
           ? "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
           : "Switzerland");
       const coordinates = await findLonLat(location);
