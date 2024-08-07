@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import { Toaster } from "~/lib/components/ui/sonner";
-import type { PastTeamProps } from "~/lib/types";
+import type { APIMessageResponse, PastTeamProps } from "~/lib/types";
 import { inter } from "../_app";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
@@ -62,7 +62,7 @@ const IcData = () => {
       method: "POST",
       body: JSON.stringify(teams),
     });
-    const data: { status: "success" | "error" | "loading"; message: string } =
+    const data: APIMessageResponse =
       await response.json();
     if (data.status === "success") {
       toast.success(data.message);
@@ -139,7 +139,7 @@ const IcData = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default,
+      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
     },
   };
 }

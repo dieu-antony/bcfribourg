@@ -186,7 +186,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`))
+  const messages = (await import(`../../../../messages/${locale}.json`) as IntlMessages)
     .default;
 
   const response = await fetch(

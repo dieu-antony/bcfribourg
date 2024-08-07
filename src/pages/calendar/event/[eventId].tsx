@@ -220,11 +220,13 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`))
-    .default;
+  const messages = (
+    (await import(`../../../../messages/${locale}.json`)) as IntlMessages
+  ).default;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data = await response.json();
+  const data: { status: string; events: CalendarEvent[] } =
+    await response.json();
 
   return {
     props: {

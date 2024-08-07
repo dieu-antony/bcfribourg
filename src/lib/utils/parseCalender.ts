@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import type { CalendarEventWithoutID, CalendarResponseFix } from "../types";
 
 export async function findLonLat(address: string) {
@@ -38,7 +40,7 @@ export async function parseCalendar(
           : coordinates.lon;
 
       const data: CalendarEventWithoutID = {
-        uid: vevent.uid, 
+        uid: vevent.uid,
         summary: vevent.summary.val,
         location: location,
         start: new Date(vevent.start.getTime()),

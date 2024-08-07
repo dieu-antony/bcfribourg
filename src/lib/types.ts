@@ -14,6 +14,7 @@ import type {
   VEventStatus,
   VTimeZone,
 } from "node-ical";
+
 export type TeamWithRatio = PastTeamProps & { ratio: number };
 
 export type EmailData = {
@@ -129,4 +130,9 @@ export type PastTeamProps = {
   league: string;
   leagueId: string;
   url: string;
+};
+
+export type APIMessageResponse = {
+  status: "success" | "error" | "loading";
+  message: string;
 };

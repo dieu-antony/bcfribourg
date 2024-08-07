@@ -99,9 +99,7 @@ const Players = () => {
           await response.json();
         if (data.status === "success") {
           setPlayers(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            data.players.flatMap((team: any) =>
-              // eslint-disable-next-line
+            data.players.flatMap((team: PlayerByTeam) =>
               team.players.map(
                 (player: {
                   id: string;
@@ -507,7 +505,7 @@ const Players = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default,
+      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
     },
   };
 }

@@ -91,7 +91,7 @@ export default function Sponsors() {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../messages/${locale}.json`)).default,
+      messages: (await import(`../../messages/${locale}.json`) as IntlMessages).default,
     },
   };
 }

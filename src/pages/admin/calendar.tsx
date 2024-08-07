@@ -6,7 +6,7 @@ import { Button } from "~/lib/components/ui/button";
 import { EventDatabaseTable } from "~/lib/components/dataTables/eventTable/EventDatabaseTable";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
-import { type CalendarEventWithoutID, sync } from "~/lib/types";
+import { type APIMessageResponse, type CalendarEventWithoutID, sync } from "~/lib/types";
 import { findLonLat, parseCalendar } from "~/lib/utils/parseCalender";
 import {
   Breadcrumb,
@@ -31,6 +31,12 @@ import {
   type DatabaseColumnsProps,
 } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
 
+type EventApiResponse = {
+  status: "success" | "loading" | "error";
+  events: DatabaseColumnsProps[];
+  message: string;
+};
+
 const Calendar = () => {
   const { status } = useSession();
   useEffect(() => {
@@ -50,11 +56,7 @@ const Calendar = () => {
   useEffect(() => {
     async function getDatabaseEvents() {
       const response = await fetch("/api/events");
-      const data: {
-        status: "success" | "loading" | "error";
-        events: DatabaseColumnsProps[];
-        message: string;
-      } = await response.json();
+      const data: EventApiResponse = await response.json();
       if (data.status === "success") {
         setTableData(
           data.events.map((event: DatabaseColumnsProps) => ({
@@ -128,7 +130,7 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(eventsWithType),
       });
-      const data: { status: "success" | "error"; message: string } =
+      const data: APIMessageResponse =
         await response.json();
       if (data.status === "success") {
         toast.success(data.message);
@@ -144,15 +146,15 @@ const Calendar = () => {
     event.preventDefault();
     try {
       const lonLat = await findLonLat(eventsToCreate.location!);
-      eventsToCreate.longitude = lonLat.lon;
-      eventsToCreate.latitude = lonLat.lat;
+      eventsToCreate.longitude = lonLat.lon as number;
+      eventsToCreate.latitude = lonLat.lat as number;
       eventsToCreate.uid = crypto.randomBytes(20).toString("hex");
       const eventsAsArray = [eventsToCreate];
       const response = await fetch("/api/events/create", {
         method: "POST",
         body: JSON.stringify(eventsAsArray),
       });
-      const data: { status: "success" | "error"; message: string } =
+      const data: APIMessageResponse =
         await response.json();
       if (data.status === "success") {
         toast.success(data.message);
@@ -174,7 +176,7 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(tableData),
       });
-      const data: { status: "success" | "error"; message: string } =
+      const data: APIMessageResponse =
         await response.json();
       if (data.status === "success") {
         toast.success(data.message);
@@ -367,7 +369,7 @@ const Calendar = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default,
+      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
     },
   };
 }

@@ -12,8 +12,8 @@ const Tournament = () => {
       <Image
         src="/assets/tournament.jpg"
         alt="Tournois Swiss Badminton"
-        width={3840}
-        height={2160}
+        width={1920}
+        height={1080}
         className="left-0 top-0 z-0 max-h-[400px] w-full object-cover"
         priority
         loading="eager"
@@ -59,7 +59,7 @@ const Tournament = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default
+      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default
     }
   };
 }

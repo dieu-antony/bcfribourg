@@ -1,3 +1,6 @@
+/* eslint-disable */
+// Disable eslint for this file due to the use of D3.js which doesn't list types
+
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 import * as topojson from "topojson-client";
@@ -79,13 +82,10 @@ const Map = ({
                 null,
                 undefined
               >,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ...args: any[]
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ) => any
           ).bind(zoom),
           d3.zoomIdentity,
-          // eslint-disable-next-line
           d3.zoomTransform(svg as any).invert([width / 2, height / 2]),
         );
     }
@@ -144,11 +144,8 @@ const Map = ({
       .on("zoom", zoomed);
 
     // Zoom function
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function zoomed(event: { transform: any }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const { transform } = event;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       g.attr("transform", transform);
       g.attr("stroke-width", 1 / transform?.k);
     }
@@ -171,9 +168,7 @@ const Map = ({
                 null,
                 undefined
               >,
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ...args: any[]
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ) => any
           ).bind(zoom),
           d3.zoomIdentity

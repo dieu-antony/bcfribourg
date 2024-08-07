@@ -11,13 +11,13 @@ export const inter = Inter({
   variable: "--font-sans",
 });
 
-const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
+const App: AppType = ({ Component, pageProps: { session, messages, ...pageProps} }: AppProps) => {
   const router = useRouter();
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={session}>
       <NextIntlClientProvider
         locale={router.locale}
-        messages={pageProps.messages}
+        messages={messages}
         timeZone="Europe/Zurich"
       >
         <Head>
@@ -61,4 +61,4 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default MyApp;
+export default App;

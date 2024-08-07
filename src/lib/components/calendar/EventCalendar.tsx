@@ -37,6 +37,7 @@ import { Clock8 } from "lucide-react";
 import Link from "next/link";
 import { frCH, de } from "date-fns/locale";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 type EventProps = {
   events: (CalendarEvent & { color: string })[];
@@ -44,7 +45,7 @@ type EventProps = {
 
 const EventCalendar = ({ events }: EventProps) => {
   const t = useTranslations("Calendar");
-
+  const { locale } = useRouter();
   // Define needed constants and states
   const [chosenMonth, setChosenMonth] = useState<Date>(new Date());
   const weekDays = [
@@ -89,7 +90,11 @@ const EventCalendar = ({ events }: EventProps) => {
   });
 
   // sat + 30 days = 35, sat & sun + 31 days = 42
-  const daysToDisplay = (daysInMonth.length == 30 && startingDayIndex == 6 || daysInMonth.length == 31 && startingDayIndex >= 5) ? 42 : 35;
+  const daysToDisplay =
+    (daysInMonth.length == 30 && startingDayIndex == 6) ||
+    (daysInMonth.length == 31 && startingDayIndex >= 5)
+      ? 42
+      : 35;
 
   return (
     <div>
@@ -122,7 +127,9 @@ const EventCalendar = ({ events }: EventProps) => {
           </Button>
         </div>
         <h2 className="hidden self-center text-center font-bold md:block">
-          {format(chosenMonth, "MMMM yyyy", { locale: (t("locale") === "frCH" ? frCH : de) })}
+          {format(chosenMonth, "MMMM yyyy", {
+            locale: t("locale") === "frCH" ? frCH : de,
+          })}
         </h2>
         <h2 className="block self-center text-center font-bold md:hidden">
           {format(chosenMonth, "MMM yy")}
@@ -141,7 +148,9 @@ const EventCalendar = ({ events }: EventProps) => {
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 <p className="hidden md:block">
                   {chosenMonth ? (
-                    format(chosenMonth, "MMMM", { locale: (t("locale") === "frCH" ? frCH : de) })
+                    format(chosenMonth, "MMMM", {
+                      locale: t("locale") === "frCH" ? frCH : de,
+                    })
                   ) : (
                     <span>Pick a date</span>
                   )}
@@ -234,7 +243,7 @@ const EventCalendar = ({ events }: EventProps) => {
                         <Dialog>
                           <DialogTrigger className="w-full">
                             <div className={`font-sans ${inter.variable}`}>
-                              {getEventDescription(event.eventType, t) ||
+                              {getEventDescription(event.eventType, locale ?? "fr-CH") ||
                                 event.summary}
                             </div>
                           </DialogTrigger>
@@ -291,21 +300,21 @@ const EventCalendar = ({ events }: EventProps) => {
             </ScrollArea>
           );
         })}
-        {Array.from({ length: daysToDisplay - startingDayIndex - daysInMonth.length }).map(
-          (_, index) => {
-            return (
-              <div
-                className="border bg-gray-100 pt-1 text-center text-gray-500"
-                key={index}
-              >
-                {format(
-                  daysInNextMonth[index]?.toString() ?? new Date().toString(),
-                  "d",
-                )}
-              </div>
-            );
-          },
-        )}
+        {Array.from({
+          length: daysToDisplay - startingDayIndex - daysInMonth.length,
+        }).map((_, index) => {
+          return (
+            <div
+              className="border bg-gray-100 pt-1 text-center text-gray-500"
+              key={index}
+            >
+              {format(
+                daysInNextMonth[index]?.toString() ?? new Date().toString(),
+                "d",
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

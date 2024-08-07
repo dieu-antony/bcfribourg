@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { useState, useEffect } from "react";
 import type { CalendarEvent } from "@prisma/client";
 import Select from "react-select";
@@ -47,15 +49,12 @@ const Calendar = () => {
     void fetchEvents();
   }, []);
 
+  /* eslint-disable */
   // Styles for the filter (unknown react-select types)
   const colorStyles = {
-    // eslint-disable-next-line
     control: (styles: any) => ({ ...styles, backgroundColor: "white" }),
-    // eslint-disable-next-line
     option: (styles: any, { data, isDisabled, isFocused, isSelected }: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const color = chroma(data.color);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...styles,
         backgroundColor: isDisabled
@@ -84,22 +83,17 @@ const Calendar = () => {
         },
       };
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     multiValue: (styles: any, { data }: any) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const color = chroma(data.color);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...styles,
         backgroundColor: color.alpha(0.1).css(),
       };
     },
-    // eslint-disable-next-line
     multiValueLabel: (styles: any, { data }: any) => ({
       ...styles,
       color: data.color,
     }),
-    // eslint-disable-next-line
     multiValueRemove: (styles: any, { data }: any) => ({
       ...styles,
       color: data.color,
@@ -109,6 +103,7 @@ const Calendar = () => {
       },
     }),
   };
+  /* eslint-enable */
 
   // Filter events based on the selected filters
   useEffect(() => {
@@ -181,7 +176,9 @@ const Calendar = () => {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`)).default,
+      messages: (
+        (await import(`../../../messages/${locale}.json`)) as IntlMessages
+      ).default,
     },
   };
 }

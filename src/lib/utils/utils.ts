@@ -97,18 +97,37 @@ export const toEmail = (subject: string) => {
 
 export const getEventDescription = (
   eventType: string,
-  t: (key: string) => string,
-): string => {
-  const eventTypeMap: Record<string, string> = {
-    "Interclub A": "NLA",
-    "Interclub B": "NLB",
-    "Interclub 1": "1",
-    "Interclub 2": "2",
-    "Interclub 3": "3",
-    "Interclub 4": "4",
-  };
+  locale: string,
+) => {
+  switch (eventType) {
+    case "Interclub A":
+      return locale === "fr-CH"
+        ? "Interclub NLA"
+        : "Interclub NLA";
+    case "Interclub B":
+      return locale === "fr-CH"
+        ? "Interclub NLB"
+        : "Interclub NLB";
+    case "Interclub 1":
+      return locale === "fr-CH"
+        ? "Interclub 1ère Ligue"
+        : "Interclub 1. Liga";
+    case "Interclub 2":
+      return locale === "fr-CH"
+        ? "Interclub 2ème Ligue"
+        : "Interclub 2. Liga";
+    case "Interclub 3":
+      return locale === "fr-CH"
+        ? "Interclub 3ème Ligue"
+        : "Interclub 3. Liga";
+    case "Interclub 4":
+      return locale === "fr-CH"
+        ? "Interclub 4ème Ligue"
+        : "Interclub 4. Liga";
+    default:
+      return "";
+  }
+}
+  
 
-  const description = eventTypeMap[eventType];
 
-  return description ? ("Interclub " + t(description)) : "";
-};
