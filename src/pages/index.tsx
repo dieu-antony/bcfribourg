@@ -67,7 +67,7 @@ export default function Home() {
                 >
                   <Image
                     src={`/assets/home/${index + 1}.jpg`}
-                    alt="Interclub"
+                    alt="Badminton Club Fribourg Badminton Fribourg"
                     width={4080}
                     height={2160}
                     className="object-cover"
@@ -98,7 +98,7 @@ export default function Home() {
               >
                 <Image
                   src="/assets/plan_du_site_grand.png"
-                  alt="Plan de la salle"
+                  alt="Plan de la salle de badminton fribourg"
                   width={800}
                   height={600}
                 />

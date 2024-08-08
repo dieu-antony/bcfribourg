@@ -35,7 +35,7 @@ const Juniors = () => {
         />
         <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm transition duration-200 hover:translate-x-1 md:place-self-start lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
-            <h1 className="text-lg font-semibold">{t("holidays.title")}</h1>
+            <h2 className="text-lg font-semibold">{t("holidays.title")}</h2>
             <a
               href="https://www.fr.ch/sites/default/files/2020-06/calendrier-majoritaire-202425.pdf"
               className="flex flex-row gap-1 hover:text-picton-blue-500"
@@ -45,9 +45,9 @@ const Juniors = () => {
             </a>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="text-lg font-semibold">
+            <h2 className="text-lg font-semibold">
               {t("holidays.seasonDuration")}
-            </h1>
+            </h2>
             <span>26.08.2024 {t("holidays.until")} 26.06.2025</span>
           </div>
         </div>

@@ -8,7 +8,7 @@ const Logo = () => {
         <Image
           className="xl:hidden"
           src="/assets/bcf-base.svg"
-          alt="BC Fribourg"
+          alt="Badminton Club Fribourg Logo"
           width={0}
           height={0}
           sizes="100vw"
@@ -18,7 +18,7 @@ const Logo = () => {
         <Image
           className="hidden 2xl:block"
           src="/assets/letter-logo.svg"
-          alt="BC Fribourg"
+          alt="Badminton Club Fribourg Logo"
           width={0}
           height={0}
           sizes="100vw"
@@ -28,7 +28,7 @@ const Logo = () => {
         <Image
           className="hidden xl:block 2xl:hidden"
           src="/assets/bcf-short-right.svg"
-          alt="BC Fribourg"
+          alt="Badminton Club Fribourg Logo"
           width={0}
           height={0}
           sizes="100vw"

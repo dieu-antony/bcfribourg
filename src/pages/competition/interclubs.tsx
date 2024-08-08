@@ -32,7 +32,7 @@ const Interclubs = () => {
     <Layout>
       <Image
         src="/assets/ic_image.jpg"
-        alt="Interclubs"
+        alt="Interclubs Badminton Club Fribourg"
         width={1920}
         height={1080}
         className="left-0 top-0 z-0 max-h-96 w-full object-cover"
@@ -67,7 +67,7 @@ const Interclubs = () => {
                   <AccordionContent>
                     <div className="mt-2 grid grid-cols-2 place-items-center items-start">
                       <div className="flex flex-col gap-4">
-                        <h1 className="text-lg font-bold">{t("f")}</h1>
+                        <h2 className="text-lg font-bold">{t("f")}</h2>
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "F")
@@ -92,7 +92,7 @@ const Interclubs = () => {
                         </div>
                       </div>
                       <div className="flex flex-col gap-4">
-                        <h1 className="text-lg font-semibold">{t("m")}</h1>
+                        <h2 className="text-lg font-semibold">{t("m")}</h2>
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "M")

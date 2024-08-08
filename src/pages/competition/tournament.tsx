@@ -11,7 +11,7 @@ const Tournament = () => {
     <Layout>
       <Image
         src="/assets/tournament.jpg"
-        alt="Tournois Swiss Badminton"
+        alt="Tournois Swiss Badminton Fribourg"
         width={1920}
         height={1080}
         className="left-0 top-0 z-0 max-h-[400px] w-full object-cover"

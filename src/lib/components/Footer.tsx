@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="h-auto w-16 transition-all duration-300 ease-linear lg:w-20">
             <Image
               src="/assets/baseinverted.svg"
-              alt="BC Fribourg"
+              alt="Badminton Fribourg"
               width={0}
               height={0}
               sizes="100vw"

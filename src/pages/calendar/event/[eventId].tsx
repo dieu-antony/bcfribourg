@@ -97,16 +97,16 @@ const EventPage = ({ initialResources }: EventPageProps) => {
           </div>
           <aside className="flex flex-col bg-white p-6 shadow-md">
             <div className="flex flex-col">
-              <h1 className="bg-picton-blue-400 p-2 shadow-sm">
-                {/*{t("details")}*/} details
-              </h1>
-              <h2 className="ml-1 mt-2 font-bold">{/*t("start")*/}start</h2>
+              <h2 className="bg-picton-blue-400 p-2 shadow-sm">
+                {t("details")}
+              </h2>
+              <h3 className="ml-1 mt-2 font-bold">{t("start")}</h3>
               <p className="ml-1">{format(event?.start ?? "", "HH:mm")}</p>
               <Separator className="my-2 bg-black" />
-              <h2 className="ml-1 font-bold">{t("end")}</h2>
+              <h3 className="ml-1 font-bold">{t("end")}</h3>
               <p className="ml-1">{format(event?.end ?? "", "HH:mm")}</p>
               <Separator className="my-2 bg-black" />
-              <h2 className="ml-1 mt-2 font-bold">{t("link")}</h2>
+              <h3 className="ml-1 mt-2 font-bold">{t("link")}</h3>
               <a
                 href={event?.url}
                 className="ml-1 flex items-center gap-1 hover:underline"
@@ -116,7 +116,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
                 {new URL(event!.url).host}
               </a>
               <Separator className="my-2 bg-black" />
-              <h2 className="ml-1 mt-2 font-bold">{t("location")}</h2>
+              <h3 className="ml-1 mt-2 font-bold">{t("location")}</h3>
               <p className="ml-1">{event?.location}</p>
             </div>
             <EmbedGoogleMap
@@ -152,14 +152,14 @@ const EventPage = ({ initialResources }: EventPageProps) => {
           </div>
           <aside className="flex flex-col bg-white p-6">
             <div className="flex flex-col">
-              <h1 className="bg-picton-blue-400 p-2">{t("details")}</h1>
-              <h2 className="ml-1 mt-2 font-bold">{t("start")}</h2>
+              <h2 className="bg-picton-blue-400 p-2">{t("details")}</h2>
+              <h3 className="ml-1 mt-2 font-bold">{t("start")}</h3>
               <p className="ml-1">{format(event?.start ?? "", "HH:mm")}</p>
               <Separator className="my-2 bg-black" />
-              <h2 className="ml-1 font-bold">{t("end")}</h2>
+              <h3 className="ml-1 font-bold">{t("end")}</h3>
               <p className="ml-1">{format(event?.end ?? "", "HH:mm")}</p>
               <Separator className="my-2 bg-black" />
-              <h2 className="ml-1 mt-2 font-bold">{t("link")}</h2>
+              <h3 className="ml-1 mt-2 font-bold">{t("link")}</h3>
               <a
                 href={event?.url}
                 className="ml-1 flex items-center gap-1 hover:underline"
@@ -169,7 +169,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
                 {new URL(event.url).host}
               </a>
               <Separator className="my-2 bg-black" />
-              <h2 className="ml-1 mt-2 font-bold">{t("location")}</h2>
+              <h3 className="ml-1 mt-2 font-bold">{t("location")}</h3>
               <p className="ml-1">{event?.location}</p>
             </div>
             <iframe

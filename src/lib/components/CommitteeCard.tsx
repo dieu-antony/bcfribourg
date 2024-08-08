@@ -21,8 +21,8 @@ const CommitteeCard = ({ info }: CommitteeCardProps) => {
         className="max-h-[325px] max-w-[250px] object-cover"
       />
 
-      <h1 className="my-2 text-lg text-picton-blue-500">{info.name}</h1>
-      <h2 className="my-2 text-slate-700">{info.title}</h2>
+      <h2 className="my-2 text-lg text-picton-blue-500">{info.name}</h2>
+      <h3 className="my-2 text-slate-700">{info.title}</h3>
       <div className="my-2 text-slate-700">
         <span className="flex my-2 gap-2">
           <Phone />

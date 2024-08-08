@@ -105,7 +105,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
                     src={result.public_id}
                     width="300"
                     height="200"
-                    alt="Gallery image"
+                    alt="Badminton Fribourg"
                     className="max-h-[300px] object-cover hover:opacity-80"
                   />
                 </DialogTrigger>
@@ -129,7 +129,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
                               src={result.public_id}
                               width="1500"
                               height="600"
-                              alt="Gallery image"
+                              alt="Badminton Fribourg"
                               className="max-h-[800px] object-cover"
                             />
                           </a>

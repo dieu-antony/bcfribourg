@@ -31,9 +31,9 @@ const Juniors = () => {
     <Layout>
       <div className="m-4 mt-8 flex max-w-[1000px] flex-col self-center">
         <div className="flex flex-col gap-2 bg-white p-4 shadow-md">
-          <h1 className="text-xl font-semibold text-picton-blue-500">
+          <h2 className="text-xl font-semibold text-picton-blue-500">
             {t("cj.title")}
-          </h1>
+          </h2>
           <div className="flex flex-col gap-4">
             <span>{t("cj.description")}</span>
             <Table className="max-w-[700px] shadow-md">
@@ -55,9 +55,9 @@ const Juniors = () => {
           </div>
         </div>
         <div className="mt-8 flex flex-col gap-2 bg-white p-4 shadow-md">
-          <h1 className="text-xl font-semibold text-picton-blue-500">
+          <h2 className="text-xl font-semibold text-picton-blue-500">
             Coupe l&apos;Avenir
-          </h1>
+          </h2>
           <div className="flex flex-col gap-4">
             <span>{t("ca.description")}</span>
             <Table className="max-w-[700px] shadow-md">

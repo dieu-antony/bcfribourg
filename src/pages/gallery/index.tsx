@@ -57,7 +57,7 @@ export default function Gallery() {
             >
               <CldImage
                 src={result.public_id}
-                alt="Cover Image"
+                alt="Badminton Fribourg"
                 width="400"
                 height="300"
                 className="max-h-[250px] object-cover"
