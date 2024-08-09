@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CldImage } from "next-cloudinary";
 import { Button } from "~/lib/components/ui/button";
 import {
@@ -22,6 +22,7 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Layout, { inter } from "~/lib/components/Layout";
+import ScrollToTop from "~/lib/components/ScrollToTop";
 
 type FolderPageProps = {
   initialResources: SearchResult[];
@@ -48,7 +49,10 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
         );
-        const data: {status: string, resources: SearchResult[]} = await response.json();
+        const data = (await response.json()) as {
+          status: string;
+          resources: SearchResult[];
+        };
         localStorage.setItem("resources", JSON.stringify(data.resources));
         setResources(data.resources);
         setLoading(false);
@@ -149,6 +153,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
             ))}
           </div>
         </div>
+        <ScrollToTop />
       </Layout>
     );
   }
@@ -168,8 +173,10 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
     `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-covers`,
   );
 
-  const data: { status: string; resources: SearchResult[] } =
-    await response.json();
+  const data = (await response.json()) as {
+    status: string;
+    resources: SearchResult[];
+  };
   const folders = data.resources.map((folder: SearchResult) => folder.tags[0]);
 
   const paths = folders.flatMap(
@@ -186,14 +193,17 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`) as IntlMessages)
-    .default;
+  const messages = (await import(
+    `../../../../messages/${locale}.json`
+  )) as IntlMessages;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
   );
-  const data: { status: string; resources: SearchResult[] } =
-    await response.json();
+  const data = (await response.json()) as {
+    status: string;
+    resources: SearchResult[];
+  };
 
   const initialResources = data.resources.filter(
     (resource: SearchResult) => resource.asset_folder === params?.folderName,
@@ -201,7 +211,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
-      messages,
+      messages: messages.default,
       initialResources,
     },
   };

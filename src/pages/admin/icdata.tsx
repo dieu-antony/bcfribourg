@@ -44,7 +44,9 @@ const IcData = () => {
     const reader = new FileReader();
 
     reader.addEventListener("load", function () {
-      const parsedTeams: PastTeamProps[] = JSON.parse(reader.result as string);
+      const parsedTeams = JSON.parse(
+        reader.result as string,
+      ) as PastTeamProps[];
       setTeams((prev) => [...prev, ...parsedTeams]);
       setLoading(false);
       toast.dismiss(toastId);
@@ -62,8 +64,7 @@ const IcData = () => {
       method: "POST",
       body: JSON.stringify(teams),
     });
-    const data: APIMessageResponse =
-      await response.json();
+    const data = (await response.json()) as APIMessageResponse;
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -137,11 +138,14 @@ const IcData = () => {
   }
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }
-
 export default IcData;

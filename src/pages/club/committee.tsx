@@ -43,12 +43,12 @@ const Committee = () => {
   };
   return (
     <Layout>
-      <div>
-        <h1 className="my-8 text-center text-4xl font-semibold lg:my-16">
+      <div className="h-16 w-full bg-picton-blue-500 mt-8 flex items-center">
+        <h1 className="pt-2 text-4xl font-bold text-white w-full text-center">
           {t("title")}
         </h1>
       </div>
-      <div className="flex max-w-[1000px] flex-col place-items-center items-center self-center md:grid md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex max-w-[1000px] mt-4 flex-col place-items-center items-center self-center md:grid md:grid-cols-2 lg:grid-cols-3">
         <CommitteeCard info={president} />
         <CommitteeCard info={treasurer} />
         <CommitteeCard info={event} />
@@ -59,10 +59,14 @@ const Committee = () => {
   );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default
-    }
+      messages: messages.default,
+    },
   };
 }
 

@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
+import type { APIMessageResponse } from "~/lib/types";
 
 export type DatabaseColumnsProps = {
   id: string;
@@ -78,10 +79,7 @@ export const EventDatabaseColumns: ColumnDef<DatabaseColumnsProps>[] = [
           method: "POST",
           body: JSON.stringify(events),
         });
-        const data: {
-          status: "success" | "error" | "loading";
-          message: string;
-        } = await response.json();
+        const data = await response.json() as APIMessageResponse;
         if (data.status === "success") {
           toast.success(data.message);
         }

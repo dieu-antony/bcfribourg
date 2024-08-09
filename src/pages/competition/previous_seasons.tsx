@@ -35,11 +35,13 @@ const PreviousSeasons = () => {
   // fetch for the graph data
   useEffect(() => {
     const fetchData = async () => {
-
       try {
         const res = await fetch("/api/pastTeams");
-        const data: { status: "success" | "error"; data: PastTeamProps[] } = await res.json()
-    
+        const data = (await res.json()) as {
+          status: "success" | "loading" | "error";
+          data: PastTeamProps[];
+        };
+
         if (data.status === "success") {
           const statsData = data.data.map((data: PastTeamProps) => ({
             ...data,
@@ -58,10 +60,11 @@ const PreviousSeasons = () => {
             url: data.url,
           }));
           setData(statsData);
-        }}
-       catch (error) {
+        }
+      } catch (error) {
         console.error("Error fetching data:", error);
-      }}
+      }
+    };
     void fetchData();
   }, []);
 
@@ -383,10 +386,14 @@ const PreviousSeasons = () => {
   );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default
-    }
+      messages: messages.default,
+    },
   };
 }
 

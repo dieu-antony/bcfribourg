@@ -29,6 +29,11 @@ const Juniors = () => {
   ];
   return (
     <Layout>
+      <div className="h-16 w-full bg-picton-blue-500 mt-8 flex items-center">
+        <h1 className="pt-2 text-4xl font-bold text-white w-full text-center">
+          {t("title")}
+        </h1>
+      </div>
       <div className="m-4 mt-8 flex max-w-[1000px] flex-col self-center">
         <div className="flex flex-col gap-2 bg-white p-4 shadow-md">
           <h2 className="text-xl font-semibold text-picton-blue-500">
@@ -83,11 +88,13 @@ const Juniors = () => {
   );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (
-        (await import(`../../../messages/${locale}.json`)) as IntlMessages
-      ).default,
+      messages: messages.default,
     },
   };
 }

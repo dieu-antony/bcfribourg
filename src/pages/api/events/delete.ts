@@ -13,7 +13,7 @@ export default async function handler(
   if (session) {
   await RouteHandler(req, res, {
     POST: async function (req, res: NextApiResponse) {
-      const calendarEvents: CalendarEvent[] = JSON.parse(req.body as string);
+      const calendarEvents = JSON.parse(req.body as string) as CalendarEvent[];
 
       try {
         const eventToDelete = await db.calendarEvent.findMany({

@@ -48,9 +48,7 @@ const Documents = () => {
                     key={index}
                     href={document.path}
                     className="m-2 flex flex-row items-center gap-1 hover:underline"
-                    download={
-                      document.path.split("/").pop()!
-                    }
+                    download={document.path.split("/").pop()!}
                   >
                     <FileText />
                     {document.name}
@@ -66,9 +64,13 @@ const Documents = () => {
   );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }

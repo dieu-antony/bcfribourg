@@ -15,7 +15,7 @@ export default async function handler(
   if (session) {
     await RouteHandler(req, res, {
       POST: async function (req, res: NextApiResponse) {
-        const team: ICTeam[] = JSON.parse(req.body as string);
+        const team = JSON.parse(req.body as string) as ICTeam[];
         if (team.length === 0) {
           return res
             .status(400)

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { useState, useEffect } from "react";
 import type { CalendarEvent } from "@prisma/client";
 import Select from "react-select";
@@ -23,8 +21,10 @@ const Calendar = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        const data: { status: string; events: CalendarEvent[] } =
-          await response.json();
+        const data = (await response.json()) as {
+          status: string;
+          events: CalendarEvent[];
+        };
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
             ...event,
@@ -174,11 +174,13 @@ const Calendar = () => {
   );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (
-        (await import(`../../../messages/${locale}.json`)) as IntlMessages
-      ).default,
+      messages: messages.default,
     },
   };
 }

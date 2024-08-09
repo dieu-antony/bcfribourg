@@ -14,6 +14,7 @@ export default function Sponsor({ name, file, link }: SponsorProps) {
       width={300}
       height={300}
       alt={name}
+      className="w-full"
     /></a>
   );
 }

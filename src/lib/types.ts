@@ -95,19 +95,19 @@ export interface NodeICalSyncFix {
   parseFileFix: (file: string) => CalendarResponseFix;
 }
 
-// eslint-disable-next-line
+// this is a fix for the node-ical types so eslint will complain
+/* eslint-disable */
 const nodeIcal = require("node-ical");
 
 export const sync: NodeICalSyncFix = {
   parseICSFix: (body: string): CalendarResponseFix => {
-    // eslint-disable-next-line
     return nodeIcal.parseICS(body);
   },
   parseFileFix: (file: string): CalendarResponseFix => {
-    // eslint-disable-next-line
     return nodeIcal.parseFile(file);
   },
 };
+/* eslint-enable */
 
 export type SearchResult = {
   public_id: string;

@@ -11,6 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
+import type { APIMessageResponse } from "~/lib/types";
 
 export type ICDatabaseColumnsProps = {
   id: string;
@@ -67,10 +68,7 @@ export const ICDatabaseColumns: ColumnDef<ICDatabaseColumnsProps>[] = [
           method: "POST",
           body: JSON.stringify(teams),
         });
-        const data: {
-          status: "success" | "error" | "loading";
-          message: string;
-        } = await response.json();
+        const data = await response.json() as APIMessageResponse;
         if (data.status === "success") {
           toast.success(data.message);
         }

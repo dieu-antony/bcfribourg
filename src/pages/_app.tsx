@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 import Head from "next/head";
 import "~/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
-import { NextIntlClientProvider } from "next-intl";
+import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { useRouter } from "next/router";
+import type { Session } from "node_modules/next-auth/core/types";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -14,10 +15,10 @@ export const inter = Inter({
 const App: AppType = ({ Component, pageProps: { session, messages, ...pageProps} }: AppProps) => {
   const router = useRouter();
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session as Session}>
       <NextIntlClientProvider
         locale={router.locale}
-        messages={messages}
+        messages={messages as AbstractIntlMessages}
         timeZone="Europe/Zurich"
       >
         <Head>

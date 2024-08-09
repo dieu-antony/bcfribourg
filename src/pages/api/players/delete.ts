@@ -13,7 +13,7 @@ export default async function handler(
   if (session) {
   await RouteHandler(req, res, {
     POST: async function (req, res: NextApiResponse) {
-      const players: Player[] = JSON.parse(req.body as string);
+      const players = JSON.parse(req.body as string) as Player[];
 
       try {
         const playerToDelete = await db.player.findMany({

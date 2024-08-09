@@ -33,8 +33,10 @@ const EventPage = ({ initialResources }: EventPageProps) => {
       try {
         setLoading(true);
         const response = await fetch("/api/events");
-        const data: { status: string; events: CalendarEvent[] } =
-          await response.json();
+        const data = (await response.json()) as {
+          status: string;
+          events: CalendarEvent[];
+        };
 
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
@@ -76,16 +78,18 @@ const EventPage = ({ initialResources }: EventPageProps) => {
   if (
     eventExists != null &&
     event?.location != "Switzerland" &&
-    event?.location != "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland"
+    event?.location !=
+      "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland" &&
+    event?.location != "Av. du Général-Guisan 61a, 1700 Fribourg"
   ) {
     return (
       <Layout>
-        <div className="flex flex-col items-center justify-center md:m-8 md:flex-row ">
-          <div className="flex flex-col items-center">
-            <h1 className="mt-4 rounded-sm bg-picton-blue-400 p-2 font-semibold shadow-sm">
+        <div className="m-8 flex flex-col items-center justify-center xl:flex-row ">
+          <div className="m-2 flex flex-col items-center">
+            <h1 className="rounded-sm bg-picton-blue-400 p-2 font-semibold">
               {event?.summary ?? ""}
             </h1>
-            <div ref={chartRef} className="h-[610px] w-full max-w-[975px]">
+            <div ref={chartRef} className="m-2 hidden min-w-[1px] xl:block">
               <Map
                 location={event?.location?.toString() ?? ""}
                 latitude={event?.latitude ?? 46.81177897206209}
@@ -95,11 +99,9 @@ const EventPage = ({ initialResources }: EventPageProps) => {
               />
             </div>
           </div>
-          <aside className="flex flex-col bg-white p-6 shadow-md">
+          <aside className="flex flex-col bg-white p-6 shadow-sm">
             <div className="flex flex-col">
-              <h2 className="bg-picton-blue-400 p-2 shadow-sm">
-                {t("details")}
-              </h2>
+              <h2 className="bg-picton-blue-400 p-2">{t("details")}</h2>
               <h3 className="ml-1 mt-2 font-bold">{t("start")}</h3>
               <p className="ml-1">{format(event?.start ?? "", "HH:mm")}</p>
               <Separator className="my-2 bg-black" />
@@ -131,6 +133,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
   } else if (
     event?.location ===
       "Av. du Général-Guisan 61a, 1700, Fribourg, Switzerland" ||
+    event?.location === "Av. du Général-Guisan 61a, 1700 Fribourg" ||
     event?.location === "Switzerland"
   ) {
     return (
@@ -150,7 +153,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
               />
             </div>
           </div>
-          <aside className="flex flex-col bg-white p-6">
+          <aside className="flex flex-col bg-white p-6 shadow-sm">
             <div className="flex flex-col">
               <h2 className="bg-picton-blue-400 p-2">{t("details")}</h2>
               <h3 className="ml-1 mt-2 font-bold">{t("start")}</h3>
@@ -201,8 +204,10 @@ const EventPage = ({ initialResources }: EventPageProps) => {
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data: { status: string; events: CalendarEvent[] } =
-    await response.json();
+  const data = (await response.json()) as {
+    status: string;
+    events: CalendarEvent[];
+  };
   const eventDates = data.events.map((event: CalendarEvent) => event.id);
 
   const paths = eventDates.flatMap(
@@ -220,17 +225,19 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const messages = (
-    (await import(`../../../../messages/${locale}.json`)) as IntlMessages
-  ).default;
+  const messages = (await import(
+    `../../../../messages/${locale}.json`
+  )) as IntlMessages;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data: { status: string; events: CalendarEvent[] } =
-    await response.json();
+  const data = (await response.json()) as {
+    status: string;
+    events: CalendarEvent[];
+  };
 
   return {
     props: {
-      messages,
+      messages: messages.default,
       initialResources: data.events,
     },
   };

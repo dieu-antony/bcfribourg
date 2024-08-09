@@ -56,7 +56,7 @@ const Calendar = () => {
   useEffect(() => {
     async function getDatabaseEvents() {
       const response = await fetch("/api/events");
-      const data: EventApiResponse = await response.json();
+      const data = await response.json() as EventApiResponse;
       if (data.status === "success") {
         setTableData(
           data.events.map((event: DatabaseColumnsProps) => ({
@@ -130,8 +130,8 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(eventsWithType),
       });
-      const data: APIMessageResponse =
-        await response.json();
+      const data =
+        await response.json() as APIMessageResponse;
       if (data.status === "success") {
         toast.success(data.message);
       } else if (data.status === "error") {
@@ -154,8 +154,8 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(eventsAsArray),
       });
-      const data: APIMessageResponse =
-        await response.json();
+      const data =
+        await response.json() as APIMessageResponse;
       if (data.status === "success") {
         toast.success(data.message);
       } else if (data.status === "error") {
@@ -176,8 +176,8 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(tableData),
       });
-      const data: APIMessageResponse =
-        await response.json();
+      const data =
+        await response.json() as APIMessageResponse;
       if (data.status === "success") {
         toast.success(data.message);
       } else if (data.status === "error") {
@@ -367,9 +367,13 @@ const Calendar = () => {
   }
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }

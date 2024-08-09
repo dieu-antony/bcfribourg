@@ -98,6 +98,7 @@
     "ligue": "ème ligue"
   },
   "CompJuniors": {
+    "title": "Compétitions juniors",
     "location": "Lieu",
     "date": "Date",
     "cj": {

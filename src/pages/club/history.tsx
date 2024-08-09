@@ -12,7 +12,7 @@ import type { GetStaticPropsContext } from "next";
 
 const History = () => {
   const t = useTranslations("History");
-  
+
   const content1 = [
     {
       title: t("events.start"),
@@ -295,12 +295,15 @@ const History = () => {
   );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }
-
 
 export default History;

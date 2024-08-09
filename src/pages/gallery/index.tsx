@@ -17,8 +17,10 @@ export default function Gallery() {
         setLoading(false);
       } else {
         const response = await fetch("/api/images/fetch-images");
-        const data: { status: string; resources: SearchResult[] } =
-          await response.json();
+        const data = (await response.json()) as {
+          status: string;
+          resources: SearchResult[];
+        };
         localStorage.setItem("resources", JSON.stringify(data.resources));
         setResources(data.resources);
         setLoading(false);
@@ -41,8 +43,12 @@ export default function Gallery() {
 
   return (
     <Layout>
+      <div className="mt-8 flex h-16 w-full items-center bg-picton-blue-500">
+        <h1 className="w-full pt-2 text-center text-4xl font-bold text-white">
+          Galerie
+        </h1>
+      </div>
       <div className="my-8 flex flex-col items-center px-5">
-        <h1 className="my-8 mt-6 text-4xl font-semibold">Galerie</h1>
         <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3">
           {filteredResources.map((result) => (
             <Link
@@ -73,9 +79,13 @@ export default function Gallery() {
   );
 }
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }

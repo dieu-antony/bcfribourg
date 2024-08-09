@@ -35,7 +35,7 @@ import { Button } from "~/lib/components/ui/button";
 import type { Player } from "@prisma/client";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
-import type { PlayerByTeam } from "~/lib/types";
+import type { APIMessageResponse, PlayerByTeam } from "~/lib/types";
 
 const Players = () => {
   const { status } = useSession();
@@ -64,7 +64,7 @@ const Players = () => {
   useEffect(() => {
     async function getIcTeams() {
       const response = await fetch("/api/icTeams");
-      const data: {
+      const data = (await response.json()) as {
         data: {
           id: string;
           name: string;
@@ -72,7 +72,7 @@ const Players = () => {
           url: string;
         }[];
         status: string;
-      } = await response.json();
+      };
       if (data.status === "success") {
         setIcTeams(
           data.data.map(
@@ -95,8 +95,10 @@ const Players = () => {
     async function getPlayers() {
       try {
         const response = await fetch("/api/players");
-        const data: { status: string; players: PlayerByTeam[] } =
-          await response.json();
+        const data = (await response.json()) as {
+          status: string;
+          players: PlayerByTeam[];
+        };
         if (data.status === "success") {
           setPlayers(
             data.players.flatMap((team: PlayerByTeam) =>
@@ -134,7 +136,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(players),
     });
-    const data: { status: string; message: string } = await response.json();
+    const data = (await response.json()) as APIMessageResponse;
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -158,7 +160,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(team),
     });
-    const data: { status: string; message: string } = await response.json();
+    const data = (await response.json()) as APIMessageResponse;
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -175,7 +177,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(playerToCreate),
     });
-    const data: { status: string; message: string } = await response.json();
+    const data = (await response.json()) as APIMessageResponse;
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -206,7 +208,7 @@ const Players = () => {
       method: "POST",
       body: JSON.stringify(playersList),
     });
-    const data: { status: string; message: string } = await response.json();
+    const data = (await response.json()) as APIMessageResponse;
     if (data.status === "success") {
       toast.success(data.message);
     }
@@ -280,25 +282,25 @@ const Players = () => {
                       Union Fribourg-Tafers 2
                     </option>
                     <option value="Union Fribourg-Tafers 3">
-                    Union Fribourg-Tafers 3
+                      Union Fribourg-Tafers 3
                     </option>
                     <option value="Union Fribourg-Tafers 4">
-                    Union Fribourg-Tafers 4
+                      Union Fribourg-Tafers 4
                     </option>
                     <option value="Union Fribourg-Tafers 5">
-                    Union Fribourg-Tafers 5
+                      Union Fribourg-Tafers 5
                     </option>
                     <option value="Union Fribourg-Tafers 6">
-                    Union Fribourg-Tafers 6
+                      Union Fribourg-Tafers 6
                     </option>
                     <option value="Union Fribourg-Tafers 7">
-                    Union Fribourg-Tafers 7
+                      Union Fribourg-Tafers 7
                     </option>
                     <option value="Union Fribourg-Tafers 8">
-                    Union Fribourg-Tafers 8
+                      Union Fribourg-Tafers 8
                     </option>
                     <option value="Union Fribourg-Tafers 9">
-                    Union Fribourg-Tafers 9
+                      Union Fribourg-Tafers 9
                     </option>
                   </select>
                   <label htmlFor="league">League</label>
@@ -503,9 +505,13 @@ const Players = () => {
   }
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }

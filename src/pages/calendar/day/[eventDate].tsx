@@ -33,8 +33,10 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
 
       try {
         const res = await fetch(`/api/events/filter/${queryDate}`);
-        const data: { status: "success" | "error"; events: CalendarEvent[] } =
-          await res.json();
+        const data = (await res.json()) as {
+          status: "success" | "error";
+          events: CalendarEvent[];
+        };
 
         if (data.status === "success") {
           const newEvents = data.events.map((event: CalendarEvent) => ({
@@ -117,8 +119,10 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data: { status: string; events: CalendarEvent[] } =
-    await response.json();
+  const data = (await response.json()) as {
+    status: string;
+    events: CalendarEvent[];
+  };
   const eventDates = data.events.map((event: CalendarEvent) =>
     new Date(event.start).toDateString(),
   );
@@ -138,19 +142,21 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (
-    (await import(`../../../../messages/${locale}.json`)) as IntlMessages
-  ).default;
+  const messages = (await import(
+    `../../../../messages/${locale}.json`
+  )) as IntlMessages;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`,
   );
-  const data: { status: string; events: CalendarEvent[] } =
-    await response.json();
+  const data = (await response.json()) as {
+    status: string;
+    events: CalendarEvent[];
+  };
 
   return {
     props: {
-      messages,
+      messages: messages.default,
       initialResources: data.events,
     },
   };

@@ -110,10 +110,13 @@ export default function Home() {
     </Layout>
   );
 }
-export async function getStaticProps({locale}: GetStaticPropsContext) {
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../messages/${locale}.json`
+  )) as IntlMessages;
   return {
     props: {
-      messages: (await import(`../../messages/${locale}.json`) as IntlMessages).default
-    }
+      messages: messages.default,
+    },
   };
 }

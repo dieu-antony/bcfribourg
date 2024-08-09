@@ -13,7 +13,7 @@ export default async function handler(
   if (session) {
     await RouteHandler(req, res, {
       POST: async function (req: NextApiRequest, res: NextApiResponse) {
-        const calendarEvents: CalendarEventWithoutID[] = JSON.parse(req.body as string);
+        const calendarEvents = JSON.parse(req.body as string) as CalendarEventWithoutID[];
 
         if (calendarEvents.length === 0) {
           return res

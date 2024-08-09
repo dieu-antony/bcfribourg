@@ -8,12 +8,12 @@ export default function Sponsors() {
   return (
     <Layout>
       <div className="flex w-full flex-col items-center">
-        <div className="h-12 w-full bg-picton-blue-500 my-8">
-          <h1 className="pt-2 text-center text-3xl font-bold text-white">
+        <div className="mt-8 flex h-16 w-full items-center bg-picton-blue-500">
+          <h1 className="w-full pt-2 text-center text-4xl font-bold text-white">
             {t("title")}
           </h1>
         </div>
-        <div className="mx-5 mb-8 max-w-[1100px]">
+        <div className="mx-5 my-8 max-w-[1100px]">
           <div className="bg-white p-8 shadow-md">
             <section className="hidden text-center">
               <h2 className="text-2xl font-bold text-picton-blue-500">
@@ -27,7 +27,7 @@ export default function Sponsors() {
               <h2 className="text-2xl font-bold text-picton-blue-500">
                 {t("important")}
               </h2>
-              <div className="grid grid-cols-2 items-center justify-center gap-4 text-center md:grid-cols-3">
+              <div className="grid grid-cols-2 items-center justify-center gap-6 text-center md:grid-cols-3">
                 <div className="h-[200px]" />
               </div>
             </section>
@@ -35,7 +35,7 @@ export default function Sponsors() {
               <h2 className="text-2xl font-bold text-picton-blue-500">
                 {t("support")}
               </h2>
-              <div className="mt-8 grid grid-cols-2 items-center justify-center gap-4 text-center md:grid-cols-3">
+              <div className="mt-8 grid grid-cols-2 items-center justify-center gap-6 text-center md:grid-cols-2">
                 <Sponsor name="SINEF" file="svg" link="https://www.sinef.ch/" />
                 <Sponsor
                   name="Frimousse"
@@ -89,9 +89,13 @@ export default function Sponsors() {
   );
 }
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(
+    `../../messages/${locale}.json`
+  )) as IntlMessages;
+
   return {
     props: {
-      messages: (await import(`../../messages/${locale}.json`) as IntlMessages).default,
+      messages: messages.default,
     },
   };
 }

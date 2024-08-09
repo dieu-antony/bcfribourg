@@ -13,7 +13,7 @@ export default async function handler(
   if (session) {
     await RouteHandler(req, res, {
       POST: async function (req, res: NextApiResponse) {
-        const players: PlayerWithoutID[] = JSON.parse(req.body as string);
+        const players = JSON.parse(req.body as string) as PlayerWithoutID[];
 
         if (players.length === 0) {
           return res
