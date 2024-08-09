@@ -43,11 +43,9 @@ export default function Gallery() {
 
   return (
     <Layout>
-      <div className="mt-8 flex h-16 w-full items-center bg-picton-blue-500">
-        <h1 className="w-full pt-2 text-center text-4xl font-bold text-white">
-          Galerie
-        </h1>
-      </div>
+      <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
+        Galerie
+      </h1>
       <div className="my-8 flex flex-col items-center px-5">
         <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3">
           {filteredResources.map((result) => (

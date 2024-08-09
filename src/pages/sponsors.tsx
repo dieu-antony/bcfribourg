@@ -8,11 +8,9 @@ export default function Sponsors() {
   return (
     <Layout>
       <div className="flex w-full flex-col items-center">
-        <div className="mt-8 flex h-16 w-full items-center bg-picton-blue-500">
-          <h1 className="w-full pt-2 text-center text-4xl font-bold text-white">
-            {t("title")}
-          </h1>
-        </div>
+        <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
+          {t("title")}
+        </h1>
         <div className="mx-5 my-8 max-w-[1100px]">
           <div className="bg-white p-8 shadow-md">
             <section className="hidden text-center">

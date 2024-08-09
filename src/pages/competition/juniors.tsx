@@ -29,8 +29,8 @@ const Juniors = () => {
   ];
   return (
     <Layout>
-      <div className="h-16 w-full bg-picton-blue-500 mt-8 flex items-center">
-        <h1 className="pt-2 text-4xl font-bold text-white w-full text-center">
+      <div className="h-12 w-full bg-picton-blue-500 mt-8 flex items-center">
+        <h1 className="pt-2 text-3xl font-bold text-white w-full text-center">
           {t("title")}
         </h1>
       </div>
