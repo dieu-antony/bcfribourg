@@ -24,12 +24,14 @@ const TrainingCard = ({
       )}
       whileHover="hovered"
       initial="initial"
+      whileTap="clicked"
     >
       <div className="flex flex-col gap-2">
         <motion.h1 className="text-lg font-semibold relative"
         variants={{
           initial: { left: 0 },
           hovered: { left: 5 },
+          clicked: { left: 5 },
         }}
         >{time.day}</motion.h1>
         <h2>{time.start}</h2>
@@ -37,10 +39,11 @@ const TrainingCard = ({
       <p>{target}</p>
       <p>{trainer}</p>
       <motion.div
-        className="absolute right-0 top-8 h-full w-2 rounded-md  bg-gray-200 group-hover:bg-picton-blue-500"
+        className="absolute right-0 top-8 h-full w-[6px] rounded-r-none rounded-l-md  bg-gray-200 group-hover:bg-picton-blue-500"
         variants={{
-          initial: { height: "2rem", backgroundColor: "#e5e7eb" },
-          hovered: { height: "3rem", backgroundColor: "#00afef" },
+          initial: { height: "3rem", backgroundColor: "#e5e7eb" },
+          hovered: { height: "4rem", backgroundColor: "#00afef" },
+          clicked: { height: "4rem", backgroundColor: "#00afef" },
         }}
         transition={{ duration: 0.3 }}
       />
