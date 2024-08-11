@@ -33,8 +33,8 @@ const Interclubs = () => {
       <Image
         src="/assets/ic_image.jpg"
         alt="Interclubs Badminton Club Fribourg"
-        width={1920}
-        height={1080}
+        width={1280}
+        height={720}
         className="left-0 top-0 z-0 max-h-96 w-full object-cover"
         priority
         loading="eager"

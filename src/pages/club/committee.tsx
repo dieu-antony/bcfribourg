@@ -28,7 +28,7 @@ const Committee = () => {
     phone: "079 452 45 15",
   };
   const treasurer = {
-    imgRef: "/assets/committee/blank.png",
+    imgRef: "/assets/committee/treasurer.jpg",
     title: t("vicePresident"),
     name: "Nathalie Rey",
     email: "caissier(at)bcfribourg.ch",
@@ -39,7 +39,7 @@ const Committee = () => {
     title: t("sup"),
     name: "Gilbert Fischer",
     email: "",
-    phone: "",
+    phone: "078 790 12 72",
   };
   return (
     <Layout>
