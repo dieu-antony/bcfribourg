@@ -31,7 +31,7 @@ const Interclubs = () => {
   return (
     <Layout>
       <Image
-        src="/assets/ic_image.jpg"
+        src="/assets/ic_image.webp"
         alt="Interclubs Badminton Club Fribourg"
         width={960}
         height={540}

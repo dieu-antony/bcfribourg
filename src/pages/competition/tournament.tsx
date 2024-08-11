@@ -10,7 +10,7 @@ const Tournament = () => {
   return (
     <Layout>
       <Image
-        src="/assets/tournament.jpg"
+        src="/assets/tournament.webp"
         alt="Tournois Swiss Badminton Fribourg"
         width={960}
         height={540}

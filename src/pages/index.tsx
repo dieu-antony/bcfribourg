@@ -66,7 +66,7 @@ export default function Home() {
                   className="flex max-h-[500px] max-w-[1000px] items-center"
                 >
                   <Image
-                    src={`/assets/home/${index + 1}.jpg`}
+                    src={`/assets/home/${index + 1}.webp`}
                     alt="Badminton Club Fribourg Badminton Fribourg"
                     width={960}
                     height={540}
@@ -92,12 +92,12 @@ export default function Home() {
               ></iframe>
               <p className="mb-4 mt-4">{t("court.details")}</p>
               <Link
-                href={"/assets/plan_du_site_grand.png"}
+                href={"/assets/plan_du_site_grand.webp"}
                 target="_blank"
                 locale=""
               >
                 <Image
-                  src="/assets/plan_du_site_grand.png"
+                  src="/assets/plan_du_site_grand.webp"
                   alt="Plan de la salle de badminton fribourg"
                   width={800}
                   height={600}
