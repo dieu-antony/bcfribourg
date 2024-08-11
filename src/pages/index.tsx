@@ -68,11 +68,11 @@ export default function Home() {
                   <Image
                     src={`/assets/home/${index + 1}.jpg`}
                     alt="Badminton Club Fribourg Badminton Fribourg"
-                    width={1280}
-                    height={720}
+                    width={960}
+                    height={540}
                     className="object-cover"
                     priority={index < 2}
-                    loading={index < 2 ? "eager" : "lazy"}
+                    loading="eager"
                   />
                 </CarouselItem>
               ))}

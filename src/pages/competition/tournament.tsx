@@ -12,8 +12,8 @@ const Tournament = () => {
       <Image
         src="/assets/tournament.jpg"
         alt="Tournois Swiss Badminton Fribourg"
-        width={1280}
-        height={720}
+        width={960}
+        height={540}
         className="left-0 top-0 z-0 max-h-[400px] w-full object-cover"
         priority
         loading="eager"
@@ -67,6 +67,5 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     },
   };
 }
-
 
 export default Tournament;
