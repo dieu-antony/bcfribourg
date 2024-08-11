@@ -13,6 +13,8 @@ import { Separator } from "~/lib/components/ui/separator";
 import { useTranslations } from "next-intl";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
+import IcImage from "../../../public/assets/ic_image.webp";
+
 
 const Interclubs = () => {
   const t = useTranslations("Interclubs");
@@ -31,10 +33,8 @@ const Interclubs = () => {
   return (
     <Layout>
       <Image
-        src="/assets/ic_image.webp"
-        alt="Interclubs Badminton Club Fribourg"
-        width={960}
-        height={540}
+        src={IcImage}
+        alt="Interclubs Badminton Club Fribourg BC Fribourg"
         className="left-0 top-0 z-0 max-h-96 w-full object-cover"
         priority
         loading="eager"

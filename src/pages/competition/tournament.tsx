@@ -4,16 +4,15 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "~/lib/components/Layout";
+import TournamentImg from "../../../public/assets/tournament.webp";
 
 const Tournament = () => {
   const t = useTranslations("Tournament");
   return (
     <Layout>
       <Image
-        src="/assets/tournament.webp"
+        src={TournamentImg}
         alt="Tournois Swiss Badminton Fribourg"
-        width={960}
-        height={540}
         className="left-0 top-0 z-0 max-h-[400px] w-full object-cover"
         priority
         loading="eager"

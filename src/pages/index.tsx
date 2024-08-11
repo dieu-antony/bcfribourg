@@ -13,6 +13,12 @@ import Autoplay from "embla-carousel-autoplay";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
+import salle from "../../public/assets/plan_du_site_grand.webp";
+import one from "../../public/assets/home/1.webp";
+import two from "../../public/assets/home/2.webp";
+import three from "../../public/assets/home/3.webp";
+import four from "../../public/assets/home/4.webp";
+import five from "../../public/assets/home/5.webp";
 
 export default function Home() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
@@ -60,22 +66,46 @@ export default function Home() {
         <Link href="/gallery" className="max-w-[1000px]">
           <Carousel plugins={[plugin.current]} opts={{ loop: true }}>
             <CarouselContent>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <CarouselItem
-                  key={index}
-                  className="flex max-h-[500px] max-w-[1000px] items-center"
-                >
-                  <Image
-                    src={`/assets/home/${index + 1}.webp`}
-                    alt="Badminton Club Fribourg Badminton Fribourg"
-                    width={960}
-                    height={540}
-                    className="object-cover"
-                    priority={index < 2}
-                    loading="eager"
-                  />
-                </CarouselItem>
-              ))}
+              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+                <Image
+                  src={one}
+                  alt="Badminton Club Fribourg Badminton Fribourg"
+                  className="object-cover"
+                  loading="eager"
+                />
+              </CarouselItem>
+              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+                <Image
+                  src={two}
+                  alt="bc fribourg Badminton Fribourg"
+                  className="object-cover"
+                  loading="eager"
+                />
+              </CarouselItem>
+              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+                <Image
+                  src={three}
+                  alt="Badminton Club Fribourg Badminton Fribourg"
+                  className="object-cover"
+                  loading="eager"
+                />
+              </CarouselItem>
+              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+                <Image
+                  src={four}
+                  alt="bc fribourg Badminton Fribourg"
+                  className="object-cover"
+                  loading="eager"
+                />
+              </CarouselItem>
+              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+                <Image
+                  src={five}
+                  alt="Badminton Club Fribourg Badminton Fribourg"
+                  className="object-cover"
+                  loading="eager"
+                />
+              </CarouselItem>
             </CarouselContent>
           </Carousel>
         </Link>
@@ -97,10 +127,8 @@ export default function Home() {
                 locale=""
               >
                 <Image
-                  src="/assets/plan_du_site_grand.webp"
+                  src={salle}
                   alt="Plan de la salle de badminton fribourg"
-                  width={800}
-                  height={600}
                 />
               </Link>
             </div>
