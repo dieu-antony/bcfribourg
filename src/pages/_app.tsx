@@ -7,6 +7,7 @@ import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { useRouter } from "next/router";
 import type { Session } from "node_modules/next-auth/core/types";
 import GoogleAnalytics from "~/lib/components/GoogleAnalytics";
+import JSONLD from "~/lib/components/JSONLD";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ const App: AppType = ({ Component, pageProps: { session, messages, ...pageProps}
         </Head>
         <Component {...pageProps} />
         <GoogleAnalytics />
+        <JSONLD />
       </NextIntlClientProvider>
     </SessionProvider>
   );
