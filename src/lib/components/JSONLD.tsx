@@ -1,5 +1,5 @@
 import Script from "next/script";
-import { SportsTeam, WithContext } from "schema-dts";
+import type { SportsTeam, WithContext } from "schema-dts";
 
 const jsonLd: WithContext<SportsTeam> = {
   "@context": "https://schema.org",
@@ -40,7 +40,7 @@ const jsonLd: WithContext<SportsTeam> = {
 };
 
 const JSONLD = () => {
-  return <Script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>;
+  return <Script id="SportsTeamSchema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}/>;
 };
 
 export default JSONLD;
