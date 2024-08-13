@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { useRouter } from "next/router";
 import type { Session } from "node_modules/next-auth/core/types";
+import GoogleAnalytics from "~/lib/components/GoogleAnalytics";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ const App: AppType = ({ Component, pageProps: { session, messages, ...pageProps}
           <title>BC Fribourg</title>
         </Head>
         <Component {...pageProps} />
+        <GoogleAnalytics />
       </NextIntlClientProvider>
     </SessionProvider>
   );
