@@ -110,7 +110,7 @@
     }
   },
   "PrevSeasons": {
-    "title": "Statistiques des saisons précédentes",
+    "title": "Saisons précédentes",
     "description": "Vous trouverez ici les statistiques des saisons précédentes du BC Fribourg depuis 2015. Utilisez les filtres pour voir les équipes et leurs performances de chaque saison!",
     "psp": "Ce graphique montre la position de chaque équipe dans leur ligue respective pour chaque saison. Une équipe en dernière position pendant une saison va descendre dans une ligue inférieure pour la saison suivante, tandis qu'une équipe en première place va être promue dans une ligue supérieure. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!",
     "lhm": "Ce graphique montre dans quelle ligue chaque équipe du BC Fribourg a joué pour chaque saison. Une couleur plus foncée indique une ligue plus élevée. Pour le moment il existent les ligues nationales (NLA, NLB), les ligues supérieurs (1, 2) et les ligues inférieures (3, 4).",
@@ -122,7 +122,8 @@
       "sets": "Sets",
       "games": "Matches",
       "matches": "Rencontres"
-    }
+    },
+    "subtitle": "Statistiques"
   },
   "Tournament": {
     "title": "Tournois Swiss Badminton",
