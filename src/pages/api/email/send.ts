@@ -13,11 +13,12 @@ export default async function send (req: NextApiRequest, res: NextApiResponse<vo
       const EmailData = JSON.parse(req.body as string) as EmailData;
       try {
         const { data, error } = await resend.emails.send({
-          from: "BC Fribourg <onboarding@resend.dev>",
+          from: "BC Fribourg <site@bcfribourg.ch>",
           to: EmailData.toEmail,
           subject: EmailData.subject ?? "Subject unknown",
           react: EmailTemplate({ ...EmailData }),
           text: EmailData.message ?? "Message unknown",
+          reply_to: EmailData.email
         });
 
         if (error) {

@@ -17,7 +17,7 @@ const Contact = () => {
 
   async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+    const form = e.currentTarget;
     const emailTo = toEmail(emailData.subject!);
 
     const data = {
@@ -30,6 +30,7 @@ const Contact = () => {
     });
     toast.success(t("success"));
     setEmailData({ subject: "Information" } as EmailData);
+    form.reset();
   }
 
   return (
@@ -55,7 +56,7 @@ const Contact = () => {
                     onChange={(e) =>
                       setEmailData({ ...emailData, lastName: e.target.value })
                     }
-                    required
+                    required={true}
                     value={emailData.lastName}
                   />
                   <FormItem
@@ -77,7 +78,7 @@ const Contact = () => {
                     onChange={(e) =>
                       setEmailData({ ...emailData, email: e.target.value })
                     }
-                    required
+                    required={true}
                     value={emailData.email}
                   />
                   <FormItem
@@ -107,7 +108,7 @@ const Contact = () => {
                     onChange={(e) =>
                       setEmailData({ ...emailData, message: e.target.value })
                     }
-                    required
+                    required={true}
                     value={emailData.message}
                   />
                   <button

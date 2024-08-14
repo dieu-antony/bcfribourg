@@ -51,7 +51,7 @@ const Juniors = () => {
         </div>
         <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-6 bg-white p-8 shadow-sm md:place-self-end lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
-            <h1 className="text-lg font-semibold">{t("contact.title")}</h1>
+            <h2 className="text-lg font-semibold">{t("contact.title")}</h2>
             <span>Antony Dieu</span>
           </div>
           <div className="grid grid-cols-2 place-items-center justify-center">

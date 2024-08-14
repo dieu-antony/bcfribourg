@@ -80,9 +80,9 @@ const Member = () => {
 
   async function onFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+    const form = e.currentTarget;
     setLoading(true);
-    const subject = "inscription";
+    const subject = "Inscription";
     const toEmail = "caissier@bcfribourg.ch";
 
     const data = {
@@ -96,8 +96,8 @@ const Member = () => {
     });
     toast.success(t("success"));
     setEmailData({ gender: "Masculin" } as EmailData);
-
     setLoading(false);
+    form.reset();
   }
 
   return (
@@ -148,7 +148,7 @@ const Member = () => {
                     label="name"
                     type="text"
                     labelName={t("lastname")}
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, lastName: e.target.value })
                     }
@@ -159,7 +159,7 @@ const Member = () => {
                     label="firstName"
                     type="text"
                     labelName={t("firstname")}
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, firstName: e.target.value })
                     }
@@ -190,7 +190,7 @@ const Member = () => {
                     label="address"
                     type=""
                     labelName={t("address")}
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, address: e.target.value })
                     }
@@ -201,7 +201,7 @@ const Member = () => {
                     label="npa"
                     type=""
                     labelName={t("npa")}
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, npa: e.target.value })
                     }
@@ -212,7 +212,7 @@ const Member = () => {
                     label="year"
                     type="date"
                     labelName={t("dob")}
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, birthdate: e.target.value })
                     }
@@ -227,13 +227,14 @@ const Member = () => {
                       setEmailData({ ...emailData, avs: e.target.value })
                     }
                     value={emailData.avs}
+                    required={false}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="phone"
                     type="tel"
                     labelName={t("phone")}
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, phone: e.target.value })
                     }
@@ -248,13 +249,14 @@ const Member = () => {
                       setEmailData({ ...emailData, license: e.target.value })
                     }
                     value={emailData.license}
+                    required={false}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="email"
                     type="email"
                     labelName="Email"
-                    required
+                    required={true}
                     onChange={(e) =>
                       setEmailData({ ...emailData, email: e.target.value })
                     }
@@ -270,6 +272,7 @@ const Member = () => {
                       setEmailData({ ...emailData, message: e.target.value })
                     }
                     value={emailData.message}
+                    required={false}
                   />
                   <button
                     disabled={loading}

@@ -172,9 +172,9 @@ const PreviousSeasons = () => {
                     className="mt-12 md:mt-0"
                   >
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <h3 className="text-lg font-bold">
+                      <h2 className="text-lg font-bold">
                         Position Scatter Plot
-                      </h3>
+                      </h2>
                       <p>{t("psp")}</p>
 
                       <Select
@@ -203,7 +203,7 @@ const PreviousSeasons = () => {
                   </TabsContent>
                   <TabsContent value="leagueHeatmap" className="mt-12 md:mt-0">
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <h3 className="text-lg font-bold">League Heatmap</h3>
+                      <h2 className="text-lg font-bold">League Heatmap</h2>
                       <p>{t("lhm")}</p>
                     </div>
                     <div
@@ -222,7 +222,7 @@ const PreviousSeasons = () => {
                     className="mt-12 md:mt-0"
                   >
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <h3 className="text-lg font-bold">Ratio Scatter Plot</h3>
+                      <h2 className="text-lg font-bold">Ratio Scatter Plot</h2>
                       <p>{t("rsp")}</p>
                       <div className="flex flex-row gap-2">
                         <Select
@@ -295,7 +295,7 @@ const PreviousSeasons = () => {
                     className="mt-12 md:mt-0"
                   >
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <h3 className="text-lg font-bold">Stacked Barplot</h3>
+                      <h2 className="text-lg font-bold">Stacked Barplot</h2>
                       <p>{t("sbp")}</p>
                       <div className="flex flex-row gap-2">
                         <Select

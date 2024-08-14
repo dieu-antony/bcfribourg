@@ -79,9 +79,9 @@ export const toEmail = (subject: string) => {
     case "Information":
       return "president@bcfribourg.ch";
     case "Compétition":
-      return "technique@bcfribourg.ch";
+      return "interclubs@bcfribourg.ch";
     case "Entraînement Adultes":
-      return "technique@bcfribourg.ch";
+      return "info@bcfribourg.ch";
     case "Entraînement Juniors":
       return "juniors@bcfribourg.ch";
     case "Site internet":

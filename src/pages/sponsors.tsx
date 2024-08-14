@@ -44,7 +44,7 @@ export default function Sponsors() {
             </section>
           </div>
           <section className="mt-8 flex flex-col gap-8 bg-white p-8 text-center shadow-md">
-            <h3 className="text-2xl font-bold">{t("subtitle")}</h3>
+            <h2 className="text-2xl font-bold">{t("subtitle")}</h2>
             <p className="text-lg">{t("desc")} </p>
             <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               <div>
