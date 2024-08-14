@@ -131,7 +131,7 @@ const PreviousSeasons = () => {
   return (
     <Layout>
       <Title>{t("title")}</Title>
-      <div className="m-4 flex max-h-max min-h-max flex-col items-center justify-center pt-8 lg:pt-16">
+      <div className="mx-5 flex max-h-max min-h-max flex-col items-center justify-center my-8">
         <div className="w-full max-w-[1000px] shadow-md">
           <div className="max-h-max max-w-[1000px] bg-white p-5">
             <h2 className="mb-2 text-picton-blue-500 text-2xl font-bold">
