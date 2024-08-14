@@ -38,7 +38,7 @@ const Committee = () => {
     imgRef: "/assets/committee/ligueSup.webp",
     title: t("sup"),
     name: "Gilbert Fischer",
-    email: "",
+    email: "technique(at)bcfribourg.ch",
     phone: "078 790 12 72",
   };
   return (

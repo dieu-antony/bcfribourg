@@ -35,8 +35,8 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div className="flex h-full min-h-max w-full flex-col items-center justify-center mt-8">
-        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-md">
+      <div className="flex h-full min-h-max w-full flex-col items-center justify-center my-8">
+        <div className="mx-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-md">
           <form onSubmit={onContactSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">

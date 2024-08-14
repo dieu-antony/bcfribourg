@@ -43,7 +43,7 @@ const Interclubs = () => {
         Interclub
       </h1>
       <div className="flex justify-center">
-        <div className="z-10 m-5 flex w-full max-w-[1000px] flex-col rounded border bg-white px-4">
+        <div className="z-10 mx-5 my-8 flex w-full max-w-[1000px] flex-col rounded border bg-white px-4">
           <Accordion type="multiple">
             {/* Set display names for the teams */}
             {playersByTeam.map((team) => {
