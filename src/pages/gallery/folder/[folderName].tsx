@@ -93,7 +93,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
           <div className="grid w-full max-w-[1200px] grid-cols-3">
             <Link
               href="/gallery"
-              className="flex w-24 items-center gap-1 self-center rounded-md bg-picton-blue-500 p-1 text-center text-white shadow-sm hover:cursor-pointer hover:bg-picton-blue-500/80 "
+              className="flex w-24 items-center gap-1 self-center rounded-md bg-picton-blue-500 p-1 text-center text-white shadow-md hover:cursor-pointer hover:bg-picton-blue-500/80 "
             >
               <ChevronLeft size="20px" /> Galerie
             </Link>

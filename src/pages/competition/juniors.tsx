@@ -1,6 +1,7 @@
 import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
+import { Title } from "~/lib/components/Title";
 import {
   Table,
   TableBody,
@@ -29,11 +30,7 @@ const Juniors = () => {
   ];
   return (
     <Layout>
-      <div className="h-12 w-full bg-picton-blue-500 mt-8 flex items-center">
-        <h1 className="pt-2 text-3xl font-bold text-white w-full text-center">
-          {t("title")}
-        </h1>
-      </div>
+      <Title>{t("title")}</Title>
       <div className="m-4 mt-8 flex max-w-[1000px] flex-col self-center">
         <div className="flex flex-col gap-2 bg-white p-4 shadow-md">
           <h2 className="text-xl font-semibold text-picton-blue-500">

@@ -37,8 +37,8 @@ const Documents = () => {
 
   return (
     <Layout>
-      <div className="mx-4 my-8 max-w-[1000px] self-center bg-white p-5 md:min-w-[700px] lg:mt-16 lg:w-[900px]">
-        <h1 className="mb-4 text-xl text-picton-blue-500">{t("title")}</h1>
+      <div className="mx-4 my-8 max-w-[1000px] self-center bg-white p-5 md:min-w-[700px] lg:w-[900px] shadow-md">
+        <h1 className="mb-4 text-xl text-picton-blue-500 font-semibold">{t("title")}</h1>
         <Table>
           <TableBody>
             {documents.map((document, index) => (

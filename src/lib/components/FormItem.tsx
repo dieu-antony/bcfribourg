@@ -37,7 +37,7 @@ const FormItem = ({
             name={label}
             id={label}
             value={value}
-            className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
+            className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:max-w-xs sm:text-sm sm:leading-6"
           >
             {options?.map((item) => <option key={item}>{item}</option>)}
           </select>
@@ -61,7 +61,7 @@ const FormItem = ({
             rows={5}
             required={required}
             id={label}
-            className="form-textarea block w-full resize-none rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+            className="form-textarea block w-full resize-none rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
           />
         </div>
       </div>
@@ -81,7 +81,7 @@ const FormItem = ({
             name={label}
             type={type}
             id={label}
-            className="form-input block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
+            className="form-input block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500 sm:text-sm sm:leading-6"
             multiple={type == "file"}
             pattern={
               type == "avs" ? "756.[0-9]{4}.[0-9]{4}.[0-9]{2}" : undefined

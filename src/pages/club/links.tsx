@@ -2,10 +2,12 @@ import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Layout from "~/lib/components/Layout";
+import { Title } from "~/lib/components/Title";
 import { HoverEffect } from "~/lib/components/ui/card-hover-effect";
 
 const Links = () => {
   const t = useTranslations("Links");
+  const l = useTranslations("Navbar");
   const links = [
     {
       title: "Swiss Badminton",
@@ -60,6 +62,7 @@ const Links = () => {
   ];
   return (
     <Layout>
+      <Title>{l("links")}</Title>
       <div className="-z-0 mx-auto max-w-5xl px-8">
         <HoverEffect items={links} />
       </div>

@@ -49,7 +49,7 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
-          <Card>
+          <Card className="shadow-md">
             <CardTitle>{item.title}</CardTitle>
             <CardDescription className="flex justify-center align-middle">{item.description}</CardDescription>
           </Card>

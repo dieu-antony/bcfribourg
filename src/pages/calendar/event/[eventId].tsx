@@ -99,7 +99,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
               />
             </div>
           </div>
-          <aside className="flex flex-col bg-white p-6 shadow-sm">
+          <aside className="flex flex-col bg-white p-6 shadow-md">
             <div className="flex flex-col">
               <h2 className="bg-picton-blue-400 p-2">{t("details")}</h2>
               <h3 className="ml-1 mt-2 font-bold">{t("start")}</h3>
@@ -153,7 +153,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
               />
             </div>
           </div>
-          <aside className="flex flex-col bg-white p-6 shadow-sm">
+          <aside className="flex flex-col bg-white p-6 shadow-md">
             <div className="flex flex-col">
               <h2 className="bg-picton-blue-400 p-2">{t("details")}</h2>
               <h3 className="ml-1 mt-2 font-bold">{t("start")}</h3>

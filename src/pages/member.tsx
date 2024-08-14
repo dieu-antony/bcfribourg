@@ -102,8 +102,8 @@ const Member = () => {
 
   return (
     <Layout>
-      <div className="flex min-h-max w-full flex-col items-center justify-center pt-8 lg:pt-16">
-        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-sm">
+      <div className="flex min-h-max w-full flex-col items-center justify-center my-8">
+        <div className="mx-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-md">
           <form onSubmit={onFormSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
@@ -178,7 +178,7 @@ const Member = () => {
                       onChange={(e) =>
                         setEmailData({ ...emailData, gender: e.target.value })
                       }
-                      className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500  sm:max-w-xs sm:text-sm sm:leading-6"
+                      className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500  sm:max-w-xs sm:text-sm sm:leading-6"
                     >
                       <option value="Masculin">{t("m")}</option>
                       <option value="Féminin">{t("f")}</option>
@@ -277,7 +277,7 @@ const Member = () => {
                   <button
                     disabled={loading}
                     type="submit"
-                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
+                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
                   >
                     {t("send")}
                   </button>

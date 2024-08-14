@@ -19,7 +19,7 @@ const TrainingCard = ({
   return (
     <motion.div
       className={cn(
-        "relative m-8 mt-0 group flex h-[200px] w-[300px] flex-col gap-2 bg-white p-8 shadow-sm lg:h-[300] lg:w-[400px]",
+        "relative m-8 mt-0 group flex h-[200px] w-[300px] flex-col gap-2 bg-white p-8 shadow-md lg:h-[300] lg:w-[400px]",
         className,
       )}
       whileHover="hovered"

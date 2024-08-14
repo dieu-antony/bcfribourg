@@ -17,6 +17,7 @@ import type { PastTeamProps } from "~/lib/types";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
+import { Title } from "~/lib/components/Title";
 
 const PreviousSeasons = () => {
   const t = useTranslations("PrevSeasons");
@@ -129,12 +130,13 @@ const PreviousSeasons = () => {
 
   return (
     <Layout>
+      <Title>{t("title")}</Title>
       <div className="m-4 flex max-h-max min-h-max flex-col items-center justify-center pt-8 lg:pt-16">
         <div className="w-full max-w-[1000px] shadow-md">
-          <div className="max-h-max max-w-[1000px]  bg-white p-5">
-            <h1 className="mb-2 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 bg-clip-text text-2xl font-bold text-transparent">
-              {t("title")}
-            </h1>
+          <div className="max-h-max max-w-[1000px] bg-white p-5">
+            <h2 className="mb-2 text-picton-blue-500 text-2xl font-bold">
+              {t("subtitle")}
+            </h2>
             <div className="flex flex-col bg-white">
               <p className="mb-4">{t("description")}</p>
               <div className="flex flex-col">

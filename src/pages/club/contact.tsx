@@ -35,14 +35,14 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-8 lg:pt-16">
-        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-sm">
+      <div className="flex h-full min-h-max w-full flex-col items-center justify-center mt-8">
+        <div className="m-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-md">
           <form onSubmit={onContactSubmit}>
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-xl font-semibold leading-7 text-picton-blue-500">
+                <h1 className="text-xl font-semibold leading-7 text-picton-blue-500">
                   {t("title")}
-                </h2>
+                </h1>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   {t("description")}
                 </p>
@@ -113,7 +113,7 @@ const Contact = () => {
                   />
                   <button
                     type="submit"
-                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
+                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
                   >
                     {t("send")}
                   </button>

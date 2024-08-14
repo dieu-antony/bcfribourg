@@ -3,6 +3,7 @@ import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Layout from "~/lib/components/Layout";
+import { Title } from "~/lib/components/Title";
 import TrainingCard from "~/lib/components/TrainingCard";
 
 const Adults = () => {
@@ -10,9 +11,7 @@ const Adults = () => {
 
   return (
     <Layout>
-      <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
-        {t("title")}
-      </h1>
+      <Title>{t("title")}</Title>
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
         <TrainingCard
           className="mt-8 md:place-self-end"
@@ -38,7 +37,7 @@ const Adults = () => {
           trainer={t("thursday19.trainer")}
           target={t("thursday19.description")}
         />
-        <div className="m-8  mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-sm md:place-self-end lg:h-[300] lg:w-[400px]">
+        <div className="m-8  mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-md md:place-self-end lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("holidays.title")}</h2>
             <a
@@ -56,7 +55,7 @@ const Adults = () => {
             <span>26.08.2024 {t("holidays.until")} 26.06.2025</span>
           </div>
         </div>
-        <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-6 bg-white p-8 shadow-sm md:place-self-start lg:h-[300] lg:w-[400px]">
+        <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-6 bg-white p-8 shadow-md md:place-self-start lg:h-[300] lg:w-[400px]">
           <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("contact.title")}</h2>
             <span>Philippe Etter</span>

@@ -110,7 +110,7 @@ export default function Home() {
           </Carousel>
         </Link>
         <div className="flex flex-col" id="salle">
-          <div className="m-5 max-w-[1000px] bg-white p-5 shadow">
+          <div className="mx-5 mb-8 mt-12 max-w-[1000px] bg-white p-5 shadow">
             <h2 className="mb-2 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 bg-clip-text font-bold text-transparent">
               {t("court.title")}
             </h2>

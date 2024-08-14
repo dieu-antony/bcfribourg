@@ -189,8 +189,8 @@ const History = () => {
   };
   return (
     <Layout>
-      <div className="flex justify-center">
-        <div className="m-5 flex w-full max-w-[1000px] flex-col gap-4 rounded bg-white p-5 shadow-sm">
+      <div className="flex justify-center mt-8">
+        <div className="m-5 mt-0 flex w-full max-w-[1000px] flex-col gap-4 rounded bg-white p-5 shadow-md">
           <h1 className="text-2xl font-bold text-picton-blue-500">
             {t("title")}
           </h1>
@@ -201,7 +201,7 @@ const History = () => {
         <Accordion
           type="single"
           collapsible
-          className="w-full rounded bg-white shadow-sm"
+          className="w-full rounded bg-white shadow-md"
         >
           <AccordionItem value="item-1">
             <AccordionTrigger className="justify-around" onClick={scrollTop}>
