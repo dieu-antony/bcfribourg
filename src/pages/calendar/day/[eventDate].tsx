@@ -10,7 +10,7 @@ import {
 import { ArrowUpRightFromSquareIcon } from "lucide-react";
 import { Button } from "~/lib/components/ui/button";
 import Link from "next/link";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 
@@ -117,47 +117,28 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
+  const messages = (await import(`../../../../messages/${locale}.json`)) as IntlMessages;
+
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
   const data = (await response.json()) as {
     status: string;
     events: CalendarEvent[];
   };
-  const eventDates = data.events.map((event: CalendarEvent) =>
-    new Date(event.start).toDateString(),
-  );
 
-  const paths = eventDates.flatMap(
-    (date) =>
-      locales?.map((locale) => ({
-        params: { eventDate: date },
-        locale,
-      })) ?? [],
-  );
+  const eventId = params?.eventId;
+  const event = data.events.find((event) => event.id === eventId);
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(
-    `../../../../messages/${locale}.json`
-  )) as IntlMessages;
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`,
-  );
-  const data = (await response.json()) as {
-    status: string;
-    events: CalendarEvent[];
-  };
+  if (!event) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       messages: messages.default,
-      initialResources: data.events,
+      initialResources: data.events, 
     },
   };
 };

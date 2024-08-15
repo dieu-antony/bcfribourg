@@ -20,7 +20,7 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 import type { SearchResult } from "~/lib/types";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 import Layout, { inter } from "~/lib/components/Layout";
 import ScrollToTop from "~/lib/components/ScrollToTop";
 
@@ -168,46 +168,24 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-covers`,
-  );
+export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
+  const messages = (await import(`../../../../messages/${locale}.json`)) as IntlMessages;
 
-  const data = (await response.json()) as {
-    status: string;
-    resources: SearchResult[];
-  };
-  const folders = data.resources.map((folder: SearchResult) => folder.tags[0]);
-
-  const paths = folders.flatMap(
-    (folder) =>
-      locales?.map((locale) => ({
-        params: { folderName: folder },
-        locale,
-      })) ?? [],
-  );
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const messages = (await import(
-    `../../../../messages/${locale}.json`
-  )) as IntlMessages;
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
-  );
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`);
   const data = (await response.json()) as {
     status: string;
     resources: SearchResult[];
   };
 
   const initialResources = data.resources.filter(
-    (resource: SearchResult) => resource.asset_folder === params?.folderName,
+    (resource: SearchResult) => resource.asset_folder === params?.folderName
   );
+
+  if (initialResources.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
@@ -216,5 +194,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     },
   };
 };
+
 
 export default FolderPage;

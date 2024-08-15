@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { Separator } from "~/lib/components/ui/separator";
 import { useDimensions } from "~/lib/hooks/useDimensions";
 import { Button } from "~/lib/components/ui/button";
-import type { GetStaticPaths, GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 import Layout from "~/lib/components/Layout";
 import { useTranslations } from "next-intl";
 
@@ -202,43 +202,28 @@ const EventPage = ({ initialResources }: EventPageProps) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
-  const data = (await response.json()) as {
-    status: string;
-    events: CalendarEvent[];
-  };
-  const eventDates = data.events.map((event: CalendarEvent) => event.id);
-
-  const paths = eventDates.flatMap(
-    (id: string) =>
-      locales?.map((locale) => ({
-        params: { eventId: id },
-        locale,
-      })) ?? [],
-  );
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const messages = (await import(
-    `../../../../messages/${locale}.json`
-  )) as IntlMessages;
+export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
+  const messages = (await import(`../../../../messages/${locale}.json`)) as IntlMessages;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
   const data = (await response.json()) as {
     status: string;
     events: CalendarEvent[];
   };
+
+  const eventId = params?.eventId;
+  const event = data.events.find((event) => event.id === eventId);
+
+  if (!event) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       messages: messages.default,
-      initialResources: data.events,
+      initialResources: data.events, 
     },
   };
 };
