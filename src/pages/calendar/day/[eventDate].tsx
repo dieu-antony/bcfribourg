@@ -120,16 +120,13 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
 export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
   const messages = (await import(`../../../../messages/${locale}.json`)) as IntlMessages;
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`);
   const data = (await response.json()) as {
     status: string;
     events: CalendarEvent[];
   };
 
-  const eventId = params?.eventId;
-  const event = data.events.find((event) => event.id === eventId);
-
-  if (!event) {
+  if (data.events.length === 0) {
     return {
       notFound: true,
     };
@@ -138,7 +135,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale })
   return {
     props: {
       messages: messages.default,
-      initialResources: data.events, 
+      initialResources: data.events,
     },
   };
 };
