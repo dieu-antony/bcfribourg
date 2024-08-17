@@ -34,7 +34,7 @@ const Juniors = () => {
           <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("holidays.title")}</h2>
             <a
-              href="https://www.fr.ch/sites/default/files/2020-06/calendrier-majoritaire-202425.pdf"
+              href="https://www.fr.ch/sites/default/files/2024-08/calendrier-majoritaire-202425.pdf"
               className="flex flex-row gap-1 hover:text-picton-blue-500"
               target="_blank"
             >
