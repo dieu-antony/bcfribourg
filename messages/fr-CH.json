@@ -278,6 +278,7 @@
     "phone": "N° téléphone",
     "sblicence": "Numéro de license (si titulaire d'une license Swiss Badminton)",
     "message": "Message",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "contact": "Je n'ai pas encore assisté à un entraînement"
   }
 }
