@@ -20,6 +20,8 @@ import {
 import { useTranslations } from "next-intl";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
+import Link from "next/link";
+import { SquareMousePointer } from "lucide-react";
 
 const Member = () => {
   const t = useTranslations("Member");
@@ -113,6 +115,9 @@ const Member = () => {
                 <p className="my-1 text-sm leading-6 text-gray-600">
                   {t("description")}
                 </p>
+                <Link href="/club/contact" className="w-auto flex text-center gap-1 flex-row my-1 text-sm leading-6 text-black hover:text-picton-blue-500 duration-100 transition-colors underline-offset-2 hover:underline">
+                 <SquareMousePointer size="20px"/>{t("contact")}
+                </Link>
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1">
                     <AccordionTrigger className="font-semibold text-picton-blue-500">

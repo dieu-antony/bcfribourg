@@ -202,7 +202,7 @@ const EventPage = ({ initialResources }: EventPageProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale, res }) => {
   const messages = (await import(`../../../../messages/${locale}.json`)) as IntlMessages;
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`);
@@ -219,6 +219,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale })
       notFound: true,
     };
   }
+
+  res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=299');
 
   return {
     props: {
