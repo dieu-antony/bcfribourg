@@ -132,7 +132,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale, r
     };
   }
 
-  res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=299');
+  res.setHeader('Cache-Control', 'public, s-maxage=28800, stale-while-revalidate=28800');
 
   return {
     props: {
