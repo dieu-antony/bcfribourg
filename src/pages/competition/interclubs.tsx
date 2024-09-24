@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/lib/components/ui/accordion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SquareArrowOutUpRight } from "lucide-react";
 import type { PlayerByTeam } from "~/lib/types";
 import Link from "next/link";
@@ -15,21 +15,14 @@ import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
 import IcImage from "../../../public/assets/ic_image.webp";
 
+type InterclubsProps = {
+  initialData: PlayerByTeam[];
+};
 
-const Interclubs = () => {
+const Interclubs = ({ initialData }: InterclubsProps) => {
   const t = useTranslations("Interclubs");
-  const [playersByTeam, setPlayersByTeam] = useState<PlayerByTeam[]>([]);
+  const [playersByTeam] = useState<PlayerByTeam[]>(initialData);
 
-  // Fetch players by team
-  useEffect(() => {
-    void fetch("/api/players")
-      .then((res) => res.json())
-      .then((data: { players: PlayerByTeam[]; status: string }) => {
-        if (data.status === "success") {
-          setPlayersByTeam(data.players);
-        }
-      });
-  }, []);
   return (
     <Layout>
       <Image
@@ -143,10 +136,18 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/players`);
+  const data = (await res.json()) as {
+    players: PlayerByTeam[];
+    status: string;
+  };
+
   return {
     props: {
       messages: messages.default,
+      initialData: data.players,
     },
+    revalidate: 604800,
   };
 }
 

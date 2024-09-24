@@ -104,7 +104,11 @@ export const StackedBarplot = ({
 
     const yAxisGenerator = d3.axisLeft(yScale);
     svgElement.append("g").call(yAxisGenerator);
-  }, [xScale, yScale, boundsHeight]);
+
+    return () => {
+        svgElement.selectAll("*").remove(); 
+    };
+}, [xScale, yScale, boundsHeight]);
 
   // Compute the springs for the rectangles outside the mapping function
   const springs = useSprings(

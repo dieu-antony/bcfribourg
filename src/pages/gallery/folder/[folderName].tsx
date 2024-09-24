@@ -59,6 +59,10 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
       }
     };
     void fetchResources();
+
+    return () => {
+      setResources([]);
+    }
   }, [router.isReady]);
 
   const filteredResources = resources.filter(
@@ -73,9 +77,15 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
 
     setCount(api.scrollSnapList().length);
 
-    api.on("select", () => {
+    const handleSelect = () => {
       setCurrent(api.selectedScrollSnap());
-    });
+    };
+
+    api.on("select", handleSelect);
+
+    return () => {
+      api.off("select", handleSelect);
+    };
   }, [api, current]);
 
   if (loading) {

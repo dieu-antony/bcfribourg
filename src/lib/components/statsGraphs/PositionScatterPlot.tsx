@@ -45,19 +45,27 @@ export const PositionScatterPlot = ({
   // Draw the axes
   useEffect(() => {
     const svgElement = d3.select(axesRef.current);
-    svgElement.selectAll("*").remove();
+    svgElement.selectAll("*").remove(); 
+    // Create the X-axis
     const xAxisGenerator = d3.axisBottom(xScale).ticks(times.length);
     svgElement
       .append("g")
       .attr("transform", "translate(0," + boundsHeight + ")")
       .call(xAxisGenerator);
 
+    // Create the Y-axis
     const yAxisGenerator = d3
       .axisLeft(yScale)
       .tickFormat(d3.format("0.0f"))
       .ticks(max);
     svgElement.append("g").call(yAxisGenerator);
-  }, [xScale, yScale, boundsHeight, max, times.length]);
+
+    // Cleanup function
+    return () => {
+        svgElement.selectAll("*").remove();
+    };
+}, [xScale, yScale, boundsHeight, max, times.length]);
+
 
   // Define the line generator
   const lineBuilder = d3

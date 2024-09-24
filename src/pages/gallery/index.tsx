@@ -1,45 +1,20 @@
 import type { GetStaticPropsContext } from "next";
 import { CldImage } from "next-cloudinary";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Layout from "~/lib/components/Layout";
 import type { SearchResult } from "~/lib/types";
 
-export default function Gallery() {
-  const [resources, setResources] = useState<SearchResult[]>([]);
-  const [loading, setLoading] = useState(true);
+type GalleryProps = {
+  initialData: SearchResult[];
+};
 
-  useEffect(() => {
-    const fetchResources = async () => {
-      const cachedResources = localStorage.getItem("resources");
-      if (cachedResources) {
-        setResources(JSON.parse(cachedResources) as SearchResult[]);
-        setLoading(false);
-      } else {
-        const response = await fetch("/api/images/fetch-images");
-        const data = (await response.json()) as {
-          status: string;
-          resources: SearchResult[];
-        };
-        localStorage.setItem("resources", JSON.stringify(data.resources));
-        setResources(data.resources);
-        setLoading(false);
-      }
-    };
-    void fetchResources();
-  }, []);
+export default function Gallery({ initialData }: GalleryProps) {
+  const [resources] = useState<SearchResult[]>(initialData);
 
   const filteredResources = resources.filter(
     (result) => result.asset_folder.toLowerCase() === "cover images",
   );
-
-  if (loading) {
-    return (
-      <Layout>
-        <span />
-      </Layout>
-    );
-  }
 
   return (
     <Layout>
@@ -81,9 +56,19 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}api/images/fetch-images`,
+  );
+  const result = (await res.json()) as {
+    status: string;
+    resources: SearchResult[];
+  };
+
   return {
     props: {
       messages: messages.default,
+      initialData: result.resources,
     },
+    revalidate: 86400,
   };
 }

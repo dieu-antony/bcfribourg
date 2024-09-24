@@ -7,47 +7,15 @@ import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
 import { useTranslations } from "next-intl";
 
-const Calendar = () => {
+type CalendarProps = {
+  initialEvents: CalendarEvent[];
+};
+
+const Calendar = ({ initialEvents }: CalendarProps) => {
   const t = useTranslations("Calendar");
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [events] = useState<CalendarEvent[]>(initialEvents);
   const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-
-  // Fetch events from the API
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch("/api/events");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = (await response.json()) as {
-          status: string;
-          events: CalendarEvent[];
-        };
-        if (data.status === "success") {
-          const newEvents = data.events.map((event: CalendarEvent) => ({
-            ...event,
-            start: event.start ?? new Date(event.start),
-            end: event.end ?? new Date(event.end),
-            title: event.summary,
-            location: event.location,
-            url: event.url,
-            eventType: event.eventType,
-            longitude: event.longitude,
-            latitude: event.latitude,
-          }));
-          setEvents(newEvents);
-        } else {
-          console.error("Error fetching events");
-        }
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
-
-    void fetchEvents();
-  }, []);
 
   /* eslint-disable */
   // Styles for the filter (unknown react-select types)
@@ -178,10 +146,30 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/events`);
+  const data = (await res.json()) as {
+    events: CalendarEvent[];
+    status: string;
+  };
+
+  const newEvents = data.events.map((event: CalendarEvent) => ({
+    ...event,
+    start: event.start ?? new Date(event.start),
+    end: event.end ?? new Date(event.end),
+    title: event.summary,
+    location: event.location,
+    url: event.url,
+    eventType: event.eventType,
+    longitude: event.longitude,
+    latitude: event.latitude,
+  }));
+
   return {
     props: {
       messages: messages.default,
+      initialEvents: newEvents,
     },
+    revalidate: 5,
   };
 }
 

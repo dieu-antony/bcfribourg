@@ -78,7 +78,12 @@ export const RatioScatterPlot = ({
 
     const yAxisGenerator = d3.axisLeft(yScale);
     svgElement.append("g").call(yAxisGenerator);
-  }, [times.length, xScale, yScale, boundsHeight]);
+
+    return () => {
+        svgElement.selectAll("*").remove(); 
+    };
+}, [times.length, xScale, yScale, boundsHeight]);
+
 
   // Define the line generator
   const lineBuilder = d3

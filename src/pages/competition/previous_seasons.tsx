@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Tabs,
   TabsContent,
@@ -19,12 +19,16 @@ import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
 import { Title } from "~/lib/components/Title";
 
-const PreviousSeasons = () => {
+type PreviousSeasonsProps = {
+  initialData: PastTeamProps[];
+};
+
+const PreviousSeasons = ({ initialData }: PreviousSeasonsProps) => {
   const t = useTranslations("PrevSeasons");
 
   const chartRef = useRef<HTMLDivElement>(null);
   const chartSize = useDimensions(chartRef);
-  const [data, setData] = useState<PastTeamProps[]>([]);
+  const [data] = useState<PastTeamProps[]>(initialData);
   const [selectedData, setSelectedData] = useState<string>(
     "Union Tafers-Fribourg 1",
   );
@@ -32,42 +36,6 @@ const PreviousSeasons = () => {
   const [barplotType, setBarplotType] = useState<"set" | "games" | "match">(
     "set",
   );
-
-  // fetch for the graph data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/pastTeams");
-        const data = (await res.json()) as {
-          status: "success" | "loading" | "error";
-          data: PastTeamProps[];
-        };
-
-        if (data.status === "success") {
-          const statsData = data.data.map((data: PastTeamProps) => ({
-            ...data,
-            name: data.name,
-            position: data.position,
-            wins: data.wins,
-            losses: data.losses,
-            ties: data.ties,
-            points: data.points,
-            matchRecord: data.matchRecord,
-            setRecord: data.setRecord,
-            gamesRecord: data.gamesRecord,
-            seasonStart: data.seasonStart,
-            league: getLeagueFromId(data.leagueId),
-            leagueId: data.leagueId,
-            url: data.url,
-          }));
-          setData(statsData);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    void fetchData();
-  }, []);
 
   // filter settings
   const filteredData = data.filter((data) => {
@@ -131,10 +99,10 @@ const PreviousSeasons = () => {
   return (
     <Layout>
       <Title>{t("title")}</Title>
-      <div className="mx-5 flex max-h-max min-h-max flex-col items-center justify-center my-8">
+      <div className="mx-5 my-8 flex max-h-max min-h-max flex-col items-center justify-center">
         <div className="w-full max-w-[1000px] shadow-md">
           <div className="max-h-max max-w-[1000px] bg-white p-5">
-            <h2 className="mb-2 text-picton-blue-500 text-2xl font-bold">
+            <h2 className="mb-2 text-2xl font-bold text-picton-blue-500">
               {t("subtitle")}
             </h2>
             <div className="flex flex-col bg-white">
@@ -392,10 +360,23 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/pastTeams`);
+  const result = (await res.json()) as {
+    status: "success" | "loading" | "error";
+    data: PastTeamProps[];
+  };
+
+  const statsData = result.data.map((data: PastTeamProps) => ({
+    ...data,
+    league: getLeagueFromId(data.leagueId),
+  }));
+
   return {
     props: {
       messages: messages.default,
+      initialData: statsData,
     },
+    revalidate: 2592000,
   };
 }
 
