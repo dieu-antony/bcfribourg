@@ -8,7 +8,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "~/lib/components/ui/carousel";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
@@ -23,6 +23,13 @@ import five from "../../public/assets/home/5.webp";
 export default function Home() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const t = useTranslations("Index");
+
+  useEffect(() => {
+    const currentPlugin = plugin.current;
+    return () => {
+      currentPlugin.destroy();
+    }
+  }, []);
 
   return (
     <Layout>

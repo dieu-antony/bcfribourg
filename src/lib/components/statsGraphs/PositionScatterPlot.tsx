@@ -62,6 +62,7 @@ export const PositionScatterPlot = ({
 
     // Cleanup function
     return () => {
+      d3.selectAll("*").on(".", null)
         svgElement.selectAll("*").remove();
     };
 }, [xScale, yScale, boundsHeight, max, times.length]);
@@ -118,6 +119,18 @@ export const PositionScatterPlot = ({
   if (!linePath) {
     return null;
   }
+  const onMouseEnter = (d: PastTeamProps) => {
+    setInteractionData({
+      xPos: xScale(customTimeParser(d.seasonStart.toString())!),
+      yPos: yScale(d.position),
+      orientation:
+        xScale(customTimeParser(d.seasonStart.toString())!) > boundsWidth / 2
+          ? "left"
+          : "right",
+      data: d,
+    });
+  
+  }
 
   // Draw the circles
   const allCircles = data.map((d, index) => (
@@ -127,18 +140,7 @@ export const PositionScatterPlot = ({
         cx: springs[index]?.cx,
         cy: springs[index]?.cy,
       }}
-      onMouseEnter={() => {
-        setInteractionData({
-          xPos: xScale(customTimeParser(d.seasonStart.toString())!),
-          yPos: yScale(d.position),
-          orientation:
-            xScale(customTimeParser(d.seasonStart.toString())!) >
-            boundsWidth / 2
-              ? "left"
-              : "right",
-          data: d,
-        });
-      }}
+      onMouseEnter={() => onMouseEnter(d) }
       onMouseLeave={() => {
         setInteractionData(null);
       }}

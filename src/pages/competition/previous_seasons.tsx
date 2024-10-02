@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import {
   Tabs,
@@ -376,7 +377,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: messages.default,
       initialData: statsData,
     },
-    revalidate: 2592000,
+    revalidate: 30 * 24 * 60 * 60,
   };
 }
 

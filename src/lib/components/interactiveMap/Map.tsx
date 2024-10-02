@@ -2,12 +2,11 @@
 // Disable eslint for this file due to the use of D3.js which doesn't list types
 
 import * as d3 from "d3";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as topojson from "topojson-client";
 import type { Topology, GeometryObject } from "topojson-specification";
 import ch_ from "swiss-maps/2024/ch-combined.json";
 const ch: Topology = ch_ as unknown as Topology;
-import { useState } from "react";
 import { MapTooltip } from "./MapTooltip";
 import type { Transition } from "d3";
 
@@ -18,11 +17,13 @@ type MapProps = {
   width: number;
   height: number;
 };
+
 type InteractionData = {
   xPos: number;
   yPos: number;
   location: string;
 };
+
 const Map = ({
   longitude,
   latitude,
@@ -34,7 +35,10 @@ const Map = ({
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    let width = Math.min(window.innerWidth, 975);
+    let height = Math.min(window.innerHeight, 610);
+
+    const handleResize = () => {
       const newWidth = Math.min(window.innerWidth, 975);
       const newHeight = Math.min(window.innerHeight, 610);
       if (newWidth !== width || newHeight !== height) {
@@ -48,9 +52,9 @@ const Map = ({
           .translate([width / 2, height / 2])
           .scale((width * height) / 600);
       }
-    });
-    let width = Math.min(window.innerWidth, 975);
-    let height = Math.min(window.innerHeight, 610);
+    };
+
+    window.addEventListener("resize", handleResize);
 
     // Define the projection and path
     const projection = d3
@@ -86,7 +90,7 @@ const Map = ({
             ) => any
           ).bind(zoom),
           d3.zoomIdentity,
-          d3.zoomTransform(svg as any).invert([width / 2, height / 2]),
+          d3.zoomTransform(svg as any).invert([width / 2, height / 2])
         );
     }
 
@@ -99,9 +103,9 @@ const Map = ({
         path(
           topojson.feature(
             ch as unknown as Topology,
-            ch.objects.country as GeometryObject,
-          ),
-        ),
+            ch.objects.country as GeometryObject
+          )
+        )
       );
 
     // Add cantons and lakes
@@ -117,9 +121,9 @@ const Map = ({
           topojson.mesh(
             ch as unknown as Topology,
             ch.objects.cantons as GeometryObject,
-            (a, b) => a !== b,
-          ),
-        ),
+            (a, b) => a !== b
+          )
+        )
       );
     g.append("path")
       .attr("fill", "#b3e6ff")
@@ -128,9 +132,9 @@ const Map = ({
         path(
           topojson.feature(
             ch as unknown as Topology,
-            ch.objects.lakes as GeometryObject,
-          ),
-        ),
+            ch.objects.lakes as GeometryObject
+          )
+        )
       );
 
     // Zoom behavior
@@ -176,10 +180,10 @@ const Map = ({
             .scale(
               Math.min(
                 8,
-                0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height),
-              ),
+                0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)
+              )
             )
-            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+            .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
         );
     };
     if (svgRef.current) {
@@ -205,8 +209,7 @@ const Map = ({
         setInteractionData(null);
       });
 
-    if (longitude === 7.147400994098687 && latitude === 46.81177897206209) {
-    } else {
+    if (longitude !== 7.147400994098687 || latitude !== 46.81177897206209) {
       const connectionSvgPath = path({
         type: "LineString",
         coordinates: [
@@ -231,16 +234,14 @@ const Map = ({
             location: location,
           });
         })
-
         .on("mouseout", () => {
           setInteractionData(null);
         });
     }
 
     return () => {
-      if (g) {
-        g.remove();
-      }
+      window.removeEventListener("resize", handleResize);
+      g.remove();
     };
   }, [latitude, longitude, location]);
 

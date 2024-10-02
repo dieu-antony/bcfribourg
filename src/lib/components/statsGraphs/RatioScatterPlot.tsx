@@ -80,6 +80,7 @@ export const RatioScatterPlot = ({
     svgElement.append("g").call(yAxisGenerator);
 
     return () => {
+        d3.selectAll("*").on(".", null)
         svgElement.selectAll("*").remove(); 
     };
 }, [times.length, xScale, yScale, boundsHeight]);

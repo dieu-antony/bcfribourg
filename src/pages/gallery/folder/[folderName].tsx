@@ -31,7 +31,7 @@ type FolderPageProps = {
 const FolderPage = ({ initialResources }: FolderPageProps) => {
   const router = useRouter();
   const [resources, setResources] = useState<SearchResult[]>(initialResources);
-  const [api, setApi] = useState<CarouselApi>();
+  const [api, setApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -40,6 +40,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
 
   useEffect(() => {
     if (!router.isReady) return;
+
     const fetchResources = async () => {
       const cachedResources = localStorage.getItem("resources");
       if (cachedResources) {
@@ -47,7 +48,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
       } else {
         setLoading(true);
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`
         );
         const data = (await response.json()) as {
           status: string;
@@ -58,16 +59,18 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
         setLoading(false);
       }
     };
+
     void fetchResources();
 
     return () => {
-      setResources([]);
-    }
+      setResources([]); // Clean up state on unmount
+    };
   }, [router.isReady]);
 
   const filteredResources = resources.filter(
-    (result) => result.asset_folder === routerQuery,
+    (result) => result.asset_folder === routerQuery
   );
+
   const folderName = filteredResources[0]?.asset_folder;
 
   useEffect(() => {
@@ -84,9 +87,9 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
     api.on("select", handleSelect);
 
     return () => {
-      api.off("select", handleSelect);
+      api.off("select", handleSelect); // Clean up event listener
     };
-  }, [api, current]);
+  }, [api]);
 
   if (loading) {
     return (
@@ -103,7 +106,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
           <div className="grid w-full max-w-[1200px] grid-cols-3">
             <Link
               href="/gallery"
-              className="flex w-24 items-center gap-1 self-center rounded-md bg-picton-blue-500 p-1 text-center text-white shadow-md hover:cursor-pointer hover:bg-picton-blue-500/80 "
+              className="flex w-24 items-center gap-1 self-center rounded-md bg-picton-blue-500 p-1 text-center text-white shadow-md hover:cursor-pointer hover:bg-picton-blue-500/80"
             >
               <ChevronLeft size="20px" /> Galerie
             </Link>
@@ -124,10 +127,10 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
                   />
                 </DialogTrigger>
                 <DialogContent
-                  className=" max-w-[800px] border-none bg-transparent shadow-none"
+                  className="max-w-[800px] border-none bg-transparent shadow-none"
                   closeClassName="hidden"
                 >
-                  <DialogTitle></DialogTitle>
+                  <DialogTitle />
                   <Carousel setApi={setApi} opts={{ startIndex: index }}>
                     <CarouselContent className="flex items-center">
                       {filteredResources.map((result) => (
@@ -138,6 +141,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
                           <a
                             href={`https://res.cloudinary.com/dpgefyzn1/image/upload/v1721078955/${result.public_id}`}
                             target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <CldImage
                               src={result.public_id}
@@ -167,6 +171,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
       </Layout>
     );
   }
+
   return (
     <div className="mt-40 flex h-full w-full flex-col items-center justify-center gap-2">
       <h1 className="text-9xl font-bold">404</h1>
@@ -206,6 +211,5 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale, r
     },
   };
 };
-
 
 export default FolderPage;
