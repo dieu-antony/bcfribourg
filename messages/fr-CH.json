@@ -55,6 +55,7 @@
       },
       "holidays": {
         "title": "Vacances",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
         "file": "Vacances scolaires",
         "seasonDuration": "Durée de la saison",
         "until": "jusqu'au"
@@ -82,6 +83,7 @@
       },
       "holidays": {
         "title": "Vacances",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
         "file": "Vacances scolaires",
         "seasonDuration": "Durée de la saison",
         "until": "jusqu'au"
@@ -153,7 +155,8 @@
     "vicePresident": "Caissière / Vice-présidente",
     "events": "Evènements",
     "secretary": "Secrétaire / Resp. interclubs",
-    "sup": "Resp. ligues supérieures"
+    "sup": "Resp. ligues supérieures",
+    "junior": "Resp. juniors"
   },
   "History": {
     "title": "Histoire du club",

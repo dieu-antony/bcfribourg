@@ -55,6 +55,7 @@
       },
       "holidays": {
         "title": "Ferien",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
         "until": "bis"
@@ -82,6 +83,7 @@
       },
       "holidays": {
         "title": "Ferien",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
         "until": "bis"
@@ -153,7 +155,8 @@
     "vicePresident": "Kassiererin / Vizepräsidentin",
     "events": "Veranstaltungen",
     "secretary": "Sekretariat / Verantw. Interclubs",
-    "sup": "Verantw. Oberligen"
+    "sup": "Verantw. Oberligen",
+    "junior": "Junioren-Verantwortlicher"
   },
   "History": {
     "title": "Geschichte des Clubs",

@@ -41,6 +41,13 @@ const Committee = () => {
     email: "technique(at)bcfribourg.ch",
     phone: "078 790 12 72",
   };
+  const junior = {
+    imgRef: "/assets/committee/junior.webp",
+    title: t("junior"),
+    name: "Hugo Genoud",
+    email: "juniors(at)bcfribourg.ch",
+    phone: "079 571 22 75",
+  }
   return (
     <Layout>
       <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
@@ -52,6 +59,7 @@ const Committee = () => {
         <CommitteeCard info={event} />
         <CommitteeCard info={secretary} />
         <CommitteeCard info={ls} />
+        <CommitteeCard info={junior} />
       </div>
     </Layout>
   );

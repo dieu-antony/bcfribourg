@@ -27,8 +27,8 @@ export default function Home() {
   useEffect(() => {
     const currentPlugin = plugin.current;
     return () => {
-      currentPlugin.destroy();
-    }
+        currentPlugin.destroy;
+    };
   }, []);
 
   return (

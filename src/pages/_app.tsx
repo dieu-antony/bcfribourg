@@ -14,7 +14,10 @@ export const inter = Inter({
   variable: "--font-sans",
 });
 
-const App: AppType = ({ Component, pageProps: { session, messages, ...pageProps} }: AppProps) => {
+const App: AppType = ({
+  Component,
+  pageProps: { session, messages, ...pageProps },
+}: AppProps) => {
   const router = useRouter();
   return (
     <SessionProvider session={session as Session}>
@@ -55,7 +58,11 @@ const App: AppType = ({ Component, pageProps: { session, messages, ...pageProps}
           />
           <meta name="theme-color" content="#ffffff" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="description" content="Le Badminton Club Fribourg accueille des joueurs et joueuses de tous âges et de tous niveaux. Que vous soyez débutant ou compétiteur confirmé, vous trouverez des opportunités adaptées à votre niveau." key="desc"/>
+          <meta
+            name="description"
+            content="Le Badminton Club Fribourg accueille des joueurs et joueuses de tous âges et de tous niveaux. Que vous soyez débutant ou compétiteur confirmé, vous trouverez des opportunités adaptées à votre niveau."
+            key="desc"
+          />
           <title>BC Fribourg</title>
         </Head>
         <Component {...pageProps} />
