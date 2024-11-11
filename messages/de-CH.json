@@ -57,7 +57,8 @@
         "title": "Ferien",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
-        "until": "bis"
+        "until": "bis",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt."
       },
       "contact": {
         "title": "Kontakt"
@@ -84,7 +85,8 @@
         "title": "Ferien",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
-        "until": "bis"
+        "until": "bis",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt."
       },
       "contact": {
         "title": "Kontakt"
