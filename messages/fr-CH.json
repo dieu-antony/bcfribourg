@@ -57,7 +57,8 @@
         "title": "Vacances",
         "file": "Vacances scolaires",
         "seasonDuration": "Durée de la saison",
-        "until": "jusqu'au"
+        "until": "jusqu'au",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes."
       },
       "contact": {
         "title": "Contact"
@@ -84,7 +85,8 @@
         "title": "Vacances",
         "file": "Vacances scolaires",
         "seasonDuration": "Durée de la saison",
-        "until": "jusqu'au"
+        "until": "jusqu'au",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes."
       },
       "contact": {
         "title": "Contact"
