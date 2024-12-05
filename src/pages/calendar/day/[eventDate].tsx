@@ -117,10 +117,18 @@ const EventDayPage = ({ initialResources }: EventDayPageProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params, locale, res }) => {
-  const messages = (await import(`../../../../messages/${locale}.json`)) as IntlMessages;
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  locale,
+  res,
+}) => {
+  const messages = (await import(
+    `../../../../messages/${locale}.json`
+  )) as IntlMessages;
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/events/filter/${params!.eventDate?.toString()}`,
+  );
   const data = (await response.json()) as {
     status: string;
     events: CalendarEvent[];
@@ -132,7 +140,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale, r
     };
   }
 
-  res.setHeader('Cache-Control', 'public, s-maxage=28800, stale-while-revalidate=28800');
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=28800, stale-while-revalidate=28800",
+  );
 
   return {
     props: {
