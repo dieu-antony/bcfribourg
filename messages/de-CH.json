@@ -55,14 +55,15 @@
       },
       "holidays": {
         "title": "Ferien",
-        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
-        "until": "bis"
+        "until": "bis",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt."
       },
       "contact": {
         "title": "Kontakt"
-      }
+      },
+      "desc": "<p>Der BC Fribourg bietet mehrere zweistündige Trainingseinheiten pro Woche in der <a>Sporthalle der DOSF an</a>. Unsere Sessions stehen Spielern aller Niveaus offen – von Anfängern bis zu erfahrenen Spielern – in einer freundlichen und dynamischen Atmosphäre.</p><p>Ob Sie Badminton entdecken, Ihre Technik verbessern oder einfach nur einen sportlichen Moment teilen möchten, unser Training ist für jeden geeignet. Schließen Sie sich uns an und machen Sie Fortschritte in Ihrem eigenen Tempo!</p>"
     },
     "Juniors": {
       "title": "Juniorentraining",
@@ -83,21 +84,23 @@
       },
       "holidays": {
         "title": "Ferien",
-        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
-        "until": "bis"
+        "until": "bis",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt."
       },
       "contact": {
         "title": "Kontakt"
-      }
+      },
+      "desc": "<p>Der BC Fribourg bietet mehrere Badminton-Trainings für Junioren in der <a>Sporthalle der DOSF</a> an. Unsere Sessions sind für alle offen, von Anfängern bis zu fortgeschrittenen Spielern, und werden von qualifizierten Trainern geleitet.</p> <p>Das Ziel ist, Spaß zu haben, während man Fortschritte macht, indem Technik, Koordination und Teamgeist entwickelt werden. Ob dein Kind Badminton entdeckt oder sich weiter verbessern möchte – unsere Trainings ermöglichen es ihm, sich in einem dynamischen und motivierenden Umfeld in seinem eigenen Tempo zu entwickeln!</p>"
     }
   },
   "Interclubs": {
     "m": "Männer",
     "f": "Damen",
     "1st": "1. Liga",
-    "ligue": ". Liga"
+    "ligue": ". Liga",
+    "desc": "Der BC Fribourg ist im Interclub durch mehrere Teams vertreten, die in verschiedenen Ligen aktiv sind. Jede Saison nehmen sie an offiziellen Begegnungen teil und treten in einem wettbewerbsorientierten Rahmen gegen andere Vereine an."
   },
   "CompJuniors": {
     "title": "Juniorenwettkämpfe",
@@ -135,7 +138,7 @@
   "Contact": {
     "success": "Ihre Nachricht wurde erfolgreich gesendet!",
     "title": "Kontakt",
-    "description": "Kontaktieren Sie uns!",
+    "description": "Bei Fragen oder Informationswünschen bezüglich des BC Fribourg zögern Sie bitte nicht, uns über das untenstehende Formular zu kontaktieren. Wir werden Ihnen so schnell wie möglich antworten.",
     "lastname": "Nachname",
     "firstname": "Vorname",
     "subject": "Betreff",
@@ -156,7 +159,8 @@
     "events": "Veranstaltungen",
     "secretary": "Sekretariat / Verantw. Interclubs",
     "sup": "Verantw. Oberligen",
-    "junior": "Junioren-Verantwortlicher"
+    "junior": "Junior-verantwortlicher",
+    "desc": "Der Vorstand des BC Fribourg organisiert und entwickelt den Verein und sorgt für einen reibungslosen Ablauf von Trainings, Wettkämpfen und Veranstaltungen. Er trifft sich fünfmal im Jahr, um wichtige Entscheidungen zu fällen. Mitglieder können Fragen oder Vorschläge einreichen, indem sie den Vorstand kontaktieren."
   },
   "History": {
     "title": "Geschichte des Clubs",

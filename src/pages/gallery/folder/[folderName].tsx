@@ -37,38 +37,47 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
   const [loading, setLoading] = useState(false);
 
   const routerQuery = router.query.folderName as string;
+  const normalizedFolder = routerQuery ? routerQuery.trim().toLowerCase() : "";
 
   useEffect(() => {
     if (!router.isReady) return;
 
     const fetchResources = async () => {
-      const cachedResources = localStorage.getItem("resources");
-      if (cachedResources) {
-        setResources(JSON.parse(cachedResources) as SearchResult[]);
-      } else {
-        setLoading(true);
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`
-        );
-        const data = (await response.json()) as {
-          status: string;
-          resources: SearchResult[];
-        };
-        localStorage.setItem("resources", JSON.stringify(data.resources));
-        setResources(data.resources);
+      try {
+        const folderKey = `resources_${normalizedFolder}`;
+        const cachedResources = localStorage.getItem(folderKey);
+        if (cachedResources) {
+          setResources(JSON.parse(cachedResources) as SearchResult[]);
+        } else {
+          setLoading(true);
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = (await response.json()) as {
+            status: string;
+            resources: SearchResult[];
+          };
+          const folderResources = data.resources.filter((result) =>
+            result.asset_folder.trim().toLowerCase() === normalizedFolder
+          );
+          localStorage.setItem(folderKey, JSON.stringify(folderResources));
+          setResources(folderResources);
+        }
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
         setLoading(false);
       }
     };
 
     void fetchResources();
+  }, [router.isReady, normalizedFolder]);
 
-    return () => {
-      setResources([]); // Clean up state on unmount
-    };
-  }, [router.isReady]);
-
-  const filteredResources = resources.filter(
-    (result) => result.asset_folder === routerQuery
+  const filteredResources = resources.filter((result) =>
+    result.asset_folder.trim().toLowerCase() === normalizedFolder
   );
 
   const folderName = filteredResources[0]?.asset_folder;
@@ -87,7 +96,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
     api.on("select", handleSelect);
 
     return () => {
-      api.off("select", handleSelect); // Clean up event listener
+      api.off("select", handleSelect);
     };
   }, [api]);
 
@@ -192,8 +201,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params, locale, r
     resources: SearchResult[];
   };
 
-  const initialResources = data.resources.filter(
-    (resource: SearchResult) => resource.asset_folder === params?.folderName
+  const folderParam = (params?.folderName as string)?.trim().toLowerCase();
+
+  const initialResources = data.resources.filter((resource: SearchResult) =>
+    resource.asset_folder.trim().toLowerCase() === folderParam
   );
 
   if (initialResources.length === 0) {

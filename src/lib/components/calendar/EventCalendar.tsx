@@ -126,14 +126,17 @@ const EventCalendar = ({ events }: EventProps) => {
             <ChevronRight />
           </Button>
         </div>
-        <h2 className="hidden self-center text-center font-bold md:block">
-          {format(chosenMonth, "MMMM yyyy", {
-            locale: t("locale") === "frCH" ? frCH : de,
-          })}
-        </h2>
-        <h2 className="block self-center text-center font-bold md:hidden">
-          {format(chosenMonth, "MMM yy")}
-        </h2>
+        <div className="flex items-center justify-center text-center">
+          <h2 className="hidden max-w-40 rounded-md bg-white shadow-sm px-3 py-2 font-bold md:block">
+            {format(chosenMonth, "MMMM yyyy", {
+              locale: t("locale") === "frCH" ? frCH : de,
+            })}
+          </h2>
+          <h2 className="block self-center bg-white rounded-md shadow-sm px-3 py-2 font-bold md:hidden">
+            {format(chosenMonth, "MMM yy")}
+          </h2>
+        </div>
+
         {/* Calendar date choose button */}
         <div className="ml-auto flex flex-grow gap-1">
           <Popover>
@@ -243,8 +246,10 @@ const EventCalendar = ({ events }: EventProps) => {
                         <Dialog>
                           <DialogTrigger className="w-full">
                             <div className={`font-sans ${inter.variable}`}>
-                              {getEventDescription(event.eventType, locale ?? "fr-CH") ||
-                                event.summary}
+                              {getEventDescription(
+                                event.eventType,
+                                locale ?? "fr-CH",
+                              ) || event.summary}
                             </div>
                           </DialogTrigger>
                           <DialogContent>

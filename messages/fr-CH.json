@@ -33,6 +33,7 @@
   "Training": {
     "Adults": {
       "title": "Entraînements adultes",
+      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de deux heures par semaine à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous les niveaux, des débutants aux joueurs expérimentés, dans une ambiance conviviale et dynamique.</p><p>Que vous souhaitiez découvrir le badminton, améliorer votre technique ou simplement partager un moment sportif, nos entraînements sont adaptés à chacun. Rejoignez-nous et progressez à votre rythme !</p>",
       "monday18": {
         "title": "Lundi",
         "description": "4ème ligue et non licenciés",
@@ -66,6 +67,7 @@
     },
     "Juniors": {
       "title": "Entraînements juniors",
+      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Que ton enfant découvre le badminton ou qu'il souhaite se perfectionner, nos entraînements lui permettront d'évoluer à son rythme dans une ambiance dynamique et motivante !</p>",
       "tuesday1": {
         "title": "Mardi",
         "description": "14-18 ans",
@@ -94,6 +96,7 @@
     }
   },
   "Interclubs": {
+    "desc": "Le BC Fribourg est représenté en Interclubs par plusieurs équipes engagées dans différentes ligues. Chaque saison, elles participent aux rencontres officielles et affrontent d'autres clubs dans un cadre compétitif.",
     "m": "Hommes",
     "f": "Femmes",
     "1st": "1ère ligue",
@@ -135,7 +138,7 @@
   "Contact": {
     "success": "Votre message a bien été envoyé!",
     "title": "Contact",
-    "description": "Contactez nous !",
+    "description": "Pour toute question ou demande d'information concernant le BC Fribourg, n'hésitez pas à nous contacter à travers le formulaire ci-dessous. Nous vous répondrons dans les plus brefs délais.",
     "lastname": "Nom",
     "firstname": "Prénom",
     "subject": "Sujet",
@@ -151,6 +154,7 @@
   },
   "Committee": {
     "title": "Comité",
+    "desc": "Le comité du BC Fribourg gère l’organisation et le développement du club, assurant le bon déroulement des entraînements, compétitions et événements. Il se réunit 5 fois par année pour prendre les décisions importantes. Les membres peuvent soumettre des questions ou propositions en contactant le comité.",
     "president": "Président",
     "vicePresident": "Caissière / Vice-présidente",
     "events": "Evènements",

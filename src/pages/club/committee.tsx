@@ -53,7 +53,10 @@ const Committee = () => {
       <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
         {t("title")}
       </h1>
-      <div className="flex max-w-[1000px] mt-4 flex-col place-items-center items-center self-center md:grid md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex max-w-[1000px] mt-4 flex-col place-items-center items-center self-center md:grid md:grid-cols-2 lg:grid-cols-3 mb-4">
+        <div className="md:col-span-2 lg:col-span-3 bg-white md:mx-20 mx-12 lg:mx-4 my-4 p-4">
+          <p>{t("desc")}</p>
+        </div>
         <CommitteeCard info={president} />
         <CommitteeCard info={treasurer} />
         <CommitteeCard info={event} />

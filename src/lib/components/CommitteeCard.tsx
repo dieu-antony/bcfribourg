@@ -12,7 +12,7 @@ type CommitteeCardProps = {
 };
 const CommitteeCard = ({ info }: CommitteeCardProps) => {
   return (
-    <div className="mx-8 my-4 max-w-[400px]">
+    <div className="mx-8 my-4 max-w-[400px] bg-white p-4 shadow-md">
       <Image
         src={info.imgRef}
         alt={info.title}

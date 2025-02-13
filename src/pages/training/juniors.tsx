@@ -12,6 +12,19 @@ const Juniors = () => {
     <Layout>
       <Title>{t("title")}</Title>
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
+        <div className="m-8 mb-0 flex w-[300px] flex-col gap-4 bg-white p-8 shadow-md md:col-span-2 md:w-[664px] md:place-self-center lg:w-[864px]">
+          {t.rich("desc", {
+            a: (chunks) => (
+              <Link
+                className="font-semibold underline hover:text-picton-blue-500"
+                href="/#salle"
+              >
+                {chunks}
+              </Link>
+            ),
+            p: (chunks) => <p>{chunks}</p>,
+          })}
+        </div>
         <TrainingCard
           className="mt-8 md:place-self-end"
           time={{ start: "18h00 - 20h00", day: t("tuesday1.title") }}
@@ -31,7 +44,7 @@ const Juniors = () => {
           target={t("thursday18.description")}
         />
         <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-md md:place-self-start lg:h-[300] lg:w-[400px]">
-        <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("contact.title")}</h2>
             <span>Hugo Genoud</span>
           </div>
@@ -49,7 +62,7 @@ const Juniors = () => {
             <span>079 571 22 75</span>
           </div>
         </div>
-        <div className="m-8 mt-0 flex h-[350px] w-[300px] flex-col md:col-span-2 md:h-[275px] md:w-[664px] gap-6 bg-white p-8 shadow-md md:place-self-center lg:w-[864px]">
+        <div className="m-8 mt-0 flex h-[350px] w-[300px] flex-col gap-6 bg-white p-8 shadow-md md:col-span-2 md:h-[275px] md:w-[664px] md:place-self-center lg:w-[864px]">
           <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("holidays.title")}</h2>
             <p className="mb-4">{t("holidays.desc")}</p>

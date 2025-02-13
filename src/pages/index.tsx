@@ -56,7 +56,7 @@ export default function Home() {
             <div className="mt-8 flex justify-around gap-2 ">
               <Link
                 href="/calendar"
-                className="cursor-pointer rounded-full border border-black px-2 py-2 text-sm font-bold shadow transition-transform duration-300 hover:scale-105 md:px-4 md:text-xl"
+                className="cursor-pointer rounded-full border bg-white border-black px-2 py-2 text-sm font-bold shadow transition-transform duration-300 hover:scale-105 md:px-4 md:text-xl"
               >
                 {t("next events")}
               </Link>

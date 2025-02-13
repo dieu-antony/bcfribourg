@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { cn } from "../utils/utils";
+import { Clock, User } from "lucide-react";
 
 type TrainingCardProps = {
   trainer: string;
@@ -34,10 +35,10 @@ const TrainingCard = ({
           clicked: { left: 5 },
         }}
         >{time.day}</motion.h1>
-        <h2>{time.start}</h2>
+        <h2 className="flex gap-2"><Clock className="text-picton-blue-600"/>{time.start}</h2>
       </div>
       <p>{target}</p>
-      <p>{trainer}</p>
+      <p className="flex gap-2"><User className="text-picton-blue-600"/>{trainer}</p>
       <motion.div
         className="absolute right-0 top-8 h-full w-[6px] rounded-r-none rounded-l-md  bg-gray-200 group-hover:bg-picton-blue-500"
         variants={{

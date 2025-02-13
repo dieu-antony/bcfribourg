@@ -33,11 +33,14 @@ const Interclubs = ({ initialData }: InterclubsProps) => {
         loading="eager"
       />
       <h1 className="absolute z-10 mt-[150px] w-full bg-gradient-to-r from-transparent via-slate-700/50 py-1 text-center text-2xl font-bold text-white md:mt-[220px] md:text-6xl">
-        Interclub
+        Interclubs
       </h1>
       <div className="flex justify-center">
-        <div className="z-10 mx-5 my-8 flex w-full max-w-[1000px] flex-col rounded border bg-white px-4">
-          <Accordion type="multiple">
+        <div className="z-10 mx-5 my-8 flex gap-2 w-full max-w-[1000px] flex-col rounded border ">
+          <div className="bg-white p-4 rounded border shadow-sm text-lg">
+            {t("desc")}
+          </div>
+          <Accordion type="multiple" className="bg-white px-4 rounded border shadow-sm">
             {/* Set display names for the teams */}
             {playersByTeam.map((team) => {
               let leagueName = "";
@@ -64,6 +67,7 @@ const Interclubs = ({ initialData }: InterclubsProps) => {
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "F")
+                            .sort((a, b) => a.lastName.localeCompare(b.lastName))
                             .map((player) => {
                               return (
                                 <div
@@ -89,6 +93,7 @@ const Interclubs = ({ initialData }: InterclubsProps) => {
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "M")
+                            .sort((a, b) => a.lastName.localeCompare(b.lastName))
                             .map((player) => {
                               return (
                                 <div
