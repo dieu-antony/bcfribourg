@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <main
-        className={`font-sans ${inter.variable} flex min-h-screen flex-col bg-gradient-to-b  from-gray-200/80 to-gray-200`}
+        className={`font-sans ${inter.variable} flex min-h-screen flex-col bg-gradient-to-tl from-gray-200 to-sky-100/50`}
       >
         <Header />
         {children}

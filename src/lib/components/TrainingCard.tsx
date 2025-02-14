@@ -35,16 +35,16 @@ const TrainingCard = ({
           clicked: { left: 5 },
         }}
         >{time.day}</motion.h1>
-        <h2 className="flex gap-2"><Clock className="text-picton-blue-600"/>{time.start}</h2>
+        <h2 className="flex gap-2"><Clock className="text-picton-blue-500"/>{time.start}</h2>
       </div>
       <p>{target}</p>
-      <p className="flex gap-2"><User className="text-picton-blue-600"/>{trainer}</p>
+      <p className="flex gap-2"><User className="text-picton-blue-500"/>{trainer}</p>
       <motion.div
-        className="absolute right-0 top-8 h-full w-[6px] rounded-r-none rounded-l-md  bg-gray-200 group-hover:bg-picton-blue-500"
+        className="absolute right-0 top-8 h-full w-[6px] rounded-r-none rounded-l-md"
         variants={{
-          initial: { height: "3rem", backgroundColor: "#e5e7eb" },
-          hovered: { height: "4rem", backgroundColor: "#00afef" },
-          clicked: { height: "4rem", backgroundColor: "#00afef" },
+          initial: { height: "3rem", backgroundColor: "#00afef" },
+          hovered: { height: "4rem", backgroundColor: "#0091d4" },
+          clicked: { height: "4rem", backgroundColor: "#0091d4" },
         }}
         transition={{ duration: 0.3 }}
       />

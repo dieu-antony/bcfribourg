@@ -6,7 +6,7 @@ import {
 } from "~/lib/components/ui/accordion";
 import { useState } from "react";
 import { SquareArrowOutUpRight } from "lucide-react";
-import type { PlayerByTeam } from "~/lib/types";
+import type { PlayerByTeam, SearchResult } from "~/lib/types";
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "~/lib/components/ui/separator";
@@ -14,14 +14,18 @@ import { useTranslations } from "next-intl";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
 import IcImage from "../../../public/assets/ic_image.webp";
+import AccentBar from "~/lib/components/AccentBar";
+import { CldImage } from "next-cloudinary";
 
 type InterclubsProps = {
   initialData: PlayerByTeam[];
+  initialImages: SearchResult[];
 };
 
-const Interclubs = ({ initialData }: InterclubsProps) => {
+const Interclubs = ({ initialData, initialImages }: InterclubsProps) => {
   const t = useTranslations("Interclubs");
   const [playersByTeam] = useState<PlayerByTeam[]>(initialData);
+  const [images] = useState<SearchResult[]>(initialImages);
 
   return (
     <Layout>
@@ -36,11 +40,16 @@ const Interclubs = ({ initialData }: InterclubsProps) => {
         Interclubs
       </h1>
       <div className="flex justify-center">
-        <div className="z-10 mx-5 my-8 flex gap-2 w-full max-w-[1000px] flex-col rounded border ">
-          <div className="bg-white p-4 rounded border shadow-sm text-lg">
+        <div className="z-10 mx-5 my-8 flex w-full max-w-[1000px] flex-col gap-2 rounded border ">
+          <div className="relative rounded border bg-white p-4 pb-5 text-lg shadow-sm">
             {t("desc")}
+            <AccentBar />
           </div>
-          <Accordion type="multiple" className="bg-white px-4 rounded border shadow-sm">
+          <Accordion
+            type="multiple"
+            className="rounded border bg-white px-4 shadow-sm"
+            defaultValue={["clzjnb1ef00057sew98rgjqkh"]}
+          >
             {/* Set display names for the teams */}
             {playersByTeam.map((team) => {
               let leagueName = "";
@@ -55,19 +64,45 @@ const Interclubs = ({ initialData }: InterclubsProps) => {
               ) {
                 leagueName = " - " + team.league.name + t("ligue");
               }
+              const teamImage =
+                images &&
+                initialImages.find((img) => {
+                  if (!img.tags || img.tags.length === 0) return false;
+                  const tagValue = img.tags[0]!.replace(/^[^_]*_/, "");
+                  return tagValue === team.id;
+                });
+
               return (
                 <AccordionItem key={team.id} value={team.id}>
-                  <AccordionTrigger className="text-xl font-semibold no-underline hover:text-picton-blue-500">
+                  <AccordionTrigger className="relative text-xl font-semibold no-underline hover:text-picton-blue-500">
                     {team.name + leagueName}
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className="mt-2 grid grid-cols-2 place-items-center items-start">
+                      <Separator className="col-span-2 mb-4 mt-0 w-full self-center bg-picton-blue-500" />
+                      <a
+                        href={`https://res.cloudinary.com/dpgefyzn1/image/upload/v1721078955/${teamImage!.public_id}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="col-span-2"
+                      >
+                        <CldImage
+                          src={teamImage!.public_id}
+                          alt={team.name}
+                          width={400}
+                          height={300}
+                        />
+                      </a>
+                      <Separator className="col-span-2 my-4 w-full self-center bg-picton-blue-500" />
+
                       <div className="flex flex-col gap-4">
                         <h2 className="text-lg font-bold">{t("f")}</h2>
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "F")
-                            .sort((a, b) => a.lastName.localeCompare(b.lastName))
+                            .sort((a, b) =>
+                              a.lastName.localeCompare(b.lastName),
+                            )
                             .map((player) => {
                               return (
                                 <div
@@ -93,7 +128,9 @@ const Interclubs = ({ initialData }: InterclubsProps) => {
                         <div className="flex flex-col gap-1">
                           {team.players
                             .filter((player) => player.gender === "M")
-                            .sort((a, b) => a.lastName.localeCompare(b.lastName))
+                            .sort((a, b) =>
+                              a.lastName.localeCompare(b.lastName),
+                            )
                             .map((player) => {
                               return (
                                 <div
@@ -146,11 +183,23 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     players: PlayerByTeam[];
     status: string;
   };
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-images`,
+  );
+  const img = (await response.json()) as {
+    status: string;
+    resources: SearchResult[];
+  };
+
+  const teamsImages = img.resources.filter(
+    (image) => image.asset_folder.trim().toLowerCase() === "teams",
+  );
 
   return {
     props: {
       messages: messages.default,
       initialData: data.players,
+      initialImages: teamsImages,
     },
     revalidate: 604800,
   };

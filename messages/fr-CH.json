@@ -67,7 +67,7 @@
     },
     "Juniors": {
       "title": "Entraînements juniors",
-      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Que ton enfant découvre le badminton ou qu'il souhaite se perfectionner, nos entraînements lui permettront d'évoluer à son rythme dans une ambiance dynamique et motivante !</p>",
+      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Si tu es jeune et motivé à essayer un nouveau sport, n'hésite plus ! Viens découvrir le badminton dans une ambiance conviviale et dynamique, où tu pourras progresser à ton rythme et te perfectionner. Contacte-nous pour un essai ! </p>",
       "tuesday1": {
         "title": "Mardi",
         "description": "14-18 ans",
@@ -154,7 +154,7 @@
   },
   "Committee": {
     "title": "Comité",
-    "desc": "Le comité du BC Fribourg gère l’organisation et le développement du club, assurant le bon déroulement des entraînements, compétitions et événements. Il se réunit 5 fois par année pour prendre les décisions importantes. Les membres peuvent soumettre des questions ou propositions en contactant le comité.",
+    "desc": "Le comité du BC Fribourg gère l'organisation et le développement du club, assurant le bon déroulement des entraînements, compétitions et événements. Il se réunit 5 fois par année pour prendre les décisions importantes. Les membres peuvent soumettre des questions ou propositions en contactant le comité.",
     "president": "Président",
     "vicePresident": "Caissière / Vice-présidente",
     "events": "Evènements",

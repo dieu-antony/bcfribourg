@@ -126,7 +126,7 @@ const Navbar = () => {
             onClick={() => setIsOpen(false)}
           />
           <Link
-            className="text-1xl mt-2 rounded bg-gray-200 p-2 text-center text-black transition-all delay-75 duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r hover:from-picton-blue-600 hover:to-picton-blue-500 hover:font-bold hover:text-white  lg:m-0 lg:self-center"
+            className="text-1xl mt-2 rounded p-2 text-centertransition-all delay-75 duration-300 ease-in-out hover:scale-105 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 font-bold text-white lg:m-0 lg:self-center"
             href="/member"
             onClick={() => setIsOpen(false)}
           >
@@ -144,19 +144,19 @@ const Navbar = () => {
         <div className="absolute right-8 top-11 lg:hidden">
           <button onClick={toggleNavbar}>
             <span
-              className={`mb-1 block h-0.5 w-7 rounded-sm bg-black
+              className={`mb-1 block h-0.5 w-7 rounded-sm bg-picton-blue-500
                       transition-all duration-300 ease-out ${
                         isOpen ? "translate-y-1.5 rotate-45 transform" : ""
                       }`}
             ></span>
             <span
-              className={`my-0.5 mb-1 block h-0.5 w-7 rounded-sm bg-black
+              className={`my-0.5 mb-1 block h-0.5 w-7 rounded-sm bg-picton-blue-500
                       transition-all duration-300 ease-out ${
                         isOpen ? "opacity-0" : "opacity-100"
                       }`}
             ></span>
             <span
-              className={`mt-1 block h-0.5 w-7 rounded-sm bg-black
+              className={`mt-1 block h-0.5 w-7 rounded-sm bg-picton-blue-500
                       transition-all duration-300 ease-out ${
                         isOpen ? "-translate-y-1.5 -rotate-45 transform" : ""
                       }`}
