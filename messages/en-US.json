@@ -12,7 +12,7 @@
     "history": "History",
     "documents": "Documents",
     "links": "Links",
-    "court": "Court",
+    "court": "Sports hall",
     "calendar": "Calendar",
     "sponsors": "Sponsors",
     "member": "Sign up"
@@ -25,8 +25,8 @@
     "next events": "Next events",
     "member": "Sign up",
     "court": {
-      "title": "Access to the courts",
-      "description": "The court is situated in the Cycle d'Orientation de langue allemande (DOSF) in the quartier du Torry",
+      "title": "Access to the sports hall",
+      "description": "The sports hall is situated in the Cycle d'Orientation de langue allemande (DOSF) in the quartier du Torry",
       "details": "Here you can find a detailed plan of the entrance"
     }
   },
@@ -35,87 +35,87 @@
       "title": "Adult trainings",
       "monday18": {
         "title": "Monday",
-        "description": "4th division and non-licensed",
+        "description": "4th league and non-licensed",
         "trainer": "Antony Dieu"
       },
       "monday20": {
         "title": "Monday",
-        "description": "LNB, 1st, 2nd and 4th divisions",
+        "description": "LNB, 1st, 2nd and 4th leagues",
         "trainer": "Manuel Helfer"
       },
       "wednesday20": {
-        "title": "Mercredi",
-        "description": "LNB, 1ère et 2ème ligues",
+        "title": "Wednesday",
+        "description": "LNB, 1st and 2nd leagues",
         "trainer": "Anna Larchenko Fischer"
       },
       "thursday19": {
-        "title": "Jeudi",
-        "description": "Licenciés et non licenciés",
+        "title": "Thursday",
+        "description": "Licensed and non-licensed ",
         "trainer": "Anna Larchenko Fischer"
       },
       "holidays": {
-        "title": "Vacances",
-        "file": "Vacances scolaires",
-        "seasonDuration": "Durée de la saison",
-        "until": "jusqu'au",
-        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes."
+        "title": "Holidays",
+        "file": "School holidays",
+        "seasonDuration": "Duration of the season ",
+        "until": "until",
+        "desc": "Training sessions do not take place during school holidays, public holidays, and the evening before holidays."
       },
       "contact": {
         "title": "Contact"
       },
-      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de deux heures par semaine à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous les niveaux, des débutants aux joueurs expérimentés, dans une ambiance conviviale et dynamique.</p><p>Que vous souhaitiez découvrir le badminton, améliorer votre technique ou simplement partager un moment sportif, nos entraînements sont adaptés à chacun. Rejoignez-nous et progressez à votre rythme !</p>"
+      "desc": "<p>BC Fribourg offers several two-hour training sessions per week at the <a>DOSF Sports Hall</a>. Our sessions are open to all levels, from beginners to experienced players, in a friendly and dynamic atmosphere.</p>\n\n<p>Whether you want to discover badminton, improve your technique, or simply enjoy a sporting moment, our training sessions are designed for everyone. Join us and progress at your own pace!</p>"
     },
     "Juniors": {
-      "title": "Entraînements juniors",
+      "title": "Junior trainings",
       "tuesday1": {
-        "title": "Mardi",
-        "description": "14-18 ans",
+        "title": "Tuesday",
+        "description": "14-18 y.o.",
         "trainer": "Sheen Khurdi"
       },
       "tuesday2": {
-        "title": "Mardi",
-        "description": "Jusqu'à 14 ans",
+        "title": "Tuesday",
+        "description": "Up to 14 y.o.",
         "trainer": "Hugo Genoud & Colette Jungo"
       },
       "thursday18": {
-        "title": "Jeudi",
-        "description": "Jusqu'à 18 ans",
+        "title": "Thursday",
+        "description": "Up to 18 y.o.",
         "trainer": "Julie Huser"
       },
       "holidays": {
-        "title": "Vacances",
-        "file": "Vacances scolaires",
-        "seasonDuration": "Durée de la saison",
-        "until": "jusqu'au",
-        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes."
+        "title": "Holidays",
+        "file": "School holidays",
+        "seasonDuration": "Duration of the season",
+        "until": "until",
+        "desc": "Training sessions do not take place during school holidays, public holidays, and the days before holidays."
       },
       "contact": {
         "title": "Contact"
       },
-      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Que ton enfant découvre le badminton ou qu'il souhaite se perfectionner, nos entraînements lui permettront d'évoluer à son rythme dans une ambiance dynamique et motivante !</p>"
+      "desc": "<p>BC Fribourg offers several badminton training sessions for young players at the <a>DOSF Sports Hall</a>. Our sessions are open to everyone, from beginners to more advanced players, and are supervised by qualified coaches.</p> \n\n<p>The goal is to have fun while improving skills, developing technique, coordination, and team spirit. Whether your child is discovering badminton or looking to refine their skills, our training sessions will allow them to progress at their own pace in a dynamic and motivating atmosphere!</p>"
     }
   },
   "Interclubs": {
-    "m": "Hommes",
-    "f": "Femmes",
-    "1st": "1ère ligue",
-    "ligue": "ème ligue",
-    "desc": "Le BC Fribourg est représenté en Interclubs par plusieurs équipes engagées dans différentes ligues. Chaque saison, elles participent aux rencontres officielles et affrontent d'autres clubs dans un cadre compétitif."
+    "m": "Men",
+    "f": "Women",
+    "1st": "1st league",
+    "ligue": " league",
+    "desc": "BC Fribourg is represented in Interclubs by several teams competing in different leagues. Each season, they take part in official matches and face other clubs in a competitive setting."
   },
   "CompJuniors": {
-    "title": "Compétitions juniors",
-    "location": "Lieu",
+    "title": "Junior competitions",
+    "location": "Location",
     "date": "Date",
     "cj": {
       "title": "Circuit juniors",
-      "description": "Les circuit juniors sont une série de tournois pour les juniors en simple. Les catégories sont U11, U13, U15, U17 et U19. Pour plus d'informations, veuillez consulter le site de l'Association Fribourgeoise du Badminton. Pour l'Inscription, veuillez contacter votre entraineur!"
+      "description": "Les junior circuits are a series of singles tournaments for junior players. The categories are U11, U13, U15, U17, and U19. For more information, please visit the website of the Fribourg Badminton Association. For registration, please contact your coach!"
     },
     "ca": {
-      "description": "La Coupe l'Avenir est un tournois sous forme d'interclubs (en équipe) pour juniors avec 2 catégories: U12 et U16. Pour plus d'informations, veuillez consulter le site de l'Association Fribourgeoise du Badminton. Pour l'Inscription, veuillez contacter votre entraineur!"
+      "description": "The Coupe l'Avenir is a team-based junior tournament in an interclub format with two categories: U12 and U16. For more information, please visit the website of the Fribourg Badminton Association. For registration, please contact your coach!"
     }
   },
   "PrevSeasons": {
-    "title": "Saisons précédentes",
+    "title": "Previous seasons",
     "description": "Vous trouverez ici les statistiques des saisons précédentes du BC Fribourg depuis 2015. Utilisez les filtres pour voir les équipes et leurs performances de chaque saison!",
     "psp": "Ce graphique montre la position de chaque équipe dans leur ligue respective pour chaque saison. Une équipe en dernière position pendant une saison va descendre dans une ligue inférieure pour la saison suivante, tandis qu'une équipe en première place va être promue dans une ligue supérieure. Utilisez les filtres pour choisir entre les équipes du BC Fribourg!",
     "lhm": "Ce graphique montre dans quelle ligue chaque équipe du BC Fribourg a joué pour chaque saison. Une couleur plus foncée indique une ligue plus élevée. Pour le moment il existent les ligues nationales (NLA, NLB), les ligues supérieurs (1, 2) et les ligues inférieures (3, 4).",
