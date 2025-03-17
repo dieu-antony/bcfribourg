@@ -22,7 +22,7 @@ The database is a Vercel database (PostgreSQL db) and Cloudinary is used as a CD
 ![D3.js](https://img.shields.io/badge/d3%20js-F9A03C?style=for-the-badge&logo=d3.js&logoColor=white)
 ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=OpenStreetMap&logoColor=white)
 
-The graphs were made with D3.js and for the map, OpenStreetMap is used as to get the coordinates of an address.
+The graphs were made with D3.js and for the map, OpenStreetMap is used to get the coordinates of an address.
 ## UI
 ![Shadcn/Ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
 
