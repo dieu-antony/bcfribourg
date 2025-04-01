@@ -1,8 +1,10 @@
 import type { GetStaticPropsContext } from "next";
 import { CldImage } from "next-cloudinary";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 import Layout from "~/lib/components/Layout";
+import { Title } from "~/lib/components/Title";
 import type { SearchResult } from "~/lib/types";
 
 type GalleryProps = {
@@ -10,6 +12,7 @@ type GalleryProps = {
 };
 
 export default function Gallery({ initialData }: GalleryProps) {
+  const t = useTranslations("Gallery");
   const [resources] = useState<SearchResult[]>(initialData);
 
   const filteredResources = resources.filter(
@@ -18,9 +21,7 @@ export default function Gallery({ initialData }: GalleryProps) {
 
   return (
     <Layout>
-      <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
-        Galerie
-      </h1>
+      <Title>{t("title")}</Title>
       <div className="my-8 flex flex-col items-center px-5">
         <div className="grid max-w-[1200px] grid-cols-2 gap-4 md:grid-cols-3">
           {filteredResources.map((result) => (

@@ -14,6 +14,7 @@ export function EmailTemplate({
   avs,
   license,
   subject,
+  comms,
 }: EmailData) {
   if (subject == "Inscription") {
     return (
@@ -85,6 +86,14 @@ export function EmailTemplate({
               </td>
               <td className="border px-4 py-2">{email}</td>
             </tr>
+            {comms && (
+              <tr className="gap-2">
+                <td className="border px-4 py-2">
+                  <strong>Moyen de communication:</strong>
+                </td>
+                <td className="border px-4 py-2">{comms}</td>
+              </tr>
+            )}
             {message && (
               <tr className="gap-2">
                 <td className="border px-4 py-2">

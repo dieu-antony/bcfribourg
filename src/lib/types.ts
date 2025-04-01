@@ -31,6 +31,7 @@ export type EmailData = {
   avs?: string;
   license?: string;
   subject?: string;
+  comms?: string;
 };
 
 export type CalendarEventWithoutID = Omit<CalendarEvent, "id">;

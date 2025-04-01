@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { toEmail } from "~/lib/utils/utils";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
+import CotisationTable from "~/lib/components/CotisationTable";
 
 const Contact = () => {
   const t = useTranslations("Contact");
@@ -35,7 +36,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div className="flex h-full min-h-max w-full flex-col items-center justify-center my-8">
+      <div className="my-8 flex h-full min-h-max w-full flex-col items-center justify-center">
         <div className="mx-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-md">
           <form onSubmit={onContactSubmit}>
             <div className="space-y-12">
@@ -46,6 +47,7 @@ const Contact = () => {
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   {t("description")}
                 </p>
+                <CotisationTable />
 
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <FormItem

@@ -5,78 +5,143 @@ import Sponsor from "~/lib/components/Sponsor";
 
 export default function Sponsors() {
   const t = useTranslations("Sponsors");
+
   return (
     <Layout>
       <div className="flex w-full flex-col items-center">
         <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
           {t("title")}
         </h1>
-        <div className="mx-5 my-8 max-w-[1100px]">
-          <div className="bg-white p-8 shadow-md">
-            <section className="hidden text-center">
-              <h2 className="text-2xl font-bold text-picton-blue-500">
-                {t("main")}
+
+        <div className="mx-5 mb-8 w-full max-w-[1100px] space-y-12">
+           {/* Gold */}
+           <section className="border border-gray-200 hidden bg-white p-8 text-center">
+            <div className="flex flex-row items-center justify-center gap-4">
+              <img
+                src="/assets/sponsors/shuttles/gold.png"
+                alt="Gold sponsor"
+                className="mb-4 w-16"
+              />
+              <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
+                {t("gold")}
               </h2>
-              <div>
-                <div className="h-[200px]" />
-              </div>
-            </section>
-            <section className="hidden text-center">
-              <h2 className="text-2xl font-bold text-picton-blue-500">
-                {t("important")}
+            </div>
+            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
+              {/* <Sponsor
+                name=""
+                file="png"
+                link=""
+                cn="text-center col-span-3"
+              /> */}
+            </div>
+          </section>
+
+
+          {/* SILVER */}
+          <section className="border border-gray-200 bg-white p-8 text-center">
+            <div className="flex flex-row items-center justify-center gap-4">
+              <img
+                src="/assets/sponsors/shuttles/silver.png"
+                alt="Silver sponsor"
+                className="mb-4 w-16"
+              />
+              <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
+                {t("silver")}
               </h2>
-              <div className="grid grid-cols-2 items-center justify-center gap-6 text-center md:grid-cols-3">
-                <div className="h-[200px]" />
-              </div>
-            </section>
-            <section className="text-center">
-              <h2 className="text-2xl font-bold text-picton-blue-500">
-                {t("support")}
+            </div>
+            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
+              <Sponsor
+                name="SINEF"
+                file="svg"
+                link="https://www.sinef.ch/"
+                cn="text-center col-span-3"
+              />
+            </div>
+          </section>
+
+          {/* BRONZE */}
+          <section className="border border-gray-200 bg-white p-8 text-center">
+            <div className="flex flex-row items-center justify-center gap-4">
+              <img
+                src="/assets/sponsors/shuttles/bronze.png"
+                alt="Bronze sponsor"
+                className="mb-4 w-16"
+              />
+              <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
+                {t("bronze")}
               </h2>
-              <div className="mt-8 grid grid-cols-2 items-center justify-center gap-6 text-center md:grid-cols-2">
-                <Sponsor name="SINEF" file="svg" link="https://www.sinef.ch/" />
-                <Sponsor
-                  name="Frimousse"
-                  file="png"
-                  link="https://www.fri-mousse.ch/wp/"
-                />
-              </div>
-            </section>
-          </div>
+            </div>
+            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
+              <Sponsor
+                name="Frimousse"
+                file="png"
+                link="https://www.fri-mousse.ch/wp/"
+                cn="text-center col-span-3"
+              />
+              
+            </div>
+          </section>
+
+          {/* Sponsor packages */}
           <section className="mt-8 flex flex-col gap-8 bg-white p-8 text-center shadow-md">
             <h2 className="text-2xl font-bold">{t("subtitle")}</h2>
-            <p className="text-lg">{t("desc")} </p>
+            <p className="text-lg">{t("desc")}</p>
+
             <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-              <div>
+              {/* Bronze */}
+              <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
-                  {t("main")}
+                  <img
+                    src="/assets/sponsors/shuttles/bronze.png"
+                    alt="Bronze sponsors"
+                    width={50}
+                    height={50}
+                    className="mr-2 inline-block"
+                  />
+                  {t("bronze")}
                 </h3>
-                <ul className="flex list-disc flex-col gap-3 text-left font-sans text-black">
-                  <li>{t("mainli1")}</li>
-                  <li>{t("mainli2")}</li>
-                  <li>{t("mainli3")}</li>
-                  <li>{t("mainli4")}</li>
-                  <li>{t("mainli5")}</li>
-                  <li>{t("mainli6")}</li>
+                <ul className="list-disc space-y-3 pl-6 text-left text-sm text-black sm:text-base">
+                  {t.rich("bronzeli", {
+                    li: (chunks) => <li>{chunks}</li>,
+                  })}
                 </ul>
               </div>
-              <div>
+
+              {/* Silver */}
+              <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
-                  {t("important")}
+                  <img
+                    src="/assets/sponsors/shuttles/silver.png"
+                    alt="Silver sponsors"
+                    width={50}
+                    height={50}
+                    className="mr-2 inline-block"
+                  />
+                  {t("silver")}
                 </h3>
-                <ul className="flex list-disc flex-col gap-3 text-left text-black">
-                  <li>{t("importantli1")}</li>
-                  <li>{t("importantli2")}</li>
-                  <li>{t("importantli3")}</li>
+                <ul className="list-disc space-y-3 pl-6 text-left text-sm text-black sm:text-base">
+                  {t.rich("silverli", {
+                    li: (chunks) => <li>{chunks}</li>,
+                  })}
                 </ul>
               </div>
-              <div>
+
+              {/* Gold */}
+              <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
-                  {t("support")}
+                  <img
+                    src="/assets/sponsors/shuttles/gold.png"
+                    alt="Gold sponsors"
+                    width={50}
+                    height={50}
+                    className="mr-2 inline-block"
+                  />
+                  {t("gold")}
                 </h3>
-                <ul className="flex list-disc flex-col gap-3 text-left text-black">
-                  <li>{t("supportli1")}</li>
-                  <li>{t("supportli2")}</li>
+                <ul className="list-disc space-y-3 pl-6 text-left text-sm text-black sm:text-base">
+                  {t.rich("goldli", {
+                    li: (chunks) => <li>{chunks}</li>,
+                  })}
                 </ul>
               </div>
             </section>
@@ -86,6 +151,7 @@ export default function Sponsors() {
     </Layout>
   );
 }
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
     `../../messages/${locale}.json`

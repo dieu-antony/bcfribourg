@@ -1,20 +1,24 @@
 import Image from "next/image";
 
 type SponsorProps = {
-    name: string;
-    file?: string;
-    link?: string;
-    };
+  name: string;
+  file?: string;
+  link?: string;
+  cn?: string;
+};
 
-export default function Sponsor({ name, file, link }: SponsorProps) {
+export default function Sponsor({ name, file, link, cn }: SponsorProps) {
   return (
-    <a className="hover:opacity-80" href={link}>
-    <Image
-      src={"/assets/sponsors/" + name + "." + file}
-      width={300}
-      height={300}
-      alt={name}
-      className="w-full"
-    /></a>
+    <div className={`${cn}`}>
+      <a className="hover:opacity-80" href={link}>
+        <Image
+          src={"/assets/sponsors/logo/" + name + "." + file}
+          width={300}
+          height={300}
+          alt={name}
+          className="max-w-96"
+        />
+      </a>
+    </div>
   );
 }

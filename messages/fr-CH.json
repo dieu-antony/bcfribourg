@@ -247,22 +247,14 @@
   },
   "Sponsors": {
     "title": "Sponsors du BC Fribourg",
-    "main": "Sponsor principal",
-    "important": "Sponsors importants",
-    "support": "Sponsors de soutien",
+    "gold": "Volant d'Or",
+    "silver": "Volant d'Argent",
+    "bronze": "Volant de Bronze",
     "subtitle": "Vous aimeriez soutenir le Badminton Club Fribourg?",
-    "desc": "Nous offrons 3 possibilités de sponsoring, le sponsor principal, les sponsors importants et les sponsors de soutien. Pour plus d'infos veuillez nous contacter sous president(at)bcfribourg.ch",
-    "mainli1": "Publicité sur l'habillement selon directives Swiss Badminton",
-    "mainli2": "Possibilité d'avoir 2 panneaux d'affichage lors des matchs à domicile (grandeur panneau max 1x3m)",
-    "mainli3": "Référence et logo du parrain principal sur le site internet",
-    "mainli4": "Référence et logo du parrain principal dans le courrier adressé aux membres",
-    "mainli5": "Participation aux matchs à domicile (Fribourg)",
-    "mainli6": "Engagement et contrat de sponsoring sur 3 ans",
-    "importantli1": "Possibilité d'avoir un panneau d'affichage lors des matchs à domicile (grandeur panneau max 1x3m)",
-    "importantli2": "Référence du nom du parrain sur le site internet",
-    "importantli3": "Participation aux matchs à domicile (Fribourg)",
-    "supportli1": "Référence du nom du parrain sur le site internet",
-    "supportli2": "Participation aux matchs à domicile (Fribourg)"
+    "desc": "Nous offrons 3 possibilités de sponsoring, le sponsor volant d'or, volant d'argent et volant de bronze. Pour plus d'infos veuillez nous contacter sous president(at)bcfribourg.ch",
+    "goldli": "<li>Tous les avantages des packs précédents</li><li>Publicité sur les maillots</li><li>2 panneaux d'affichage lors des matchs à domicile</li><li>Logo dans toutes les communications clés (réseaux sociaux, affiches, site)</li><li>Engagement et contrat de sponsoring sur 3 ans</li>",
+    "silverli": "<li>Tous les avantages du pack Bronze</li><li>Affichage du logo lors des matchs à domicile (1 panneau 1x3m)</li><li>Logo sur les maillots, en format réduit</li><li>Mention dans les stories & posts Instagram</li><li>Invitation au tournoi des sponsors</li>",
+    "bronzeli": "<li>Logo & mention sur notre site web</li><li>Mention lors des événements internes</li><li>Participation aux matchs à domicile</li>"
   },
   "Member": {
     "success": "Votre message a bien été envoyé!",
@@ -284,8 +276,14 @@
     "avs": "Numéro AVS (pour juniors)",
     "phone": "N° téléphone",
     "sblicence": "Numéro de license (si titulaire d'une license Swiss Badminton)",
+    "comms": "Moyen de communication",
+    "email": "E-mail",
+    "letter": "Courrier",
     "message": "Message",
     "send": "Envoyer",
     "contact": "Je n'ai pas encore assisté à un entraînement"
+  },
+  "Gallery": {
+    "title": "Galerie"
   }
 }

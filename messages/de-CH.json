@@ -33,6 +33,7 @@
   "Training": {
     "Adults": {
       "title": "Erwachsenentrainings",
+      "desc": "<p>Der BC Fribourg bietet mehrere zweistündige Trainingseinheiten pro Woche in der <a>Sporthalle der DOSF an</a>. Unsere Sessions stehen Spielern aller Niveaus offen – von Anfängern bis zu erfahrenen Spielern – in einer freundlichen und dynamischen Atmosphäre.</p><p>Ob Sie Badminton entdecken, Ihre Technik verbessern oder einfach nur einen sportlichen Moment teilen möchten, unser Training ist für jeden geeignet. Schließen Sie sich uns an und machen Sie Fortschritte in Ihrem eigenen Tempo!</p>",
       "monday18": {
         "title": "Montag",
         "description": "4. Liga und nicht Lizenzierte",
@@ -55,18 +56,18 @@
       },
       "holidays": {
         "title": "Ferien",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
-        "until": "bis",
-        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt."
+        "until": "bis"
       },
       "contact": {
         "title": "Kontakt"
-      },
-      "desc": "<p>Der BC Fribourg bietet mehrere zweistündige Trainingseinheiten pro Woche in der <a>Sporthalle der DOSF an</a>. Unsere Sessions stehen Spielern aller Niveaus offen – von Anfängern bis zu erfahrenen Spielern – in einer freundlichen und dynamischen Atmosphäre.</p><p>Ob Sie Badminton entdecken, Ihre Technik verbessern oder einfach nur einen sportlichen Moment teilen möchten, unser Training ist für jeden geeignet. Schließen Sie sich uns an und machen Sie Fortschritte in Ihrem eigenen Tempo!</p>"
+      }
     },
     "Juniors": {
       "title": "Juniorentraining",
+      "desc": "<p>Der BC Fribourg bietet mehrere Badmintontrainings für Jugendliche in der <a>Sporthalle der DOSF</a> an. Unsere Trainings sind für alle offen – von Anfänger:innen bis zu fortgeschrittenen Spieler:innen – und werden von qualifizierten Trainer:innen geleitet.</p> <p>Das Ziel: Spass haben und dabei Fortschritte machen! In den Trainings kannst du deine Technik, Koordination und deinen Teamgeist entwickeln. Wenn du jung, motiviert und bereit bist, eine neue Sportart auszuprobieren, ist jetzt der perfekte Zeitpunkt! Entdecke Badminton in einer freundlichen und dynamischen Atmosphäre, in der du in deinem eigenen Tempo besser werden und dich weiterentwickeln kannst.</p> <p>Kontaktiere uns für ein kostenloses Probetraining!</p>",
       "tuesday1": {
         "title": "Dienstag",
         "description": "14-18 Jahre",
@@ -84,23 +85,22 @@
       },
       "holidays": {
         "title": "Ferien",
+        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
         "file": "Schulferien",
         "seasonDuration": "Saisondauer",
-        "until": "bis",
-        "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt."
+        "until": "bis"
       },
       "contact": {
         "title": "Kontakt"
-      },
-      "desc": "<p>BC Fribourg bietet mehrere Badminton-Trainingseinheiten für Jugendliche in der <a>Salle de Sport de la DOSF</a> an. Unsere Sitzungen sind für alle offen, von Anfängern bis zu fortgeschrittenen Spielern, und werden von qualifizierten Trainern betreut.</p><p>Das Ziel ist es, Spaß zu haben und gleichzeitig Fortschritte zu erzielen, Technik, Koordination und Teamgeist zu entwickeln. Wenn du jung und motiviert bist, einen neuen Sport auszuprobieren, zögere nicht länger! Komm und entdecke Badminton in einer freundlichen und dynamischen Atmosphäre, in der du in deinem eigenen Tempo Fortschritte machen und deine Fähigkeiten perfektionieren kannst. Kontaktiere uns für ein Probetraining!</p>."
+      }
     }
   },
   "Interclubs": {
+    "desc": "Der BC Fribourg ist im Interclub durch mehrere Teams vertreten, die in verschiedenen Ligen aktiv sind. Jede Saison nehmen sie an offiziellen Begegnungen teil und treten in einem wettbewerbsorientierten Rahmen gegen andere Vereine an.",
     "m": "Männer",
     "f": "Damen",
     "1st": "1. Liga",
-    "ligue": ". Liga",
-    "desc": "Der BC Fribourg ist im Interclub durch mehrere Teams vertreten, die in verschiedenen Ligen aktiv sind. Jede Saison nehmen sie an offiziellen Begegnungen teil und treten in einem wettbewerbsorientierten Rahmen gegen andere Vereine an."
+    "ligue": ". Liga"
   },
   "CompJuniors": {
     "title": "Juniorenwettkämpfe",
@@ -154,13 +154,13 @@
   },
   "Committee": {
     "title": "Vorstand",
+    "desc": "Der Vorstand des BC Fribourg organisiert und entwickelt den Verein und sorgt für einen reibungslosen Ablauf von Trainings, Wettkämpfen und Veranstaltungen. Er trifft sich fünfmal im Jahr, um wichtige Entscheidungen zu fällen. Mitglieder können Fragen oder Vorschläge einreichen, indem sie den Vorstand kontaktieren.",
     "president": "Präsident",
     "vicePresident": "Kassiererin / Vizepräsidentin",
     "events": "Veranstaltungen",
     "secretary": "Sekretariat / Verantw. Interclubs",
     "sup": "Verantw. Oberligen",
-    "junior": "Junior-verantwortlicher",
-    "desc": "Der Vorstand des BC Fribourg organisiert und entwickelt den Verein und sorgt für einen reibungslosen Ablauf von Trainings, Wettkämpfen und Veranstaltungen. Er trifft sich fünfmal im Jahr, um wichtige Entscheidungen zu fällen. Mitglieder können Fragen oder Vorschläge einreichen, indem sie den Vorstand kontaktieren."
+    "junior": "Junior-verantwortlicher"
   },
   "History": {
     "title": "Geschichte des Clubs",
@@ -247,22 +247,14 @@
   },
   "Sponsors": {
     "title": "Sponsoren des BC Fribourg",
-    "main": "Hauptsponsor",
-    "important": "Wichtiger Sponsor",
-    "support": "Unterstützende Sponsoren",
+    "gold": "Goldener Shuttle",
+    "silver": "Silberner Shuttle",
+    "bronze": "Bronzener Shuttle",
     "subtitle": "Sie möchten den Badminton Club Freiburg unterstützen?",
-    "desc": "Wir bieten 3 Sponsoringmöglichkeiten an, Hauptsponsor, wichtige Sponsoren und unterstützende Sponsoren. Für weitere Informationen kontaktieren Sie uns bitte unter president(at)bcfribourg.ch",
-    "mainli1": "Werbung auf der Bekleidung gemäss Richtlinien von Swiss Badminton",
-    "mainli2": "Möglichkeit, bei Heimspielen 2 Anzeigetafeln zu haben (max. Tafelgröße 1x3m)",
-    "mainli3": "Verweis und Logo des Hauptsponsors auf der Website",
-    "mainli4": "Verweis und Logo des Hauptsponsors in den Mitteilungen an die Mitglieder",
-    "mainli5": "Teilnahme an Heimspielen (Freiburg)",
-    "mainli6": "Engagement und Sponsoringvertrag über 3 Jahre",
-    "importantli1": "Möglichkeit, bei Heimspielen eine Anzeigetafel zu haben (Größe der Anzeigetafel max. 1x3m)",
-    "importantli2": "Verweis auf den Namen des Sponsors auf der Website",
-    "importantli3": "Teilnahme an Heimspielen (Freiburg)",
-    "supportli1": "Verweis auf den Namen des Sponsors auf der Website",
-    "supportli2": "Teilnahme an Heimspielen (Freiburg)"
+    "desc": "Wir bieten drei Sponsoringmöglichkeiten an: Sponsor „Goldener Shuttle“, „Silberner Shuttle“ und „Bronzener Shuttle“. Für weitere Informationen kontaktieren Sie uns bitte unter: president(at)bcfribourg.ch",
+    "goldli": "<li>Alle Vorteile der vorherigen Pakete</li><li>Werbung auf den Trikots</li><li>2 Werbebanner bei Heimspielen</li><li>Logo in allen wichtigen Kommunikationskanälen (Social Media, Plakate, Website)</li><li>Dreijähriger Sponsoringvertrag</li>\n",
+    "silverli": "<li>Alle Vorteile des Bronze-Pakets</li><li>Logopräsenz bei Heimspielen (1 Banner 1x3 m)</li><li>Kleines Logo auf den Trikots</li><li>Erwähnung in Instagram-Stories und -Posts</li><li>Einladung zum Sponsoren-Turnier</li>\n",
+    "bronzeli": "<li>Logo & Erwähnung auf unserer Website</li><li>Erwähnung bei internen Veranstaltungen</li><li>Teilnahme an Heimspielen</li>\n"
   },
   "Member": {
     "success": "Ihre Nachricht wurde erfolgreich gesendet!",
@@ -284,8 +276,15 @@
     "avs": "AHV Nummer (für Junioren)",
     "phone": "Telefonnummer",
     "sblicence": "Lizenznummer (falls Inhaber einer Swiss Badminton-Lizenz)",
+    "comms": "Kommunikationsweg",
+    "email": "Email",
+    "letter": "Post",
     "message": "Nachricht",
     "send": "Senden",
     "contact": "Ich habe noch kein Training besucht"
+  },
+  "Gallery": {
+    "title": "Galerie"
   }
+
 }
