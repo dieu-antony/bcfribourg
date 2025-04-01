@@ -1,5 +1,6 @@
 import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Layout from "~/lib/components/Layout";
 import Sponsor from "~/lib/components/Sponsor";
 
@@ -17,7 +18,7 @@ export default function Sponsors() {
            {/* Gold */}
            <section className="border border-gray-200 hidden bg-white p-8 text-center">
             <div className="flex flex-row items-center justify-center gap-4">
-              <img
+              <Image
                 src="/assets/sponsors/shuttles/gold.png"
                 alt="Gold sponsor"
                 className="mb-4 w-16"
@@ -40,7 +41,7 @@ export default function Sponsors() {
           {/* SILVER */}
           <section className="border border-gray-200 bg-white p-8 text-center">
             <div className="flex flex-row items-center justify-center gap-4">
-              <img
+              <Image
                 src="/assets/sponsors/shuttles/silver.png"
                 alt="Silver sponsor"
                 className="mb-4 w-16"
@@ -62,7 +63,7 @@ export default function Sponsors() {
           {/* BRONZE */}
           <section className="border border-gray-200 bg-white p-8 text-center">
             <div className="flex flex-row items-center justify-center gap-4">
-              <img
+              <Image
                 src="/assets/sponsors/shuttles/bronze.png"
                 alt="Bronze sponsor"
                 className="mb-4 w-16"
@@ -91,7 +92,7 @@ export default function Sponsors() {
               {/* Bronze */}
               <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
-                  <img
+                  <Image
                     src="/assets/sponsors/shuttles/bronze.png"
                     alt="Bronze sponsors"
                     width={50}
@@ -110,7 +111,7 @@ export default function Sponsors() {
               {/* Silver */}
               <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
-                  <img
+                  <Image
                     src="/assets/sponsors/shuttles/silver.png"
                     alt="Silver sponsors"
                     width={50}
@@ -129,7 +130,7 @@ export default function Sponsors() {
               {/* Gold */}
               <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
-                  <img
+                  <Image
                     src="/assets/sponsors/shuttles/gold.png"
                     alt="Gold sponsors"
                     width={50}
