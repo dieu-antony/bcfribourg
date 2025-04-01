@@ -251,7 +251,7 @@
     "silver": "Silberner Shuttle",
     "bronze": "Bronzener Shuttle",
     "subtitle": "Sie möchten den Badminton Club Freiburg unterstützen?",
-    "desc": "Wir bieten 3 Sponsoringmöglichkeiten an, Hauptsponsor, wichtige Sponsoren und unterstützende Sponsoren. Für weitere Informationen kontaktieren Sie uns bitte unter president(at)bcfribourg.ch",
+    "desc": "Nous offrons 3 possibilités de sponsoring, le sponsor volant d'or, volant d'argent et volant de bronze. Pour plus d'infos veuillez nous contacter sous president(at)bcfribourg.ch",
     "goldli": "<li>Alle Vorteile der vorherigen Pakete</li><li>Werbung auf den Trikots</li><li>2 Werbebanner bei Heimspielen</li><li>Logo in allen wichtigen Kommunikationskanälen (Social Media, Plakate, Website)</li><li>Dreijähriger Sponsoringvertrag</li>\n",
     "silverli": "<li>Alle Vorteile des Bronze-Pakets</li><li>Logopräsenz bei Heimspielen (1 Banner 1x3 m)</li><li>Kleines Logo auf den Trikots</li><li>Erwähnung in Instagram-Stories und -Posts</li><li>Einladung zum Sponsoren-Turnier</li>\n",
     "bronzeli": "<li>Logo & Erwähnung auf unserer Website</li><li>Erwähnung bei internen Veranstaltungen</li><li>Teilnahme an Heimspielen</li>\n"
@@ -276,6 +276,9 @@
     "avs": "AHV Nummer (für Junioren)",
     "phone": "Telefonnummer",
     "sblicence": "Lizenznummer (falls Inhaber einer Swiss Badminton-Lizenz)",
+    "comms": "Moyen de communication",
+    "email": "E-mail",
+    "letter": "Courrier",
     "message": "Nachricht",
     "send": "Senden",
     "contact": "Ich habe noch kein Training besucht"
