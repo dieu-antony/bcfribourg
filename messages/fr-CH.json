@@ -33,6 +33,7 @@
   "Training": {
     "Adults": {
       "title": "Entraînements adultes",
+      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de deux heures par semaine à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous les niveaux, des débutants aux joueurs expérimentés, dans une ambiance conviviale et dynamique.</p><p>Que vous souhaitiez découvrir le badminton, améliorer votre technique ou simplement partager un moment sportif, nos entraînements sont adaptés à chacun. Rejoignez-nous et progressez à votre rythme !</p>",
       "monday18": {
         "title": "Lundi",
         "description": "4ème ligue et non licenciés",
@@ -55,18 +56,18 @@
       },
       "holidays": {
         "title": "Vacances",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
         "file": "Vacances scolaires",
         "seasonDuration": "Durée de la saison",
-        "until": "jusqu'au",
-        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes."
+        "until": "jusqu'au"
       },
       "contact": {
         "title": "Contact"
-      },
-      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de deux heures par semaine à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous les niveaux, des débutants aux joueurs expérimentés, dans une ambiance conviviale et dynamique.</p><p>Que vous souhaitiez découvrir le badminton, améliorer votre technique ou simplement partager un moment sportif, nos entraînements sont adaptés à chacun. Rejoignez-nous et progressez à votre rythme !</p>"
+      }
     },
     "Juniors": {
       "title": "Entraînements juniors",
+      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Si tu es jeune et motivé à essayer un nouveau sport, n'hésite plus ! Viens découvrir le badminton dans une ambiance conviviale et dynamique, où tu pourras progresser à ton rythme et te perfectionner. Contacte-nous pour un essai ! </p>",
       "tuesday1": {
         "title": "Mardi",
         "description": "14-18 ans",
@@ -84,23 +85,22 @@
       },
       "holidays": {
         "title": "Vacances",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
         "file": "Vacances scolaires",
         "seasonDuration": "Durée de la saison",
-        "until": "jusqu'au",
-        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes."
+        "until": "jusqu'au"
       },
       "contact": {
         "title": "Contact"
-      },
-      "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Que ton enfant découvre le badminton ou qu'il souhaite se perfectionner, nos entraînements lui permettront d'évoluer à son rythme dans une ambiance dynamique et motivante !</p>"
+      }
     }
   },
   "Interclubs": {
+    "desc": "Le BC Fribourg est représenté en Interclubs par plusieurs équipes engagées dans différentes ligues. Chaque saison, elles participent aux rencontres officielles et affrontent d'autres clubs dans un cadre compétitif.",
     "m": "Hommes",
     "f": "Femmes",
     "1st": "1ère ligue",
-    "ligue": "ème ligue",
-    "desc": "Le BC Fribourg est représenté en Interclubs par plusieurs équipes engagées dans différentes ligues. Chaque saison, elles participent aux rencontres officielles et affrontent d'autres clubs dans un cadre compétitif."
+    "ligue": "ème ligue"
   },
   "CompJuniors": {
     "title": "Compétitions juniors",
@@ -154,13 +154,13 @@
   },
   "Committee": {
     "title": "Comité",
+    "desc": "Le comité du BC Fribourg gère l'organisation et le développement du club, assurant le bon déroulement des entraînements, compétitions et événements. Il se réunit 5 fois par année pour prendre les décisions importantes. Les membres peuvent soumettre des questions ou propositions en contactant le comité.",
     "president": "Président",
     "vicePresident": "Caissière / Vice-présidente",
     "events": "Evènements",
     "secretary": "Secrétaire / Resp. interclubs",
     "sup": "Resp. ligues supérieures",
-    "junior": "Resp. juniors",
-    "desc": "Le comité du BC Fribourg gère l'organisation et le développement du club, assurant le bon déroulement des entraînements, compétitions et événements. Il se réunit 5 fois par année pour prendre les décisions importantes. Les membres peuvent soumettre des questions ou propositions en contactant le comité."
+    "junior": "Resp. juniors"
   },
   "History": {
     "title": "Histoire du club",
@@ -247,22 +247,14 @@
   },
   "Sponsors": {
     "title": "Sponsors du BC Fribourg",
-    "main": "Sponsor principal",
-    "important": "Sponsors importants",
-    "support": "Sponsors de soutien",
+    "gold": "Volant d'Or",
+    "silver": "Volant d'Argent",
+    "bronze": "Volant de Bronze",
     "subtitle": "Vous aimeriez soutenir le Badminton Club Fribourg?",
     "desc": "Nous offrons 3 possibilités de sponsoring, le sponsor principal, les sponsors importants et les sponsors de soutien. Pour plus d'infos veuillez nous contacter sous president(at)bcfribourg.ch",
-    "mainli1": "Publicité sur l'habillement selon directives Swiss Badminton",
-    "mainli2": "Possibilité d'avoir 2 panneaux d'affichage lors des matchs à domicile (grandeur panneau max 1x3m)",
-    "mainli3": "Référence et logo du parrain principal sur le site internet",
-    "mainli4": "Référence et logo du parrain principal dans le courrier adressé aux membres",
-    "mainli5": "Participation aux matchs à domicile (Fribourg)",
-    "mainli6": "Engagement et contrat de sponsoring sur 3 ans",
-    "importantli1": "Possibilité d'avoir un panneau d'affichage lors des matchs à domicile (grandeur panneau max 1x3m)",
-    "importantli2": "Référence du nom du parrain sur le site internet",
-    "importantli3": "Participation aux matchs à domicile (Fribourg)",
-    "supportli1": "Référence du nom du parrain sur le site internet",
-    "supportli2": "Participation aux matchs à domicile (Fribourg)"
+    "goldli": "<li>Tous les avantages des packs précédents</li><li>Publicité sur les maillots</li><li>2 panneaux d'affichage lors des matchs à domicile</li><li>Logo dans toutes les communications clés (réseaux sociaux, affiches, site)</li><li>Engagement et contrat de sponsoring sur 3 ans</li>",
+    "silverli": "<li>Tous les avantages du pack Bronze</li><li>Affichage du logo lors des matchs à domicile (1 panneau 1x3m)</li><li>Logo sur les maillots, en format réduit</li><li>Mention dans les stories & posts Instagram</li><li>Invitation au tournoi des sponsors</li>",
+    "bronzeli": "<li>Logo & mention sur notre site web</li><li>Mention lors des événements internes</li><li>Participation aux matchs à domicile</li>"
   },
   "Member": {
     "success": "Votre message a bien été envoyé!",
