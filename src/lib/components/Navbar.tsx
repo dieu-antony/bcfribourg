@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import DropdownNavLink from "./DropdownNavLink";
 import NavLinks from "./NavLink";
+import LocaleSwitcher from "./LocaleSwitcher";
 import {
   Handshake,
   Award,
@@ -21,6 +22,8 @@ import { useTranslations } from "next-intl";
 
 const Navbar = () => {
   const t = useTranslations("Navbar");
+  const [isOpen, setIsOpen] = useState(false);
+
   const subTraining = [
     {
       name: t("adults"),
@@ -33,6 +36,7 @@ const Navbar = () => {
       icon: <UserRoundCog size="20px" />,
     },
   ];
+
   const subCompetition = [
     {
       name: "Interclubs",
@@ -55,38 +59,19 @@ const Navbar = () => {
       icon: <FileClock size="20px" />,
     },
   ];
+
   const subClub = [
     { name: t("contact"), href: "/club/contact", icon: <Mail size="20px" /> },
     { name: t("committee"), href: "/club/committee", icon: <Users size="20px" /> },
-    {
-      name: t("history"),
-      href: "/club/history",
-      icon: <History size="20px" />,
-    },
-    {
-      name: t("documents"),
-      href: "/club/documents",
-      icon: <Folder size="20px" />,
-    },
-    {
-      name: t("links"),
-      href: "/club/links",
-      icon: <Link2 size="20px" />,
-    },
-    {
-      name: t("court"),
-      href: "/#salle",
-      icon: <MapPinned size="20px" />,
-    },
+    { name: t("history"), href: "/club/history", icon: <History size="20px" /> },
+    { name: t("documents"), href: "/club/documents", icon: <Folder size="20px" /> },
+    { name: t("links"), href: "/club/links", icon: <Link2 size="20px" /> },
+    { name: t("court"), href: "/#salle", icon: <MapPinned size="20px" /> },
   ];
-  const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-
-  const { locale, locales, asPath } = useRouter();
-  const otherLocale = locales?.find((cur) => cur !== locale);
 
   return (
     <>
@@ -132,34 +117,29 @@ const Navbar = () => {
           >
             {t("member")}
           </Link>
-          <Link
-            className="ml-2 mt-4 flex hover:text-picton-blue-500 lg:m-0 lg:self-center"
-            href={asPath}
-            locale={otherLocale}
-            onClick={() => setIsOpen(false)}
-          >
-            {locale === "de-CH" ? "FR" : "DE"}
-          </Link>
+          <LocaleSwitcher />
         </div>
+
+        {/* Burger Menu Button for Mobile */}
         <div className="absolute right-8 top-11 lg:hidden">
           <button onClick={toggleNavbar}>
             <span
               className={`mb-1 block h-0.5 w-7 rounded-sm bg-picton-blue-500
-                      transition-all duration-300 ease-out ${
-                        isOpen ? "translate-y-1.5 rotate-45 transform" : ""
-                      }`}
+                transition-all duration-300 ease-out ${
+                  isOpen ? "translate-y-1.5 rotate-45 transform" : ""
+                }`}
             ></span>
             <span
               className={`my-0.5 mb-1 block h-0.5 w-7 rounded-sm bg-picton-blue-500
-                      transition-all duration-300 ease-out ${
-                        isOpen ? "opacity-0" : "opacity-100"
-                      }`}
+                transition-all duration-300 ease-out ${
+                  isOpen ? "opacity-0" : "opacity-100"
+                }`}
             ></span>
             <span
               className={`mt-1 block h-0.5 w-7 rounded-sm bg-picton-blue-500
-                      transition-all duration-300 ease-out ${
-                        isOpen ? "-translate-y-1.5 -rotate-45 transform" : ""
-                      }`}
+                transition-all duration-300 ease-out ${
+                  isOpen ? "-translate-y-1.5 -rotate-45 transform" : ""
+                }`}
             ></span>
           </button>
         </div>
