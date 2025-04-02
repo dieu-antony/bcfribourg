@@ -282,5 +282,8 @@
     "message": "Nachricht",
     "send": "Senden",
     "contact": "Ich habe noch kein Training besucht"
+  },
+  "Gallery": {
+    "title": "Galerie"
   }
 }
