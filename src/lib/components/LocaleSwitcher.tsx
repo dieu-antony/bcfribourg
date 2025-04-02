@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Globe } from "lucide-react";
+import React, { useState } from "react";
 
 const languageNames: Record<string, string> = {
   "fr-CH": "Français",
@@ -11,30 +11,43 @@ const languageNames: Record<string, string> = {
 
 const LocaleSwitcher = () => {
   const { locale, locales, asPath } = useRouter();
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  if (!locales || locales.length <= 1) return null;
+  const toggle = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   return (
-    <div className="relative ml-4 mt-4 lg:m-0 lg:self-center">
+    <div
+      className="relative flex flex-col justify-start lg:justify-center lg:self-center"
+      onMouseEnter={() => {
+        if (window.innerWidth >= 1024) setIsOpen(true);
+      }}
+      onMouseLeave={() => {
+        if (window.innerWidth >= 1024) setTimeout(() => setIsOpen(false), 750);
+      }}
+      onClick={toggle}
+    >
       <button
-        onClick={() => setOpen(!open)}
-        className="flex items-center hover:text-picton-blue-500"
-        aria-label="Switch language"
+        className="mt-2 flex cursor-pointer items-center text-black lg:self-center"
+        aria-label="Change language"
       >
-        <Globe size={22} />
+        <Globe size={20} />
       </button>
-      {open && (
-        <div className="absolute right-0 z-50 mt-2 flex min-w-[100px] flex-col rounded-md border bg-white p-2 text-sm shadow-md">
-          {locales.map((loc) => (
+
+      {isOpen && (
+        <div className="relative left-0 z-50 flex min-w-[8rem] max-w-[75vw] flex-col rounded-md bg-white py-1 px-2 text-sm shadow-md lg:absolute lg:top-full">
+          {locales?.map((loc) => (
             <Link
               key={loc}
               href={asPath}
               locale={loc}
-              className={`hover:text-picton-blue-600 px-2 py-1 rounded ${
+              className={`p-1 hover:text-picton-blue-500 ${
                 loc === locale ? "font-bold" : ""
               }`}
-              onClick={() => setOpen(false)}
+              onClick={() => setIsOpen(false)}
             >
               {languageNames[loc] ?? loc.toUpperCase()}
             </Link>
