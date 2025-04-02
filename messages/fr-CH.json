@@ -276,11 +276,14 @@
     "avs": "Numéro AVS (pour juniors)",
     "phone": "N° téléphone",
     "sblicence": "Numéro de license (si titulaire d'une license Swiss Badminton)",
-    "comms": "Moyen de communication",
+    "comms": "Moyen de contact",
     "email": "E-mail",
     "letter": "Courrier",
     "message": "Message",
     "send": "Envoyer",
     "contact": "Je n'ai pas encore assisté à un entraînement"
+  },
+  "Gallery": {
+    "title": "Galerie"
   }
 }
