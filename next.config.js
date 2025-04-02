@@ -7,7 +7,7 @@ const config = {
 
   // Comment out the i18n configuration if using `appDir`
   i18n: {
-    locales: ['fr-CH', 'de-CH'],
+    locales: ['fr-CH', 'de-CH', 'en'],
     defaultLocale: 'fr-CH',
   },
 };
