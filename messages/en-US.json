@@ -1,0 +1,289 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "training": "Trainings",
+    "adults": "Adults",
+    "juniors": "Juniors",
+    "competition": "Competition",
+    "tournament": "SB Tournaments",
+    "prevSeasons": "Previous seasons",
+    "contact": "Contact",
+    "committee": "Committee",
+    "history": "History",
+    "documents": "Documents",
+    "links": "Links",
+    "court": "Sports hall",
+    "calendar": "Calendar",
+    "sponsors": "Sponsors",
+    "member": "Sign up"
+  },
+  "Footer": {
+    "find": "Find us on"
+  },
+  "Index": {
+    "welcome": "Welcome to the website of",
+    "next events": "Next events",
+    "member": "Sign up",
+    "court": {
+      "title": "Access to the sports hall",
+      "description": "The sports hall is situated in the Cycle d'Orientation de langue allemande (DOSF) in the quartier du Torry",
+      "details": "Here you can find a detailed plan of the entrance"
+    }
+  },
+  "Training": {
+    "Adults": {
+      "title": "Adult trainings",
+      "desc": "<p>BC Fribourg offers several two-hour training sessions per week at the <a>DOSF Sports Hall</a>. Our sessions are open to all levels, from beginners to experienced players, in a friendly and dynamic atmosphere.</p><p>Whether you want to discover badminton, improve your technique, or simply enjoy a sporting moment, our training sessions are designed for everyone. Join us and progress at your own pace!</p>",
+      "monday18": {
+        "title": "Monday",
+        "description": "4th league and non-licensed",
+        "trainer": "Antony Dieu"
+      },
+      "monday20": {
+        "title": "Monday",
+        "description": "LNB, 1st, 2nd and 4th leagues",
+        "trainer": "Manuel Helfer"
+      },
+      "wednesday20": {
+        "title": "Wednesday",
+        "description": "LNB, 1st and 2nd leagues",
+        "trainer": "Anna Larchenko Fischer"
+      },
+      "thursday19": {
+        "title": "Thursday",
+        "description": "Licensed and non-licensed ",
+        "trainer": "Anna Larchenko Fischer"
+      },
+      "holidays": {
+        "title": "Holidays",
+        "desc": "Training sessions do not take place during school holidays, public holidays, and the evening before holidays.",
+        "file": "School holidays",
+        "seasonDuration": "Duration of the season ",
+        "until": "until"
+      },
+      "contact": {
+        "title": "Contact"
+      }
+    },
+    "Juniors": {
+      "title": "Junior trainings",
+      "desc": "<p>BC Fribourg offers several badminton training sessions for youth at the <a>Sports Hall of the DOSF</a>. Our sessions are open to everyone, from beginners to more advanced players, and are led by qualified coaches.</p>  <p>The goal is to have fun while improving, developing technique, coordination, and team spirit. If you're young and motivated to try a new sport, don’t hesitate! Come discover badminton in a friendly and dynamic atmosphere, where you can progress at your own pace and refine your skills. Contact us for a trial session!</p>\n",
+      "tuesday1": {
+        "title": "Tuesday",
+        "description": "14-18 y.o.",
+        "trainer": "Sheen Khurdi"
+      },
+      "tuesday2": {
+        "title": "Tuesday",
+        "description": "Up to 14 y.o.",
+        "trainer": "Hugo Genoud & Colette Jungo"
+      },
+      "thursday18": {
+        "title": "Thursday",
+        "description": "Up to 18 y.o.",
+        "trainer": "Julie Huser"
+      },
+      "holidays": {
+        "title": "Holidays",
+        "desc": "Training sessions do not take place during school holidays, public holidays, and the days before holidays.",
+        "file": "School holidays",
+        "seasonDuration": "Duration of the season",
+        "until": "until"
+      },
+      "contact": {
+        "title": "Contact"
+      }
+    }
+  },
+  "Interclubs": {
+    "desc": "BC Fribourg is represented in Interclubs by several teams competing in different leagues. Each season, they take part in official matches and face other clubs in a competitive setting.",
+    "m": "Men",
+    "f": "Women",
+    "1st": "1st league",
+    "ligue": " league"
+  },
+  "CompJuniors": {
+    "title": "Junior competitions",
+    "location": "Location",
+    "date": "Date",
+    "cj": {
+      "title": "Circuit juniors",
+      "description": "Les junior circuits are a series of singles tournaments for junior players. The categories are U11, U13, U15, U17, and U19. For more information, please visit the website of the Fribourg Badminton Association. For registration, please contact your coach!"
+    },
+    "ca": {
+      "description": "The Coupe l'Avenir is a team-based junior tournament in an interclub format with two categories: U12 and U16. For more information, please visit the website of the Fribourg Badminton Association. For registration, please contact your coach!"
+    }
+  },
+  "PrevSeasons": {
+    "title": "Previous seasons",
+    "description": "Here you will find the statistics of previous seasons of BC Fribourg since 2015. Use the filters to view the teams and their performances for each season!",
+    "psp": "This chart shows the position of each team in their respective league for each season. A team that finishes last in a season will be relegated to a lower league the following season, while a team that finishes first will be promoted to a higher league. Use the filters to select between the BC Fribourg teams!",
+    "lhm": "This chart shows which league each BC Fribourg team played in for each season. A darker color indicates a higher league. Currently, the league system includes the national leagues (NLA, NLB), the upper leagues (1, 2), and the lower leagues (3, 4).",
+    "rsp": "This chart shows a ratio between matches won per match played and points earned per match played for each BC Fribourg team in each season. Click on the data points to learn more, and use the filters to select between BC Fribourg teams!",
+    "sbp": "This chart shows the performance of each BC Fribourg team for each season. You can choose between sets, matches, and interclubs won for each season. Use the filters to select between BC Fribourg teams!",
+    "filter": {
+      "points": "Points",
+      "wins": "Wins",
+      "sets": "Sets",
+      "games": "Matches",
+      "matches": "Encounters"
+    },
+    "subtitle": "Statistics"
+  },
+  "Tournament": {
+    "title": "Swiss Badminton Tournaments",
+    "desc1": "Swiss Badminton tournaments are official tournaments organized by the Swiss Badminton Association. To register, you must go through the Swiss Badminton website.",
+    "desc2": "If you have a license, simply create a login using your personal information. If you don’t have a license, you can register as an unlicensed player, but your options will be limited. For more information, please contact the technical manager:"
+  },
+  "Contact": {
+    "success": "Your message has been sent successfully!",
+    "title": "Contact",
+    "description": "For any questions or information regarding BC Fribourg, feel free to contact us using the form below. We will get back to you as soon as possible.",
+    "lastname": "Last name",
+    "firstname": "First name",
+    "subject": "Subject",
+    "information": "Information",
+    "comp": "Competition",
+    "adultTraining": "Adult trainings",
+    "juniorTraining": "Junior trainings",
+    "website": "Website",
+    "events": "Events",
+    "other": "Other",
+    "message": "Message",
+    "send": "Send"
+  },
+  "Committee": {
+    "title": "Committee",
+    "desc": "The BC Fribourg committee manages the organization and development of the club, ensuring the smooth running of trainings, competitions, and events. It meets five times a year to make important decisions. Members can submit questions or proposals by contacting the committee.",
+    "president": "President",
+    "vicePresident": "Treasurer / Vice-president",
+    "events": "Events",
+    "secretary": "Secretary / IC",
+    "sup": "Upper leagues",
+    "junior": "Juniors"
+  },
+  "History": {
+    "title": "History of the Club",
+    "description": "The Badminton Club of Fribourg was officially founded on November 12, 1969. Here are some of the key milestones in the life of our club from its beginnings to today:",
+    "events": {
+      "start": "In the beginning…",
+      "startDesc": "A few teenagers from the Jura neighborhood play shuttlecock, with one main goal: finding spots sheltered from the wind! Among them are Jean-Claude Doutaz, Pierre Guerra, and Claude Page. In the late 1960s, the group discovers that shuttlecock is actually a sport played in clubs—badminton! They join BC Wünnewil, the only club in the canton at the time.",
+      "1969": "On November 12, the founding assembly of the club takes place—Badminton Club Fribourg is born! It has 5 members: Jean-Claude Doutaz (president), Pierre Guerra (treasurer), Pierre Lorson (secretary), Rico Casutt, and Juliette Guerra. Thanks to a few good connections, the small group secures the Schönberg sports hall for Monday and Thursday evenings. However, during the 1969/1970 season, BC Fribourg players compete in their first interclub season under the banner of BC Wünnewil. Jean-Claude Doutaz eventually steps down as president, and Pierre Guerra takes over the leadership. From then on, BC Fribourg is officially represented in interclub competitions. A team of four men plays in the 2nd league.",
+      "1973": "The club continues its steady progress and now has 10 members. The season is marked by the team’s promotion to the 1st league—a decision made by the Swiss federation, helped along by a few regulatory maneuvers. Women are now officially allowed on court and join the team. Among them is Jane Skinner, an Englishwoman who moved to Fribourg in 1972, becoming the first foreign player in the ranks of BC Fribourg.",
+      "1975": "The team is relegated to the 2nd league.",
+      "1976": "An official match between Switzerland and China takes place at the Belluard hall, in front of no fewer than 800 spectators. It’s a high-tension event—the highly protocol-driven Chinese team, amid the Cultural Revolution, presented many challenges for the organizers. But the match also brought visibility to badminton, making its first appearance in the Fribourg media.",
+      "1977": "Change in the committee: Marcel Petignat takes over as president, and Pierre Guerra becomes vice-president. The club organizes its first activities outside the gym, including hikes, skiing, and more.",
+      "1979": "With the introduction of J+S (Youth+Sports), the club’s two coaches, Pierre Guerra and Marcel Petignat—both certified by the Swiss Badminton Association—make the transition and become J+S instructors. Club members can now train on Tuesday evenings at Collège Saint-Michel.",
+      "1982": "The club’s players move from the Schönberg hall to the Jura hall for Monday and Friday evening sessions. For the first time since its founding, Badminton Club Fribourg has two teams competing in the championship: Team 1 plays in the 2nd league, Team 2 in the 3rd league. Among the players, two names have become fixtures on the courts: Jean-Charles Bossens and Felice Marchesi.",
+      "1983": "The first junior training sessions are led by Pierre Guerra. Results soon follow: Francine Guerra is selected for the national junior team (U14). The second team earns promotion to the 2nd league. Felice Marchesi finishes twice as runner-up at the Léman Championships in men’s singles D category.",
+      "1984": "The club organizes the Swiss Junior Championships at the Sainte-Croix hall.",
+      "1985": "Promotion to the 1st league for the club’s first team. BC Fribourg now has two official referees: Daniel Dupraz and Marcel Petignat.",
+      "1986": "Francine Guerra wins the Swiss Junior Championship in La Chaux-de-Fonds, earning a gold medal in U14 singles and a bronze medal in doubles with Santi Wibowo (Geneva). In interclub competition, BC Fribourg now has four teams.",
+      "1987": "Francine Guerra makes headlines once again at the Swiss Junior Championship in Stein, achieving a triple win: gold in U14 women’s singles, women’s doubles with Cathia Etzensberger (Basel), and mixed doubles with Martin Tschumi. Valentine Ayer and Véronique Petignat take second place in women’s doubles. The club also hosts the Fribourg Championships for the first time in collaboration with Villars-sur-Glâne.",
+      "1988": "Swiss Junior Championship in Winterthur: In the U14 category, Francine Guerra and Valentine Ayer win the Swiss junior title in women’s doubles. Valentine Ayer and Yvan Haymoz (Tavel) claim the gold medal in mixed doubles. Francine Guerra finishes second in U16 women’s singles. Daniel Dupraz takes over as club president.",
+      "1989": "BC Fribourg organizes the Fribourg Championships in Sainte-Croix, marking its 20th anniversary. Medals pour in once again at the Swiss Junior Championship: In the U16 category, Francine Guerra and Valentine Ayer win the women’s doubles. Valentine also takes gold in mixed doubles with her partner from Singine, Yvan Haymoz. On the men’s side, Didier Page wins three gold medals: in singles, in doubles with Damiano Slongo (Tafers), and in mixed doubles with Caroline Kull (Tafers).",
+      "1990": "The Swiss Junior Championship takes place in Fribourg: Francine Guerra wins both the women’s singles and women’s doubles (with Valentine Ayer) in the U18 category. In U16, Didier Page takes first place in men’s doubles alongside Patrick Bovard (Lausanne), and finishes second in singles and mixed doubles with Caroline Kull (Tafers). The club celebrates its first A-ranked players: Claudine Francey, Francine Guerra, Jean-Charles Bossens, Felice Marchesi, and Didier Page.",
+      "1991": "The season is marked by the promotion of the first team to League B.",
+      "1993": "BC Fribourg once again organizes the Fribourg Championships and, in the same season, celebrates the promotion of its team to League A.",
+      "1994": "Another promotion—this time the 4th league team moves up to the 3rd league at the end of the season. The club’s training sessions now take place at the Pérolles secondary school gym.",
+      "1995": "A dark season for BC Fribourg: the first team gives up its spot in the LNA and drops back to League B. The 3rd league team suffers the same fate, returning to the 4th league.",
+      "1996": "BC Fribourg and BC Tafers join forces. The collaboration between the two clubs begins with training sessions and the first team. For the first time, the juniors reach the finals of the Coupe de l’Avenir.",
+      "1997": "The first team is now officially named Union Fribourg Tafers.",
+      "1999": "The club’s 30th anniversary is celebrated in style. A special outing to central Switzerland, in Morschach, is organized for the occasion. The club’s annual dinner gathers over 100 people. On the sporting side, BC Fribourg sees its 2nd league team relegated to the 3rd league.",
+      "2001": "BC Fribourg is organizing the Fribourg Championships in collaboration with BC Granges-Paccot.",
+      "2002": "The 2nd league team celebrates its promotion to the 1st league.",
+      "2004": "The club is once again pleased with strong interclub results, as the 4th league team secures promotion to the 3rd league. A junior outing is organized.",
+      "2005": "BC Fribourg, in close collaboration with BC Tafers, is organizing the Fribourg Championships. The first summer camp, held over a weekend, takes place in Yverdon.",
+      "2006": "The 3rd league team is relegated to the 4th league at the end of the season.",
+      "2007": "The Union is no longer reserved for elite players. During the Coupe de l’Avenir, both Fribourg and Tafers juniors proudly represent the colors of Union Fribourg-Tafers.",
+      "2008": "The 4th league team finishes brilliantly in first place and thus moves up to the 3rd league. (Photo: League B)",
+      "2009": "To mark its 40th anniversary, the club organized the Fribourg Championships in collaboration with BC Tafers. After several attempts, the 3rd league team secures promotion and now plays in the 2nd league. The club now has teams in all interclub leagues, from League A to the 4th league. As a birthday gift, BCF now has its own website.",
+      "2010": "A third 4th league team is created. The club now has 8 interclub teams.",
+      "2012": "Starting from the 2012–2013 season, all our teams are part of the Union Fribourg-Tafers! We now have a 9th team and are once again represented in all leagues.",
+      "2019": "BC Fribourg is celebrating its 50th anniversary. On this occasion, the club is organizing, among other things, a summer outing in the heights above Leukerbad.",
+      "2022": "The club is organizing the Fribourg Championships in collaboration with BC Villars-sur-Glâne.",
+      "2024": "Union Tafers-Fribourg has to withdraw its team from the NLA. The Union will continue with five interclub teams: one in the NLB, one in the 1st league, one in the 2nd league, and two in the 4th league. For its 25th anniversary, the website will be completely redesigned and modernized."
+    }
+  },
+  "Documents": {
+    "title": "Documents",
+    "file1": "Bylaws",
+    "desc1": "Statutes of the Badminton Club Fribourg",
+    "file2": "CoE",
+    "desc2": "Code of Ethics",
+    "file3": "Club registration form",
+    "desc3": "Club registration form (french)",
+    "file4": "QR code",
+    "desc4": "QR code for payments"
+  },
+  "Links": {
+    "afb": "Fribourg Badminton Association",
+    "afs": "Fribourg Sports Association"
+  },
+  "Calendar": {
+    "today": "Today",
+    "link": "Link",
+    "details": "Details",
+    "date": "Date",
+    "NLA": "NLA",
+    "NLB": "NLB",
+    "1": "1st league",
+    "2": "2nd league",
+    "3": "3rd league",
+    "4": "4th league",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun",
+    "filter": "Filter by type",
+    "location": "Location",
+    "start": "Start",
+    "end": "End",
+    "locale": "en",
+    "events": "Events"
+  },
+  "Sponsors": {
+    "title": "Sponsors of BC Fribourg",
+    "gold": "Golden Shuttle",
+    "silver": "Silver Shuttle",
+    "bronze": "Bronze Shuttle",
+    "subtitle": "Would you like to support the Badminton Club Fribourg?",
+    "desc": "We offer three sponsorship options: Gold Shuttle Sponsor, Silver Shuttle Sponsor, and Bronze Shuttle Sponsor. For more information, please contact us at president(at)bcfribourg.ch.",
+    "goldli": "<li>All the benefits of the previous packages</li><li>Advertising on shirts</li><li>2 display panels during home matches</li><li>Logo in all key communications (social media, posters, website)</li><li>3-year sponsorship commitment and contract</li>\n",
+    "silverli": "<li>All the benefits of the Bronze package</li><li>Logo display during home matches (1 panel 1x3m)</li><li>Logo on shirts, in reduced size</li><li>Mention in Instagram stories & posts</li><li>Invitation to the sponsors' tournament</li>\n",
+    "bronzeli": "<li>Logo & mention on our website</li><li>Mention during internal events</li><li>Participation in home matches</li>"
+  },
+  "Member": {
+    "success": "Your message has been sent successfully!",
+    "title": "Membership application",
+    "description": "Already had a trial and want to become a member of Badminton Club Fribourg? Fill out the registration form below!",
+    "fee": "Annual fee",
+    "category": "Category",
+    "years": "Born in",
+    "licence": "License",
+    "m": "Male",
+    "f": "Female",
+    "other": "Other",
+    "lastname": "Last name",
+    "firstname": "First name",
+    "gender": "Gender",
+    "address": "Address",
+    "npa": "ZIP code, Locality",
+    "dob": "Date of birth",
+    "avs": "\n\nAHV number (for juniors only)",
+    "phone": "Phone number",
+    "sblicence": "License number (if holder of a Swiss Badminton license)",
+    "comms": "Contact method",
+    "email": "E-mail",
+    "letter": "Letter",
+    "message": "Message",
+    "send": "Send",
+    "contact": "I haven’t attended a training session yet"
+  },
+  "Gallery": {
+    "title": "Gallery"
+  }
+}
