@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.grecaptcha-badge {
+    visibility: hidden;
+  }
+
 @layer base {
+  
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;

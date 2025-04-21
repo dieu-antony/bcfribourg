@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import AccentBar from "~/lib/components/AccentBar";
 import CommitteeCard from "~/lib/components/CommitteeCard";
 import Layout from "~/lib/components/Layout";
+import { Title } from "~/lib/components/Title";
 
 const Committee = () => {
   const t = useTranslations("Committee");
@@ -51,9 +52,9 @@ const Committee = () => {
   }
   return (
     <Layout>
-      <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
+      <Title>
         {t("title")}
-      </h1>
+      </Title>
       <div className="flex max-w-[1000px] mt-4 flex-col place-items-center items-center self-center md:grid md:grid-cols-2 lg:grid-cols-3 mb-4">
         <div className="relative md:col-span-2 lg:col-span-3 bg-white md:mx-20 mx-12 lg:mx-4 my-4 p-4 shadow-sm">
           <p>{t("desc")}</p>

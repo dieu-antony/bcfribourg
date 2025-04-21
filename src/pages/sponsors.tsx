@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Layout from "~/lib/components/Layout";
 import Sponsor from "~/lib/components/Sponsor";
+import { Title } from "~/lib/components/Title";
 
 export default function Sponsors() {
   const t = useTranslations("Sponsors");
@@ -10,9 +11,9 @@ export default function Sponsors() {
   return (
     <Layout>
       <div className="flex w-full flex-col items-center">
-        <h1 className="mt-8 w-full bg-picton-blue-500 py-2 text-center text-3xl font-bold text-white">
+        <Title>
           {t("title")}
-        </h1>
+        </Title>
 
         <div className="mx-5 mb-8 w-full max-w-[1100px] space-y-12">
            {/* Gold */}
@@ -21,7 +22,9 @@ export default function Sponsors() {
               <Image
                 src="/assets/sponsors/shuttles/gold.png"
                 alt="Gold sponsor"
-                className="mb-4 w-16"
+                width={64}
+                height={64}
+                className="mb-4"
               />
               <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
                 {t("gold")}
@@ -44,7 +47,9 @@ export default function Sponsors() {
               <Image
                 src="/assets/sponsors/shuttles/silver.png"
                 alt="Silver sponsor"
-                className="mb-4 w-16"
+                width={64}
+                height={64}
+                className="mb-4"
               />
               <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
                 {t("silver")}
@@ -66,7 +71,9 @@ export default function Sponsors() {
               <Image
                 src="/assets/sponsors/shuttles/bronze.png"
                 alt="Bronze sponsor"
-                className="mb-4 w-16"
+                width={64}
+                height={64}
+                className="mb-4"
               />
               <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
                 {t("bronze")}

@@ -76,22 +76,22 @@ export function turnLeagueToNumber(league: string) {
 
 export const toEmail = (subject: string) => {
   switch (subject) {
-    case "Information":
+    case "information":
       return "president@bcfribourg.ch";
-    case "Compétition":
+    case "comp":
       return "interclubs@bcfribourg.ch";
-    case "Entraînement Adultes":
+    case "adultTraining":
       return "info@bcfribourg.ch";
-    case "Entraînement Juniors":
+    case "juniorTraining":
       return "juniors@bcfribourg.ch";
-    case "Site internet":
+    case "website":
       return "webmaster@bcfribourg.ch";
-    case "Evènements":
+    case "events":
       return "event@bcfribourg.ch";
-    case "Autre":
-      return "secretaire@bcfribourg.ch";
+    case "other":
+      return "secretaire@outlook.com";
     default:
-      "secretaire@bcfribourg.ch";
+      return "secretaire@bcfribourg.ch";
   }
 };
 

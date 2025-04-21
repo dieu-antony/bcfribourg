@@ -231,18 +231,10 @@
     "2": "2ème Ligue",
     "3": "3ème Ligue",
     "4": "4ème Ligue",
-    "mon": "Lun",
-    "tue": "Mar",
-    "wed": "Mer",
-    "thu": "Jeu",
-    "fri": "Ven",
-    "sat": "Sam",
-    "sun": "Dim",
     "filter": "Filtrer par type",
     "location": "Lieu",
     "start": "Début",
     "end": "Fin",
-    "locale": "frCH",
     "events": "Evènements"
   },
   "Sponsors": {
@@ -285,5 +277,14 @@
   },
   "Gallery": {
     "title": "Galerie"
+  },
+  "Cookie": {
+    "description": "Nous utilisons des cookies essentiels pour le bon fonctionnement du site et pour nous protéger contre le spam (reCAPTCHA). Vous pouvez désactiver les cookies analytiques ci-dessous. Ce site est protégé par reCAPTCHA et la <privacy>Politique de confidentialité de Google</privacy> ainsi que les <terms>Conditions d'utilisation</terms> s'appliquent.",
+    "settingsTitle": "Préférences des cookies",
+    "essential": "Cookies essentiels",
+    "essentialDescription": "Toujours activés. Requis pour le bon fonctionnement du site et la protection contre le spam (reCAPTCHA).",
+    "analytics": "Analytique (Google)",
+    "cancel": "Annuler",
+    "save": "Enregistrer"
   }
 }

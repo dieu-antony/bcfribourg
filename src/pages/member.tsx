@@ -9,41 +9,90 @@ import Layout from "~/lib/components/Layout";
 import Link from "next/link";
 import { SquareMousePointer } from "lucide-react";
 import CotisationTable from "~/lib/components/CotisationTable";
+import { useRecaptcha } from "~/lib/hooks/useRecaptcha";
 
 const Member = () => {
   const t = useTranslations("Member");
+  const { requestToken } = useRecaptcha();
 
-  const [emailData, setEmailData] = useState({
+  const defaultEmailData: EmailData = {
     gender: "Masculin",
-  } as EmailData);
+    comms: "Email",
+    lastName: "",
+    firstName: "",
+    address: "",
+    npa: "",
+    birthdate: "",
+    avs: "",
+    phone: "",
+    license: "",
+    email: "",
+    message: "",
+    subject: "Inscription",
+    toEmail: "secretaire@bcfribourg.ch",
+  };
 
+  const [emailData, setEmailData] = useState<EmailData>(defaultEmailData);
   const [loading, setLoading] = useState(false);
 
   async function onFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
+    if (loading) return;
     setLoading(true);
-    const subject = "Inscription";
-    const toEmail = "caissier@bcfribourg.ch";
 
-    const data = {
-      ...emailData,
-      subject: subject,
-      toEmail: toEmail,
-    };
-    await fetch("/api/email/send", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    toast.success(t("success"));
-    setEmailData({ gender: "Masculin", comms:"Email" } as EmailData);
+    const form = e.currentTarget;
+
+    if (!emailData.email || !emailData.firstName || !emailData.lastName) {
+      toast.error("Please fill in all required fields.");
+      setLoading(false);
+      return;
+    }
+
+    const token = await requestToken("member_application");
+
+    if (!token) {
+      toast.error("reCAPTCHA validation failed.");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/email/send", {
+        method: "POST",
+        body: JSON.stringify({
+          ...emailData,
+          recaptchaToken: token,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const result = (await res.json()) as {
+        error?: string;
+        data?: { id: string };
+      };
+
+      if (res.ok) {
+        toast.success(t("success"));
+        setEmailData(defaultEmailData);
+        form.reset();
+      } else {
+        toast.error(result?.error ?? "Something went wrong.");
+      }
+    } catch (err) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Email form error:", err);
+      }
+      toast.error("An unknown error occurred.");
+    }
+
     setLoading(false);
-    form.reset();
   }
 
   return (
     <Layout>
-      <div className="flex min-h-max w-full flex-col items-center justify-center my-8">
+      <div className="my-8 flex min-h-max w-full flex-col items-center justify-center">
         <div className="mx-5 w-full max-w-[1000px] rounded-sm bg-white p-5 shadow-md">
           <form onSubmit={onFormSubmit}>
             <div className="space-y-12">
@@ -54,17 +103,22 @@ const Member = () => {
                 <p className="my-1 text-sm leading-6 text-gray-600">
                   {t("description")}
                 </p>
-                <Link href="/club/contact" className="w-auto flex text-center gap-1 flex-row my-1 text-sm leading-6 text-black hover:text-picton-blue-500 duration-100 transition-colors underline-offset-2 hover:underline">
-                 <SquareMousePointer size="20px"/>{t("contact")}
+                <Link
+                  href="/club/contact"
+                  className="my-1 flex w-auto flex-row gap-1 text-center text-sm leading-6 text-black underline-offset-2 transition-colors duration-100 hover:text-picton-blue-500 hover:underline"
+                >
+                  <SquareMousePointer size="20px" />
+                  {t("contact")}
                 </Link>
-                <CotisationTable/>
+                <CotisationTable />
+
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <FormItem
                     className="sm:col-span-3"
                     label="name"
                     type="text"
                     labelName={t("lastname")}
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, lastName: e.target.value })
                     }
@@ -75,7 +129,7 @@ const Member = () => {
                     label="firstName"
                     type="text"
                     labelName={t("firstname")}
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, firstName: e.target.value })
                     }
@@ -94,6 +148,7 @@ const Member = () => {
                       onChange={(e) =>
                         setEmailData({ ...emailData, gender: e.target.value })
                       }
+                      value={emailData.gender}
                       className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500  sm:max-w-xs sm:text-sm sm:leading-6"
                     >
                       <option value="Masculin">{t("m")}</option>
@@ -106,7 +161,7 @@ const Member = () => {
                     label="address"
                     type=""
                     labelName={t("address")}
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, address: e.target.value })
                     }
@@ -117,7 +172,7 @@ const Member = () => {
                     label="npa"
                     type=""
                     labelName={t("npa")}
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, npa: e.target.value })
                     }
@@ -128,7 +183,7 @@ const Member = () => {
                     label="year"
                     type="date"
                     labelName={t("dob")}
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, birthdate: e.target.value })
                     }
@@ -143,14 +198,13 @@ const Member = () => {
                       setEmailData({ ...emailData, avs: e.target.value })
                     }
                     value={emailData.avs}
-                    required={false}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="phone"
                     type="tel"
                     labelName={t("phone")}
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, phone: e.target.value })
                     }
@@ -165,36 +219,36 @@ const Member = () => {
                       setEmailData({ ...emailData, license: e.target.value })
                     }
                     value={emailData.license}
-                    required={false}
                   />
                   <FormItem
                     className="sm:col-span-6"
                     label="email"
                     type="email"
                     labelName="Email"
-                    required={true}
+                    required
                     onChange={(e) =>
                       setEmailData({ ...emailData, email: e.target.value })
                     }
                     value={emailData.email}
                   />
                   <label
-                      htmlFor="comms"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      {t("comms")}
-                    </label>
-                    <select
-                      name="comms"
-                      id="comms"
-                      onChange={(e) =>
-                        setEmailData({ ...emailData, comms: e.target.value })
-                      }
-                      className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500  sm:max-w-xs sm:text-sm sm:leading-6"
-                    >
-                      <option value="Email">{t("email")}</option>
-                      <option value="Letter">{t("letter")}</option>
-                    </select>
+                    htmlFor="comms"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    {t("comms")}
+                  </label>
+                  <select
+                    name="comms"
+                    id="comms"
+                    onChange={(e) =>
+                      setEmailData({ ...emailData, comms: e.target.value })
+                    }
+                    value={emailData.comms}
+                    className="form-select block w-full rounded-md border-0 bg-gray-50 py-1.5 text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-picton-blue-500  sm:max-w-xs sm:text-sm sm:leading-6"
+                  >
+                    <option value="Email">{t("email")}</option>
+                    <option value="Letter">{t("letter")}</option>
+                  </select>
                   <FormItem
                     className="sm:col-span-6"
                     label="message"
@@ -204,14 +258,13 @@ const Member = () => {
                       setEmailData({ ...emailData, message: e.target.value })
                     }
                     value={emailData.message}
-                    required={false}
                   />
                   <button
                     disabled={loading}
                     type="submit"
-                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
+                    className={`rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6 ${loading ? "cursor-not-allowed opacity-60" : ""}`}
                   >
-                    {t("send")}
+                    {loading ? "..." : t("send")}
                   </button>
                 </div>
               </div>
@@ -223,11 +276,11 @@ const Member = () => {
     </Layout>
   );
 };
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
     `../../messages/${locale}.json`
   )) as IntlMessages;
-
   return {
     props: {
       messages: messages.default,

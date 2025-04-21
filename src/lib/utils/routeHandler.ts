@@ -12,14 +12,20 @@ interface RouteHandlerParams {
 export async function RouteHandler(
   req: NextApiRequest,
   res: NextApiResponse,
-  handlers: RouteHandlerParams,
+  handlers: RouteHandlerParams
 ) {
-  const method = req.method as HttpMethod;
+  const method = req.method?.toUpperCase() as HttpMethod;
   const handler = handlers[method];
 
   if (!handler) {
-    return res.status(405).send("Method not allowed");
+    res.setHeader("Allow", Object.keys(handlers).join(", "));
+    return res.status(405).json({ error: `Method ${method} Not Allowed` });
   }
 
-  return await handler(req, res);
+  try {
+    await handler(req, res);
+  } catch (error) {
+    console.error("Unhandled error in RouteHandler:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 }

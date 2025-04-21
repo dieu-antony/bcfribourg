@@ -231,18 +231,10 @@
     "2": "2nd league",
     "3": "3rd league",
     "4": "4th league",
-    "mon": "Mon",
-    "tue": "Tue",
-    "wed": "Wed",
-    "thu": "Thu",
-    "fri": "Fri",
-    "sat": "Sat",
-    "sun": "Sun",
     "filter": "Filter by type",
     "location": "Location",
     "start": "Start",
     "end": "End",
-    "locale": "en",
     "events": "Events"
   },
   "Sponsors": {
@@ -285,5 +277,14 @@
   },
   "Gallery": {
     "title": "Gallery"
+  },
+  "Cookie": {
+    "description": "We use essential cookies for site functionality and to protect against spam (reCAPTCHA). You can disable analytics cookies below. This site is protected by reCAPTCHA and the <privacy>Google Privacy Policy</privacy> and <terms>Terms of Service</terms> apply.",
+    "settingsTitle": "Cookie Preferences",
+    "essential": "Essential Cookies",
+    "essentialDescription": "Always enabled. These are needed for core site functionality and spam protection (e.g. reCAPTCHA).",
+    "analytics": "Analytics (Google)",
+    "cancel": "Cancel",
+    "save": "Save Preferences"
   }
 }

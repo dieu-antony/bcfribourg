@@ -7,6 +7,8 @@ import {
   getDay,
   isToday,
   isSameDay,
+  startOfWeek,
+  addDays,
 } from "date-fns";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -35,7 +37,7 @@ import {
 } from "../ui/dialog";
 import { Clock8 } from "lucide-react";
 import Link from "next/link";
-import { frCH, de } from "date-fns/locale";
+import { frCH, de, enUS } from "date-fns/locale";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 
@@ -48,15 +50,14 @@ const EventCalendar = ({ events }: EventProps) => {
   const { locale } = useRouter();
   // Define needed constants and states
   const [chosenMonth, setChosenMonth] = useState<Date>(new Date());
-  const weekDays = [
-    t("mon"),
-    t("tue"),
-    t("wed"),
-    t("thu"),
-    t("fri"),
-    t("sat"),
-    t("sun"),
-  ];
+
+  const dateLocale = locale === "fr-CH" ? frCH : locale === "de-CH" ? de : enUS;
+
+  const weekDays = eachDayOfInterval({
+    start: startOfWeek(new Date(), { weekStartsOn: 1 }), // Monday
+    end: addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 6),
+  }).map((day) => format(day, "EEE", { locale: dateLocale }));
+  
   const firstDayOfMonth = startOfMonth(chosenMonth);
   const lastDayOfMonth = endOfMonth(chosenMonth);
   const daysInMonth = eachDayOfInterval({
@@ -127,13 +128,13 @@ const EventCalendar = ({ events }: EventProps) => {
           </Button>
         </div>
         <div className="flex items-center justify-center text-center">
-          <h2 className="hidden max-w-40 rounded-md bg-white shadow-sm px-3 py-2 font-bold md:block">
+          <h2 className="hidden max-w-40 rounded-md bg-white px-3 py-2 font-bold shadow-sm md:block">
             {format(chosenMonth, "MMMM yyyy", {
-              locale: t("locale") === "frCH" ? frCH : de,
+              locale: dateLocale,
             })}
           </h2>
-          <h2 className="block self-center bg-white rounded-md shadow-sm px-3 py-2 font-bold md:hidden">
-            {format(chosenMonth, "MMM yy")}
+          <h2 className="block self-center rounded-md bg-white px-3 py-2 font-bold shadow-sm md:hidden">
+            {format(chosenMonth, "MMM yy", { locale: dateLocale })}
           </h2>
         </div>
 
@@ -152,7 +153,7 @@ const EventCalendar = ({ events }: EventProps) => {
                 <p className="hidden md:block">
                   {chosenMonth ? (
                     format(chosenMonth, "MMMM", {
-                      locale: t("locale") === "frCH" ? frCH : de,
+                      locale: dateLocale,
                     })
                   ) : (
                     <span>Pick a date</span>

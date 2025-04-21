@@ -231,18 +231,10 @@
     "2": "2. Liga",
     "3": "3. Liga",
     "4": "4. Liga",
-    "mon": "Mon",
-    "tue": "Die",
-    "wed": "Mit",
-    "thu": "Don",
-    "fri": "Fre",
-    "sat": "Sam",
-    "sun": "Son",
     "filter": "Nach Typ filtern",
     "location": "Ort",
     "start": "Start",
     "end": "Ende",
-    "locale": "de",
     "events": "Veranstaltungen"
   },
   "Sponsors": {
@@ -285,6 +277,14 @@
   },
   "Gallery": {
     "title": "Galerie"
+  },
+  "Cookie": {
+    "description": "Wir verwenden essentielle Cookies für die grundlegende Funktionalität der Website und zum Schutz vor Spam (reCAPTCHA). Sie können Analyse-Cookies unten deaktivieren. Diese Seite ist durch reCAPTCHA geschützt und es gelten die <privacy>Datenschutzerklärung von Google</privacy> und die <terms>Nutzungsbedingungen</terms>.",
+    "settingsTitle": "Cookie-Einstellungen",
+    "essential": "Essenzielle Cookies",
+    "essentialDescription": "Immer aktiviert. Diese sind notwendig für grundlegende Funktionen der Website und den Spamschutz (z. B. reCAPTCHA).",
+    "analytics": "Analyse (Google)",
+    "cancel": "Abbrechen",
+    "save": "Einstellungen speichern"
   }
-
 }

@@ -8,30 +8,82 @@ import { toEmail } from "~/lib/utils/utils";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
 import CotisationTable from "~/lib/components/CotisationTable";
+import { useRecaptcha } from "~/lib/hooks/useRecaptcha";
+
+type ErrorResponse = {
+  error: string;
+  score?: number;
+  EmailData?: EmailData;
+};
 
 const Contact = () => {
   const t = useTranslations("Contact");
 
-  const [emailData, setEmailData] = useState({
-    subject: "Information",
-  } as EmailData);
+  const defaultEmailData: EmailData = {
+    subject: "information",
+    lastName: "",
+    firstName: "",
+    email: "",
+    message: "",
+    toEmail: "",
+  };
+
+  const [emailData, setEmailData] = useState<EmailData>(defaultEmailData);
+
+  const { requestToken } = useRecaptcha();
+
+  const [loading, setLoading] = useState(false);
 
   async function onContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (loading) return;
+
+    setLoading(true);
     const form = e.currentTarget;
+
+    const token = await requestToken("contact_form");
+
+    if (!token) {
+      toast.error("reCAPTCHA validation failed. Please try again.");
+      setLoading(false);
+      return;
+    }
+
     const emailTo = toEmail(emailData.subject!);
 
     const data = {
       ...emailData,
       toEmail: emailTo,
+      recaptchaToken: token,
     };
-    await fetch("/api/email/send", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    toast.success(t("success"));
-    setEmailData({ subject: "Information" } as EmailData);
-    form.reset();
+
+    try {
+      const res = await fetch("/api/email/send", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        toast.success(t("success"));
+        setEmailData(defaultEmailData);
+        form.reset();
+      } else {
+        const errorData = (await res.json()) as ErrorResponse;
+        toast.error(
+          errorData.error ?? "Something went wrong. Please try again.",
+        );
+      }
+    } catch (err) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error("Fetch error:", err);
+      }
+      toast.error("Network error or server is unreachable.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -89,13 +141,13 @@ const Contact = () => {
                     type="select"
                     labelName={t("subject")}
                     options={[
-                      t("information"),
-                      t("comp"),
-                      t("adultTraining"),
-                      t("juniorTraining"),
-                      t("website"),
-                      t("events"),
-                      t("other"),
+                      { value: "information", label: t("information") },
+                      { value: "comp", label: t("comp") },
+                      { value: "adultTraining", label: t("adultTraining") },
+                      { value: "juniorTraining", label: t("juniorTraining") },
+                      { value: "website", label: t("website") },
+                      { value: "events", label: t("events") },
+                      { value: "other", label: t("other") },
                     ]}
                     onChange={(e) =>
                       setEmailData({ ...emailData, subject: e.target.value })
@@ -115,9 +167,10 @@ const Contact = () => {
                   />
                   <button
                     type="submit"
-                    className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
+                    disabled={loading}
+                    className={`rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6 ${loading ? "cursor-not-allowed opacity-60" : ""}`}
                   >
-                    {t("send")}
+                    {loading ? "..." : t("send")}
                   </button>
                 </div>
               </div>

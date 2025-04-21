@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
 import Router from "next/router";
+import { useRecaptcha } from "~/lib/hooks/useRecaptcha";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -10,24 +11,41 @@ const Login = () => {
     password: "",
   });
   const [failedLogin, setFailedLogin] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const { requestToken } = useRecaptcha();
 
   const loginUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await signIn("credentials", {
+    setFailedLogin(false);
+    setLoading(true);
+
+    const token = await requestToken("admin_login");
+
+    if (!token) {
+      setFailedLogin(true);
+      setLoading(false);
+      return;
+    }
+
+    const res = await signIn("credentials", {
       ...data,
-      callbackUrl: "/admin",
       redirect: false,
-    }).then((res) => {
-      if (res!.error) {
-        setFailedLogin(true);
-        setData({ ...data, password: "" });
-      }
-      if (res!.ok) {
-        setFailedLogin(false);
-        void Router.replace("/admin");
-      }
+      callbackUrl: "/admin",
+      recaptchaToken: token,
     });
+
+    if (res?.error) {
+      setFailedLogin(true);
+      setData((prev) => ({ ...prev, password: "" }));
+    } else if (res?.ok) {
+      setFailedLogin(false);
+      void Router.replace("/admin");
+    }
+
+    setLoading(false);
   };
+
   return (
     <Layout>
       <div className="flex h-full min-h-max w-full flex-col items-center justify-center pt-16">
@@ -39,13 +57,16 @@ const Login = () => {
                   Login
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  Please login using your usename and password. If you
+                  Please login using your username and password. If you
                   don&apos;t have a login, please ask the admin to create one
                   for you.
                 </p>
                 <p
                   className={`mt-2 text-sm leading-6 text-red-500 ${failedLogin ? "block" : "hidden"}`}
-                >The username or password you entered is incorrect. Please try again.</p>
+                >
+                  The username, password, or reCAPTCHA was invalid. Please try again.
+                </p>
+
                 <div className="mt-6 flex flex-col gap-x-6 gap-y-8">
                   <div>
                     <label
@@ -68,6 +89,7 @@ const Login = () => {
                       />
                     </div>
                   </div>
+
                   <div>
                     <label
                       htmlFor="password"
@@ -91,10 +113,11 @@ const Login = () => {
                   </div>
 
                   <button
+                    disabled={loading}
                     type="submit"
                     className="rounded-md bg-picton-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-picton-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-span-6"
                   >
-                    Login
+                    {loading ? "Logging in..." : "Login"}
                   </button>
                 </div>
               </div>
@@ -105,6 +128,7 @@ const Login = () => {
     </Layout>
   );
 };
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
     `../../messages/${locale}.json`

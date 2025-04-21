@@ -17,7 +17,6 @@ import {
   Link2,
   MapPinned,
 } from "lucide-react";
-import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
 
 const Navbar = () => {
