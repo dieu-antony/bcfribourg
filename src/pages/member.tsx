@@ -29,7 +29,7 @@ const Member = () => {
     email: "",
     message: "",
     subject: "Inscription",
-    toEmail: "secretaire@bcfribourg.ch",
+    toEmail: "caissier@bcfribourg.ch",
   };
 
   const [emailData, setEmailData] = useState<EmailData>(defaultEmailData);

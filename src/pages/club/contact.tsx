@@ -141,13 +141,13 @@ const Contact = () => {
                     type="select"
                     labelName={t("subject")}
                     options={[
-                      { value: "information", label: t("information") },
-                      { value: "comp", label: t("comp") },
-                      { value: "adultTraining", label: t("adultTraining") },
-                      { value: "juniorTraining", label: t("juniorTraining") },
-                      { value: "website", label: t("website") },
-                      { value: "events", label: t("events") },
-                      { value: "other", label: t("other") },
+                      { value: "Information", label: t("information") },
+                      { value: "Competition", label: t("comp") },
+                      { value: "Entrainement adulte", label: t("adultTraining") },
+                      { value: "Entrainement junior", label: t("juniorTraining") },
+                      { value: "Website", label: t("website") },
+                      { value: "Evenement", label: t("events") },
+                      { value: "Autre", label: t("other") },
                     ]}
                     onChange={(e) =>
                       setEmailData({ ...emailData, subject: e.target.value })

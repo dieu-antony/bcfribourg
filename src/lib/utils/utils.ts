@@ -76,19 +76,19 @@ export function turnLeagueToNumber(league: string) {
 
 export const toEmail = (subject: string) => {
   switch (subject) {
-    case "information":
+    case "Information":
       return "president@bcfribourg.ch";
-    case "comp":
+    case "Competition":
       return "interclubs@bcfribourg.ch";
-    case "adultTraining":
+    case "Entrainement adulte":
       return "info@bcfribourg.ch";
-    case "juniorTraining":
+    case "Entrainement junior":
       return "juniors@bcfribourg.ch";
-    case "website":
+    case "Website":
       return "webmaster@bcfribourg.ch";
-    case "events":
+    case "Evenement":
       return "event@bcfribourg.ch";
-    case "other":
+    case "Autre":
       return "secretaire@outlook.com";
     default:
       return "secretaire@bcfribourg.ch";
