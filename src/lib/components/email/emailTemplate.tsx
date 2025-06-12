@@ -16,7 +16,7 @@ export function EmailTemplate({
   subject,
   comms,
 }: EmailData) {
-  if (subject == "Inscription") {
+  if (subject?.toLocaleLowerCase() == "inscription") {
     return (
       <div className="font-sans text-base leading-normal">
         <h2 className="mb-6 text-3xl font-bold">Nouvelle inscription!</h2>
