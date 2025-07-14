@@ -14,6 +14,7 @@
     "links": "Liens",
     "court": "Salle",
     "calendar": "Calendrier",
+    "gallery": "Galerie",
     "sponsors": "Sponsors",
     "member": "Devenir membre"
   },
@@ -32,28 +33,20 @@
   },
   "Training": {
     "Adults": {
+      "1Monday": "Lundi",
+      "2Tuesday": "Mardi",
+      "3Wednesday": "Mercredi",
+      "4Thursday": "Jeudi",
+      "5Friday": "Vendredi",
+      "6Saturday": "Samedi",
+      "7Sunday": "Dimanche",
+      "LowerLeagues": "4ème ligue et non licenciés",
+      "UpperLeagues": "LNB, 1ère et 2ème ligues",
+      "Licensed": "LNB, 1ère, 2ème et 4ème ligues",
+      "All": "Licenciés et non licenciés",
+      "FreePlay": "Jeu libre",
       "title": "Entraînements adultes",
       "desc": "<p>Le BC Fribourg propose plusieurs entraînements de deux heures par semaine à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous les niveaux, des débutants aux joueurs expérimentés, dans une ambiance conviviale et dynamique.</p><p>Que vous souhaitiez découvrir le badminton, améliorer votre technique ou simplement partager un moment sportif, nos entraînements sont adaptés à chacun. Rejoignez-nous et progressez à votre rythme !</p>",
-      "monday18": {
-        "title": "Lundi",
-        "description": "4ème ligue et non licenciés",
-        "trainer": "Antony Dieu"
-      },
-      "monday20": {
-        "title": "Lundi",
-        "description": "LNB, 1ère, 2ème et 4ème ligues",
-        "trainer": "Manuel Helfer"
-      },
-      "wednesday20": {
-        "title": "Mercredi",
-        "description": "LNB, 1ère et 2ème ligues",
-        "trainer": "Anna Larchenko Fischer"
-      },
-      "thursday19": {
-        "title": "Jeudi",
-        "description": "Licenciés et non licenciés",
-        "trainer": "Anna Larchenko Fischer"
-      },
       "holidays": {
         "title": "Vacances",
         "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
@@ -66,6 +59,16 @@
       }
     },
     "Juniors": {
+      "1Monday": "Lundi",
+      "2Tuesday": "Mardi",
+      "3Wednesday": "Mercredi",
+      "4Thursday": "Jeudi",
+      "5Friday": "Vendredi",
+      "6Saturday": "Samedi",
+      "7Sunday": "Dimanche",
+      "JuniorsOlder": "14-18 ans",
+      "JuniorsYounger": "Jusqu'à 14 ans",
+      "JuniorsAll": "Jusqu'à 18 ans",
       "title": "Entraînements juniors",
       "desc": "<p>Le BC Fribourg propose plusieurs entraînements de badminton pour les jeunes à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous, des débutants aux joueurs plus avancés, et sont encadrées par des entraîneurs qualifiés.</p> <p>L'objectif est de s'amuser tout en progressant, en développant la technique, la coordination et l'esprit d'équipe. Si tu es jeune et motivé à essayer un nouveau sport, n'hésite plus ! Viens découvrir le badminton dans une ambiance conviviale et dynamique, où tu pourras progresser à ton rythme et te perfectionner. Contacte-nous pour un essai ! </p>",
       "tuesday1": {
@@ -156,11 +159,14 @@
     "title": "Comité",
     "desc": "Le comité du BC Fribourg gère l'organisation et le développement du club, assurant le bon déroulement des entraînements, compétitions et événements. Il se réunit 5 fois par année pour prendre les décisions importantes. Les membres peuvent soumettre des questions ou propositions en contactant le comité.",
     "president": "Président",
-    "vicePresident": "Caissière / Vice-présidente",
+    "treasurer": "Caissière",
+    "vicePresident": "Vice-présidente",
     "events": "Evènements",
-    "secretary": "Secrétaire / Resp. interclubs",
+    "secretary": "Secrétaire",
+    "interclubs": "Resp. interclubs",
     "sup": "Resp. ligues supérieures",
-    "junior": "Resp. juniors"
+    "junior": "Resp. juniors",
+    "media": "Resp. communication et médias"
   },
   "History": {
     "title": "Histoire du club",
