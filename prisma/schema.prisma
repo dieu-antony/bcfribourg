@@ -74,4 +74,59 @@ model ICTeam {
     leagueId String
     players  Player[]
     url      String
+    photoUrl String?
+}
+
+model Training {
+    id      String @id @default(cuid())
+    day     String
+    time    String
+    target  String
+    trainer String
+    type    String
+}
+
+model SeasonDuration {
+    id    String   @id @default(cuid())
+    link  String
+    start DateTime
+    end   DateTime
+}
+
+model Contact {
+    id       String @id @default(cuid())
+    name     String
+    phone    String
+    position String
+}
+
+model JuniorComp {
+    id       String   @id @default(cuid())
+    type     String
+    location String
+    date     DateTime
+}
+
+model CommitteeMember {
+    id       String  @id @default(cuid())
+    name     String
+    email    String
+    phone    String
+    role     String
+    role2    String?
+    photoUrl String
+}
+
+model HistoryEvent {
+    id       String  @id @default(cuid())
+    year     Int
+    imageUrl String?
+}
+
+model Sponsor {
+    id      String @id @default(cuid())
+    name    String
+    logoUrl String
+    link    String
+    tier    Int
 }

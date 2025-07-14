@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { Mail, Smartphone, File } from "lucide-react";
 import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
@@ -6,8 +7,27 @@ import AccentBar from "~/lib/components/AccentBar";
 import Layout from "~/lib/components/Layout";
 import { Title } from "~/lib/components/Title";
 import TrainingCard from "~/lib/components/TrainingCard";
+import type { Contact, DurationEntry, TrainingEntry } from "~/lib/types";
+import { db } from "~/server/db";
 
-const Juniors = () => {
+type Props = {
+  trainings: TrainingEntry[];
+  holidays: DurationEntry;
+  contact: Contact;
+};
+
+type TrainingDayKey =
+  | "1Monday"
+  | "2Tuesday"
+  | "3Wednesday"
+  | "4Thursday"
+  | "5Friday"
+  | "6Saturday"
+  | "7Sunday";
+
+type TargetKey = "JuniorsOlder" | "JuniorsYounger" | "JuniorsAll";
+
+const Juniors = ({ trainings, holidays, contact }: Props) => {
   const t = useTranslations("Training.Juniors");
   return (
     <Layout>
@@ -27,28 +47,28 @@ const Juniors = () => {
           })}
           <AccentBar />
         </div>
-        <TrainingCard
-          className="mt-8 md:place-self-end"
-          time={{ start: "18h00 - 20h00", day: t("tuesday1.title") }}
-          trainer={t("tuesday1.trainer")}
-          target={t("tuesday1.description")}
-        />
-        <TrainingCard
-          className="md:mt-8 md:place-self-start"
-          time={{ start: "18h00 - 20h00", day: t("tuesday2.title") }}
-          trainer={t("tuesday2.trainer")}
-          target={t("tuesday2.description")}
-        />
-        <TrainingCard
-          className="md:place-self-end"
-          time={{ start: "18h00 - 20h00", day: t("thursday18.title") }}
-          trainer={t("thursday18.trainer")}
-          target={t("thursday18.description")}
-        />
-        <div className="m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-4 bg-white p-8 shadow-md md:place-self-start lg:h-[300] lg:w-[400px]">
+
+        {trainings.map((training, i) => (
+          <TrainingCard
+            key={training.id}
+            className={
+              i % 2 === 0
+                ? "mt-8 md:place-self-end"
+                : "md:mt-8 md:place-self-start"
+            }
+            time={{
+              start: training.time,
+              day: t(training.day as TrainingDayKey),
+            }}
+            trainer={training.trainer}
+            target={t(training.target as TargetKey)}
+          />
+        ))}
+
+        <div className="relative m-8 mt-0 flex h-[200px] w-[300px] flex-col gap-6 bg-white p-8 shadow-md md:col-span-2 md:h-[200px] md:w-[664px] md:place-self-center lg:w-[864px]">
           <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("contact.title")}</h2>
-            <span>Hugo Genoud</span>
+            <span>{contact.name}</span>
           </div>
           <div className="grid grid-cols-2 place-items-center justify-center">
             <Link
@@ -61,15 +81,18 @@ const Juniors = () => {
             <Link className="hover:text-picton-blue-500" href="/club/contact">
               Email
             </Link>
-            <span>079 571 22 75</span>
+            <span>{contact.phone}</span>
           </div>
+          <AccentBar />
         </div>
+
         <div className="relative m-8 mt-0 flex h-[350px] w-[300px] flex-col gap-6 bg-white p-8 shadow-md md:col-span-2 md:h-[275px] md:w-[664px] md:place-self-center lg:w-[864px]">
           <div className="flex flex-col gap-1">
             <h2 className="text-lg font-semibold">{t("holidays.title")}</h2>
             <p className="mb-4">{t("holidays.desc")}</p>
             <a
-              href="https://www.fr.ch/sites/default/files/2024-08/calendrier-majoritaire-202425.pdf"
+              href={holidays.link}
+              rel="noopener noreferrer"
               className="flex flex-row gap-1 hover:text-picton-blue-500"
               target="_blank"
             >
@@ -80,7 +103,9 @@ const Juniors = () => {
             <h2 className="text-lg font-semibold">
               {t("holidays.seasonDuration")}
             </h2>
-            <span>26.08.2024 {t("holidays.until")} 26.06.2025</span>
+            <span>
+              {holidays.start} {t("holidays.until")} {holidays.end}
+            </span>
           </div>
           <AccentBar />
         </div>
@@ -93,10 +118,35 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const trainings = await db.training.findMany({
+    orderBy: { time: "asc" },
+    where: {
+      type: "Juniors",
+    },
+  });
+
+  const holidaysRaw = await db.seasonDuration.findFirst();
+
+  const holidays = holidaysRaw
+    ? {
+        ...holidaysRaw,
+        start: format(holidaysRaw.start, "dd.MM.yyyy"),
+        end: format(holidaysRaw.end, "dd.MM.yyyy"),
+      }
+    : { start: "", end: "", link: "", id: "" };
+
+  const contact = await db.contact.findFirst({
+    where: { position: "JuniorsTraining" },
+  });
+
   return {
     props: {
       messages: messages.default,
+      trainings,
+      holidays,
+      contact,
     },
+    revalidate: 604800,
   };
 }
 

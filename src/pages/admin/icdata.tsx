@@ -1,26 +1,12 @@
-import { ChevronDownIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
 import { type FormEvent, useEffect, useState } from "react";
 import { toast } from "sonner";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "~/lib/components/ui/breadcrumb";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "~/lib/components/ui/dropdown-menu";
 import { Toaster } from "~/lib/components/ui/sonner";
 import type { APIMessageResponse, PastTeamProps } from "~/lib/types";
-import { inter } from "../_app";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
+import AdminBreadcrumb from "~/lib/components/AdminBreadcrumb";
 
 const IcData = () => {
   const [teams, setTeams] = useState<PastTeamProps[]>([]);
@@ -76,42 +62,7 @@ const IcData = () => {
   if (status === "authenticated") {
     return (
       <Layout>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/admin">Admin</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1">
-                  IC Data
-                  <ChevronDownIcon />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  className={`font-sans ${inter.variable}`}
-                >
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/icdata">
-                      IC Data
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/players">
-                      Players
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/calendar">
-                      Calendar
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <AdminBreadcrumb currentPage="IC Data" />
         <div className="mt-6 flex flex-col items-center justify-center gap-2">
           <div className="container">
             <h2 className="text-xl">Upload Team Interclub Data (JSON file)</h2>

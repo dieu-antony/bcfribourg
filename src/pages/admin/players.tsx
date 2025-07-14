@@ -1,21 +1,12 @@
-import { ChevronDownIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Router from "next/router";
-import { type FormEvent, useEffect, useState } from "react";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "~/lib/components/ui/breadcrumb";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "~/lib/components/ui/dropdown-menu";
-import { inter } from "../_app";
+  type FormEvent,
+  useEffect,
+  useState,
+  useCallback,
+  type ChangeEvent,
+} from "react";
 import { getLeagueFromId } from "~/lib/utils/utils";
 import { toast } from "sonner";
 import { Toaster } from "~/lib/components/ui/sonner";
@@ -34,11 +25,23 @@ import {
 import { Button } from "~/lib/components/ui/button";
 import type { Player } from "@prisma/client";
 import Layout from "~/lib/components/Layout";
-import type { GetStaticPropsContext } from "next";
 import type { APIMessageResponse, PlayerByTeam } from "~/lib/types";
+import AdminBreadcrumb from "~/lib/components/AdminBreadcrumb";
+import type { GetStaticPropsContext } from "next/types";
+
+const leagues = [
+  { id: "clvzbbfot00001o6wxykabs64", label: "A" },
+  { id: "clvzbblao0000nrcwt4za7q9h", label: "B" },
+  { id: "clvzb9fvi0000132rf2m0p5mn", label: "1" },
+  { id: "clvzbaizc0000ji7z4hvz8bzd", label: "2" },
+  { id: "clvzbav2u0000xmtyuu85b6fu", label: "3" },
+  { id: "clvzbazur00009r4ruxq9hltm", label: "4" },
+  { id: "clvzbb65d00005qy3z10kl2no", label: "5" },
+];
 
 const Players = () => {
   const { status } = useSession();
+
   useEffect(() => {
     if (status === "unauthenticated") {
       void Router.replace("/login");
@@ -47,462 +50,542 @@ const Players = () => {
 
   const [icTeams, setIcTeams] = useState<ICDatabaseColumnsProps[]>([]);
   const [players, setPlayers] = useState<PlayerDatabaseColumnsProps[]>([]);
+  const [loading, setLoading] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [loading] = useState(false);
-  const [leagueId, setLeagueId] = useState("clvzbbfot00001o6wxykabs64");
-  const [teamName, setTeamName] = useState("Union Tafers-Fribourg 1");
-  const [playersF, setPlayersF] = useState("");
-  const [playersM, setPlayersM] = useState("");
-  const [url, setUrl] = useState("");
-  const [icTeamId, setIcTeamId] = useState("");
-  const [captain, setCaptain] = useState("");
-  const [singlePlayer, setSinglePlayer] = useState({
+
+  // New team form state
+  const [newTeam, setNewTeam] = useState({
+    name: "",
+    leagueId: leagues[0]!.id,
+    url: "",
+    photoUrl: "",
+  });
+
+  // Bulk players input state
+  const [bulkPlayers, setBulkPlayers] = useState({
+    teamId: "",
+    female: "",
+    male: "",
+    captain: "",
+  });
+
+  // Single player form state
+  const [singlePlayer, setSinglePlayer] = useState<Player>({
+    id: "",
+    firstName: "",
+    lastName: "",
+    teamId: "",
     gender: "M",
     captain: false,
-    teamId: "",
-  } as Player);
-  useEffect(() => {
-    async function getIcTeams() {
-      const response = await fetch("/api/icTeams");
-      const data = (await response.json()) as {
+  });
+
+  // Load IC teams
+  const fetchIcTeams = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/icTeams");
+      const data = (await res.json()) as {
         data: {
           id: string;
           name: string;
           leagueId: string;
           url: string;
+          photoUrl?: string;
         }[];
         status: string;
       };
       if (data.status === "success") {
         setIcTeams(
-          data.data.map(
-            (team: {
-              id: string;
-              name: string;
-              leagueId: string;
-              url: string;
-            }) => ({
-              id: team.id,
-              name: team.name,
-              url: team.url,
-              league: getLeagueFromId(team.leagueId),
-            }),
-          ),
+          data.data.map((team) => ({
+            id: team.id,
+            name: team.name,
+            url: team.url,
+            league: getLeagueFromId(team.leagueId),
+            photoUrl: team.photoUrl ?? "",
+          })),
         );
+      } else {
+        toast.error("Failed to load IC teams");
       }
+    } catch (e) {
+      toast.error("Error loading IC teams");
+    } finally {
+      setLoading(false);
     }
-    void getIcTeams();
-    async function getPlayers() {
-      try {
-        const response = await fetch("/api/players");
-        const data = (await response.json()) as {
-          status: string;
-          players: PlayerByTeam[];
-        };
-        if (data.status === "success") {
-          setPlayers(
-            data.players.flatMap((team: PlayerByTeam) =>
-              team.players.map(
-                (player: {
-                  id: string;
-                  firstName: string;
-                  lastName: string;
-                  teamId: string;
-                  captain: boolean;
-                  gender: string;
-                }) => ({
-                  id: player.id,
-                  firstName: player.firstName,
-                  lastName: player.lastName,
-                  team: team.name,
-                  captain: player.captain ? "Yes" : "No",
-                  gender: player.gender,
-                }),
-              ),
-            ),
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching players", error);
-      }
-    }
-    void getPlayers();
   }, []);
 
-  async function deleteAllPlayers() {
-    confirmDelete ? setConfirmDelete(false) : setConfirmDelete(true);
-    if (!confirmDelete) return;
-    const response = await fetch("/api/players/delete", {
-      method: "POST",
-      body: JSON.stringify(players),
-    });
-    const data = (await response.json()) as APIMessageResponse;
-    if (data.status === "success") {
-      toast.success(data.message);
+  // Load players grouped by team
+  const fetchPlayers = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/players");
+      const data = (await res.json()) as {
+        status: string;
+        players: PlayerByTeam[];
+      };
+      if (data.status === "success") {
+        setPlayers(
+          data.players.flatMap((team) =>
+            team.players.map((player) => ({
+              id: player.id,
+              firstName: player.firstName,
+              lastName: player.lastName,
+              team: team.name,
+              captain: player.captain ? "Yes" : "No",
+              gender: player.gender,
+            })),
+          ),
+        );
+      } else {
+        toast.error("Failed to load players");
+      }
+    } catch (e) {
+      toast.error("Error loading players");
+    } finally {
+      setLoading(false);
     }
-    if (data.status === "error") {
-      toast.error(data.message);
-    }
-  }
+  }, []);
 
-  async function createIcTeams(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const team = [
-      {
-        name: teamName,
-        leagueId: leagueId,
-        url: url,
-      },
-    ];
-
-    const response = await fetch("/api/icTeams/create", {
-      method: "POST",
-      body: JSON.stringify(team),
-    });
-    const data = (await response.json()) as APIMessageResponse;
-    if (data.status === "success") {
-      toast.success(data.message);
+  useEffect(() => {
+    if (status === "authenticated") {
+      void fetchIcTeams();
+      void fetchPlayers();
     }
-    if (data.status === "error") {
-      toast.error(data.message);
-    }
-  }
-  async function createSinglePlayer(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  }, [status, fetchIcTeams, fetchPlayers]);
 
-    const playerToCreate = [singlePlayer];
+  // Delete all players with confirmation
+  const deleteAllPlayers = async () => {
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      return;
+    }
 
-    const response = await fetch("/api/players/create", {
-      method: "POST",
-      body: JSON.stringify(playerToCreate),
-    });
-    const data = (await response.json()) as APIMessageResponse;
-    if (data.status === "success") {
-      toast.success(data.message);
+    setLoading(true);
+    try {
+      const response = await fetch("/api/players/delete", {
+        method: "POST",
+        body: JSON.stringify(players),
+      });
+      const data = (await response.json()) as APIMessageResponse;
+      if (data.status === "success") {
+        toast.success(data.message);
+        await fetchPlayers();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Error deleting players");
+    } finally {
+      setConfirmDelete(false);
+      setLoading(false);
     }
-    if (data.status === "error") {
-      toast.error(data.message);
+  };
+
+  // Create a new IC team
+  const handleCreateTeam = async (e: FormEvent) => {
+    e.preventDefault();
+    if (
+      !newTeam.name.trim() ||
+      !newTeam.url.trim() ||
+      !newTeam.photoUrl.trim()
+    ) {
+      toast.error("Please fill all required team fields");
+      return;
     }
-  }
-  async function createPlayers(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const playersFList = playersF.split(", ").map((player) => ({
-      firstName: player.split(" ")[0] ?? "",
-      lastName: player.slice((player.split(" ")[0]?.length ?? 0) + 1) ?? "",
-      gender: "F",
-      captain: captain === player ? true : false,
-      teamId: icTeamId,
+    setLoading(true);
+    try {
+      const response = await fetch("/api/icTeams/create", {
+        method: "POST",
+        body: JSON.stringify([newTeam]),
+      });
+      const data = (await response.json()) as APIMessageResponse;
+      if (data.status === "success") {
+        toast.success(data.message);
+        setNewTeam({
+          name: "",
+          leagueId: leagues[0]!.id,
+          url: "",
+          photoUrl: "",
+        });
+        await fetchIcTeams();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Error creating team");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Create players in bulk (female + male)
+  const handleCreatePlayersBulk = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!bulkPlayers.teamId) {
+      toast.error("Please select a team");
+      return;
+    }
+
+    const parsePlayers = (input: string, gender: "M" | "F") => {
+      return input
+        .split(",")
+        .map((p) => p.trim())
+        .filter(Boolean)
+        .map((fullName) => {
+          const parts = fullName.split(" ");
+          const firstName = parts.shift() ?? "";
+          const lastName = parts.join(" ") ?? "";
+          return {
+            firstName,
+            lastName,
+            gender,
+            captain: bulkPlayers.captain.trim() === fullName,
+            teamId: bulkPlayers.teamId,
+          };
+        });
+    };
+
+    const femalePlayers = parsePlayers(bulkPlayers.female, "F");
+    const malePlayers = parsePlayers(bulkPlayers.male, "M");
+
+    const allPlayers = [...femalePlayers, ...malePlayers];
+
+    if (allPlayers.length === 0) {
+      toast.error("Please enter at least one player");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("/api/players/create", {
+        method: "POST",
+        body: JSON.stringify(allPlayers),
+      });
+      const data = (await response.json()) as APIMessageResponse;
+      if (data.status === "success") {
+        toast.success(data.message);
+        setBulkPlayers({ teamId: "", female: "", male: "", captain: "" });
+        await fetchPlayers();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Error creating players");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Create a single player
+  const handleCreateSinglePlayer = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (
+      !singlePlayer.firstName.trim() ||
+      !singlePlayer.lastName.trim() ||
+      !singlePlayer.teamId.trim()
+    ) {
+      toast.error("Please fill all required player fields");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("/api/players/create", {
+        method: "POST",
+        body: JSON.stringify([singlePlayer]),
+      });
+      const data = (await response.json()) as APIMessageResponse;
+      if (data.status === "success") {
+        toast.success(data.message);
+        setSinglePlayer({
+          id: "",
+          firstName: "",
+          lastName: "",
+          teamId: "",
+          gender: "M",
+          captain: false,
+        });
+        await fetchPlayers();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Error creating player");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleNewTeamChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setNewTeam((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
     }));
-    const playersMList = playersM.split(", ").map((player) => ({
-      firstName: player.split(" ")[0] ?? "",
-      lastName: player.slice((player.split(" ")[0]?.length ?? 0) + 1) ?? "",
-      gender: "M",
-      captain: captain === player ? true : false,
-      teamId: icTeamId,
+  };
+
+  const handleBulkPlayersChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
+    setBulkPlayers((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
     }));
+  };
 
-    const playersList = playersFList.concat(playersMList);
+  const handleSinglePlayerChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    const { name, value } = e.target;
 
-    const response = await fetch("/api/players/create", {
-      method: "POST",
-      body: JSON.stringify(playersList),
-    });
-    const data = (await response.json()) as APIMessageResponse;
-    if (data.status === "success") {
-      toast.success(data.message);
+    if (name === "captain") {
+      setSinglePlayer((prev) => ({
+        ...prev,
+        captain: value === "true",
+      }));
+    } else {
+      setSinglePlayer((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
     }
-    if (data.status === "error") {
-      toast.error(data.message);
-    }
+  };
+
+  const teamOptions = icTeams.map((team) => (
+    <option key={team.id} value={team.id}>
+      {team.name}
+    </option>
+  ));
+
+  if (status !== "authenticated") {
+    return null;
   }
 
-  const teamOption = icTeams.map((team) => {
-    return (
-      <option key={team.id} value={team.id}>
-        {team.name}
-      </option>
-    );
-  });
-  if (status === "authenticated") {
-    return (
-      <Layout>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/admin">Admin</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1">
-                  Players <ChevronDownIcon />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  className={`font-sans ${inter.variable}`}
-                >
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/icdata">
-                      IC Data
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/players">
-                      Players
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/calendar">
-                      Calendar
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        <div className="mt-6 flex flex-col items-center justify-center gap-2">
-          <div>
-            <h2 className="text-xl">Players and IC teams</h2>
-            <div className="grid grid-cols-2">
-              <div>
-                <h3>IC Teams</h3>
-                <form className="flex flex-col" onSubmit={createIcTeams}>
-                  <label htmlFor="teamName">Team Name</label>
-                  <select
-                    name="teamName"
-                    className="form-select"
-                    onChange={(e) => setTeamName(e.target.value)}
-                  >
-                    <option value="Union Tafers-Fribourg 1">
-                      Union Tafers-Fribourg 1
-                    </option>
-                    <option value="Union Fribourg-Tafers 2">
-                      Union Fribourg-Tafers 2
-                    </option>
-                    <option value="Union Fribourg-Tafers 3">
-                      Union Fribourg-Tafers 3
-                    </option>
-                    <option value="Union Fribourg-Tafers 4">
-                      Union Fribourg-Tafers 4
-                    </option>
-                    <option value="Union Fribourg-Tafers 5">
-                      Union Fribourg-Tafers 5
-                    </option>
-                    <option value="Union Fribourg-Tafers 6">
-                      Union Fribourg-Tafers 6
-                    </option>
-                    <option value="Union Fribourg-Tafers 7">
-                      Union Fribourg-Tafers 7
-                    </option>
-                    <option value="Union Fribourg-Tafers 8">
-                      Union Fribourg-Tafers 8
-                    </option>
-                    <option value="Union Fribourg-Tafers 9">
-                      Union Fribourg-Tafers 9
-                    </option>
-                  </select>
-                  <label htmlFor="league">League</label>
-                  <select
-                    name="league"
-                    className="form-select"
-                    onChange={(e) => setLeagueId(e.target.value)}
-                  >
-                    <option value="clvzbbfot00001o6wxykabs64">A</option>
-                    <option value="clvzbblao0000nrcwt4za7q9h">B</option>
-                    <option value="clvzb9fvi0000132rf2m0p5mn">1</option>
-                    <option value="clvzbaizc0000ji7z4hvz8bzd">2</option>
-                    <option value="clvzbav2u0000xmtyuu85b6fu">3</option>
-                    <option value="clvzbazur00009r4ruxq9hltm">4</option>
-                    <option value="clvzbb65d00005qy3z10kl2no">5</option>
-                  </select>
-                  <label htmlFor="url">URL</label>
-                  <input
-                    name="url"
-                    type="url"
-                    className="form-input"
-                    onChange={(e) => setUrl(`${e.target.value}`)}
-                    required
-                  />
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className="m-1 mt-2 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
-                    disabled={loading}
-                  />
-                </form>
-              </div>
-              <div>
-                <h3>Players</h3>
-                <form className="flex flex-col" onSubmit={createPlayers}>
-                  <select
-                    className="form-select"
-                    onChange={(e) => setIcTeamId(e.target.value)}
-                  >
-                    <option>Choose a Team</option>
-                    {teamOption}
-                  </select>
-                  <label htmlFor="women">Women</label>
-                  <textarea
-                    name="women"
-                    className="form-textarea"
-                    placeholder="Prénom Nom, Prénom2 Nom 2, ..."
-                    onChange={(e) => setPlayersF(e.target.value)}
-                    required
-                  ></textarea>
-                  <label htmlFor="men">Men</label>
-                  <textarea
-                    name="men"
-                    className="form-textarea"
-                    placeholder="Prénom Nom, Prénom2 Nom 2, ..."
-                    onChange={(e) => setPlayersM(e.target.value)}
-                    required
-                  ></textarea>
-                  <label htmlFor="captain">Capitain</label>
-                  <input
-                    className="form-input"
-                    name="captain"
-                    onChange={(e) => setCaptain(e.target.value)}
-                    placeholder="Prénom Nom"
-                  />
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className="m-1 mt-2 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
-                    disabled={loading}
-                  />
-                </form>
-              </div>
-              <div>
-                <h3>Add one Players</h3>
-                <form className="flex flex-col" onSubmit={createSinglePlayer}>
-                  <select
-                    className="form-select"
-                    onChange={(e) =>
-                      setSinglePlayer({
-                        ...singlePlayer,
-                        teamId: e.target.value,
-                      })
-                    }
-                  >
-                    <option>Choose a Team</option>
-                    {teamOption}
-                  </select>
-                  <label htmlFor="firstName">First Name</label>
-                  <input
-                    name="firstName"
-                    className="form-input"
-                    placeholder="Prénom"
-                    onChange={(e) =>
-                      setSinglePlayer({
-                        ...singlePlayer,
-                        firstName: e.target.value,
-                      })
-                    }
-                  ></input>
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    name="lastName"
-                    className="form-input"
-                    placeholder="Nom"
-                    onChange={(e) =>
-                      setSinglePlayer({
-                        ...singlePlayer,
-                        lastName: e.target.value,
-                      })
-                    }
-                  ></input>
-                  <label htmlFor="gender">Gender</label>
-                  <select
-                    className="form-select"
-                    name="gender"
-                    onChange={(e) =>
-                      setSinglePlayer({
-                        ...singlePlayer,
-                        gender: e.target.value,
-                      })
-                    }
-                  >
-                    <option>M</option>
-                    <option>F</option>
-                  </select>
-                  <label htmlFor="captain">Capitain?</label>
-                  <select
-                    className="form-select"
-                    name="captain"
-                    onChange={(e) =>
-                      setSinglePlayer({
-                        ...singlePlayer,
-                        captain: e.target.value === "1" ? true : false,
-                      })
-                    }
-                  >
-                    <option value={0}>No</option>
-                    <option value={1}>Yes</option>
-                  </select>
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className="m-1 mt-2 rounded-sm bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:opacity-50 disabled:hover:cursor-not-allowed"
-                    disabled={loading}
-                  />
-                </form>
-              </div>
-            </div>
-          </div>
-          <Tabs defaultValue="teams" className="w-[1000px] pt-10">
-            <TabsList className="gap-4">
-              <TabsTrigger
-                value="teams"
-                className="text-gray rounded-sm border-2 bg-gray-50 p-2 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white"
+  return (
+    <Layout>
+      <AdminBreadcrumb currentPage="Players" />
+      <div className="mx-auto max-w-7xl p-6">
+        <h1 className="mb-6 text-2xl font-bold">Manage Players and IC Teams</h1>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {/* Create Team */}
+          <section className="rounded-lg bg-white p-6 shadow">
+            <h2 className="mb-4 text-xl font-semibold">Create IC Team</h2>
+            <form
+              onSubmit={handleCreateTeam}
+              className="flex flex-col space-y-3"
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Team Name"
+                value={newTeam.name}
+                onChange={handleNewTeamChange}
+                className="form-input"
+                required
+                disabled={loading}
+              />
+              <select
+                name="leagueId"
+                value={newTeam.leagueId}
+                onChange={handleNewTeamChange}
+                className="form-select"
+                disabled={loading}
               >
-                IC Teams
-              </TabsTrigger>
-              <TabsTrigger
-                value="players"
-                className="text-gray rounded-sm border-2 bg-gray-50 p-2 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white"
+                {leagues.map(({ id, label }) => (
+                  <option key={id} value={id}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="url"
+                name="url"
+                placeholder="Team Website URL"
+                value={newTeam.url}
+                onChange={handleNewTeamChange}
+                className="form-input"
+                required
+                disabled={loading}
+              />
+              <input
+                type="url"
+                name="photoUrl"
+                placeholder="Team Photo URL"
+                value={newTeam.photoUrl}
+                onChange={handleNewTeamChange}
+                className="form-input"
+                required
+                disabled={loading}
+              />
+              <Button type="submit" disabled={loading}>
+                Create Team
+              </Button>
+            </form>
+          </section>
+
+          {/* Bulk Players */}
+          <section className="rounded-lg bg-white p-6 shadow">
+            <h2 className="mb-4 text-xl font-semibold">Add Multiple Players</h2>
+            <form
+              onSubmit={handleCreatePlayersBulk}
+              className="flex flex-col space-y-3"
+            >
+              <select
+                name="teamId"
+                value={bulkPlayers.teamId}
+                onChange={handleBulkPlayersChange}
+                className="form-select"
+                required
+                disabled={loading}
               >
-                Players
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="teams">
-              <div className="container mx-auto pb-10">
-                <ICDatabaseTable columns={ICDatabaseColumns} data={icTeams} />
-              </div>
-            </TabsContent>
-            <TabsContent value="players">
-              <div className="flex flex-row gap-2">
-                <Button
-                  onClick={deleteAllPlayers}
-                  className="bg-red-500 hover:bg-red-600"
-                >
-                  {confirmDelete
-                    ? "Yes, delete all Players"
-                    : "Delete All Players"}
-                </Button>
-                {confirmDelete && (
-                  <Button
-                    onClick={() => setConfirmDelete(false)}
-                    className="bg-green-500 hover:bg-green-600"
-                  >
-                    Nevermind
-                  </Button>
-                )}
-              </div>
-              <div className="container mx-auto pb-10">
-                <PlayerDatabaseTable
-                  columns={PlayerDatabaseColumns}
-                  data={players}
-                />
-              </div>
-            </TabsContent>
-          </Tabs>
-          <Toaster richColors />
+                <option value="">Select Team</option>
+                {teamOptions}
+              </select>
+              <textarea
+                name="female"
+                placeholder="Female Players (FirstName LastName, separated by commas)"
+                value={bulkPlayers.female}
+                onChange={handleBulkPlayersChange}
+                className="form-textarea"
+                disabled={loading}
+              />
+              <textarea
+                name="male"
+                placeholder="Male Players (FirstName LastName, separated by commas)"
+                value={bulkPlayers.male}
+                onChange={handleBulkPlayersChange}
+                className="form-textarea"
+                disabled={loading}
+              />
+              <input
+                type="text"
+                name="captain"
+                placeholder="Captain full name (exactly as in the list)"
+                value={bulkPlayers.captain}
+                onChange={handleBulkPlayersChange}
+                className="form-input"
+                disabled={loading}
+              />
+              <Button type="submit" disabled={loading}>
+                Add Players
+              </Button>
+            </form>
+          </section>
+
+          {/* Single Player */}
+          <section className="rounded-lg bg-white p-6 shadow">
+            <h2 className="mb-4 text-xl font-semibold">Add Single Player</h2>
+            <form
+              onSubmit={handleCreateSinglePlayer}
+              className="flex flex-col space-y-3"
+            >
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={singlePlayer.firstName}
+                onChange={handleSinglePlayerChange}
+                className="form-input"
+                required
+                disabled={loading}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={singlePlayer.lastName}
+                onChange={handleSinglePlayerChange}
+                className="form-input"
+                required
+                disabled={loading}
+              />
+              <select
+                name="teamId"
+                value={singlePlayer.teamId}
+                onChange={handleSinglePlayerChange}
+                className="form-select"
+                required
+                disabled={loading}
+              >
+                <option value="">Select Team</option>
+                {teamOptions}
+              </select>
+              <select
+                name="gender"
+                value={singlePlayer.gender}
+                onChange={handleSinglePlayerChange}
+                className="form-select"
+                disabled={loading}
+              >
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+              <select
+                name="captain"
+                value={singlePlayer.captain ? "true" : "false"}
+                onChange={handleSinglePlayerChange}
+                className="form-select"
+                disabled={loading}
+              >
+                <option value="false">Not Captain</option>
+                <option value="true">Captain</option>
+              </select>
+              <Button type="submit" disabled={loading}>
+                Add Player
+              </Button>
+            </form>
+          </section>
         </div>
-      </Layout>
-    );
-  }
+
+        {/* Delete All Players Button */}
+        <div className="mt-8">
+          <Button
+            variant={confirmDelete ? "destructive" : "default"}
+            onClick={deleteAllPlayers}
+            disabled={loading}
+          >
+            {confirmDelete
+              ? "Confirm Delete All Players"
+              : "Delete All Players"}
+          </Button>
+        </div>
+
+        {/* Data Tables */}
+        <Tabs defaultValue="teams" className="w-[1000px] pt-10">
+          <TabsList className="gap-4">
+            <TabsTrigger
+              value="teams"
+              className="text-gray rounded-sm border-2 bg-gray-50 p-2 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white"
+            >
+              IC Teams
+            </TabsTrigger>
+            <TabsTrigger
+              value="players"
+              className="text-gray rounded-sm border-2 bg-gray-50 p-2 data-[state=active]:border-picton-blue-700 data-[state=inactive]:border-gray-200 data-[state=active]:bg-picton-blue-500 data-[state=active]:text-white"
+            >
+              Players
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="teams" className="pt-4">
+            <ICDatabaseTable columns={ICDatabaseColumns} data={icTeams} />
+          </TabsContent>
+          <TabsContent value="players" className="pt-4">
+            <PlayerDatabaseTable
+              columns={PlayerDatabaseColumns}
+              data={players}
+            />
+          </TabsContent>
+        </Tabs>
+
+        <Toaster />
+      </div>
+    </Layout>
+  );
 };
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
@@ -515,5 +598,4 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     },
   };
 }
-
 export default Players;

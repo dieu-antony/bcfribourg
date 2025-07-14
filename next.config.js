@@ -10,7 +10,10 @@ const config = {
     locales: ['fr-CH', 'de-CH', 'en-US'],
     defaultLocale: 'fr-CH',
   },
+
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 };
 
 export default config;
-

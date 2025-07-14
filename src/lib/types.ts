@@ -86,6 +86,7 @@ export type PlayerByTeam = {
   league: {
     name: string;
   };
+  photoUrl: string;
 };
 export type CalendarResponseFix = Record<string, CalendarComponent>;
 
@@ -136,4 +137,48 @@ export type PastTeamProps = {
 export type APIMessageResponse = {
   status: "success" | "error" | "loading";
   message: string;
+};
+
+// Database types
+export type TrainingEntry = {
+  id: string;
+  day: string;
+  time: string;
+  target: string;
+  trainer: string;
+};
+
+export type DurationEntry = {
+  id: string;
+  link: string;
+  start: string;
+  end: string;
+};
+
+export type Contact = {
+  name: string;
+  phone: string;
+  position: string;
+}
+
+export type Role = 
+"president" |
+"treasurer" |
+"vicePresident" |
+"events" |
+"secretary" |
+"interclubs" |
+"sup" |
+"junior" |
+"media";
+
+export type CommitteeCardProps = {
+  info: {
+    imgRef: string;
+    role: string;
+    role2?: string;
+    name: string;
+    email: string;
+    phone: string;
+  };
 };

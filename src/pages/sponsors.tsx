@@ -4,104 +4,89 @@ import Image from "next/image";
 import Layout from "~/lib/components/Layout";
 import Sponsor from "~/lib/components/Sponsor";
 import { Title } from "~/lib/components/Title";
+import { db } from "~/server/db";
+import type { Sponsor as SponsorType } from "@prisma/client"; // adjust this if the type is elsewhere
 
-export default function Sponsors() {
+type Props = {
+  sponsors: SponsorType[];
+};
+
+export default function SponsorsPage({ sponsors }: Props) {
   const t = useTranslations("Sponsors");
+
+  const goldSponsors = sponsors.filter((s) => s.tier === 1);
+  const silverSponsors = sponsors.filter((s) => s.tier === 2);
+  const bronzeSponsors = sponsors.filter((s) => s.tier === 3);
+
+  const renderSponsorSection = (
+    tierLabel: string,
+    iconPath: string,
+    sponsors: SponsorType[],
+  ) => {
+    if (sponsors.length === 0) return null;
+    return (
+      <section className="border border-gray-200 bg-white p-8 text-center">
+        <div className="flex flex-row items-center justify-center gap-4">
+          <Image
+            src={iconPath}
+            alt={`${tierLabel} sponsor`}
+            width={64}
+            height={64}
+            className="mb-4"
+          />
+          <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
+            {tierLabel}
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {sponsors.map((sponsor) => (
+            <Sponsor
+              key={sponsor.id}
+              name={sponsor.name}
+              imgUrl={sponsor.logoUrl}
+              link={sponsor.link}
+              cn="text-center col-span-3"
+            />
+          ))}
+        </div>
+      </section>
+    );
+  };
 
   return (
     <Layout>
       <div className="flex w-full flex-col items-center">
-        <Title>
-          {t("title")}
-        </Title>
+        <Title>{t("title")}</Title>
 
-        <div className="mx-5 mb-8 w-full max-w-[1100px] space-y-12">
-           {/* Gold */}
-           <section className="border border-gray-200 hidden bg-white p-8 text-center">
-            <div className="flex flex-row items-center justify-center gap-4">
-              <Image
-                src="/assets/sponsors/shuttles/gold.png"
-                alt="Gold sponsor"
-                width={64}
-                height={64}
-                className="mb-4"
-              />
-              <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
-                {t("gold")}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
-              {/* <Sponsor
-                name=""
-                file="png"
-                link=""
-                cn="text-center col-span-3"
-              /> */}
-            </div>
-          </section>
+        <div className="mx-5 my-8 w-full max-w-[1100px] space-y-12">
+          {renderSponsorSection(
+            t("gold"),
+            "/assets/sponsors/shuttles/gold.png",
+            goldSponsors,
+          )}
+          {renderSponsorSection(
+            t("silver"),
+            "/assets/sponsors/shuttles/silver.png",
+            silverSponsors,
+          )}
+          {renderSponsorSection(
+            t("bronze"),
+            "/assets/sponsors/shuttles/bronze.png",
+            bronzeSponsors,
+          )}
 
-
-          {/* SILVER */}
-          <section className="border border-gray-200 bg-white p-8 text-center">
-            <div className="flex flex-row items-center justify-center gap-4">
-              <Image
-                src="/assets/sponsors/shuttles/silver.png"
-                alt="Silver sponsor"
-                width={64}
-                height={64}
-                className="mb-4"
-              />
-              <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
-                {t("silver")}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
-              <Sponsor
-                name="SINEF"
-                file="svg"
-                link="https://www.sinef.ch/"
-                cn="text-center col-span-3"
-              />
-            </div>
-          </section>
-
-          {/* BRONZE */}
-          <section className="border border-gray-200 bg-white p-8 text-center">
-            <div className="flex flex-row items-center justify-center gap-4">
-              <Image
-                src="/assets/sponsors/shuttles/bronze.png"
-                alt="Bronze sponsor"
-                width={64}
-                height={64}
-                className="mb-4"
-              />
-              <h2 className="mb-6 text-xl font-bold text-picton-blue-500">
-                {t("bronze")}
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 ">
-              <Sponsor
-                name="Frimousse"
-                file="png"
-                link="https://www.fri-mousse.ch/wp/"
-                cn="text-center col-span-3"
-              />
-              
-            </div>
-          </section>
-
-          {/* Sponsor packages */}
+          {/* Sponsor Packages Section */}
           <section className="mt-8 flex flex-col gap-8 bg-white p-8 text-center shadow-md">
             <h2 className="text-2xl font-bold">{t("subtitle")}</h2>
             <p className="text-lg">{t("desc")}</p>
 
             <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-              {/* Bronze */}
+              {/* Bronze Package */}
               <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
                   <Image
                     src="/assets/sponsors/shuttles/bronze.png"
-                    alt="Bronze sponsors"
+                    alt="Bronze"
                     width={50}
                     height={50}
                     className="mr-2 inline-block"
@@ -115,12 +100,12 @@ export default function Sponsors() {
                 </ul>
               </div>
 
-              {/* Silver */}
+              {/* Silver Package */}
               <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
                   <Image
                     src="/assets/sponsors/shuttles/silver.png"
-                    alt="Silver sponsors"
+                    alt="Silver"
                     width={50}
                     height={50}
                     className="mr-2 inline-block"
@@ -134,12 +119,12 @@ export default function Sponsors() {
                 </ul>
               </div>
 
-              {/* Gold */}
+              {/* Gold Package */}
               <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
                   <Image
                     src="/assets/sponsors/shuttles/gold.png"
-                    alt="Gold sponsors"
+                    alt="Gold"
                     width={50}
                     height={50}
                     className="mr-2 inline-block"
@@ -165,9 +150,15 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const sponsors = await db.sponsor.findMany({
+    orderBy: { tier: "asc" },
+  });
+
   return {
     props: {
       messages: messages.default,
+      sponsors,
     },
+    revalidate: 604800,
   };
 }

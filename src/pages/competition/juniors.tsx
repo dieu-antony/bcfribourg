@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
@@ -10,24 +11,21 @@ import {
   TableHeader,
   TableRow,
 } from "~/lib/components/ui/table";
+import { db } from "~/server/db";
 
-const Juniors = () => {
+type juniorCompDataType = {
+  id: string;
+  type: string;
+  location: string;
+  date: string;
+};
+
+const Juniors = ({
+  juniorCompData,
+}: {
+  juniorCompData: juniorCompDataType[];
+}) => {
   const t = useTranslations("CompJuniors");
-  const circuitJunior = [
-    { lieu: "Payerne", date: "30.11.2024" },
-    { lieu: "Kerzers", date: "18.01.2025" },
-    { lieu: "Gurmels", date: "15.02.2025" },
-    { lieu: "Bulle", date: "22.02.2025" },
-    { lieu: "Romont", date: "05.04.2025" },
-    { lieu: "Masters: Villars-sur-Glâne", date: "18.05.2025" },
-  ];
-  const coupeAvenir = [
-    { lieu: "CO de Pérolles, Fribourg", date: "23.11.2024" },
-    { lieu: "CO de Pérolles, Fribourg", date: "14.12.2024" },
-    { lieu: "CO de Pérolles, Fribourg", date: "11.01.2025" },
-    { lieu: "CO de Pérolles, Fribourg", date: "08.02.2025" },
-    { lieu: "CO de Pérolles, Fribourg", date: "29.03.2025" },
-  ];
   return (
     <Layout>
       <Title>{t("title")}</Title>
@@ -46,12 +44,14 @@ const Juniors = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {circuitJunior.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{item.lieu}</TableCell>
-                    <TableCell>{item.date}</TableCell>
-                  </TableRow>
-                ))}
+                {juniorCompData
+                  .filter((item) => item.type === "CJ")
+                  .map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.location}</TableCell>
+                      <TableCell>{format(new Date(item.date),"dd.MM.yyyy")}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </div>
@@ -70,12 +70,14 @@ const Juniors = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {coupeAvenir.map((item, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{item.lieu}</TableCell>
-                    <TableCell>{item.date}</TableCell>
-                  </TableRow>
-                ))}
+                {juniorCompData
+                  .filter((item) => item.type === "Avenir")
+                  .map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.location}</TableCell>
+                      <TableCell>{format(new Date(item.date),"dd.MM.yyyy")}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </div>
@@ -89,10 +91,17 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const juniorCompData = (await db.juniorComp.findMany()).map((comp) => ({
+    ...comp,
+    date: comp.date.toISOString(),
+  }));
+
   return {
     props: {
       messages: messages.default,
+      juniorCompData,
     },
+    revalidate: 604800,
   };
 }
 export default Juniors;

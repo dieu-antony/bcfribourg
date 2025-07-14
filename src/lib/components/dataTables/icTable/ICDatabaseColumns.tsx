@@ -12,12 +12,14 @@ import {
   DropdownMenuTrigger,
 } from "~/lib/components/ui/dropdown-menu";
 import type { APIMessageResponse } from "~/lib/types";
+import Image from "next/image";
 
 export type ICDatabaseColumnsProps = {
   id: string;
   league: string;
   name: string;
   url: string;
+  photoUrl: string;
 };
 
 export const ICDatabaseColumns: ColumnDef<ICDatabaseColumnsProps>[] = [
@@ -58,24 +60,49 @@ export const ICDatabaseColumns: ColumnDef<ICDatabaseColumnsProps>[] = [
     header: "URL",
   },
   {
+    accessorKey: "photoUrl",
+    header: "Photo URL",
+    cell: ({ row }) => {
+      const photoUrl = row.original.photoUrl;
+      return (
+        <Image
+          src={photoUrl}
+          alt="Team Photo"
+          width={50}
+          height={50}
+          className="rounded"
+        />
+      );
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const original = row.original;
       async function deleteTeam() {
         const teams = [original];
 
+        if (teams.length === 0) {
+          toast.error("No teams selected to delete");
+          return;
+        }
+
         const response = await fetch("/api/icTeams/delete", {
-          method: "POST",
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(teams),
         });
-        const data = await response.json() as APIMessageResponse;
+
+        const data = (await response.json()) as APIMessageResponse;
         if (data.status === "success") {
           toast.success(data.message);
-        }
-        if (data.status === "error") {
+        } else {
           toast.error(data.message);
         }
       }
+
       return (
         <>
           <DropdownMenu>

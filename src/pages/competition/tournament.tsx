@@ -5,8 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "~/lib/components/Layout";
 import TournamentImg from "../../../public/assets/tournament.webp";
+import { db } from "~/server/db";
 
-const Tournament = () => {
+type Contact = {
+  name: string;
+  phone: string;
+};
+
+const Tournament = ({ contact }: { contact: Contact }) => {
   const t = useTranslations("Tournament");
   return (
     <Layout>
@@ -35,7 +41,7 @@ const Tournament = () => {
             </div>
             <span>{t("desc2")}</span>
 
-            <span className="self-center font-semibold">Antony Dieu</span>
+            <span className="self-center font-semibold">{contact.name}</span>
           </div>
           <div className="mt-2 grid max-w-[300px] grid-cols-2 place-items-center justify-center self-center">
             <Link
@@ -48,7 +54,7 @@ const Tournament = () => {
             <Link className="hover:text-picton-blue-500" href="/club/contact">
               Email
             </Link>
-            <span>078 692 53 87</span>
+            <span>{contact.phone}</span>
           </div>
         </div>
       </div>
@@ -60,10 +66,16 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const contact = await db.contact.findFirst({
+    where: { position: "Tournament" },
+  });
+
   return {
     props: {
       messages: messages.default,
+      contact,
     },
+    revalidate: 604800,
   };
 }
 

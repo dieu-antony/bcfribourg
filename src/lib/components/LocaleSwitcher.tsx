@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Globe } from "lucide-react";
 import React, { useState, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const languageNames: Record<string, string> = {
   "fr-CH": "Français",
@@ -55,34 +56,39 @@ const LocaleSwitcher = () => {
       >
         <>
           <Globe size={20} className="mr-2" />
-          <span className="hidden text-lg sm:inline">
-            {language[locale!]}
-          </span>
+          <span className="hidden text-lg sm:inline">{language[locale!]}</span>
         </>
       </button>
 
-      {isOpen && (
-        <div
-          className={`absolute z-50 mt-2 flex min-w-[4rem] max-w-[12rem] translate-x-[0]
-            translate-y-[25%] flex-col bg-white px-2 py-1 text-sm shadow-md
-            lg:-translate-x-1/4 lg:translate-y-[75%]
-          `}
-        >
-          {locales?.map((loc) => (
-            <Link
-              key={loc}
-              href={asPath}
-              locale={loc}
-              className={`p-1 hover:text-picton-blue-500 ${
-                loc === locale ? "font-bold" : ""
-              }`}
-              onClick={() => setIsOpen(false)}
-            >
-              {languageNames[loc] ?? loc.toUpperCase()}
-            </Link>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            key="locale-dropdown"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={`fixed z-50 mt-12 lg:mt-2 flex min-w-[4rem] max-w-[12rem] translate-x-[0]
+        -translate-y-[10%] flex-col overflow-hidden bg-white px-2 py-1 text-sm shadow-md
+        lg:-translate-x-1/4 lg:translate-y-[75%]
+      `}
+          >
+            {locales?.map((loc) => (
+              <Link
+                key={loc}
+                href={asPath}
+                locale={loc}
+                className={`p-1 text-black hover:text-picton-blue-500 ${
+                  loc === locale ? "font-bold" : ""
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {languageNames[loc] ?? loc.toUpperCase()}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

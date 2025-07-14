@@ -8,21 +8,6 @@ import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
 import { type APIMessageResponse, type CalendarEventWithoutID, sync } from "~/lib/types";
 import { findLonLat, parseCalendar } from "~/lib/utils/parseCalender";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "~/lib/components/ui/breadcrumb";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "~/lib/components/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
-import { inter } from "../_app";
 import crypto from "crypto";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
@@ -30,6 +15,7 @@ import {
   EventDatabaseColumns,
   type DatabaseColumnsProps,
 } from "~/lib/components/dataTables/eventTable/EventDatabaseColumns";
+import AdminBreadcrumb from "~/lib/components/AdminBreadcrumb";
 
 type EventApiResponse = {
   status: "success" | "loading" | "error";
@@ -191,42 +177,7 @@ const Calendar = () => {
   if (status === "authenticated") {
     return (
       <Layout>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/admin">Admin</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-1">
-                  Calendar
-                  <ChevronDownIcon />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="start"
-                  className={`font-sans ${inter.variable}`}
-                >
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/icdata">
-                      IC Data
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/players">
-                      Players
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <BreadcrumbLink href="/admin/calendar">
-                      Calendar
-                    </BreadcrumbLink>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <AdminBreadcrumb currentPage="Calendar" />
         <div className="mt-6 flex flex-col items-center justify-center gap-2">
           <div className="container">
             <h2 className="text-xl">

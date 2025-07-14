@@ -30,6 +30,18 @@ const Admin = () => {
           <Button onClick={() => Router.push("/admin/calendar")}>
             Calendar
           </Button>
+          <Button onClick={() => Router.push("/admin/trainings")}>
+            Trainings
+          </Button>
+          <Button onClick={() => Router.push("/admin/junior-competitions")}>
+            Junior Competition
+          </Button>
+          <Button onClick={() => Router.push("/admin/contacts")}>
+            Contacts
+          </Button>
+          <Button onClick={() => Router.push("/admin/committee")}>Committee</Button>
+          <Button onClick={() => Router.push("/admin/history")}>History</Button>
+          <Button onClick={() => Router.push("/admin/sponsors")}>Sponsors</Button>
         </div>
       </Layout>
     );

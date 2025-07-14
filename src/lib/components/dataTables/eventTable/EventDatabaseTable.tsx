@@ -12,7 +12,7 @@ import type {
   ColumnFiltersState,
 } from "@tanstack/react-table";
 import { Button } from "~/lib/components/ui/button";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
