@@ -207,7 +207,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: messages.default,
       teams,
     },
-    revalidate: 604800,
+    revalidate: 86400,
   };
 }
 
