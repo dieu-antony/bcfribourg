@@ -14,6 +14,7 @@
     "links": "Links",
     "court": "Halle",
     "calendar": "Kalender",
+    "gallery": "Galerie",
     "sponsors": "Sponsoren",
     "member": "Mitglied werden"
   },
@@ -32,28 +33,20 @@
   },
   "Training": {
     "Adults": {
+      "1Monday": "Montag",
+      "2Tuesday": "Dienstag",
+      "3Wednesday": "Mittwoch",
+      "4Thursday": "Donnerstag",
+      "5Friday": "Freitag",
+      "6Saturday": "Samstag",
+      "7Sunday": "Sonntag",
+      "LowerLeagues": "4. Liga und nicht Lizenzierte",
+      "UpperLeagues": "LNB, 1. und 2. Ligen",
+      "Licensed": "LNB, 1., 2. und 4. Ligen",
+      "All": "Lizenzierte und nicht Lizenzierte",
+      "FreePlay": "Freies Spiel",
       "title": "Erwachsenentrainings",
       "desc": "<p>Der BC Fribourg bietet mehrere zweistündige Trainingseinheiten pro Woche in der <a>Sporthalle der DOSF an</a>. Unsere Sessions stehen Spielern aller Niveaus offen – von Anfängern bis zu erfahrenen Spielern – in einer freundlichen und dynamischen Atmosphäre.</p><p>Ob Sie Badminton entdecken, Ihre Technik verbessern oder einfach nur einen sportlichen Moment teilen möchten, unser Training ist für jeden geeignet. Schließen Sie sich uns an und machen Sie Fortschritte in Ihrem eigenen Tempo!</p>",
-      "monday18": {
-        "title": "Montag",
-        "description": "4. Liga und nicht Lizenzierte",
-        "trainer": "Antony Dieu"
-      },
-      "monday20": {
-        "title": "Montag",
-        "description": "LNB, 1., 2. und 4. Ligen",
-        "trainer": "Manuel Helfer"
-      },
-      "wednesday20": {
-        "title": "Mittwoch",
-        "description": "LNB, 1. und 2. Ligen",
-        "trainer": "Anna Larchenko Fischer"
-      },
-      "thursday19": {
-        "title": "Donnerstag",
-        "description": "Lizenzierte und nicht Lizenzierte",
-        "trainer": "Anna Larchenko Fischer"
-      },
       "holidays": {
         "title": "Ferien",
         "desc": "Die Trainings finden in den Schulferien, an Feiertagen sowie an den Vorabenden von Feiertagen nicht statt.",
@@ -66,6 +59,16 @@
       }
     },
     "Juniors": {
+      "1Monday": "Montag",
+      "2Tuesday": "Dienstag",
+      "3Wednesday": "Mittwoch",
+      "4Thursday": "Donnerstag",
+      "5Friday": "Freitag",
+      "6Saturday": "Samstag",
+      "7Sunday": "Sonntag",
+      "JuniorsOlder": "14-18 Jahre",
+      "JuniorsYounger": "Bis 14 Jahre",
+      "JuniorsAll": "Bis 18 Jahre",
       "title": "Juniorentraining",
       "desc": "<p>Der BC Fribourg bietet mehrere Badmintontrainings für Jugendliche in der <a>Sporthalle der DOSF</a> an. Unsere Trainings sind für alle offen – von Anfänger:innen bis zu fortgeschrittenen Spieler:innen – und werden von qualifizierten Trainer:innen geleitet.</p> <p>Das Ziel: Spass haben und dabei Fortschritte machen! In den Trainings kannst du deine Technik, Koordination und deinen Teamgeist entwickeln. Wenn du jung, motiviert und bereit bist, eine neue Sportart auszuprobieren, ist jetzt der perfekte Zeitpunkt! Entdecke Badminton in einer freundlichen und dynamischen Atmosphäre, in der du in deinem eigenen Tempo besser werden und dich weiterentwickeln kannst.</p> <p>Kontaktiere uns für ein kostenloses Probetraining!</p>",
       "tuesday1": {
@@ -156,11 +159,14 @@
     "title": "Vorstand",
     "desc": "Der Vorstand des BC Fribourg organisiert und entwickelt den Verein und sorgt für einen reibungslosen Ablauf von Trainings, Wettkämpfen und Veranstaltungen. Er trifft sich fünfmal im Jahr, um wichtige Entscheidungen zu fällen. Mitglieder können Fragen oder Vorschläge einreichen, indem sie den Vorstand kontaktieren.",
     "president": "Präsident",
-    "vicePresident": "Kassiererin / Vizepräsidentin",
+    "treasurer": "Kassiererin",
+    "vicePresident": "Vizepräsidentin",
     "events": "Veranstaltungen",
-    "secretary": "Sekretariat / Verantw. Interclubs",
+    "secretary": "Sekretär",
+    "interclubs": "Interclub verantw.",
     "sup": "Verantw. Oberligen",
-    "junior": "Junior-verantwortlicher"
+    "junior": "Junior-verantwortlicher",
+    "media": "Kommunikation und Medien"
   },
   "History": {
     "title": "Geschichte des Clubs",
