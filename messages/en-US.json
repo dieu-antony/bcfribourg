@@ -42,6 +42,8 @@
       "7Sunday": "Sunday",
       "LowerLeagues": "4th league and non-licensed",
       "UpperLeagues": "LNB, 1st and 2nd leagues",
+      "LowLeagues": "4th league",
+      "Unlicensed": "Unlicensed",
       "Licensed": "LNB, 1st, 2nd and 4th leagues",
       "All": "Licensed and non-licensed ",
       "FreePlay": "Free play",
