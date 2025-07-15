@@ -179,6 +179,5 @@ export type CommitteeCardProps = {
     role2?: string;
     name: string;
     email: string;
-    phone: string;
   };
 };

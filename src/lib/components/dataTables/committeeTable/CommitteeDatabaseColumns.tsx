@@ -19,7 +19,6 @@ export type CommitteeDatabaseColumnsProps = {
   id: string;
   name: string;
   email: string;
-  phone: string;
   role: string;
   role2: string | null;
   photoUrl: string;
@@ -34,10 +33,6 @@ export const CommitteeDatabaseColumns: ColumnDef<CommitteeDatabaseColumnsProps>[
     {
       accessorKey: "name",
       header: "Name",
-    },
-    {
-      accessorKey: "phone",
-      header: "Phone number",
     },
     {
       accessorKey: "email",

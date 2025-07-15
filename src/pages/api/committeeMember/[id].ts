@@ -22,12 +22,12 @@ export default async function handler(
           .status(401)
           .json({ status: "error", message: "Unauthorized" });
       }
-      const { name, email, phone, role, role2, photoUrl } =
+      const { name, email, role, role2, photoUrl } =
         req.body as CommitteeMember;
 
       const updatedMember = await db.committeeMember.update({
         where: { id },
-        data: { name, email, phone, role, role2, photoUrl },
+        data: { name, email, role, role2, photoUrl },
       });
 
       return res.status(200).json(updatedMember);

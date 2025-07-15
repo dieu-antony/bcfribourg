@@ -37,7 +37,6 @@ function Committee({ members }: { members: CommitteeDatabaseColumnsProps[] }) {
   ];
 
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [role2, setRole2] = useState(null as string | null);
@@ -50,11 +49,10 @@ function Committee({ members }: { members: CommitteeDatabaseColumnsProps[] }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, phone, role, role2, photoUrl }),
+      body: JSON.stringify({ name, email, role, role2, photoUrl }),
     });
     if (response.status === 200 || response.status === 201) {
       setName("");
-      setPhone("");
       setEmail("");
       setRole("");
       setRole2(null);
@@ -96,19 +94,7 @@ function Committee({ members }: { members: CommitteeDatabaseColumnsProps[] }) {
               className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </label>
-          <label className="mb-4 block">
-            <span className="mb-1 block font-medium text-gray-700">
-              Phone number
-            </span>
-            <input
-              type="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="078 553 12 45"
-              required
-              className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </label>
+          
           <label className="mb-4 block">
             <span className="mb-1 block font-medium text-gray-700">Email</span>
             <input

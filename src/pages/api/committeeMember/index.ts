@@ -22,15 +22,15 @@ export default async function handler(
           .status(401)
           .json({ status: "error", message: "Unauthorized" });
       }
-      const { name, email, phone, role, role2, photoUrl } =
+      const { name, email, role, role2, photoUrl } =
         req.body as CommitteeMember;
 
-      if (!name || !email || !phone || !role || !photoUrl) {
+      if (!name || !email || !role || !photoUrl) {
         return res.status(400).json({ message: "Missing required fields" });
       }
 
       const newMember = await db.committeeMember.create({
-        data: { name, email, phone, role, role2, photoUrl },
+        data: { name, email, role, role2, photoUrl },
       });
 
       return res.status(201).json(newMember);

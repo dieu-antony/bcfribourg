@@ -111,7 +111,6 @@ model CommitteeMember {
     id       String  @id @default(cuid())
     name     String
     email    String
-    phone    String
     role     String
     role2    String?
     photoUrl String

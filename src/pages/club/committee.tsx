@@ -13,7 +13,6 @@ type CommitteeMember = {
   role2: Role | "";
   name: string;
   email: string;
-  phone: string;
 };
 
 type Props = {
@@ -29,7 +28,6 @@ const Committee = ({ members }: Props) => {
     role2: member.role2 === "" ? "" : t(member.role2),
     name: member.name,
     email: member.email,
-    phone: member.phone,
   }));
 
   return (
@@ -62,7 +60,6 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
         role2: true,
         name: true,
         email: true,
-        phone: true,
       },
     })
     .then((data) => {
