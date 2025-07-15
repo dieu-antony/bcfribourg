@@ -74,7 +74,7 @@ model ICTeam {
     leagueId String
     players  Player[]
     url      String
-    photoUrl String?
+    photoUrl String
 }
 
 model Training {
