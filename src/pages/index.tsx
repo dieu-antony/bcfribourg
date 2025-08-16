@@ -19,6 +19,7 @@ import two from "../../public/assets/home/2.webp";
 import three from "../../public/assets/home/3.webp";
 import four from "../../public/assets/home/4.webp";
 import five from "../../public/assets/home/5.webp";
+import { LaserButton } from "~/lib/components/ui/LaserButton";
 
 export default function Home() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
@@ -27,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     const currentPlugin = plugin.current;
     return () => {
-        currentPlugin.destroy;
+      currentPlugin.destroy;
     };
   }, []);
 
@@ -54,12 +55,21 @@ export default function Home() {
             <br />
             <Highlight className="">Badminton Club Fribourg</Highlight>
             <div className="mt-8 flex justify-around gap-2 ">
-              <Link
+              {/* <Link
                 href="/calendar"
                 className="cursor-pointer rounded-full border bg-white border-black px-2 py-2 text-sm font-bold shadow transition-transform duration-300 hover:scale-105 md:px-4 md:text-xl"
               >
                 {t("next events")}
-              </Link>
+              </Link> */}
+              <LaserButton className="cursor-pointer rounded-full px-2 py-2 text-sm font-bold shadow md:px-4 md:text-xl">
+                <Link
+                  href="/bolzes_tournament"
+                  className="flex items-center gap-2"
+                >
+                  {t("bolzes tournament")}
+                </Link>
+              </LaserButton>
+
               <Link
                 href="/member"
                 className="flex cursor-pointer items-center gap-2 self-center rounded-full border border-transparent bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 px-2 py-2 text-sm font-normal text-white shadow transition-transform duration-300 hover:scale-105 md:px-4 md:text-xl"

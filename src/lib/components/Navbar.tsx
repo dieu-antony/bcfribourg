@@ -16,6 +16,7 @@ import {
   UserRoundPlus,
   Link2,
   MapPinned,
+  Crown,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
@@ -39,6 +40,32 @@ const Navbar = () => {
   ];
 
   const subCompetition = [
+    {
+      name: t("bolzes tournament"),
+      href: "/bolzes_tournament",
+      icon: (
+        <motion.div
+          initial={{ scale: 1, opacity: 1 }}
+          animate={{
+            scale: [0.8, 1, 0.8],
+            color: ["#000000", "#00afef", "#000000"],
+            opacity: [1, 0.8, 1],
+            textShadow: [
+              "0 0 8px #a855f7",
+              "0 0 16px #c084fc",
+              "0 0 8px #a855f7",
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Crown size="20px"/>
+        </motion.div>
+      ),
+    },
     {
       name: "Interclubs",
       href: "/competition/interclubs",
@@ -154,7 +181,7 @@ const Navbar = () => {
         </AnimatePresence>
 
         <div
-          className={`hidden lg:flex mt-4 basis-full flex-col place-items-start lg:ml-16 lg:mt-0 lg:w-full lg:flex-row lg:justify-between`}
+          className={`mt-4 hidden basis-full flex-col place-items-start lg:ml-16 lg:mt-0 lg:flex lg:w-full lg:flex-row lg:justify-between`}
         >
           <NavLinks
             name={t("home")}

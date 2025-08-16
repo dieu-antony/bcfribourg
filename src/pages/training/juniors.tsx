@@ -119,7 +119,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   )) as IntlMessages;
 
   const trainings = await db.training.findMany({
-    orderBy: { time: "asc" },
+    orderBy: { day: "asc"},
     where: {
       type: "Juniors",
     },

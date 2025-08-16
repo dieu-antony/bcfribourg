@@ -16,6 +16,7 @@
     "calendar": "Kalender",
     "gallery": "Galerie",
     "sponsors": "Sponsoren",
+    "bolzes tournament": "Tournoi des Bolzes",
     "member": "Mitglied werden"
   },
   "Footer": {
@@ -24,6 +25,7 @@
   "Index": {
     "welcome": "Willkommen auf der Website des",
     "next events": "Nächste Veranstaltungen",
+    "bolzes tournament": "Tournoi des Bolzes",
     "member": "Mitglied werden",
     "court": {
       "title": "Zugang zur Halle",
@@ -294,5 +296,16 @@
     "analytics": "Analyse (Google)",
     "cancel": "Abbrechen",
     "save": "Einstellungen speichern"
+  },
+  "BolzesTournament": {
+    "title": "Tournoi des Bolzes",
+    "registerButton": "Anmelden",
+    "subtitle": "Die erste Edition des Tournoi des Bolzes wird bald stattfinden!",
+    "description": "Komm vorbei für ein Badminton Wochenende voller",
+    "flipWord1": "Freundschaft",
+    "flipWord2": "Sport",
+    "flipWord3": "Spass",
+    "additionalInfo": "Das Tournoi des Bolzes ist offen für alle Spieler und Spielerinnen mit den Lizenzen TOP/A/B/C/D. Die Mixed-Doppel und die Damen- und Herrendoppel finden am Samstag statt, während die Damen- und Herreneinzel am Sonntag ausgetragen werden.",
+    "location": "Das Tournoi des Bolzes findet in der Sporthalle Ste-Croix in Fribourg statt. Die Adresse lautet: Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. Wir empfehlen die Anreise mit öffentlichen Verkehrsmitteln, indem Sie den Bus vom Bahnhof Fribourg in Richtung Pérolles nehmen."
   }
 }
