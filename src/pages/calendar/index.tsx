@@ -169,7 +169,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: messages.default,
       initialEvents: newEvents,
     },
-    revalidate: 86400,
+    revalidate: 60 * 60 * 24,
   };
 }
 

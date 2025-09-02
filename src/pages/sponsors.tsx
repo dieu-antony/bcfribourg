@@ -24,6 +24,16 @@ export default function SponsorsPage({ sponsors }: Props) {
     sponsors: SponsorType[],
   ) => {
     if (sponsors.length === 0) return null;
+    let gridClasses = "";
+
+    if (sponsors.length === 1) {
+      gridClasses = "grid grid-cols-1 place-items-center";
+    } else if (sponsors.length === 2) {
+      gridClasses = "grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center";
+    } else {
+      gridClasses =
+        "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center";
+    }
     return (
       <section className="border border-gray-200 bg-white p-8 text-center">
         <div className="flex flex-row items-center justify-center gap-4">
@@ -38,14 +48,14 @@ export default function SponsorsPage({ sponsors }: Props) {
             {tierLabel}
           </h2>
         </div>
-        <div className="grid grid-cols-1 place-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={gridClasses}>
           {sponsors.map((sponsor) => (
             <Sponsor
               key={sponsor.id}
               name={sponsor.name}
               imgUrl={sponsor.logoUrl}
               link={sponsor.link}
-              cn="text-center col-span-3"
+              cn="text-center"
             />
           ))}
         </div>
