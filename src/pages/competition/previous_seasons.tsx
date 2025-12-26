@@ -19,6 +19,7 @@ import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
 import { Title } from "~/lib/components/Title";
+import { db } from "~/server/db";
 
 type PreviousSeasonsProps = {
   initialData: PastTeamProps[];
@@ -356,27 +357,32 @@ const PreviousSeasons = ({ initialData }: PreviousSeasonsProps) => {
     </Layout>
   );
 };
+
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  const messages = (await import(
-    `../../../messages/${locale}.json`
-  )) as IntlMessages;
+  // Load locale messages
+  const messages = (await import(`../../../messages/${locale}.json`)) as IntlMessages;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/pastTeams`);
-  const result = (await res.json()) as {
-    status: "success" | "loading" | "error";
-    data: PastTeamProps[];
-  };
+  let statsData: PastTeamProps[] = [];
 
-  const statsData = result.data.map((data: PastTeamProps) => ({
-    ...data,
-    league: getLeagueFromId(data.leagueId),
-  }));
+  try {
+    // Direct DB fetch at build time
+    const data = await db.pastTeam.findMany();
+
+    statsData = data.map((d) => ({
+      ...d,
+      league: getLeagueFromId(d.leagueId),
+    })) as PastTeamProps[];
+  } catch (err) {
+    console.warn('Past teams DB fetch failed at build time, returning empty array:', err);
+  }
 
   return {
     props: {
       messages: messages.default,
       initialData: statsData,
     },
+    // Revalidate once every 30 days
     revalidate: 30 * 24 * 60 * 60,
   };
 }

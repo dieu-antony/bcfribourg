@@ -6,6 +6,7 @@ import chroma from "chroma-js";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
 import { useTranslations } from "next-intl";
+import { db } from "~/server/db";
 
 type CalendarProps = {
   initialEvents: CalendarEvent[];
@@ -141,36 +142,43 @@ const Calendar = ({ initialEvents }: CalendarProps) => {
     </Layout>
   );
 };
+
+type CalendarEventProps = Omit<CalendarEvent, 'start' | 'end'> & {
+  start: string | null;
+  end: string | null;
+};
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  const messages = (await import(
-    `../../../messages/${locale}.json`
-  )) as IntlMessages;
+  const messages = (await import(`../../../messages/${locale}.json`)) as IntlMessages;
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/events`);
-  const data = (await res.json()) as {
-    events: CalendarEvent[];
-    status: string;
-  };
+  let initialEvents: CalendarEventProps[] = [];
 
-  const newEvents = data.events.map((event: CalendarEvent) => ({
-    ...event,
-    start: event.start ?? new Date(event.start),
-    end: event.end ?? new Date(event.end),
-    title: event.summary,
-    location: event.location,
-    url: event.url,
-    eventType: event.eventType,
-    longitude: event.longitude,
-    latitude: event.latitude,
-  }));
+  try {
+    const events = await db.calendarEvent.findMany();
+
+    initialEvents = events.map((event) => ({
+      ...event,
+      start: event.start ? event.start.toISOString() : null,
+      end: event.end ? event.end.toISOString() : null,
+      title: event.summary,
+      location: event.location,
+      url: event.url,
+      eventType: event.eventType,
+      longitude: event.longitude,
+      latitude: event.latitude,
+    }));
+  } catch (err) {
+    console.warn('Calendar events fetch failed at build time, returning empty array:', err);
+  }
 
   return {
     props: {
       messages: messages.default,
-      initialEvents: newEvents,
+      initialEvents,
     },
-    revalidate: 60 * 60 * 24,
+    revalidate: 60 * 60 * 24, // 24 hours
   };
 }
+
 
 export default Calendar;

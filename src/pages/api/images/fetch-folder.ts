@@ -1,24 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import cloudinary from "cloudinary";
+import type { CloudinarySearchResult } from "~/lib/types";
 
 cloudinary.v2.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
-// Minimal type for only the fields you use
-type CloudinaryAsset = {
-  public_id: string;
-  asset_folder: string;
-};
-
-// Type for a Cloudinary search result
-type CloudinarySearchResult = {
-  resources: CloudinaryAsset[];
-  next_cursor?: string;
-  total_count?: number;
-};
 
 export default async function handler(
   req: NextApiRequest,

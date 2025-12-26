@@ -181,3 +181,16 @@ export type CommitteeCardProps = {
     email: string;
   };
 };
+
+// Minimal type for only the fields you use
+export type CloudinaryAsset = {
+  public_id: string;
+  asset_folder: string;
+};
+
+// Type for a Cloudinary search result
+export type CloudinarySearchResult = {
+  resources: CloudinaryAsset[];
+  next_cursor?: string;
+  total_count?: number;
+};

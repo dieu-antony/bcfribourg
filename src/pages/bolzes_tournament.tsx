@@ -12,6 +12,8 @@ import { TextHoverEffect } from "~/lib/components/ui/text-hover-effect";
 import Image from "next/image";
 import { Separator } from "~/lib/components/ui/separator";
 import { CldImage } from "next-cloudinary";
+import cloudinary from "cloudinary";
+import type { CloudinarySearchResult } from "~/lib/types";
 
 type Props = {
   sponsors: { public_id: string; folder: string }[];
@@ -173,24 +175,42 @@ function BolzesTournament({ sponsors }: Props) {
   );
 }
 
+cloudinary.v2.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
     `../../messages/${locale}.json`
   )) as IntlMessages;
 
-  const sponsors: {
-    data: { public_id: string; folder: string }[];
-    error?: string;
-  } = await (
-    await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-folder?folder=Sponsors/Tournament/`,
-    )
-  ).json() as { data: { public_id: string; folder: string }[]; error?: string };
+  let sponsorsData: { public_id: string; folder: string }[] = [];
+
+  try {
+    // Direct Cloudinary fetch at build time
+    const result = (await cloudinary.v2.search
+      .expression("asset_folder:Sponsors/Tournament/*")
+      .execute()) as CloudinarySearchResult;
+
+    sponsorsData = result.resources.map(
+      (asset: { public_id: string; asset_folder: string }) => ({
+        public_id: asset.public_id,
+        folder: asset.asset_folder.split("/").pop() ?? "",
+      }),
+    );
+  } catch (err) {
+    console.warn(
+      "Sponsors fetch failed at build time, returning empty array:",
+      err,
+    );
+  }
 
   return {
     props: {
       messages: messages.default,
-      sponsors: sponsors.data,
+      sponsors: sponsorsData,
     },
     revalidate: 60 * 60 * 24,
   };

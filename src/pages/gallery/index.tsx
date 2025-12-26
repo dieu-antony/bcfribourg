@@ -6,6 +6,7 @@ import { useState } from "react";
 import Layout from "~/lib/components/Layout";
 import { Title } from "~/lib/components/Title";
 import type { SearchResult } from "~/lib/types";
+import cloudinary from "cloudinary";
 
 type GalleryProps = {
   initialData: SearchResult[];
@@ -52,24 +53,42 @@ export default function Gallery({ initialData }: GalleryProps) {
     </Layout>
   );
 }
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  const messages = (await import(
-    `../../../messages/${locale}.json`
-  )) as IntlMessages;
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}api/images/fetch-images`,
-  );
-  const result = (await res.json()) as {
-    status: string;
-    resources: SearchResult[];
-  };
+cloudinary.v2.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  const messages = (await import(`../../../messages/${locale}.json`)) as IntlMessages;
+
+  let initialData: SearchResult[] = [];
+
+  try {
+    const result = (await cloudinary.v2.search
+      .expression("resource_type:image")
+      .sort_by("created_at", "desc")
+      .with_field("tags")
+      .max_results(500)
+      .execute()) as { resources: SearchResult[] };
+
+    if (result?.resources) {
+      initialData = result.resources;
+    }
+  } catch (err) {
+    console.warn(
+      "Image fetch failed at build time, returning empty array:",
+      err,
+    );
+  }
 
   return {
     props: {
       messages: messages.default,
-      initialData: result.resources,
+      initialData,
     },
-    revalidate: 86400,
+    // Revalidate once every 24 hours
+    revalidate: 60 * 60 * 24,
   };
 }
