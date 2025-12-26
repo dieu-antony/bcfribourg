@@ -1,17 +1,17 @@
 "use client";
-
+import { useCookieContext } from "../cookies/CookieContext";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
-import { Label } from "./ui/label";
-import { Switch } from "./ui/switch";
+} from "../ui/sheet";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
 import { inter } from "~/pages/_app";
 import { useTranslations } from "next-intl";
 
@@ -25,35 +25,34 @@ interface Props {
   onConsentChange: (prefs: CookiePreferences) => void;
 }
 
-export default function CookieConsent({ onConsentChange }: Props) {
-  const [showBanner, setShowBanner] = useState(false);
-  const [prefs, setPrefs] = useState<CookiePreferences>({ analytics: true });
+export default function CookiesBanner({ onConsentChange }: Props) {
+  const { prefs, setPrefs, bannerOpen, setBannerOpen } = useCookieContext();
+
   const [sheetOpen, setSheetOpen] = useState(false);
   const t = useTranslations("Cookie");
 
   useEffect(() => {
     const stored = localStorage.getItem(COOKIE_KEY);
     if (!stored) {
-      setShowBanner(true);
+      setBannerOpen(true);
     } else {
       const parsed = JSON.parse(stored) as CookiePreferences;
       setPrefs(parsed);
       onConsentChange(parsed);
     }
-  }, [onConsentChange]);
+  }, [onConsentChange, setBannerOpen, setPrefs]);
 
   const save = (updated: CookiePreferences) => {
     localStorage.setItem(COOKIE_KEY, JSON.stringify(updated));
     setPrefs(updated);
-    onConsentChange(updated);
-    setShowBanner(false);
+    setBannerOpen(false);
     setSheetOpen(false);
   };
 
   const acceptAll = () => save({ analytics: true });
   const rejectAll = () => save({ analytics: false });
 
-  return showBanner ? (
+  return bannerOpen ? (
     <div className="fixed bottom-4 z-50 flex w-full justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -93,14 +92,14 @@ export default function CookieConsent({ onConsentChange }: Props) {
               className="bg-picton-blue-600 text-white hover:bg-picton-blue-700"
               onClick={acceptAll}
             >
-              Accept All
+              {t("acceptAll")}
             </Button>
             <Button
               size="sm"
               className="bg-gray-800 text-white hover:bg-black"
               onClick={rejectAll}
             >
-              Reject All
+              {t("rejectAll")}
             </Button>
 
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -108,9 +107,9 @@ export default function CookieConsent({ onConsentChange }: Props) {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border border-gray-300"
+                  className="border border-gray-300 text-black"
                 >
-                  Settings
+                  {t("settings")}
                 </Button>
               </SheetTrigger>
               <SheetContent
@@ -139,7 +138,7 @@ export default function CookieConsent({ onConsentChange }: Props) {
                       id="analytics"
                       checked={prefs.analytics}
                       onCheckedChange={(checked) =>
-                        setPrefs((p) => ({ ...p, analytics: checked }))
+                        setPrefs({ ...prefs, analytics: checked })
                       }
                       className="data-[state=checked]:bg-picton-blue-600 data-[state=unchecked]:bg-gray-200"
                     />

@@ -25,14 +25,9 @@ type TrainingDayKey =
   | "6Saturday"
   | "7Sunday";
 
-type TargetKey =
-  | "Licensed"
-  | "LowerLeagues"
-  | "UpperLeagues"
-  | "All";
 
-const Adults = ({ trainings, holidays, contact }: Props) => {
-  const t = useTranslations("Training.Adults");
+const FreePlay = ({ trainings, holidays, contact }: Props) => {
+  const t = useTranslations("Training.FreePlay");
 
   return (
     <Layout>
@@ -67,7 +62,7 @@ const Adults = ({ trainings, holidays, contact }: Props) => {
               day: t(training.day as TrainingDayKey),
             }}
             trainer={training.trainer}
-            target={t(training.target as TargetKey)}
+            target={t("FreePlay")}
           />
         ))}
 
@@ -127,8 +122,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const trainings = await db.training.findMany({
     orderBy: { day: "asc" },
     where: {
-      type: "Adults",
-      NOT: { target: "FreePlay" },
+      target: "FreePlay",
     },
   });
 
@@ -157,4 +151,4 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   };
 }
 
-export default Adults;
+export default FreePlay;

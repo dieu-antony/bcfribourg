@@ -11,8 +11,13 @@ import { FlipWords } from "~/lib/components/ui/flip-words";
 import { TextHoverEffect } from "~/lib/components/ui/text-hover-effect";
 import Image from "next/image";
 import { Separator } from "~/lib/components/ui/separator";
+import { CldImage } from "next-cloudinary";
 
-function BolzesTournament() {
+type Props = {
+  sponsors: { public_id: string; folder: string }[];
+};
+
+function BolzesTournament({ sponsors }: Props) {
   const t = useTranslations("BolzesTournament");
 
   return (
@@ -36,7 +41,7 @@ function BolzesTournament() {
 
           <button className="relative my-16 p-[3px] sm:my-24">
             <Link
-              href="https://www.swiss-badminton.ch/calendarevent/85728/RT-Tournoi-des-Bolzes"
+              href="https://sb.tournamentsoftware.com/sport/tournament?id=41BA949F-B13D-4B10-B469-154FA7B79B20"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -97,6 +102,71 @@ function BolzesTournament() {
               </p>
             </div>
           </FadeUpOnScroll>
+
+          {/* <FadeUpOnScroll> */}
+          <div className="mx-8 my-16 flex flex-col">
+            <h2 className="mb-4 self-center text-5xl font-bold">
+              {t("OfficialSponsors")}
+            </h2>
+            <Separator className="my-4 mb-16 h-1 w-8 place-self-center bg-picton-blue-500" />
+
+            <div className="mt-8 space-y-16">
+              {[
+                "Gold" as const,
+                "Silver" as const,
+                "Bronze" as const,
+                // "Donation" as const,
+              ].map((tier) => {
+                const tierImages = sponsors.filter((s) =>
+                  s.folder.includes(tier),
+                );
+
+                if (tierImages.length === 0) return null;
+
+                return (
+                  <div key={tier} className="mb-12 flex flex-col">
+                    <h3 className="mb-8 place-self-center text-2xl font-semibold">
+                      {t(tier)}
+                    </h3>
+                    {tierImages.length === 1 ? (
+                      // Single centered image
+                      <div className="flex justify-center">
+                        <CldImage
+                          src={tierImages[0]!.public_id}
+                          width={300}
+                          height={200}
+                          crop="fit"
+                          alt={tier}
+                          className="rounded-lg"
+                        />
+                      </div>
+                    ) : (
+                      // Grid for 2+ images
+                      <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3">
+                        {tierImages.map((img) => (
+                          <div
+                            key={img.public_id}
+                            className="flex justify-center"
+                          >
+                            <CldImage
+                              src={img.public_id}
+                              width={300}
+                              height={200}
+                              crop="fit"
+                              alt={tier}
+                              className="rounded-lg"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <Separator className="col-span-3 my-4 mt-12 h-1 w-full bg-gray-300" />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          {/* </FadeUpOnScroll> */}
         </div>
       </div>
     </Layout>
@@ -108,9 +178,19 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const sponsors: {
+    data: { public_id: string; folder: string }[];
+    error?: string;
+  } = await (
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/images/fetch-folder?folder=Sponsors/Tournament/`,
+    )
+  ).json() as { data: { public_id: string; folder: string }[]; error?: string };
+
   return {
     props: {
       messages: messages.default,
+      sponsors: sponsors.data,
     },
     revalidate: 60 * 60 * 24,
   };

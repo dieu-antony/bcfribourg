@@ -4,6 +4,7 @@
     "training": "Entraînements",
     "adults": "Adultes",
     "juniors": "Juniors",
+    "freePlay": "Jeu libre",
     "competition": "Compétition",
     "tournament": "Tournois SB",
     "prevSeasons": "Saisons précédentes",
@@ -20,7 +21,9 @@
     "member": "Devenir membre"
   },
   "Footer": {
-    "find": "Retrouvez-nous sur"
+    "find": "Retrouvez-nous sur",
+    "cookieSettings": "Paramètres des cookies",
+    "privacyPolicy": "Politique de confidentialité"
   },
   "Index": {
     "welcome": "Bienvenue sur le site du",
@@ -48,7 +51,6 @@
       "Unlicensed": "Non licenciés",
       "Licensed": "LNB, 1ère, 2ème et 4ème ligues",
       "All": "Licenciés et non licenciés",
-      "FreePlay": "Jeu libre",
       "title": "Entraînements adultes",
       "desc": "<p>Le BC Fribourg propose plusieurs entraînements de deux heures par semaine à la <a>Salle de Sport de la DOSF</a>. Nos sessions sont ouvertes à tous les niveaux, des débutants aux joueurs expérimentés, dans une ambiance conviviale et dynamique.</p><p>Que vous souhaitiez découvrir le badminton, améliorer votre technique ou simplement partager un moment sportif, nos entraînements sont adaptés à chacun. Rejoignez-nous et progressez à votre rythme !</p>",
       "holidays": {
@@ -100,6 +102,28 @@
       "contact": {
         "title": "Contact"
       }
+    },
+    "FreePlay": {
+      "1Monday": "Lundi",
+      "2Tuesday": "Mardi",
+      "3Wednesday": "Mercredi",
+      "4Thursday": "Jeudi",
+      "5Friday": "Vendredi",
+      "6Saturday": "Samedi",
+      "7Sunday": "Dimanche",
+      "FreePlay": "Jeu libre",
+      "title": "Jeu libre",
+      "desc": "<p>Le Badminton Club Fribourg offre des sessions de jeu libre à la <a>Salle de Sport de la DOSF</a> pour tous les membres du club. Ces sessions sont l'occasion idéale de pratiquer le badminton dans une ambiance détendue et conviviale, sans la structure formelle des entraînements.</p><p>Que vous souhaitiez perfectionner votre technique, jouer des matchs amicaux ou simplement profiter d'un moment sportif entre amis, nos sessions de jeu libre sont ouvertes à tous les niveaux. Rejoignez-nous pour partager votre passion du badminton et passer un bon moment sur le court !</p>",
+      "holidays": {
+        "title": "Vacances",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
+        "file": "Vacances scolaires",
+        "seasonDuration": "Durée de la saison",
+        "until": "jusqu'au"
+      },
+      "contact": {
+        "title": "Contact"
+      }
     }
   },
   "Interclubs": {
@@ -107,7 +131,9 @@
     "m": "Hommes",
     "f": "Femmes",
     "1st": "1ère ligue",
-    "ligue": "ème ligue"
+    "2nd": "2ème ligue",
+    "3rd": "3ème ligue",
+    "nth": "ème ligue"
   },
   "CompJuniors": {
     "title": "Compétitions juniors",
@@ -295,7 +321,10 @@
     "essentialDescription": "Toujours activés. Requis pour le bon fonctionnement du site et la protection contre le spam (reCAPTCHA).",
     "analytics": "Analytique (Google)",
     "cancel": "Annuler",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "acceptAll": "Accepter tout",
+    "rejectAll": "Refuser tout",
+    "settings": "Paramètres"
   },
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
@@ -306,6 +335,39 @@
     "flipWord2": "sportif",
     "flipWord3": "compétitif",
     "additionalInfo": "Le tournoi des Bolzes est ouvert a tous les joueurs et joueues licenciés TOP/A/B/C/D. Le double mixte et les doubles femmes et hommes auront lieu le samedi pendant que les simples femmes et hommes se dérouleront le dimanche.",
-    "location": "Le tournoi des Bolzes aura lieu à la salle de sport de Ste-Croix, Fribourg. L'adresse est : Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. On vous encourage à venir en transports publics, en prenant le bus depuis la gare de Fribourg, en direction de Pérolles."
+    "location": "Le tournoi des Bolzes aura lieu à la salle de sport de Ste-Croix, Fribourg. L'adresse est : Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. On vous encourage à venir en transports publics, en prenant le bus depuis la gare de Fribourg, en direction de Pérolles.",
+    "OfficialSponsors": "Sponsors officiels",
+    "Gold": "Sponsors d'Or",
+    "Silver": "Sponsors d'Argent",
+    "Bronze": "Sponsors de Bronze",
+    "Donation": "Donateurs"
+  },
+  "PrivacyPolicy": {
+    "title": "Politique de confidentialité",
+    "lastUpdated": "Dernière mise à jour,",
+    "1introduction": "<h2>1. Introduction</h2><p>La présente politique de confidentialité explique comment Badminton Club Fribourg (« nous ») collecte et traite les données personnelles lorsque vous utilisez notre site web ou interagissez avec nous. Nous respectons la Loi fédérale sur la protection des données (LPD / nLPD) et les réglementations applicables.</p>",
+    "question": "Pour toute question",
+    "email": "E-mail ",
+    "address": "Adresse ",
+    "2dataCollection": "2. Données que nous collectons",
+    "21webSite": "<h3>2.1 Lors de la visite du site web</h3><ul><li>Adresse IP</li><li>Informations sur le navigateur et l'appareil</li><li>Date et heure de la requête</li><li>Pages consultées</li><li>Cookies</li></ul><p>Ces données sont collectées automatiquement pour des raisons techniques et de sécurité.</p>",
+    "22contactForm": "<h3>2.2 Formulaire de contact</h3><p>Lorsque vous remplissez notre formulaire de contact, nous collectons les informations suivantes :</p><ul><li>Nom et prénom</li><li>Adresse e-mail</li><li>Sujet et message</li></ul><p>Ces informations sont uniquement utilisées pour répondre à vos demandes.</p>",
+    "23memberForm": "<h3>2.3 Formulaire d'inscription (adhésion)</h3><p>Lorsque vous remplissez notre formulaire d'inscription, nous collectons les informations suivantes :</p><ul><li>Nom et prénom</li><li>Adresse</li><li>Date de naissance</li><li>Numéro AVS (pour les juniors)</li><li>Numéro de licence Swiss Badminton (si applicable)</li><li>Adresse e-mail</li><li>Numéro de téléphone</li><li>Préférence de communication</li><li>Message envoyé</li></ul><p>Ces informations sont utilisées pour gérer votre adhésion au club.</p><h4>Pourquoi nos collectons votre numéro AVS</h4><p>Pour les participants inscrits dans le cadre du programme fédéral Jeunesse+Sport (J+S), nous sommes légalement tenus de transmettre le numéro AVS aux autorités J+S pour vérifier l'éligibilité et permettre au club de bénéficier des subventions fédérales. Votre numéro AVS est, utilisé uniquement à des fins administratives J+S, accessible uniquement aux membres autorisés du comité, transmis uniquement au système officiel J+S, conservé de manière sécurisée et pour la durée légale nécessaire.</p>",
+    "24recaptcha": "<h3>2.4 Google reCAPTCHA</h3><p>Nous utilisons reCAPTCHA de Google pour protéger notre site contre le spam et les abus. reCAPTCHA collecte des données telles que l'adresse IP et d'autres informations techniques conformément à la <a>Politique de confidentialité de Google</a>.</p>",
+    "25googleAnalytics": "<h3>2.5 Google Analytics</h3><p>Nous utilisons (uniquement si vous acceptez les cookies) Google Analytics pour analyser l'utilisation de notre site web. Google Analytics collecte des données telles que l'adresse IP, les pages consultées, la durée de la visite, etc. conformément à la <a>Politique de confidentialité de Google Analytics</a>. Vous pouvez désactiver Google Analytics en ajustant vos paramètres de cookies.</p>",
+    "26admin": "<h3>2.6 Espace administrateur (NextAuth)</h3><p>Pour les membres du comité utilisant l'espace administrateur, nous collectons des informations d'authentification via NextAuth. Ces données sont utilisées pour sécuriser l'accès à l'espace administrateur et ne sont pas partagées avec des tiers.</p>",
+    "3Cookies": "<h2>3. Cookies et technologies similaires</h2>",
+    "31essential": "<h3>3.1 Cookies essentiels</h3><p>Nécessaires pour :</p><ul><li>le bon fonctionnement du site web</li><li>la sécurité (protection contre le spam via reCAPTCHA)</li><li>l'authentification administrateur</li><li>Les préférences de cookies</li></ul><p>Ils ne peuvent pas être désactivés</p>",
+    "32analytics": "<h3>3.2 Cookies analytiques (optionnels)</h3><p>Désactivés par défaut. Ils ne sont activés qu'après votre consentement explicite.Vous pouvez modifier vos préférences à tout moment via le lien « Paramètres des cookies » dans le pied de page.</p>",
+    "4processing": "<h2>4. Finalités du traitement des données</h2><p>Nous traitons vos données personnelles pour les finalités suivantes :</p><ul><li>assurer le fonctionnement du site</li><li>répondre à vos demandes</li><li>gérer les inscriptions au club</li><li>enregistrer les participants auprès de J+S</li><li>remplir les obligations légales</li><li>sécuriser le site (reCAPTCHA, authentification)</li><li>réaliser des analyses (optionnelles)</li></ul>",
+    "5legalBasis": "<h2>5. Bases légales</h2><p>Selon la LPD/nLPD, nous traitons vos données personnelles sur les bases légales suivantes :</p><ul><li>exécution d'un contrat (gestion des inscriptions au club)</li><li>obligations légales (J+S, sécurité)</li><li>intérêts légitimes (sécurité du site, analyses optionnelles)</li><li>consentement (cookies analytiques)</li></ul>",
+    "6dataSharing": "<h2>6. Transmission de données</h2>",
+    "61JS": "<h3>6.1 Autorités J+S</h3><p>Pour les participants inscrits dans le cadre du programme J+S (Juniors U21), nous transmettons les données nécessaires (y compris le numéro AVS) aux autorités J+S conformément aux exigences légales.</p>",
+    "62thirdParties": "<h3>6.2 Tiers de confiance</h3><p>Nous partageons vos données avec des tiers uniquement lorsque cela est nécessaire pour les finalités décrites, tels que :</p><ul><li>fournisseurs de services techniques (hébergement, sécurité)</li><li>Google (reCAPTCHA, Analytics)</li></ul><p>Nous exigeons de ces tiers qu'ils protègent vos données conformément à la LPD/nLPD.</p>",
+    "7dataRetention": "<h2>7. Durée de conservation des données</h2><p>Nous conservons les données :</p><ul><li>demandes d'adhésion : jusqu'à la fin de l'inscription ou de l'adhésion</li><li>données J+S : selon les exigences légales</li><li>formulaires de contact : jusqu'à traitement de la demande</li><li>journaux serveur : 3 à 12 mois</li><li>données analytiques : selon la politique de Google (si activé)</li></ul>",
+    "8security": "<h2>8. Sécurité des données</h2><p>Nous mettons en place des mesures telles que :</p><ul><li>Chiffrement HTTPS</li><li>restriction d'accès</li><li>cookies de session sécurisées</li><li>reCAPTCHA</li><li>stockage sécurisé des données AVS</li></ul>",
+    "9rights": "<h2>9. Vos droits</h2><p>Vous pouvez :</p><ul><li>demander l'accès à vos données</li><li>corriger des données inexactes</li><li>demander la supression (selon les limites légales)</li><li>retirer votre consentement aux cookies analytiques</li></ul><p>Pour exercer vos droits, contactez :</p>",
+    "10international": "<h2>10. Transfert international</h2><p>Certains prestataires (ex : Google) peuvent traiter les données hors de Suisse. Nous utilisons les garanties reconnues (SCC, Swiss-U.S. DPF, etc.).</p>",
+    "11changes": "<h2>11. Modifications de la politique</h2><p>Nous pouvons mettre à jour cette politique. La date de la dernière mise à jour est indiquée en haut. Nous vous encourageons à la consulter régulièrement.</p>"
   }
 }

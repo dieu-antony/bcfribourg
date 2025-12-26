@@ -74,7 +74,7 @@ const Interclubs = ({ teams }: InterclubsProps) => {
             defaultValue={[
               [...playersByTeam].sort(
                 (a, b) => leagueRank(a.league.name) - leagueRank(b.league.name),
-              )[0]!.id
+              )[0]!.id,
             ]}
           >
             {[...playersByTeam]
@@ -85,14 +85,20 @@ const Interclubs = ({ teams }: InterclubsProps) => {
                 return teamNameComparator(a.name, b.name);
               })
               .map((team) => {
-                let leagueName = "";
-                if (team.league.name === "A" || team.league.name === "B") {
-                  leagueName = " - NL" + team.league.name;
-                } else if (team.league.name === "1") {
-                  leagueName = " - " + t("1st");
-                } else if (["2", "3", "4", "5"].includes(team.league.name)) {
-                  leagueName = " - " + team.league.name + t("ligue");
-                }
+                const leagueMap = {
+                  A: "NLA",
+                  B: "NLB",
+                  1: t("1st"),
+                  2: t("2nd"),
+                  3: t("3rd"),
+                  4: "4" + t("nth"),
+                  5: "5" + t("nth"),
+                };
+
+                const leagueName =
+                  team.league.name in leagueMap
+                    ? ` - ${leagueMap[team.league.name as keyof typeof leagueMap]}`
+                    : "";
 
                 return (
                   <AccordionItem key={team.id} value={team.id}>

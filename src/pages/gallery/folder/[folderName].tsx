@@ -23,12 +23,14 @@ import Link from "next/link";
 import type { GetServerSideProps } from "next";
 import Layout, { inter } from "~/lib/components/Layout";
 import ScrollToTop from "~/lib/components/ScrollToTop";
+import { useTranslations } from "next-intl";
 
 type FolderPageProps = {
   initialResources: SearchResult[];
 };
 
 const FolderPage = ({ initialResources }: FolderPageProps) => {
+  const t = useTranslations("Gallery");
   const router = useRouter();
   const [resources, setResources] = useState<SearchResult[]>(initialResources);
   const [api, setApi] = useState<CarouselApi | null>(null);
@@ -117,7 +119,7 @@ const FolderPage = ({ initialResources }: FolderPageProps) => {
               href="/gallery"
               className="flex w-24 items-center gap-1 self-center rounded-md bg-picton-blue-500 p-1 text-center text-white shadow-md hover:cursor-pointer hover:bg-picton-blue-500/80"
             >
-              <ChevronLeft size="20px" /> Galerie
+              <ChevronLeft size="20px" /> {t("title")}
             </Link>
             <h1 className="my-8 self-center text-center text-xl font-semibold">
               {folderName}

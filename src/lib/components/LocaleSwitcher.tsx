@@ -56,7 +56,7 @@ const LocaleSwitcher = () => {
       >
         <>
           <Globe size={20} className="mr-2" />
-          <span className="hidden text-lg sm:inline">{language[locale!]}</span>
+          <span className="text-lg">{language[locale!]}</span>
         </>
       </button>
 
@@ -68,8 +68,8 @@ const LocaleSwitcher = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`fixed z-50 mt-12 lg:mt-2 flex min-w-[4rem] max-w-[12rem] translate-x-[0]
-        -translate-y-[10%] flex-col overflow-hidden bg-white px-2 py-1 text-sm shadow-md
+            className={`fixed z-50 mt-12 flex min-w-[4rem] max-w-[12rem] -translate-y-[10%] translate-x-[0] flex-col
+        overflow-hidden bg-white px-2 py-1 text-sm shadow-md lg:fixed lg:mt-2
         lg:-translate-x-1/4 lg:translate-y-[75%]
       `}
           >

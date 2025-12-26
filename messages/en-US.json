@@ -4,6 +4,7 @@
     "training": "Trainings",
     "adults": "Adults",
     "juniors": "Juniors",
+    "freePlay": "Free Play",
     "competition": "Competition",
     "tournament": "SB Tournaments",
     "prevSeasons": "Previous seasons",
@@ -20,7 +21,9 @@
     "member": "Sign up"
   },
   "Footer": {
-    "find": "Find us on"
+    "find": "Find us on",
+    "cookieSettings": "Cookie settings",
+    "privacyPolicy": "Privacy policy"
   },
   "Index": {
     "welcome": "Welcome to the website of",
@@ -48,7 +51,6 @@
       "LowLeagues": "4th league",
       "Unlicensed": "Unlicensed",
       "All": "Licensed and non-licensed ",
-      "FreePlay": "Free play",
       "title": "Adult trainings",
       "desc": "<p>BC Fribourg offers several two-hour training sessions per week at the <a>DOSF Sports Hall</a>. Our sessions are open to all levels, from beginners to experienced players, in a friendly and dynamic atmosphere.</p><p>Whether you want to discover badminton, improve your technique, or simply enjoy a sporting moment, our training sessions are designed for everyone. Join us and progress at your own pace!</p>",
       "holidays": {
@@ -100,6 +102,28 @@
       "contact": {
         "title": "Contact"
       }
+    },
+    "FreePlay": {
+      "1Monday": "Lundi",
+      "2Tuesday": "Mardi",
+      "3Wednesday": "Mercredi",
+      "4Thursday": "Jeudi",
+      "5Friday": "Vendredi",
+      "6Saturday": "Samedi",
+      "7Sunday": "Dimanche",
+      "FreePlay": "Jeu libre",
+      "title": "Jeu libre",
+      "desc": "<p>Le Badminton Club Fribourg offre des sessions de jeu libre à la <a>Salle de Sport de la DOSF</a> pour tous les membres du club. Ces sessions sont l'occasion idéale de pratiquer le badminton dans une ambiance détendue et conviviale, sans la structure formelle des entraînements.</p><p>Que vous souhaitiez perfectionner votre technique, jouer des matchs amicaux ou simplement profiter d'un moment sportif entre amis, nos sessions de jeu libre sont ouvertes à tous les niveaux. Rejoignez-nous pour partager votre passion du badminton et passer un bon moment sur le court !</p>",
+      "holidays": {
+        "title": "Vacances",
+        "desc": "Les entraînements n'ont pas lieu pendant les vacances scolaires, les jours fériés et les veilles de fêtes.",
+        "file": "Vacances scolaires",
+        "seasonDuration": "Durée de la saison",
+        "until": "jusqu'au"
+      },
+      "contact": {
+        "title": "Contact"
+      }
     }
   },
   "Interclubs": {
@@ -107,7 +131,9 @@
     "m": "Men",
     "f": "Women",
     "1st": "1st league",
-    "ligue": " league"
+    "2nd": "2nd league",
+    "3rd": "3rd league",
+    "nth": "th league"
   },
   "CompJuniors": {
     "title": "Junior competitions",
@@ -295,7 +321,10 @@
     "essentialDescription": "Always enabled. These are needed for core site functionality and spam protection (e.g. reCAPTCHA).",
     "analytics": "Analytics (Google)",
     "cancel": "Cancel",
-    "save": "Save Preferences"
+    "save": "Save Preferences",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "settings": "Settings"
   },
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
@@ -306,6 +335,39 @@
     "flipWord2": "friendship",
     "flipWord3": "competition",
     "additionalInfo": "The Tournoi des Bolzes is open to all players licensed TOP/A/B/C/D. The mixed doubles and women's and men's doubles will take place on Saturday, while the women's and men's singles will be held on Sunday.",
-    "location": "The Tournoi des Bolzes will take place at the Ste-Croix sports hall in Fribourg. The address is: Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. We encourage you to use public transport, taking the bus from Fribourg station towards Pérolles."
+    "location": "The Tournoi des Bolzes will take place at the Ste-Croix sports hall in Fribourg. The address is: Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. We encourage you to use public transport, taking the bus from Fribourg station towards Pérolles.",
+    "OfficialSponsors": "Official Sponsors",
+    "Gold": "Gold Sponsors",
+    "Silver": "Silver Sponsors",
+    "Bronze": "Bronze Sponsors",
+    "Donation": "Donors"
+  },
+  "PrivacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated,",
+    "1introduction": "<h2>1. Introduction</h2><p>This privacy policy explains how Badminton Club Fribourg (\"we\") collects and processes personal data when you use our website or interact with us. We comply with the Swiss Federal Act on Data Protection (FADP/nFADP) and applicable regulations.</p>",
+    "question": "For any questions",
+    "email": "Email ",
+    "address": "Address ",
+    "2dataCollection": "2. Data We Collect",
+    "21webSite": "<h3>2.1 When visiting the website</h3><ul><li>IP address</li><li>Browser and device information</li><li>Date and time of the request</li><li>Pages viewed</li><li>Cookies</li></ul><p>This data is collected automatically for technical and security reasons.</p>",
+    "22contactForm": "<h3>2.2 Contact form</h3><p>When you fill out our contact form, we collect the following information:</p><ul><li>First and last name</li><li>Email address</li><li>Subject and message</li></ul><p>This information is used solely to respond to your inquiry.</p>",
+    "23memberForm": "<h3>2.3 Membership registration form</h3><p>When you fill out our membership form, we collect the following information:</p><ul><li>First and last name</li><li>Address</li><li>Date of birth</li><li>Social Security Number (AVS) for juniors</li><li>Swiss Badminton licence number (if applicable)</li><li>Email address</li><li>Phone number</li><li>Communication preference</li><li>Message sent</li></ul><p>This information is used to manage your club membership.</p><h4>Why we collect your AVS number</h4><p>For participants registered under the federal Youth+Sports (J+S) program, we are legally required to transmit the AVS number to the J+S authorities to verify eligibility and to allow the club to receive federal funding. Your AVS number is used solely for J+S administrative purposes, accessible only to authorized committee members, transmitted only to the official J+S system, and stored securely for the legally required period.</p>",
+    "24recaptcha": "<h3>2.4 Google reCAPTCHA</h3><p>We use Google reCAPTCHA to protect our website against spam and abuse. reCAPTCHA collects data such as your IP address and other technical information in accordance with the <a>Google Privacy Policy</a>.</p>",
+    "25googleAnalytics": "<h3>2.5 Google Analytics</h3><p>We use Google Analytics (only if you accept cookies) to analyse website usage. Google Analytics collects data such as IP address, pages visited, and visit duration, in accordance with the <a>Google Analytics Privacy Policy</a>. You can disable Google Analytics through your cookie settings.</p>",
+    "26admin": "<h3>2.6 Administrator area (NextAuth)</h3><p>For committee members using the administrator area, we collect authentication information via NextAuth. This data is used to secure access to the admin area and is not shared with third parties.</p>",
+    "3Cookies": "<h2>3. Cookies and similar technologies</h2>",
+    "31essential": "<h3>3.1 Essential cookies</h3><p>Required for:</p><ul><li>the proper functioning of the website</li><li>security (spam protection via reCAPTCHA)</li><li>administrator authentication</li><li>cookie preferences</li></ul><p>They cannot be disabled.</p>",
+    "32analytics": "<h3>3.2 Analytical cookies (optional)</h3><p>Disabled by default. They are only activated after your explicit consent. You can change your preferences at any time via the “Cookie Settings” link in the footer.</p>",
+    "4processing": "<h2>4. Purposes of data processing</h2><p>We process your personal data for the following purposes:</p><ul><li>ensuring the proper functioning of the website</li><li>responding to your inquiries</li><li>managing club registrations</li><li>registering participants with J+S</li><li>fulfilling legal obligations</li><li>securing the website (reCAPTCHA, authentication)</li><li>performing optional analytics</li></ul>",
+    "5legalBasis": "<h2>5. Legal bases</h2><p>Under the FADP/nFADP, we process your personal data based on the following legal grounds:</p><ul><li>performance of a contract (membership management)</li><li>legal obligations (J+S, security)</li><li>legitimate interests (website security, optional analytics)</li><li>consent (analytical cookies)</li></ul>",
+    "6dataSharing": "<h2>6. Data sharing</h2>",
+    "61JS": "<h3>6.1 J+S authorities</h3><p>For participants registered under the J+S program (juniors U21), we transmit the necessary data (including AVS number) to the J+S authorities as legally required.</p>",
+    "62thirdParties": "<h3>6.2 Trusted third parties</h3><p>We only share your data with third parties when necessary for the purposes described, such as:</p><ul><li>technical service providers (hosting, security)</li><li>Google (reCAPTCHA, Analytics)</li></ul><p>We require these third parties to protect your data in accordance with the FADP/nFADP.</p>",
+    "7dataRetention": "<h2>7. Data retention</h2><p>We retain data as follows:</p><ul><li>membership applications: until the end of registration or membership</li><li>J+S data: according to legal requirements</li><li>contact form submissions: until the request is processed</li><li>server logs: 3 to 12 months</li><li>analytics data: according to Google’s policy (if enabled)</li></ul>",
+    "8security": "<h2>8. Data security</h2><p>We apply measures such as:</p><ul><li>HTTPS encryption</li><li>access restrictions</li><li>secure session cookies</li><li>reCAPTCHA</li><li>secure storage of AVS data</li></ul>",
+    "9rights": "<h2>9. Your rights</h2><p>You may:</p><ul><li>request access to your data</li><li>correct inaccurate data</li><li>request deletion (within legal limits)</li><li>withdraw consent for analytical cookies</li></ul><p>To exercise your rights, please contact:</p>",
+    "10international": "<h2>10. International transfers</h2><p>Certain providers (e.g., Google) may process data outside Switzerland. We use recognized safeguards (SCC, Swiss-U.S. DPF, etc.).</p>",
+    "11changes": "<h2>11. Changes to this policy</h2><p>We may update this policy. The date of the latest update is shown at the top. We encourage you to review it regularly.</p>"
   }
 }

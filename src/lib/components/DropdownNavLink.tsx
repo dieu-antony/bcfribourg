@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -24,12 +24,25 @@ const DropdownNavLink = ({
 
   const isDesktop = typeof window !== "undefined" && window.innerWidth > 1023;
 
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+
   const handleEnter = () => {
-    if (isDesktop) setIsHovered(true);
+    if (isDesktop) {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+        closeTimeout.current = null;
+      }
+      setIsHovered(true);
+    }
   };
 
   const handleLeave = () => {
-    if (isDesktop) setTimeout(() => setIsHovered(false), 500);
+    if (isDesktop) {
+      closeTimeout.current = setTimeout(() => {
+        setIsHovered(false);
+        closeTimeout.current = null;
+      }, 200);
+    }
   };
 
   const handleClick = () => {

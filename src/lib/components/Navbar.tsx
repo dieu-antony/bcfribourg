@@ -37,6 +37,11 @@ const Navbar = () => {
       href: "/training/juniors",
       icon: <UserRoundCog size="20px" />,
     },
+    {
+      name: t("freePlay"),
+      href: "/training/free_play",
+      icon: <UserRoundPlus size="20px" />,
+    },
   ];
 
   const subCompetition = [
