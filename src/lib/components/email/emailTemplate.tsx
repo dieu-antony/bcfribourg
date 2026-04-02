@@ -110,7 +110,7 @@ export function EmailTemplate({
     return (
       <div className="font-sans text-base leading-normal text-black">
         <h2 className="text-md mb-6">
-          Enovyé par{" "}
+          Envoyé par{" "}
           <strong>
             {firstName} {lastName}
           </strong>

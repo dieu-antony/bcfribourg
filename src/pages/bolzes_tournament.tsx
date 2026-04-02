@@ -139,7 +139,7 @@ function BolzesTournament({ sponsors }: Props) {
                           height={200}
                           crop="fit"
                           alt={tier}
-                          className="rounded-lg"
+                          className="rounded-lg object-contain"
                         />
                       </div>
                     ) : (
@@ -156,7 +156,7 @@ function BolzesTournament({ sponsors }: Props) {
                               height={200}
                               crop="fit"
                               alt={tier}
-                              className="rounded-lg"
+                              className="rounded-lg object-contain"
                             />
                           </div>
                         ))}
