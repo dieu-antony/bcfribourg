@@ -30,11 +30,15 @@
     "next events": "Nächste Veranstaltungen",
     "bolzes tournament": "Tournoi des Bolzes",
     "member": "Mitglied werden",
+    "last_insta": "Unsere letzten Instagram-Posts",
+    "followus": "Folge uns, um nichts von der Club-Lage zu verpassen!",
     "court": {
       "title": "Zugang zur Halle",
       "description": "Die Halle befindet sich in der DOSF (Deutsche Orientierungsschule Freiburg) im Torry-Quartier",
       "details": "Unten finden Sie einen detaillierten Plan des Standorts"
-    }
+    },
+    "findus": "Finde uns auf Instagram!",
+    "subtitle": "Der Badminton Club Fribourg vereint ambitioniertes Training für Junioren und Erwachsene mit einer starken, integrativen Gemeinschaft. Egal ob du für den nächsten Interclub-Sieg trainierst oder einfach aus Freude am Racketsport spielst, bei uns bist du richtig. Schau in einem Training vorbei und entdecke die Faszination Badminton!"
   },
   "Training": {
     "Adults": {
@@ -196,7 +200,8 @@
     "interclubs": "Interclub verantw.",
     "sup": "Verantw. Oberligen",
     "junior": "Junior-verantwortlicher",
-    "media": "Kommunikation und Medien"
+    "media": "Kommunikation und Medien",
+    "webmaster": "Webmaster"
   },
   "History": {
     "title": "Geschichte des Clubs",
@@ -329,7 +334,7 @@
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
     "registerButton": "Anmelden",
-    "subtitle": "Die erste Edition des Tournoi des Bolzes wird bald stattfinden!",
+    "subtitle": "Die zweite Edition des Tournoi des Bolzes wird bald stattfinden!",
     "description": "Komm vorbei für ein Badminton Wochenende voller",
     "flipWord1": "Freundschaft",
     "flipWord2": "Sport",

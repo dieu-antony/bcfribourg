@@ -14,12 +14,14 @@ import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
 import salle from "../../public/assets/plan_du_site_grand.webp";
-import one from "../../public/assets/home/1.webp";
-import two from "../../public/assets/home/2.webp";
-import three from "../../public/assets/home/3.webp";
-import four from "../../public/assets/home/4.webp";
-import five from "../../public/assets/home/5.webp";
+import one from "../../public/assets/home/1.jpg";
+import two from "../../public/assets/home/2.jpg";
+import three from "../../public/assets/home/3.jpg";
+import four from "../../public/assets/home/4.jpg";
+import five from "../../public/assets/home/5.jpg";
 import { LaserButton } from "~/lib/components/ui/LaserButton";
+import BeholdWidget from "@behold/react";
+import { Separator } from "~/lib/components/ui/separator";
 
 export default function Home() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
@@ -54,6 +56,11 @@ export default function Home() {
             {t("welcome")}
             <br />
             <Highlight className="">Badminton Club Fribourg</Highlight>
+
+            <p className="sm:text-md mx-12 my-12 flex max-w-[1000px] text-left text-sm font-normal text-gray-700 md:text-lg lg:text-xl">
+              {t("subtitle")}
+            </p>
+
             <div className="mt-8 flex justify-around gap-2 ">
               {/* <Link
                 href="/calendar"
@@ -71,7 +78,7 @@ export default function Home() {
               </LaserButton>
 
               <Link
-                href="/member"
+                href="/club/contact"
                 className="flex cursor-pointer items-center gap-2 self-center rounded-full border border-transparent bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 px-2 py-2 text-sm font-normal text-white shadow transition-transform duration-300 hover:scale-105 md:px-4 md:text-xl"
               >
                 <CornerDownRight size="15px" />
@@ -83,7 +90,7 @@ export default function Home() {
         <Link href="/gallery" className="max-w-[1000px]">
           <Carousel plugins={[plugin.current]} opts={{ loop: true }}>
             <CarouselContent>
-              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+              <CarouselItem className="flex max-h-[650px] max-w-[1000px] items-center">
                 <Image
                   src={one}
                   alt="Badminton Club Fribourg Badminton Fribourg"
@@ -91,7 +98,7 @@ export default function Home() {
                   loading="eager"
                 />
               </CarouselItem>
-              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+              <CarouselItem className="flex max-h-[650px] max-w-[1000px] items-center">
                 <Image
                   src={two}
                   alt="bc fribourg Badminton Fribourg"
@@ -99,7 +106,7 @@ export default function Home() {
                   loading="eager"
                 />
               </CarouselItem>
-              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+              <CarouselItem className="flex max-h-[650px] max-w-[1000px] items-center">
                 <Image
                   src={three}
                   alt="Badminton Club Fribourg Badminton Fribourg"
@@ -107,7 +114,7 @@ export default function Home() {
                   loading="eager"
                 />
               </CarouselItem>
-              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+              <CarouselItem className="flex max-h-[650px] max-w-[1000px] items-center">
                 <Image
                   src={four}
                   alt="bc fribourg Badminton Fribourg"
@@ -115,7 +122,7 @@ export default function Home() {
                   loading="eager"
                 />
               </CarouselItem>
-              <CarouselItem className="flex max-h-[500px] max-w-[1000px] items-center">
+              <CarouselItem className="flex max-h-[650px] max-w-[1000px] items-center">
                 <Image
                   src={five}
                   alt="Badminton Club Fribourg Badminton Fribourg"
@@ -126,6 +133,33 @@ export default function Home() {
             </CarouselContent>
           </Carousel>
         </Link>
+
+        {/* insta section */}
+        <Separator className="mt-12 h-1 w-full bg-picton-blue-700 shadow-xl" />
+
+        <div className="flex w-full flex-col items-center justify-center bg-slate-200 p-8">
+
+          <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center max-w-[1000px] p-4">
+            <div className="flex flex-col gap-2 place-self-start">
+              <h2 className="text-2xl font-extrabold">{t("last_insta")}</h2>
+              <p className="text-md text-gray-700">{t("followus")}</p>
+            </div>
+            <a
+              href="https://instagram.com/bcfribourg"
+              className="mt-2 flex gap-2 text-lg font-semibold border-picton-blue-700 border-2 rounded-md p-2 hover:bg-picton-blue-700 text-picton-blue-700 hover:text-white"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @bcfribourg
+            </a>
+          </div>
+          <div className="mt-4 flex h-full min-h-max w-full flex-col items-center justify-center px-5 pb-4 md:mt-8">
+            <BeholdWidget feedId="lZYG6F0AcwkHahCPw0lw" />
+          </div>
+        </div>
+
+        <Separator className="h-1 w-full bg-picton-blue-700 shadow-xl" />
+
         <div className="flex flex-col" id="salle">
           <div className="mx-5 mb-8 mt-12 max-w-[1000px] bg-white p-5 shadow">
             <h2 className="mb-2 bg-gradient-to-r from-picton-blue-600 to-picton-blue-500 bg-clip-text font-bold text-transparent">

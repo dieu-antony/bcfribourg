@@ -14,6 +14,7 @@ import { Separator } from "~/lib/components/ui/separator";
 import { CldImage } from "next-cloudinary";
 import cloudinary from "cloudinary";
 import type { CloudinarySearchResult } from "~/lib/types";
+import InstaEmbed from "~/lib/components/InstaEmbed";
 
 type Props = {
   sponsors: { public_id: string; folder: string }[];
@@ -34,16 +35,16 @@ function BolzesTournament({ sponsors }: Props) {
 
           <div className="relative mx-auto mt-8 max-w-[80%] text-center sm:mt-16">
             <h2 className="absolute left-0 top-0 w-full translate-x-[3px] translate-y-[3px] text-5xl font-bold leading-snug tracking-tighter text-picton-blue-600">
-              14.02. - 15.02.2026
+              13.02. - 14.02.2027
             </h2>
             <h2 className="relative w-full text-5xl font-bold leading-snug tracking-tighter text-black">
-              14.02. - 15.02.2026
+              13.02. - 14.02.2027
             </h2>
           </div>
 
           <button className="relative my-16 p-[3px] sm:my-24">
             <Link
-              href="https://sb.tournamentsoftware.com/sport/tournament?id=41BA949F-B13D-4B10-B469-154FA7B79B20"
+              href="https://sb.tournamentsoftware.com/sport/tournament?id=6EF63569-AD15-437A-BD17-9792B1A075E1"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -69,12 +70,15 @@ function BolzesTournament({ sponsors }: Props) {
 
             <CountdownTimer
               className="mb-8"
-              targetDate={new Date("2026-02-14T00:00:00Z")}
+              targetDate={new Date("2027-02-13T00:00:00Z")}
             />
 
             <Separator className="my-16 h-2 w-full bg-picton-blue-500" />
           </FadeUpOnScroll>
 
+          <FadeUpOnScroll>
+            <InstaEmbed />
+          </FadeUpOnScroll>
           <FadeUpOnScroll>
             <div className="mx-8 my-16 flex flex-col gap-8 sm:my-28 sm:grid sm:grid-cols-3 sm:items-center sm:justify-between">
               <p className="text-lg text-gray-700">{t("additionalInfo")}</p>

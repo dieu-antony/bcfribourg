@@ -30,11 +30,14 @@
     "next events": "Prochains événements",
     "bolzes tournament": "Tournoi des Bolzes",
     "member": "Devenir membre",
+    "last_insta": "Nos derniers posts Instagram",
+    "followus": "Suivez-nous pour ne rien manquer de la vie du club !",
     "court": {
       "title": "Accès à la salle",
       "description": "La salle se situe au Cycle d'Orientation de langue allemande (DOSF) du quartier du Torry",
       "details": "Ci-dessous, vous trouvez un plan détaillé du site lui-même"
-    }
+    },
+    "subtitle": "Le Badminton Club Fribourg allie un entraînement ambitieux pour juniors et adultes à une communauté forte et inclusive. Que tu t'entraînes pour la prochaine victoire en Interclub ou que tu joues simplement pour le plaisir des sports de raquette, tu es au bon endroit. Viens participer à un entraînement et découvre la fascination du badminton !"
   },
   "Training": {
     "Adults": {
@@ -196,7 +199,8 @@
     "interclubs": "Resp. interclubs",
     "sup": "Resp. ligues supérieures",
     "junior": "Resp. juniors",
-    "media": "Resp. communication et médias"
+    "media": "Resp. communication et médias",
+    "webmaster": "Webmaster"
   },
   "History": {
     "title": "Histoire du club",
@@ -329,7 +333,7 @@
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
     "registerButton": "Inscription au tournoi",
-    "subtitle": "La première édition du tournoi des Bolzes aura lieu bientôt !",
+    "subtitle": "La deuxième édition du tournoi des Bolzes aura lieu bientôt !",
     "description": "Rejoignez-nous pour un week-end de badminton",
     "flipWord1": "amical",
     "flipWord2": "sportif",

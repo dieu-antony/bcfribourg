@@ -31,7 +31,7 @@ const FreePlay = ({ trainings, holidays, contact }: Props) => {
 
   return (
     <Layout>
-      <Title>{t("title")}</Title>
+      <Title bannerImage="/assets/titles/20250704_BCF_CSB 137.jpg">{t("title")}</Title>
 
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
         <div className="relative m-8 mb-0 flex w-[300px] flex-col gap-4 bg-white p-8 shadow-md md:col-span-2 md:w-[664px] md:place-self-center lg:w-[864px]">

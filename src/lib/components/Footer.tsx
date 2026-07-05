@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react";
+import { Mail, Camera } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,6 +27,7 @@ const Footer = () => {
             />
           </div>
         </div>
+
         <div className="flex flex-col items-center gap-2">
           <div className="text-gray-500">{t("find")}</div>
           <div className="flex flex-row gap-8">
@@ -60,6 +61,18 @@ const Footer = () => {
             </Link>
           </div>
         </div>
+
+        <div className="flex flex-col items-end">
+          <a
+            className="flex flex-row items-center gap-2 text-gray-500 hover:text-white"
+            href="https://www.instagram.com/camillesimonbrunet/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Camera /> C. S. Brunet
+          </a>
+        </div>
+
         <Separator className="h-px w-full bg-gray-600 sm:col-span-3" />
         <button
           onClick={openBanner}

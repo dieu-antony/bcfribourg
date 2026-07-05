@@ -16,6 +16,7 @@ import Layout from "~/lib/components/Layout";
 import IcImage from "../../../public/assets/ic_image.webp";
 import AccentBar from "~/lib/components/AccentBar";
 import { db } from "~/server/db";
+import { Title } from "~/lib/components/Title";
 
 type InterclubsProps = {
   teams: PlayerByTeam[];
@@ -51,16 +52,11 @@ const Interclubs = ({ teams }: InterclubsProps) => {
 
   return (
     <Layout>
-      <Image
-        src={IcImage}
-        alt="Interclubs Badminton Club Fribourg BC Fribourg"
-        className="left-0 top-0 z-0 max-h-96 w-full object-cover"
-        priority
-        loading="eager"
-      />
-      <h1 className="absolute z-10 mt-[150px] w-full bg-gradient-to-r from-transparent via-slate-700/50 py-1 text-center text-2xl font-bold text-white md:mt-[220px] md:text-6xl">
-        Interclubs
-      </h1>
+      <Title
+        bannerImage="/assets/titles/260320_BCF-INTERCLUB_CSB 25.jpg"
+        bannerAlt="Interclubs Banner"
+      >
+      Interclubs</Title>
       <div className="flex justify-center">
         <div className="z-10 mx-5 my-8 flex w-full max-w-[1000px] flex-col gap-2 rounded border">
           <div className="relative rounded border bg-white p-4 pb-5 text-lg shadow-sm">

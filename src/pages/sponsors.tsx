@@ -66,7 +66,10 @@ export default function SponsorsPage({ sponsors }: Props) {
   return (
     <Layout>
       <div className="flex w-full flex-col items-center">
-        <Title>{t("title")}</Title>
+        <Title
+          bannerImage="/assets/260214_TDB_BCF_CSB16.jpg"
+          bannerAlt="Sponsors Banner"
+        >{t("title")}</Title>
 
         <div className="mx-5 my-8 w-full max-w-[1100px] space-y-12">
           {renderSponsorSection(

@@ -30,11 +30,14 @@
     "next events": "Next events",
     "bolzes tournament": "Tournoi des Bolzes",
     "member": "Sign up",
+    "last_insta": "Our latest Instagram posts",
+    "followus": "Follow us to never miss a beat of the club's life!",
     "court": {
       "title": "Access to the sports hall",
       "description": "The sports hall is situated in the Cycle d'Orientation de langue allemande (DOSF) in the quartier du Torry",
       "details": "Here you can find a detailed plan of the entrance"
-    }
+    },
+    "subtitle": "Badminton Club Fribourg combines ambitious training for both juniors and adults with a strong, inclusive community. Whether you are training for the next Interclub victory or simply playing for the love of the racket sport, you have come to the right place. Drop by for a training session and discover the fascination of badminton!"
   },
   "Training": {
     "Adults": {
@@ -196,7 +199,8 @@
     "interclubs": "Interclubs",
     "sup": "Upper leagues",
     "junior": "Juniors",
-    "media": "Communication and Media"
+    "media": "Communication and Media",
+    "webmaster": "Webmaster"
   },
   "History": {
     "title": "History of the Club",
@@ -210,10 +214,10 @@
       "1976": "An official match between Switzerland and China takes place at the Belluard hall, in front of no fewer than 800 spectators. It’s a high-tension event—the highly protocol-driven Chinese team, amid the Cultural Revolution, presented many challenges for the organizers. But the match also brought visibility to badminton, making its first appearance in the Fribourg media.",
       "1977": "Change in the committee: Marcel Petignat takes over as president, and Pierre Guerra becomes vice-president. The club organizes its first activities outside the gym, including hikes, skiing, and more.",
       "1979": "With the introduction of J+S (Youth+Sports), the club’s two coaches, Pierre Guerra and Marcel Petignat—both certified by the Swiss Badminton Association—make the transition and become J+S instructors. Club members can now train on Tuesday evenings at Collège Saint-Michel.",
-      "1982": "The club’s players move from the Schönberg hall to the Jura hall for Monday and Friday evening sessions. For the first time since its founding, Badminton Club Fribourg has two teams competing in the championship: Team 1 plays in the 2nd league, Team 2 in the 3rd league. Among the players, two names have become fixtures on the courts: Jean-Charles Bossens and Felice Marchesi.",
+      "1982": "The club's players move from the Schönberg hall to the Jura hall for Monday and Friday evening sessions. For the first time since its founding, Badminton Club Fribourg has two teams competing in the championship: Team 1 plays in the 2nd league, Team 2 in the 3rd league. Among the players, two names have become fixtures on the courts: Jean-Charles Bossens and Felice Marchesi.",
       "1983": "The first junior training sessions are led by Pierre Guerra. Results soon follow: Francine Guerra is selected for the national junior team (U14). The second team earns promotion to the 2nd league. Felice Marchesi finishes twice as runner-up at the Léman Championships in men’s singles D category.",
       "1984": "The club organizes the Swiss Junior Championships at the Sainte-Croix hall.",
-      "1985": "Promotion to the 1st league for the club’s first team. BC Fribourg now has two official referees: Daniel Dupraz and Marcel Petignat.",
+      "1985": "Promotion to the 1st league for the club's first team. BC Fribourg now has two official referees: Daniel Dupraz and Marcel Petignat.",
       "1986": "Francine Guerra wins the Swiss Junior Championship in La Chaux-de-Fonds, earning a gold medal in U14 singles and a bronze medal in doubles with Santi Wibowo (Geneva). In interclub competition, BC Fribourg now has four teams.",
       "1987": "Francine Guerra makes headlines once again at the Swiss Junior Championship in Stein, achieving a triple win: gold in U14 women’s singles, women’s doubles with Cathia Etzensberger (Basel), and mixed doubles with Martin Tschumi. Valentine Ayer and Véronique Petignat take second place in women’s doubles. The club also hosts the Fribourg Championships for the first time in collaboration with Villars-sur-Glâne.",
       "1988": "Swiss Junior Championship in Winterthur: In the U14 category, Francine Guerra and Valentine Ayer win the Swiss junior title in women’s doubles. Valentine Ayer and Yvan Haymoz (Tavel) claim the gold medal in mixed doubles. Francine Guerra finishes second in U16 women’s singles. Daniel Dupraz takes over as club president.",
@@ -309,7 +313,7 @@
     "letter": "Letter",
     "message": "Message",
     "send": "Send",
-    "contact": "I haven’t attended a training session yet"
+    "contact": "I haven't attended a training session yet"
   },
   "Gallery": {
     "title": "Gallery"
@@ -329,7 +333,7 @@
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
     "registerButton": "Register",
-    "subtitle": "The first edition of the Tournoi des Bolzes will take place soon!",
+    "subtitle": "The second edition of the Tournoi des Bolzes will take place soon!",
     "description": "Join us for a weekend of badminton full of",
     "flipWord1": "fun",
     "flipWord2": "friendship",
