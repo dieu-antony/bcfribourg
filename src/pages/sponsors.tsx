@@ -5,7 +5,7 @@ import Layout from "~/lib/components/Layout";
 import Sponsor from "~/lib/components/Sponsor";
 import { Title } from "~/lib/components/Title";
 import { db } from "~/server/db";
-import type { Sponsor as SponsorType } from "@prisma/client"; // adjust this if the type is elsewhere
+import type { Sponsor as SponsorType } from "@prisma/client";
 
 type Props = {
   sponsors: SponsorType[];
@@ -67,7 +67,7 @@ export default function SponsorsPage({ sponsors }: Props) {
     <Layout>
       <div className="flex w-full flex-col items-center">
         <Title
-          bannerImage="/assets/260214_TDB_BCF_CSB16.jpg"
+          bannerImage="/assets/titles/260214_TDB_BCF_CSB16.jpg"
           bannerAlt="Sponsors Banner"
         >{t("title")}</Title>
 
