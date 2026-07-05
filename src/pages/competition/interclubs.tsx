@@ -13,7 +13,6 @@ import { Separator } from "~/lib/components/ui/separator";
 import { useTranslations } from "next-intl";
 import type { GetStaticPropsContext } from "next";
 import Layout from "~/lib/components/Layout";
-import IcImage from "../../../public/assets/ic_image.webp";
 import AccentBar from "~/lib/components/AccentBar";
 import { db } from "~/server/db";
 import { Title } from "~/lib/components/Title";

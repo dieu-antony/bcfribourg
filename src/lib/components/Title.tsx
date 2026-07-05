@@ -14,15 +14,14 @@ export const Title = ({
   className,
   bannerImage,
   bannerAlt,
-  height,
 }: TitleProps) => {
-  
+
   if (bannerImage) {
     return (
       <div className="relative w-full overflow-hidden h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] mb-4">
         <Image
           src={bannerImage}
-          alt={bannerAlt || "Banner"}
+          alt={bannerAlt ?? "Banner"}
           fill
           className="object-cover"
         />

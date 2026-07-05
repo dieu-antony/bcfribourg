@@ -13,20 +13,25 @@ export default function Reel() {
     "idle"
   );
 
-  const handleClick = () => {
-    const video = videoRef.current;
-    if (!video) return;
+const handleClick = async () => {
+  const video = videoRef.current;
+  if (!video) return;
 
-    if (state === "idle" || state === "paused") {
-      video.play();
+  if (state === "idle" || state === "paused") {
+    try {
+      await video.play();
       setState("playing");
-    } else if (state === "playing") {
-      video.pause();
-      setState("paused");
-    } else if (state === "ended") {
-      window.open(INSTA_URL, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      // Playback was blocked or interrupted — stay in current state
+      console.error("Video playback failed:", err);
     }
-  };
+  } else if (state === "playing") {
+    video.pause();
+    setState("paused");
+  } else if (state === "ended") {
+    window.open(INSTA_URL, "_blank", "noopener,noreferrer");
+  }
+};
 
   return (
     <div className="w-full max-w-sm">
