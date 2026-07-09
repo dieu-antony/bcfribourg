@@ -77,13 +77,21 @@ model ICTeam {
     photoUrl String
 }
 
+model Trainer {
+    id        String     @id @default(cuid())
+    name      String
+    qualis    String     @default("")
+    imageUrl  String     @default("")
+    trainings Training[]
+}
+
 model Training {
-    id      String @id @default(cuid())
-    day     String
-    time    String
-    target  String
-    trainer String
-    type    String
+    id       String    @id @default(cuid())
+    day      String
+    time     String
+    target   String
+    type     String
+    trainers Trainer[]
 }
 
 model SeasonDuration {

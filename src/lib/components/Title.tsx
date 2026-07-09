@@ -29,7 +29,7 @@ export const Title = ({
         {/* Content overlay */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/50" />
 
           {/* Content on top */}
           <div className="relative z-10 text-center">

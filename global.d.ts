@@ -12,3 +12,5 @@ interface Grecaptcha {
 interface Window {
   grecaptcha: Grecaptcha;
 }
+
+declare module "*.css";

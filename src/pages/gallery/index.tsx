@@ -6,7 +6,6 @@ import { useState } from "react";
 import Layout from "~/lib/components/Layout";
 import { Title } from "~/lib/components/Title";
 import type { SearchResult } from "~/lib/types";
-import cloudinary from "cloudinary";
 
 type GalleryProps = {
   initialData: SearchResult[];
@@ -54,19 +53,23 @@ export default function Gallery({ initialData }: GalleryProps) {
   );
 }
 
-cloudinary.v2.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  const messages = (await import(`../../../messages/${locale}.json`)) as IntlMessages;
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
 
   let initialData: SearchResult[] = [];
 
+  const { v2: cloudinary } = await import("cloudinary");
+
+  cloudinary.config({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
   try {
-    const result = (await cloudinary.v2.search
+    const result = (await cloudinary.search
       .expression("resource_type:image")
       .sort_by("created_at", "desc")
       .with_field("tags")

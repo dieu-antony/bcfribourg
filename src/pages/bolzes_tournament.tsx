@@ -12,7 +12,6 @@ import { TextHoverEffect } from "~/lib/components/ui/text-hover-effect";
 import Image from "next/image";
 import { Separator } from "~/lib/components/ui/separator";
 import { CldImage } from "next-cloudinary";
-import cloudinary from "cloudinary";
 import type { CloudinarySearchResult } from "~/lib/types";
 import InstaEmbed from "~/lib/components/InstaEmbed";
 
@@ -179,22 +178,24 @@ function BolzesTournament({ sponsors }: Props) {
   );
 }
 
-cloudinary.v2.config({
-  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
     `../../messages/${locale}.json`
   )) as IntlMessages;
 
+  const { v2: cloudinary } = await import("cloudinary");
+
+  cloudinary.config({
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
   let sponsorsData: { public_id: string; folder: string }[] = [];
 
   try {
     // Direct Cloudinary fetch at build time
-    const result = (await cloudinary.v2.search
+    const result = (await cloudinary.search
       .expression("asset_folder:Sponsors/Tournament/*")
       .execute()) as CloudinarySearchResult;
 

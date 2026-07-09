@@ -69,7 +69,9 @@ export default function SponsorsPage({ sponsors }: Props) {
         <Title
           bannerImage="/assets/titles/260214_TDB_BCF_CSB16.jpg"
           bannerAlt="Sponsors Banner"
-        >{t("title")}</Title>
+        >
+          {t("title")}
+        </Title>
 
         <div className="mx-5 my-8 w-full max-w-[1100px] space-y-12">
           {renderSponsorSection(
@@ -95,7 +97,7 @@ export default function SponsorsPage({ sponsors }: Props) {
 
             <section className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               {/* Bronze Package */}
-              <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
+              <div className="border-2 border-amber-800 rounded-md bg-white p-6 shadow-md">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
                   <Image
                     src="/assets/sponsors/shuttles/bronze.png"
@@ -114,7 +116,7 @@ export default function SponsorsPage({ sponsors }: Props) {
               </div>
 
               {/* Silver Package */}
-              <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
+              <div className="border-2 border-slate-300 rounded-md bg-white p-6 shadow-md">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
                   <Image
                     src="/assets/sponsors/shuttles/silver.png"
@@ -133,7 +135,7 @@ export default function SponsorsPage({ sponsors }: Props) {
               </div>
 
               {/* Gold Package */}
-              <div className="border border-picton-blue-500 bg-white p-6 shadow-sm">
+              <div className="border-2 border-yellow-500 rounded-md bg-white p-6 shadow-md">
                 <h3 className="my-4 text-xl font-bold text-picton-blue-500">
                   <Image
                     src="/assets/sponsors/shuttles/gold.png"

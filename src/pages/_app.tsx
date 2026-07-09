@@ -5,7 +5,7 @@ import "~/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { useRouter } from "next/router";
-import type { Session } from "node_modules/next-auth/core/types";
+import type { Session } from "next-auth";
 import GoogleAnalytics from "~/lib/components/GoogleAnalytics";
 import JSONLD from "~/lib/components/JSONLD";
 import dynamic from "next/dynamic";

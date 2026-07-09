@@ -29,15 +29,15 @@ const getCurrentYear = (): number => {
 const CotisationTable = () => {
   const t = useTranslations("Member");
   const cotisation = [
-    { catégorie: "Adultes", années: "", cotisation: "270.-", license: "60.-" },
+    { catégorie: "Adultes", années: "", cotisation: "300.-", license: "80.-" },
     {
       catégorie: "Juniors U19",
       années:
         (getCurrentYear() - 18).toString() +
         " - " +
         (getCurrentYear() - 17).toString(),
-      cotisation: "200.-",
-      license: "40.-",
+      cotisation: "220.-",
+      license: "60.-",
     },
     {
       catégorie: "Juniors U17",
@@ -45,8 +45,8 @@ const CotisationTable = () => {
         (getCurrentYear() - 16).toString() +
         " - " +
         (getCurrentYear() - 15).toString(),
-      cotisation: "190.-",
-      license: "30.-",
+      cotisation: "210.-",
+      license: "50.-",
     },
     {
       catégorie: "Juniors U15",
@@ -54,13 +54,13 @@ const CotisationTable = () => {
         (getCurrentYear() - 14).toString() +
         " - " +
         (getCurrentYear() - 13).toString(),
-      cotisation: "150.-",
-      license: "30.-",
+      cotisation: "170.-",
+      license: "50.-",
     },
     {
       catégorie: "Juniors U13",
       années: (getCurrentYear() - 12).toString() + " - ",
-      cotisation: "120.-",
+      cotisation: "140.-",
       license: "",
     },
   ];

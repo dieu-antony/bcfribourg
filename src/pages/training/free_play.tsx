@@ -25,13 +25,14 @@ type TrainingDayKey =
   | "6Saturday"
   | "7Sunday";
 
-
 const FreePlay = ({ trainings, holidays, contact }: Props) => {
   const t = useTranslations("Training.FreePlay");
 
   return (
     <Layout>
-      <Title bannerImage="/assets/titles/20250704_BCF_CSB 137.jpg">{t("title")}</Title>
+      <Title bannerImage="/assets/titles/20250704_BCF_CSB 137.jpg">
+        {t("title")}
+      </Title>
 
       <div className="flex flex-col place-items-center justify-center md:grid md:grid-cols-2">
         <div className="relative m-8 mb-0 flex w-[300px] flex-col gap-4 bg-white p-8 shadow-md md:col-span-2 md:w-[664px] md:place-self-center lg:w-[864px]">
@@ -61,7 +62,7 @@ const FreePlay = ({ trainings, holidays, contact }: Props) => {
               start: training.time,
               day: t(training.day as TrainingDayKey),
             }}
-            trainer={training.trainer}
+            trainers={training.trainers}
             target={t("FreePlay")}
           />
         ))}
@@ -124,6 +125,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     where: {
       target: "FreePlay",
     },
+    include: { trainers: true },
   });
 
   const holidaysRaw = await db.seasonDuration.findFirst();

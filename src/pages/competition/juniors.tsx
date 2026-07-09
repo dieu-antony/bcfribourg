@@ -91,10 +91,14 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     `../../../messages/${locale}.json`
   )) as IntlMessages;
 
-  const juniorCompData = (await db.juniorComp.findMany()).map((comp) => ({
-    ...comp,
-    date: comp.date.toISOString(),
-  }));
+const juniorCompData = (await db.juniorComp.findMany({
+  orderBy: {
+    date: 'asc',
+  },
+})).map((comp) => ({
+  ...comp,
+  date: comp.date.toISOString(),
+}));
 
   return {
     props: {

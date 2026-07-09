@@ -97,20 +97,6 @@ export interface NodeICalSyncFix {
   parseFileFix: (file: string) => CalendarResponseFix;
 }
 
-// this is a fix for the node-ical types so eslint will complain
-/* eslint-disable */
-const nodeIcal = require("node-ical");
-
-export const sync: NodeICalSyncFix = {
-  parseICSFix: (body: string): CalendarResponseFix => {
-    return nodeIcal.parseICS(body);
-  },
-  parseFileFix: (file: string): CalendarResponseFix => {
-    return nodeIcal.parseFile(file);
-  },
-};
-/* eslint-enable */
-
 export type SearchResult = {
   public_id: string;
   asset_folder: string;
@@ -145,7 +131,13 @@ export type TrainingEntry = {
   day: string;
   time: string;
   target: string;
-  trainer: string;
+  type: string;
+  trainers: {
+    id: string;
+    name: string;
+    qualis: string;
+    imageUrl: string;
+  }[];
 };
 
 export type DurationEntry = {

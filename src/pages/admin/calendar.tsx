@@ -6,8 +6,11 @@ import { Button } from "~/lib/components/ui/button";
 import { EventDatabaseTable } from "~/lib/components/dataTables/eventTable/EventDatabaseTable";
 import { Toaster } from "~/lib/components/ui/sonner";
 import { toast } from "sonner";
-import { type APIMessageResponse, type CalendarEventWithoutID, sync } from "~/lib/types";
-import { findLonLat, parseCalendar } from "~/lib/utils/parseCalender";
+import {
+  type APIMessageResponse,
+  type CalendarEventWithoutID,
+} from "~/lib/types";
+import { findLonLat } from "~/lib/utils/parseCalender";
 import crypto from "crypto";
 import Layout from "~/lib/components/Layout";
 import type { GetStaticPropsContext } from "next";
@@ -42,7 +45,7 @@ const Calendar = () => {
   useEffect(() => {
     async function getDatabaseEvents() {
       const response = await fetch("/api/events");
-      const data = await response.json() as EventApiResponse;
+      const data = (await response.json()) as EventApiResponse;
       if (data.status === "success") {
         setTableData(
           data.events.map((event: DatabaseColumnsProps) => ({
@@ -80,10 +83,21 @@ const Calendar = () => {
         if (!content) return;
         if (typeof content !== "string") return;
 
-        const data = sync.parseICSFix(content);
-        parseCalendar(data)
-          .then((parsedEvents) => {
-            setEvents((prev) => [...prev, ...parsedEvents]);
+        fetch("/api/events/parse", {
+          method: "POST",
+          headers: { "Content-Type": "text/plain" },
+          body: content,
+        })
+          .then(async (res) => {
+            const data = (await res.json()) as {
+              status: string;
+              events?: CalendarEventWithoutID[];
+              message?: string;
+            };
+            if (data.status !== "success" || !data.events) {
+              throw new Error(data.message ?? "Parse failed");
+            }
+            setEvents((prev) => [...prev, ...data.events!]);
             setLoading(false);
             toast.dismiss(toastId);
             toast.success("Events uploaded successfully");
@@ -116,8 +130,7 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(eventsWithType),
       });
-      const data =
-        await response.json() as APIMessageResponse;
+      const data = (await response.json()) as APIMessageResponse;
       if (data.status === "success") {
         toast.success(data.message);
       } else if (data.status === "error") {
@@ -140,8 +153,7 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(eventsAsArray),
       });
-      const data =
-        await response.json() as APIMessageResponse;
+      const data = (await response.json()) as APIMessageResponse;
       if (data.status === "success") {
         toast.success(data.message);
       } else if (data.status === "error") {
@@ -162,8 +174,7 @@ const Calendar = () => {
         method: "POST",
         body: JSON.stringify(tableData),
       });
-      const data =
-        await response.json() as APIMessageResponse;
+      const data = (await response.json()) as APIMessageResponse;
       if (data.status === "success") {
         toast.success(data.message);
       } else if (data.status === "error") {

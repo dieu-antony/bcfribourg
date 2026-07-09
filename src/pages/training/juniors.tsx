@@ -60,7 +60,7 @@ const Juniors = ({ trainings, holidays, contact }: Props) => {
               start: training.time,
               day: t(training.day as TrainingDayKey),
             }}
-            trainer={training.trainer}
+            trainers={training.trainers}
             target={t(training.target as TargetKey)}
           />
         ))}
@@ -123,6 +123,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     where: {
       type: "Juniors",
     },
+    include: { trainers: true },
   });
 
   const holidaysRaw = await db.seasonDuration.findFirst();

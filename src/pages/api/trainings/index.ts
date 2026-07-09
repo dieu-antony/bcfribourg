@@ -10,7 +10,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   return RouteHandler(req, res, {
     GET: async (_req, res) => {
-      const trainings = await db.training.findMany({ orderBy: { time: "asc" } });
+      const trainings = await db.training.findMany({
+        orderBy: { time: "asc" },
+        include: { trainers: true },
+      });
       return res.status(200).json(trainings);
     },
     POST: async (req, res) => {
@@ -18,14 +21,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(401).json({ error: "Unauthorized" });
       }
 
-      const { day, time, target, trainer, type } = req.body as Training;
+      const { day, time, target, type, trainerIds } = req.body as Training & {
+        trainerIds?: string[];
+      };
 
-      if (!day || !time || !target || !trainer || !type) {
+      if (!day || !time || !target || !type) {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
       const newTraining = await db.training.create({
-        data: { day, time, target, trainer, type },
+        data: {
+          day,
+          time,
+          target,
+          type,
+          trainers: {
+            connect: (trainerIds ?? []).map((id) => ({ id })),
+          },
+        },
+        include: { trainers: true },
       });
 
       return res.status(201).json(newTraining);
