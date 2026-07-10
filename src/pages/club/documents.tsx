@@ -25,13 +25,8 @@ const Documents = () => {
     },
     {
       name: t("file3"),
-      path: "/documents/demande_dadmission.docx",
-      description: t("desc3"),
-    },
-    {
-      name: t("file4"),
       path: "/documents/qr_code.pdf",
-      description: t("desc4"),
+      description: t("desc3"),
     },
   ];
 

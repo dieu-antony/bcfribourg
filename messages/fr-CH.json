@@ -251,10 +251,8 @@
     "desc1": "Status du Badminton Club Fribourg",
     "file2": "Charte",
     "desc2": "Charte d'éthique",
-    "file3": "Formulaire d'inscription",
-    "desc3": "Formulaire d'inscription au club",
-    "file4": "Code QR",
-    "desc4": "Code QR pour paiements"
+    "file3": "Code QR",
+    "desc3": "Code QR pour paiements"
   },
   "Links": {
     "afb": "Association Fribourgeoise de Badminton",

@@ -251,10 +251,8 @@
     "desc1": "Statutes of the Badminton Club Fribourg",
     "file2": "CoE",
     "desc2": "Code of Ethics",
-    "file3": "Club registration form",
-    "desc3": "Club registration form (french)",
-    "file4": "QR code",
-    "desc4": "QR code for payments"
+    "file3": "QR code",
+    "desc3": "QR code for payments"
   },
   "Links": {
     "afb": "Fribourg Badminton Association",
