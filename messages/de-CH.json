@@ -37,7 +37,20 @@
       "description": "Die Halle befindet sich in der DOSF (Deutsche Orientierungsschule Freiburg) im Torry-Quartier",
       "details": "Unten finden Sie einen detaillierten Plan des Standorts"
     },
-    "subtitle": "Der Badminton Club Fribourg vereint ambitioniertes Training für Junioren und Erwachsene mit einer starken, integrativen Gemeinschaft. Egal ob du für den nächsten Interclub-Sieg trainierst oder einfach aus Freude am Racketsport spielst, bei uns bist du richtig. Schau in einem Training vorbei und entdecke die Faszination Badminton!"
+    "subtitle": "Der Badminton Club Fribourg vereint ambitioniertes Training für Junioren und Erwachsene mit einer starken, integrativen Gemeinschaft. Egal ob du für den nächsten Interclub-Sieg trainierst oder einfach aus Freude am Racketsport spielst, bei uns bist du richtig. Schau in einem Training vorbei und entdecke die Faszination Badminton!",
+    "trainings": {
+      "title": "Unsere Trainings",
+      "subtitle": "Kontaktiere uns um dich an ein Probetraining zumelden. Schläger stellen wir. Trainings finden abgesehen von Schulferien statt zwischen",
+      "cta": "Kontakt",
+      "next": "Nächstes",
+      "venue": "Sporthalle DOSF, Av. Général-Guisan 61a, 1700 Freiburg —",
+      "directions": "Anfahrt",
+      "group": {
+        "Adults": "Erwachsene",
+        "Juniors": "Junioren",
+        "FreePlay": "Freies Spiel"
+      }
+    }
   },
   "Training": {
     "Adults": {

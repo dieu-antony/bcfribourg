@@ -39,7 +39,7 @@ const daysOfWeek = [
   { value: "7Sunday", label: "Dimanche" },
 ];
 
-const times = ["18h00 - 20h00", "19h00 - 21h00", "20h00 - 22h00"];
+const times = ["18h00 - 20h00", "19h00 - 21h00", "20h00 - 22h00", "19h00 - 20h30", "17h30 - 19h00", "18h00 - 19h30"];
 
 type TrainerOption = {
   id: string;

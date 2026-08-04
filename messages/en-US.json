@@ -37,7 +37,20 @@
       "description": "The sports hall is situated in the Cycle d'Orientation de langue allemande (DOSF) in the quartier du Torry",
       "details": "Here you can find a detailed plan of the entrance"
     },
-    "subtitle": "Badminton Club Fribourg combines ambitious training for both juniors and adults with a strong, inclusive community. Whether you are training for the next Interclub victory or simply playing for the love of the racket sport, you have come to the right place. Drop by for a training session and discover the fascination of badminton!"
+    "subtitle": "Badminton Club Fribourg combines ambitious training for both juniors and adults with a strong, inclusive community. Whether you are training for the next Interclub victory or simply playing for the love of the racket sport, you have come to the right place. Drop by for a training session and discover the fascination of badminton!",
+    "trainings": {
+      "title": "Our Trainings",
+      "subtitle": "Contact us for a free trial session. Rackets provided. Trainings take place outside of school holidays between",
+      "cta": "Contact",
+      "next": "Next",
+      "venue": "DOSF Sports Hall, Av. Général-Guisan 61a, 1700 Fribourg —",
+      "directions": "Directions",
+      "group": {
+        "Adults": "Adults",
+        "Juniors": "Juniors",
+        "FreePlay": "Free Play"
+      }
+    }
   },
   "Training": {
     "Adults": {

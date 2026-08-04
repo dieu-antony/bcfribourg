@@ -37,7 +37,20 @@
       "description": "La salle se situe au Cycle d'Orientation de langue allemande (DOSF) du quartier du Torry",
       "details": "Ci-dessous, vous trouvez un plan détaillé du site lui-même"
     },
-    "subtitle": "Le Badminton Club Fribourg allie un entraînement ambitieux pour juniors et adultes à une communauté forte et inclusive. Que tu t'entraînes pour la prochaine victoire en Interclub ou que tu joues simplement pour le plaisir des sports de raquette, tu es au bon endroit. Viens participer à un entraînement et découvre la fascination du badminton !"
+    "subtitle": "Le Badminton Club Fribourg allie un entraînement ambitieux pour juniors et adultes à une communauté forte et inclusive. Que tu t'entraînes pour la prochaine victoire en Interclub ou que tu joues simplement pour le plaisir des sports de raquette, tu es au bon endroit. Viens participer à un entraînement et découvre la fascination du badminton !",
+    "trainings": {
+      "title": "Nos Entraînements",
+      "subtitle": "Contacte-nous pour un essai gratuit. Des raquettes sont fournies. Les entraînements ont lieu en dehors des vacances scolaires entre",
+      "cta": "Contact",
+      "next": "Suivant",
+      "venue": "Salle de Sport de la DOSF, Av. Général-Guisan 61a, 1700 Fribourg —",
+      "directions": "Directions",
+      "group": {
+        "Adults": "Adultes",
+        "Juniors": "Juniors",
+        "FreePlay": "Jeu libre"
+      }
+    }
   },
   "Training": {
     "Adults": {

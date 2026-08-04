@@ -30,6 +30,8 @@ const TrainingCard = ({
   className,
 }: TrainingCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const hasTrainers = trainers.length > 0;
+
   return (
     <motion.div
       className={cn(
@@ -57,66 +59,68 @@ const TrainingCard = ({
         {time.start}
       </h3>
       <p className="px-8">{target}</p>
-      <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <Popover open={hasTrainers && isOpen} onOpenChange={(open) => hasTrainers && setIsOpen(open)}>
         <PopoverTrigger asChild>
           <button
-            className="flex cursor-pointer gap-2 px-8 text-left outline-none"
+            className={cn(
+              "flex gap-2 px-8 text-left outline-none",
+              hasTrainers ? "cursor-pointer" : "cursor-default",
+            )}
+            disabled={!hasTrainers}
             // Desktop Hover Behaviors
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
+            onMouseEnter={() => hasTrainers && setIsOpen(true)}
+            onMouseLeave={() => hasTrainers && setIsOpen(false)}
             // Mobile Touch Behavior (Fallback click)
-            onClick={() => setIsOpen((prev) => !prev)}
+            onClick={() => hasTrainers && setIsOpen((prev) => !prev)}
           >
             <User className="text-picton-blue-500" />
             <span className="font-medium text-gray-900">
-              {trainers.map((t) => t.name).join(", ")}
+              {hasTrainers ? trainers.map((t) => t.name).join(", ") : "-"}
             </span>
           </button>
         </PopoverTrigger>
 
-        <PopoverContent
-          className="pointer-events-none h-40 w-80 p-2 data-[state=open]:pointer-events-auto"
-          // Keeps the popup open when desktop users move their mouse into it
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-          side="bottom"
-          align="start"
-        >
-          <div className={`font-sans ${inter.variable} flex h-full flex-col gap-4`}>
-            {trainers.map((trainer) => (
-              <div key={trainer.id} className="flex h-full items-stretch gap-4">
-                {/* Left Side: Image Container */}
-                <div className="relative h-full w-28 flex-shrink-0 overflow-hidden rounded-md">
-                  {trainer.imageUrl ? (
-                    <Image
-                      src={trainer.imageUrl}
-                      alt={trainer.name}
-                      fill
-                      sizes="(max-width: 120px) 100vw"
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-picton-blue-100">
-                      <User className="h-8 w-8 text-picton-blue-500" />
-                    </div>
-                  )}
+        {hasTrainers && (
+          <PopoverContent
+            className="pointer-events-none h-40 w-80 p-2 data-[state=open]:pointer-events-auto"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+            side="bottom"
+            align="start"
+          >
+            <div className={`font-sans ${inter.variable} flex h-full flex-col gap-4`}>
+              {trainers.map((trainer) => (
+                <div key={trainer.id} className="flex h-full items-stretch gap-4">
+                  <div className="relative h-full w-28 flex-shrink-0 overflow-hidden rounded-md">
+                    {trainer.imageUrl ? (
+                      <Image
+                        src={trainer.imageUrl}
+                        alt={trainer.name}
+                        fill
+                        sizes="(max-width: 120px) 100vw"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-picton-blue-100">
+                        <User className="h-8 w-8 text-picton-blue-500" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-1">
+                    <span className="text-base font-semibold text-gray-900">
+                      {trainer.name}
+                    </span>
+                    {trainer.qualis && (
+                      <p className="line-clamp-3 text-sm text-gray-500">
+                        {trainer.qualis}
+                      </p>
+                    )}
+                  </div>
                 </div>
-
-                {/* Right Side: Text details */}
-                <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-1">
-                  <span className="text-base font-semibold text-gray-900">
-                    {trainer.name}
-                  </span>
-                  {trainer.qualis && (
-                    <p className="line-clamp-3 text-sm text-gray-500">
-                      {trainer.qualis}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </PopoverContent>
+              ))}
+            </div>
+          </PopoverContent>
+        )}
       </Popover>
 
       <motion.div

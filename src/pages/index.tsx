@@ -22,10 +22,21 @@ import five from "../../public/assets/home/5.jpg";
 import { LaserButton } from "~/lib/components/ui/LaserButton";
 import BeholdWidget from "@behold/react";
 import { Separator } from "~/lib/components/ui/separator";
+import { TrainingEntry } from "~/lib/types";
+import TrainingSummary from "~/lib/components/TrainingSummary";
+import { db } from "~/server/db";
+import { SeasonDuration } from "@prisma/client";
+import { format } from "date-fns";
 
-export default function Home() {
+type Props = {
+  trainings: TrainingEntry[];
+  holidays: SeasonDuration;
+};
+
+export default function Home({ trainings, holidays }: Props) {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const t = useTranslations("Index");
+  const t2 = useTranslations("Home.Trainings");
 
   useEffect(() => {
     const currentPlugin = plugin.current;
@@ -134,19 +145,21 @@ export default function Home() {
           </Carousel>
         </Link>
 
-        {/* insta section */}
         <Separator className="mt-12 h-1 w-full bg-picton-blue-700 shadow-xl" />
+        <TrainingSummary trainings={trainings} holidays={holidays} />
+
+        {/* insta section */}
+        <Separator className="h-1 w-full bg-picton-blue-700 shadow-xl" />
 
         <div className="flex w-full flex-col items-center justify-center bg-slate-200 p-8">
-
-          <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center max-w-[1000px] p-4">
+          <div className="flex w-full max-w-[1000px] flex-col items-start justify-between p-4 sm:flex-row sm:items-center">
             <div className="flex flex-col gap-2 place-self-start">
               <h2 className="text-2xl font-extrabold">{t("last_insta")}</h2>
               <p className="text-md text-gray-700">{t("followus")}</p>
             </div>
             <a
               href="https://instagram.com/bcfribourg"
-              className="mt-2 flex gap-2 text-lg font-semibold border-picton-blue-700 border-2 rounded-md p-2 hover:bg-picton-blue-700 text-picton-blue-700 hover:text-white"
+              className="mt-2 flex gap-2 rounded-md border-2 border-picton-blue-700 p-2 text-lg font-semibold text-picton-blue-700 hover:bg-picton-blue-700 hover:text-white"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -189,13 +202,32 @@ export default function Home() {
     </Layout>
   );
 }
+
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const messages = (await import(
     `../../messages/${locale}.json`
   )) as IntlMessages;
+
+  const trainings = await db.training.findMany({
+    orderBy: [{ day: "asc" }, { time: "asc" }],
+  });
+
+   const holidaysRaw = await db.seasonDuration.findFirst();
+  
+    const holidays = holidaysRaw
+      ? {
+          ...holidaysRaw,
+          start: format(holidaysRaw.start, "dd.MM.yyyy"),
+          end: format(holidaysRaw.end, "dd.MM.yyyy"),
+        }
+      : { start: "", end: "", link: "", id: "" };
+
   return {
     props: {
       messages: messages.default,
+      trainings,
+      holidays,
     },
+    revalidate: 604800,
   };
 }
