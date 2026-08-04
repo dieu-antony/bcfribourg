@@ -22,10 +22,10 @@ import five from "../../public/assets/home/5.jpg";
 import { LaserButton } from "~/lib/components/ui/LaserButton";
 import BeholdWidget from "@behold/react";
 import { Separator } from "~/lib/components/ui/separator";
-import { TrainingEntry } from "~/lib/types";
+import type { TrainingEntry } from "~/lib/types";
 import TrainingSummary from "~/lib/components/TrainingSummary";
 import { db } from "~/server/db";
-import { SeasonDuration } from "@prisma/client";
+import type { SeasonDuration } from "@prisma/client";
 import { format } from "date-fns";
 
 type Props = {
@@ -36,7 +36,6 @@ type Props = {
 export default function Home({ trainings, holidays }: Props) {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
   const t = useTranslations("Index");
-  const t2 = useTranslations("Home.Trainings");
 
   useEffect(() => {
     const currentPlugin = plugin.current;

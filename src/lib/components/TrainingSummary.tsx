@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import AccentBar from "~/lib/components/AccentBar";
 import { cn } from "~/lib/utils/utils";
 import type { TrainingEntry } from "~/lib/types";
-import { SeasonDuration } from "@prisma/client";
+import type { SeasonDuration } from "@prisma/client";
 import Image from "next/image";
 
 type TrainingDayKey =
@@ -59,12 +59,12 @@ const TrainingSummary = ({ trainings, holidays, className }: Props) => {
   const tt = useTranslations("Training");
 
   const day = (key: TrainingDayKey) =>
-    tt(`Adults.${key}` as Parameters<typeof tt>[0]);
+    tt(`Adults.${key}`);
 
   const target = (value: string) => {
     const group = TARGET_GROUP[value];
     if (!group) return value;
-    return tt(`${group}.${value}` as Parameters<typeof tt>[0]);
+    return tt(`${group}.${value}`);
   };
 
   const grouped = useMemo(
@@ -107,7 +107,7 @@ const TrainingSummary = ({ trainings, holidays, className }: Props) => {
             {t("title")}
           </h2>
           <p className="text-md text-gray-700">
-            {t("subtitle") + " " + holidays.start + " - " + holidays.end + "."}
+            {t("subtitle") + " " + holidays.start.toString() + " - " + holidays.end.toString() + "."}
           </p>
         </div>
         <Link
@@ -169,7 +169,7 @@ const TrainingSummary = ({ trainings, holidays, className }: Props) => {
                           GROUP_BADGE[group],
                         )}
                       >
-                        {t(`group.${group}` as Parameters<typeof t>[0])}
+                        {t(`group.${group}`)}
                       </Link>
                     </div>
                   );
