@@ -17,6 +17,7 @@ const juniorsTargets = [
   { value: "JuniorsOlder", label: "14-18 ans" },
   { value: "JuniorsYounger", label: "Jusqu'à 14 ans" },
   { value: "JuniorsAll", label: "Jusqu'à 18 ans" },
+  { value: "JuniorsAdvanced", label: "Juniors avancés" },
 ];
 
 const adultsTargets = [
@@ -39,7 +40,7 @@ const daysOfWeek = [
   { value: "7Sunday", label: "Dimanche" },
 ];
 
-const times = ["18h00 - 20h00", "19h00 - 21h00", "20h00 - 22h00", "19h00 - 20h30", "17h30 - 19h00", "18h00 - 19h30"];
+const times = ["18h00 - 20h00", "19h00 - 21h00", "20h00 - 22h00", "19h00 - 20h30", "17h30 - 19h00", "18h00 - 19h30", "20h30 - 22h00"];
 
 type TrainerOption = {
   id: string;

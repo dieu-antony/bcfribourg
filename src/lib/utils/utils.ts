@@ -90,9 +90,9 @@ export const toEmail = (subject: string) => {
     case "evenement":
       return "event@bcfribourg.ch";
     case "autre":
-      return "secretaire@bcfribourg.ch";
+      return "info@bcfribourg.ch";
     default:
-      return "secretaire@bcfribourg.ch";
+      return "info@bcfribourg.ch";
   }
 };
 
