@@ -55,7 +55,7 @@ async function sendEmail(emailData: EmailData): Promise<CreateEmailResponse> {
     subject: emailData.subject ?? "New contact message",
     react: EmailTemplate({ ...emailData }),
     text: emailData.message ?? "",
-    reply_to: emailData.email,
+    replyTo: emailData.email,
   });
 }
 
@@ -97,7 +97,7 @@ export default async function send(
           return res.status(400).json({
             error:
               typeof result.error === "string"
-                ? result.error
+                ? result
                 : (result.error.message ?? "Email sending failed"),
             EmailData: emailData,
           });
