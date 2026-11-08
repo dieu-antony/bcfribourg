@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "~/lib/components/Layout";
-import TournamentImg from "../../../public/assets/tournament.webp";
+import TournamentImg from "../../../public/assets/tournament.jpg";
 import { db } from "~/server/db";
 
 type Contact = {

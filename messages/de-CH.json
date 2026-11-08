@@ -29,7 +29,7 @@
     "welcome": "Willkommen auf der Website des",
     "next events": "Nächste Veranstaltungen",
     "bolzes tournament": "Tournoi des Bolzes",
-    "member": "Mitglied werden",
+    "member": "Probetraining machen",
     "last_insta": "Unsere letzten Instagram-Posts",
     "followus": "Folge uns, um nichts von der Club-Lage zu verpassen!",
     "court": {
@@ -37,7 +37,7 @@
       "description": "Die Halle befindet sich in der DOSF (Deutsche Orientierungsschule Freiburg) im Torry-Quartier",
       "details": "Unten finden Sie einen detaillierten Plan des Standorts"
     },
-    "subtitle": "Der Badminton Club Fribourg vereint ambitioniertes Training für Junioren und Erwachsene mit einer starken, integrativen Gemeinschaft. Egal ob du für den nächsten Interclub-Sieg trainierst oder einfach aus Freude am Racketsport spielst, bei uns bist du richtig. Schau in einem Training vorbei und entdecke die Faszination Badminton!",
+    "subtitle": "Ambitioniertes Training für Junioren und Erwachsene in einer starken und inklusiven Gemeinschaft. Komm vorbei und probiere ein Training aus!",
     "trainings": {
       "title": "Unsere Trainings",
       "subtitle": "Kontaktiere uns um dich an ein Probetraining zumelden. Schläger stellen wir. Trainings finden abgesehen von Schulferien statt zwischen",
@@ -296,8 +296,8 @@
     "bronze": "Bronzener Shuttle",
     "subtitle": "Sie möchten den Badminton Club Freiburg unterstützen?",
     "desc": "Wir bieten drei Sponsoringmöglichkeiten an: Sponsor „Goldener Shuttle“, „Silberner Shuttle“ und „Bronzener Shuttle“. Für weitere Informationen kontaktieren Sie uns bitte unter: president(at)bcfribourg.ch",
-    "goldli": "<li>Alle Vorteile der vorherigen Pakete</li><li>Werbung auf den Trikots</li><li>2 Werbebanner bei Heimspielen</li><li>Logo in allen wichtigen Kommunikationskanälen (Social Media, Plakate, Website)</li><li>Dreijähriger Sponsoringvertrag</li>\n",
-    "silverli": "<li>Alle Vorteile des Bronze-Pakets</li><li>Logopräsenz bei Heimspielen (1 Banner 1x3 m)</li><li>Kleines Logo auf den Trikots</li><li>Erwähnung in Instagram-Stories und -Posts</li><li>Einladung zum Sponsoren-Turnier</li>\n",
+    "goldli": "<li>Alle Vorteile der vorherigen Pakete</li><li>Werbung auf den Trikots (Je nach Verfügbarkeit)</li><li>2 Werbebanner bei Heimspielen</li><li>Logo in allen wichtigen Kommunikationskanälen (Social Media, Plakate, Website)</li><li>Dreijähriger Sponsoringvertrag</li>\n ",
+    "silverli": "<li>Alle Vorteile des Bronze-Pakets</li><li>Logopräsenz bei Heimspielen (1 Banner 1x3 m)</li><li>Erwähnung in Instagram-Stories und -Posts</li><li>Einladung zum Sponsoren-Turnier</li>\n",
     "bronzeli": "<li>Logo & Erwähnung auf unserer Website</li><li>Erwähnung bei internen Veranstaltungen</li><li>Teilnahme an Heimspielen</li>\n"
   },
   "Member": {
@@ -345,18 +345,57 @@
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
     "registerButton": "Anmelden",
-    "subtitle": "Die zweite Edition des Tournoi des Bolzes wird bald stattfinden!",
     "description": "Komm vorbei für ein Badminton Wochenende voller",
     "flipWord1": "Freundschaft",
     "flipWord2": "Sport",
     "flipWord3": "Spass",
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "seconds": "Sekunden",
     "additionalInfo": "Das Tournoi des Bolzes ist offen für alle Spieler und Spielerinnen mit den Lizenzen TOP/A/B/C/D. Die Mixed-Doppel und die Damen- und Herrendoppel finden am Samstag statt, während die Damen- und Herreneinzel am Sonntag ausgetragen werden.",
     "location": "Das Tournoi des Bolzes findet in der Sporthalle Ste-Croix in Fribourg statt. Die Adresse lautet: Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. Wir empfehlen die Anreise mit öffentlichen Verkehrsmitteln, indem Sie den Bus vom Bahnhof Fribourg in Richtung Pérolles nehmen.",
     "OfficialSponsors": "Offizielle Sponsoren",
     "Gold": "Gold-Sponsoren",
     "Silver": "Silber-Sponsoren",
     "Bronze": "Bronze-Sponsoren",
-    "Donation": "Spender"
+    "Donation": "Spender",
+    "facts": {
+      "dateLabel": "Datum",
+      "placeLabel": "Ort",
+      "levelLabel": "Level",
+      "feeLabel": "Einschreibegebühr",
+      "fee": "24.- Doppel / 15.- Einzel"
+    },
+    "band": {
+      "title": "Bereit zu spielen?",
+      "highlight": "Schreib dich jetzt ein!"
+    },
+    "downloads": {
+      "title": "Dokumente",
+      "cta": "Herunterladen",
+      "flyer": {
+        "title": "Flyer",
+        "description": "Der offiziele Turnierflyer, zum Herunterladen und Ausdrucken."
+      },
+      "payment": {
+        "title": "Zahlungsinformationen",
+        "description": "QR-Code für die Zahlung der Einschreibegebühr."
+      },
+      "announcement": {
+        "title": "Turnier Ankündigung",
+        "description": "Die Ankündigung des Turniers, mit allen Informationen zu den Kategorien und Regeln."
+      }
+    },
+    "sponsorCta": {
+      "title": "Werden Sie Sponsor des Tournoi des Bolzes",
+      "text": "Entdecken Sie unsere Sponsoringpakete und die Sichtbarkeit, die wir für Ihr Unternehmen bieten.",
+      "button": "Sponsorendossier"
+    },
+    "whatIsBolze": {
+      "title": "Was ist Bolz?",
+      "text": "Bolz ist ein zweisprachiger Dialekt, der hauptsächlich in der Unterstadt von Freiburg gesprochen wird. Dabei werden Französisch und Schweizerdeutsch fliessend innerhalb eines Satzes vermischt. Der Dialekt entstand im 19. Jahrhundert, als viele Bauern vom Land in die Stadt zogen. Da die Menschen unterschiedliche Sprachen sprachen, begannen ihre Kinder beim gemeinsamen Spielen, Wörter aus beiden Sprachen zu vermischen. So entwickelte sich Bolz."
+    }
   },
   "PrivacyPolicy": {
     "title": "Datenschutzerklärung",

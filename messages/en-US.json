@@ -29,7 +29,7 @@
     "welcome": "Welcome to the website of",
     "next events": "Next events",
     "bolzes tournament": "Tournoi des Bolzes",
-    "member": "Sign up",
+    "member": "Try a training session",
     "last_insta": "Our latest Instagram posts",
     "followus": "Follow us to never miss a beat of the club's life!",
     "court": {
@@ -37,7 +37,7 @@
       "description": "The sports hall is situated in the Cycle d'Orientation de langue allemande (DOSF) in the quartier du Torry",
       "details": "Here you can find a detailed plan of the entrance"
     },
-    "subtitle": "Badminton Club Fribourg combines ambitious training for both juniors and adults with a strong, inclusive community. Whether you are training for the next Interclub victory or simply playing for the love of the racket sport, you have come to the right place. Drop by for a training session and discover the fascination of badminton!",
+    "subtitle": "Ambitious training for juniors and adults, in a strong and inclusive community. Come try a training session!",
     "trainings": {
       "title": "Our Trainings",
       "subtitle": "Contact us for a free trial session. Rackets provided. Trainings take place outside of school holidays between",
@@ -296,8 +296,8 @@
     "bronze": "Bronze Shuttle",
     "subtitle": "Would you like to support the Badminton Club Fribourg?",
     "desc": "We offer three sponsorship options: Gold Shuttle Sponsor, Silver Shuttle Sponsor, and Bronze Shuttle Sponsor. For more information, please contact us at president(at)bcfribourg.ch.",
-    "goldli": "<li>All the benefits of the previous packages</li><li>Advertising on shirts</li><li>2 display panels during home matches</li><li>Logo in all key communications (social media, posters, website)</li><li>3-year sponsorship commitment and contract</li>\n",
-    "silverli": "<li>All the benefits of the Bronze package</li><li>Logo display during home matches (1 panel 1x3m)</li><li>Logo on shirts, in reduced size</li><li>Mention in Instagram stories & posts</li><li>Invitation to the sponsors' tournament</li>\n",
+    "goldli": "<li>All the benefits of the previous packages</li><li>Advertising on shirts (subject to availability)</li><li>2 display panels during home matches</li><li>Logo in all key communications (social media, posters, website)</li><li>3-year sponsorship commitment and contract</li>\n",
+    "silverli": "<li>All the benefits of the Bronze package</li><li>Logo display during home matches (1 panel 1x3m)</li><li>Mention in Instagram stories & posts</li><li>Invitation to the sponsors' tournament</li>\n",
     "bronzeli": "<li>Logo & mention on our website</li><li>Mention during internal events</li><li>Participation in home matches</li>"
   },
   "Member": {
@@ -345,18 +345,57 @@
   "BolzesTournament": {
     "title": "Tournoi des Bolzes",
     "registerButton": "Register",
-    "subtitle": "The second edition of the Tournoi des Bolzes will take place soon!",
     "description": "Join us for a weekend of badminton full of",
     "flipWord1": "fun",
     "flipWord2": "friendship",
     "flipWord3": "competition",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
     "additionalInfo": "The Tournoi des Bolzes is open to all players licensed TOP/A/B/C/D. The mixed doubles and women's and men's doubles will take place on Saturday, while the women's and men's singles will be held on Sunday.",
     "location": "The Tournoi des Bolzes will take place at the Ste-Croix sports hall in Fribourg. The address is: Rue Antoine-De-Saint-Exupéry 14, 1700 Fribourg. We encourage you to use public transport, taking the bus from Fribourg station towards Pérolles.",
     "OfficialSponsors": "Official Sponsors",
     "Gold": "Gold Sponsors",
     "Silver": "Silver Sponsors",
     "Bronze": "Bronze Sponsors",
-    "Donation": "Donors"
+    "Donation": "Donors",
+    "facts": {
+      "dateLabel": "Date",
+      "placeLabel": "Location",
+      "levelLabel": "Level",
+      "feeLabel": "Entry fees",
+      "fee": "24.- Doubles / 15.- Singles"
+    },
+    "band": {
+      "title": "Ready to play?",
+      "highlight": "Register now!"
+    },
+    "downloads": {
+      "title": "Documents",
+      "cta": "Download",
+      "flyer": {
+        "title": "Flyer",
+        "description": "The official tournament flyer, to share or print."
+      },
+      "payment": {
+        "title": "Payment Information",
+        "description": "QR code for paying the registration fee."
+      },
+      "announcement": {
+        "title": "Tournament Announcement",
+        "description": "The official announcement with all practical information."
+      }
+    },
+    "sponsorCta": {
+      "title": "Become a Tournament Partner",
+      "text": "Discover our sponsorship packages and the visibility offered to your company.",
+      "button": "Sponsorship Package"
+    },
+    "whatIsBolze": {
+      "title": "What is Bolz?",
+      "text": "Bolz is a bilingual dialect spoken mainly in the Lower Town of Fribourg. It naturally mixes French and Swiss German within the same sentence. The dialect emerged in the 19th century, when many farmers moved from the countryside to the city. Since they spoke different languages, their children began mixing words from both languages while playing together. This is how Bolz developed."
+    }
   },
   "PrivacyPolicy": {
     "title": "Privacy Policy",
