@@ -227,7 +227,8 @@
       "foundingVicePresident": "Gründungsvizepräsident",
       "foundingTreasurer": "Gründungskassierer",
       "foundingSecretary": "Gründungssekretär",
-      "foundingTechnical": "Gründungs-Technischer Leiter"
+      "foundingTechnical": "Gründungs-Technischer Leiter",
+      "committeeMember": "Langjähriges Vorstandsmitglied"
     },
     "events": {
       "start": "Am Anfang...",

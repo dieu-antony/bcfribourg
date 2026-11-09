@@ -29,6 +29,7 @@ const HonoraryMembers = ({ title, description }: HonoraryMembersProps) => {
     { name: "Rico Casutt", detail: t("foundingTechnical") },
     { name: "Marcel Petignat", detail: t("president") + " 1977-1988" },
     { name: "Daniel Dupraz", detail: t("president") + " 1988-2010" },
+    { name: "Claude Page", detail: t("committeeMember") + " 1984-2013" },
     {
       name: "Jean-Charles Bossens",
       detail: t("president") + " 2010-2015",

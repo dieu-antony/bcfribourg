@@ -227,7 +227,8 @@
       "foundingVicePresident": "Founding Vice President",
       "foundingTreasurer": "Founding Treasurer",
       "foundingSecretary": "Founding Secretary",
-      "foundingTechnical": "Founding Technical Director"
+      "foundingTechnical": "Founding Technical Director",
+      "committeeMember": "Longstanding Committee Member"
     },
     "events": {
       "start": "In the beginning…",
