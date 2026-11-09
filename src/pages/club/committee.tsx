@@ -1,6 +1,5 @@
 import type { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
-import AccentBar from "~/lib/components/AccentBar";
 import CommitteeCard from "~/lib/components/CommitteeCard";
 import Layout from "~/lib/components/Layout";
 import { Title } from "~/lib/components/Title";
@@ -19,6 +18,15 @@ type Props = {
   members: CommitteeMember[];
 };
 
+const ROLE_ORDER: string[] = ["president", "vicePresident", "secretary"];
+
+const rank = (m: { role: string; role2: string }) => {
+  const ranks = [m.role, m.role2]
+    .map((r) => ROLE_ORDER.indexOf(r))
+    .filter((i) => i !== -1);
+  return ranks.length > 0 ? Math.min(...ranks) : ROLE_ORDER.length;
+};
+
 const Committee = ({ members }: Props) => {
   const t = useTranslations("Committee");
 
@@ -33,15 +41,19 @@ const Committee = ({ members }: Props) => {
   return (
     <Layout>
       <Title>{t("title")}</Title>
-      <div className="mb-4 mt-4 flex max-w-[1000px] flex-col place-items-center items-center self-center md:grid md:grid-cols-2 lg:grid-cols-3">
-        <div className="relative mx-12 my-4 bg-white p-4 shadow-sm md:col-span-2 md:mx-20 lg:col-span-3 lg:mx-4">
-          <p>{t("desc")}</p>
-          <AccentBar />
-        </div>
 
-        {info.map((member, index) => (
-          <CommitteeCard key={index} info={member} />
-        ))}
+      <div className="mx-auto mb-12 mt-6 flex w-full max-w-[1000px] flex-col gap-6 px-5">
+        <section className="rounded border-l-4 border-picton-blue-500 bg-white p-5 shadow-md sm:p-6">
+          <p className="leading-relaxed text-slate-700">
+            {t("desc")}
+          </p>
+        </section>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {info.map((member, index) => (
+            <CommitteeCard key={index} info={member} />
+          ))}
+        </div>
       </div>
     </Layout>
   );
@@ -68,15 +80,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
           ...member,
           role2: member.role2 ?? "",
         }))
-        .sort((a, b) => {
-          const aIsPresident =
-            a.role === "president" || a.role2 === "president";
-          const bIsPresident =
-            b.role === "president" || b.role2 === "president";
-          if (aIsPresident && !bIsPresident) return -1;
-          if (!aIsPresident && bIsPresident) return 1;
-          return 0;
-        });
+        .sort((a, b) => rank(a) - rank(b));
       return sorted;
     });
 

@@ -219,6 +219,16 @@
   "History": {
     "title": "History of the Club",
     "description": "The Badminton Club of Fribourg was officially founded on November 12, 1969. Here are some of the key milestones in the life of our club from its beginnings to today:",
+    "honorary": {
+      "title": "Honorary Members",
+      "desc": "The Badminton Club Fribourg has awarded the title of honorary member to several individuals who have contributed exceptionally to the development and success of the club. These honorary members have played a key role in promoting badminton in Fribourg and have left a lasting impact on the club community.",
+      "president": "President",
+      "foundingPresident": "Founding President",
+      "foundingVicePresident": "Founding Vice President",
+      "foundingTreasurer": "Founding Treasurer",
+      "foundingSecretary": "Founding Secretary",
+      "foundingTechnical": "Founding Technical Director"
+    },
     "events": {
       "start": "In the beginning…",
       "startDesc": "A few teenagers from the Jura neighborhood play shuttlecock, with one main goal: finding spots sheltered from the wind! Among them are Jean-Claude Doutaz, Pierre Guerra, and Claude Page. In the late 1960s, the group discovers that shuttlecock is actually a sport played in clubs—badminton! They join BC Wünnewil, the only club in the canton at the time.",

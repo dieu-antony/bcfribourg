@@ -6,9 +6,10 @@ import {
 } from "~/lib/components/ui/accordion";
 import ScrollToTop from "~/lib/components/ScrollToTop";
 import HistoryCard from "~/lib/components/HistoryCard";
+import HonoraryMembers from "~/lib/components/HonoraryMembers";
 import { useTranslations } from "next-intl";
 import Layout from "~/lib/components/Layout";
-import { useMemo, useCallback } from "react";
+import { useMemo } from "react";
 import type { GetStaticPropsContext } from "next";
 import { db } from "~/server/db";
 import type { HistoryEvent } from "@prisma/client";
@@ -66,51 +67,59 @@ const History = ({ historyEvents, rawEvents }: Props) => {
     return grouped;
   }, [historyEvents, rawEvents, t]);
 
-  const scrollTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  const sortedDecades = useMemo(
+    () =>
+      Object.entries(groupedEvents).sort(
+        ([a], [b]) => parseInt(a) - parseInt(b),
+      ),
+    [groupedEvents],
+  );
 
   return (
     <Layout>
-      <div className="mt-8 flex justify-center">
-        <div className="m-5 mt-0 flex w-full max-w-[1000px] flex-col gap-4 rounded bg-white p-5 shadow-md">
-          <h1 className="text-2xl font-bold text-picton-blue-500">
+      <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-6 px-5 pb-12 pt-8">
+        {/* Intro */}
+        <section className="rounded border-l-4 border-picton-blue-500 bg-white p-5 shadow-md sm:p-6">
+          <h1 className="text-3xl font-bold text-picton-blue-500">
             {t("title")}
           </h1>
-          <p>{t("description")}</p>
-        </div>
-      </div>
+          <p className="mt-3 max-w-prose leading-relaxed text-slate-700">
+            {t("description")}
+          </p>
+        </section>
 
-      <div className="mx-5 mb-8 w-full max-w-[1000px] self-center">
+        {/* Honorary members */}
+        <HonoraryMembers
+          title={t("honorary.title")}
+          description={t("honorary.desc")}
+        />
+
+        {/* Timeline */}
         <Accordion
           type="single"
           collapsible
-          className="w-full rounded bg-white shadow-md"
+          defaultValue="item-1"
+          className="w-full overflow-hidden rounded bg-white shadow-md"
         >
-          {Object.entries(groupedEvents)
-            .sort(([a], [b]) => parseInt(a) - parseInt(b))
-            .map(([decade, events], idx) => (
-              <AccordionItem key={decade} value={`item-${idx + 1}`}>
-                <AccordionTrigger
-                  className="justify-around"
-                  onClick={scrollTop}
-                >
-                  {decade}
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="relative w-full">
-                    {events.map((item, index) => (
-                      <HistoryCard
-                        key={index}
-                        title={item.title}
-                        description={item.description}
-                        imgUrl={item.imgFile ?? undefined}
-                      />
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+          {sortedDecades.map(([decade, events], idx) => (
+            <AccordionItem key={decade} value={`item-${idx + 1}`}>
+              <AccordionTrigger className="px-6 text-lg font-semibold text-slate-900 hover:bg-slate-50 hover:no-underline">
+                {decade}
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="relative ml-9 mr-6 mt-2 border-l-2 border-slate-200 pb-4 sm:ml-12 sm:mr-10">
+                  {events.map((item, index) => (
+                    <HistoryCard
+                      key={index}
+                      title={item.title}
+                      description={item.description}
+                      imgUrl={item.imgFile ?? undefined}
+                    />
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
         </Accordion>
       </div>
 
@@ -120,7 +129,9 @@ const History = ({ historyEvents, rawEvents }: Props) => {
 };
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  const messages = await import(`../../../messages/${locale}.json`) as IntlMessages;
+  const messages = (await import(
+    `../../../messages/${locale}.json`
+  )) as IntlMessages;
   const historyEvents = await db.historyEvent.findMany({
     orderBy: { year: "asc" },
   });

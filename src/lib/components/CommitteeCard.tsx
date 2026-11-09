@@ -3,29 +3,41 @@ import Image from "next/image";
 import type { CommitteeCardProps } from "../types";
 
 const CommitteeCard = ({ info }: CommitteeCardProps) => {
+  const roles = [info.role, info.role2].filter(Boolean);
+
   return (
-    <div className="mx-8 my-4 h-[460px] w-[300px] bg-white p-4 shadow-md">
-      <div className="flex h-[325px] items-center justify-center">
+    <article className="flex h-full flex-col overflow-hidden rounded bg-white shadow-md transition hover:shadow-lg">
+
+      <div className="relative aspect-[4/5] w-full bg-slate-100">
         <Image
           src={info.imgRef}
-          alt={info.role}
-          height={300}
-          width={250}
-          className="max-h-[325px] max-w-[250px] object-cover"
+          alt={info.name}
+          fill
+          sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 100vw"
+          className="object-cover object-top"
         />
       </div>
 
-      <h2 className="my-2 text-lg text-picton-blue-500">{info.name}</h2>
-      <h3 className="my-2 text-slate-700">
-        {info.role + (info.role2 === "" ? "" : " / " + info.role2)}
-      </h3>
-      <div className="my-2 text-slate-700">
-        <span className="my-2 flex gap-2">
-          <Mail />
+      <div className="flex flex-1 flex-col gap-3 p-5">
+        <h2 className="text-xl font-bold text-slate-900">{info.name}</h2>
+
+        <div className="flex flex-wrap gap-2">
+          {roles.map((role) => (
+            <span
+              key={role}
+              className="rounded-full border border-picton-blue-500 px-3 py-0.5 text-sm font-medium text-picton-blue-500"
+            >
+              {role}
+            </span>
+          ))}
+        </div>
+
+        <p className="mt-auto flex items-center gap-2 break-all border-t border-slate-100 pt-3 text-sm text-slate-600">
+          <Mail className="h-4 w-4 shrink-0 text-picton-blue-500" aria-hidden />
           {info.email}
-        </span>
+        </p>
       </div>
-    </div>
+    </article>
   );
 };
 

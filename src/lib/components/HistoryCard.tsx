@@ -9,31 +9,38 @@ type HistoryCardProps = {
 
 const HistoryCard = ({ title, description, imgUrl }: HistoryCardProps) => {
   return (
-    <div className="my-8 flex w-full flex-col justify-center p-10 px-10 pb-0 sm:flex-row sm:px-12 md:px-24 lg:px-32 xl:px-40">
-      <div className="flex w-full flex-col items-center text-justify sm:items-start">
-        <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
-        <p className="text-kg mt-4 max-w-sm text-slate-700">{description}</p>
-      </div>
+    <article className="relative pb-10 pl-6 last:pb-0 sm:pl-8">
+      <span
+        aria-hidden
+        className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full border-4 border-white bg-picton-blue-500 shadow"
+      />
 
-      {imgUrl && (
-        <div className="items-center justify-center px-10 pt-10 sm:pt-0">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-8">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-xl font-bold text-picton-blue-500">{title}</h3>
+          <p className="mt-2 max-w-prose leading-relaxed text-slate-700">
+            {description}
+          </p>
+        </div>
+
+        {imgUrl && (
           <Link
             href={imgUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-full w-full items-center justify-center text-white"
+            className="block w-full shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-slate-50 transition hover:shadow-md md:w-56"
           >
             <Image
               src={imgUrl}
               width={300}
               height={300}
-              className="h-full w-full object-contain"
+              className="h-auto w-full object-contain"
               alt={`Historique du club de badminton de Fribourg ${title}`}
             />
           </Link>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </article>
   );
 };
 

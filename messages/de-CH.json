@@ -219,6 +219,16 @@
   "History": {
     "title": "Geschichte des Clubs",
     "description": "Der Badminton Club Fribourg wurde offiziel am 12. November 1969 gegründet. Hier sind einige der wichtigsten Ereignisse aus der Geschichte unseres Clubs von den Anfängen bis heute:",
+    "honorary": {
+      "title": "Ehrenmitglieder",
+      "desc": "Der Badminton Club Fribourg hat den Titel des Ehrenmitgliedes an mehrere Personen vergeben, die sich außergewöhnlich für die Entwicklung und den Erfolg des Vereins eingesetzt haben. Diese Ehrenmitglieder haben eine Schlüsselrolle bei der Förderung des Badminton in Fribourg gespielt und einen bleibenden Eindruck auf die Vereinscommunity hinterlassen.",
+      "president": "Präsident/in",
+      "foundingPresident": "Gründungspräsident",
+      "foundingVicePresident": "Gründungsvizepräsident",
+      "foundingTreasurer": "Gründungskassierer",
+      "foundingSecretary": "Gründungssekretär",
+      "foundingTechnical": "Gründungs-Technischer Leiter"
+    },
     "events": {
       "start": "Am Anfang...",
       "startDesc": "Einige Jugendliche aus dem Jura-Viertel spielen das Spiel „Fliegen“. Hauptziel: Windgeschützte Orte finden! Zu ihnen gehörten Jean-Claude Doutaz, Pierre Guerra und Claude Page. Ende der 60er Jahre entdeckten sie, dass das Federballspiel ein Sport ist, der in Vereinen ausgeübt wird: Badminton! Sie traten dem BC Wünnewil bei, dem einzigen Verein im Kanton.",
