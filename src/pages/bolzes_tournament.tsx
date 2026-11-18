@@ -44,7 +44,7 @@ const myImages = [
   { src: img10, alt: "Image 10" },
 ];
 
-type Tier = "Gold" | "Silver" | "Bronze";
+type Tier = "Gold" | "Silver" | "Donation";
 
 const TIERS: Record<
   Tier,
@@ -62,7 +62,7 @@ const TIERS: Record<
     grid: "grid-cols-2 sm:grid-cols-3 gap-10",
     label: "from-gray-300 to-gray-500",
   },
-  Bronze: {
+  Donation: {
     width: 160,
     height: 110,
     grid: "grid-cols-2 sm:grid-cols-4 gap-8",
@@ -214,7 +214,7 @@ function BolzesTournament({ sponsors }: Props) {
               <SponsorCta />
 
               <div className="space-y-12">
-                {(["Gold", "Silver", "Bronze"] as const).map((tier) => {
+                {(["Gold", "Silver", "Donation"] as const).map((tier) => {
                   const tierImages = sponsors.filter((s) =>
                     s.folder.includes(tier),
                   );
