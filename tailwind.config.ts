@@ -32,6 +32,7 @@ export default {
           "700": "#0073ab",
           "800": "#00618d",
           "900": "#065174",
+          "950": "#04334d"
         },
 
         background: "hsl(var(--background))",

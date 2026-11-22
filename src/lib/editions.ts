@@ -13,7 +13,7 @@ export const CURRENT = {
   docs: {
     sponsorDossier: "/documents/tournament/dossier-sponsoring-bolzes.pdf",
     flyer: "/documents/tournament/flyer-2027.pdf",
-    payment: "/documents/tournament/qr_code.pdf",
+    payment: "/documents/tournament/qr_code_tournament.pdf",
     announcement: "/documents/tournament/annonce-bolzes-2027.pdf",
   },
 } as const;
